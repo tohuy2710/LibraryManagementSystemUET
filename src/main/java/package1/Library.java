@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
+    public static Library instance;
     private List<Document> documentList;
     private List<Admin> adminList;
     private List<User> userList;
 
-    public Library() {
+    private Library() {
         documentList = new ArrayList<Document>();
         adminList = new ArrayList<Admin>();
         userList = new ArrayList<User>();
+    }
+
+    public static Library getInstance() {
+        if (instance == null) {
+            instance = new Library();
+        }
+        return instance;
     }
 
 
@@ -49,6 +57,7 @@ public class Library {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public Document findDocumentsByName(String name) {
@@ -61,6 +70,7 @@ public class Library {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public List<Document> findDocumentsByAuthor(String author) {
@@ -75,6 +85,7 @@ public class Library {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public void addUser(User newUser) {
