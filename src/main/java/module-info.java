@@ -11,6 +11,8 @@ module org.example.librarymanagementsystemuet {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
+    requires mysql.connector.j;
 
     opens org.example.librarymanagementsystemuet to javafx.fxml;
     exports org.example.librarymanagementsystemuet;

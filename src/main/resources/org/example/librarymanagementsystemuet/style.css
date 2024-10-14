@@ -1,0 +1,59 @@
+.root {
+    -fx-background-color: #f5f5f7;
+}
+
+.button {
+    -fx-background-color: #ed1c24;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: Bold;
+}
+
+.button:hover {
+    -fx-background-color: #ff4e52;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: Bold;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 4px;
+    -fx-padding: 1px;
+    -fx-text-fill: #000000;
+}
+
+.text-field:hover {
+    -fx-border-color: #a0a0a0;
+}
+
+.password-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 4px;
+    -fx-padding: 1px;
+    -fx-text-fill: #000000;
+}
+
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 4px;
+    -fx-text-fill: #000000;
+}
+
+.label1 {
+    -fx-text-fill: #000000;
+    -fx-font-family: "BlinkMacSystemFont";
+}
+
+.label2 {
+    -fx-text-fill: #fd4d51;
+    -fx-font-family: "BlinkMacSystemFont";
+    -fx-font-weight: Bold;
+}
+
+.labelHeader {
+    -fx-text-fill: #ed1c24;
+    font-family: "BlinkMacSystemFont";
+    -fx-font-weight: Bold;
+}

@@ -6,6 +6,10 @@ import java.util.List;
 public class User extends Account {
     public List<Document> history = new ArrayList<>();
 
+    public User() {
+
+    }
+
     public User(String id, String name, String username, String password, String email, String phoneNumber) {
         super(id, name, username, password, email, phoneNumber);
     }
