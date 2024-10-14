@@ -1,8 +1,8 @@
 module org.example.librarymanagementsystemuet {
+    // JavaFX modules
     requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.web;
 
+    // External libraries and utilities
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires net.synedra.validatorfx;
@@ -10,10 +10,22 @@ module org.example.librarymanagementsystemuet {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+
+    // Java built-in modules
     requires java.desktop;
     requires java.sql;
-    requires mysql.connector.j;
 
+    // MySQL connector for database
+    requires mysql.connector.j;
+    requires google.api.services.books.v1.rev114;
+    requires google.http.client;
+    requires google.http.client.jackson2;
+
+    // Google API Client dependencies
+
+    // Allow reflection-based access for FXML loading
     opens org.example.librarymanagementsystemuet to javafx.fxml;
+
+    // Export your base package to make it accessible for other modules
     exports org.example.librarymanagementsystemuet;
 }

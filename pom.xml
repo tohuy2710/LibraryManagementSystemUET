@@ -111,6 +111,11 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-books</artifactId>
+            <version>v1-rev114-1.25.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -149,3 +154,4 @@
         </plugins>
     </build>
 </project>
+
