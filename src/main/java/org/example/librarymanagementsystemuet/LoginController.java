@@ -185,7 +185,8 @@ public class LoginController implements Initializable {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager
-                    .getConnection("jdbc:mysql://localhost:3307/account", "root", "");
+                    .getConnection("jdbc:mysql://localhost:3307/library_management_system_uet",
+                            "root", "");
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -20,11 +20,17 @@ module org.example.librarymanagementsystemuet {
     requires google.api.services.books.v1.rev114;
     requires google.http.client;
     requires google.http.client.jackson2;
+    requires google.oauth.client;
+    requires google.api.client;
+    requires java.net.http;
+    requires org.json;
 
     // Google API Client dependencies
 
     // Allow reflection-based access for FXML loading
     opens org.example.librarymanagementsystemuet to javafx.fxml;
+
+    opens package1 to javafx.base;
 
     // Export your base package to make it accessible for other modules
     exports org.example.librarymanagementsystemuet;
