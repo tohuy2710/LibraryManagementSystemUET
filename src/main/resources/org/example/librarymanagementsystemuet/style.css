@@ -57,3 +57,109 @@
     font-family: "BlinkMacSystemFont";
     -fx-font-weight: Bold;
 }
+
+
+/* Style for the search button */
+.search-button {
+    -fx-background-color: #ed1c24;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: Bold;
+    -fx-border-radius: 5px;
+}
+
+.search-button:hover {
+    -fx-background-color: #ff4e52;
+    -fx-text-fill: #ffffff;
+}
+
+/* Style for the search text field */
+.search-text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 4px;
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+}
+
+.search-text-field:hover {
+    -fx-border-color: #a0a0a0;
+}
+
+/* Style for the result label */
+.result-label {
+    -fx-text-fill: #000000;
+    -fx-font-family: "BlinkMacSystemFont";
+    -fx-font-size: 16px;
+    -fx-padding: 10px 0;
+}
+
+/* Style for the book name label with ellipsis */
+.ellipsis-label {
+    -fx-text-overrun: ellipsis;
+    -fx-max-width: 500px; /* Adjust the width as needed */
+    -fx-wrap-text: false;
+}
+
+/* Style for the ScrollPane */
+.scroll-pane {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 4px;
+}
+
+/* Style for the vertical scroll bar */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: #ffffff;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #ed1c24;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: #c0c0c0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+/* Style for the horizontal scroll bar */
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: #ffffff;
+}
+
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: #ed1c24;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: #c0c0c0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4px;
+}
+
+/* Style for the book-view-card */
+.book-view-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 0);
+}
+
+/* Style for the book image */
+.book-view-card .book-image {
+    -fx-fit-width: 80px;
+    -fx-fit-height: 100px;
+    -fx-border-radius: 5px;
+}
+
+/* Style for the book author label */
+.book-view-card .book-author {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+}

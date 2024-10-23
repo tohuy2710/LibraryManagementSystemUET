@@ -1,110 +1,33 @@
 package org.example.librarymanagementsystemuet;
 
-import com.google.api.services.books.model.Volumes;
+import com.google.api.services.books.model.Volume;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import package1.AlertMessage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.GeneralSecurityException;
+import java.util.List;
 import java.util.ResourceBundle;
-
-import static org.example.librarymanagementsystemuet.GoogleBooksAPI.searchBookByISBN;
 
 public class AddBookController extends Thread implements Initializable {
 
     @FXML
-    private Label ISBNBook1;
+    private GridPane bookContainer;
 
     @FXML
-    private Label ISBNBook2;
+    private ChoiceBox<String> choiceBoxTypeSearch;
 
     @FXML
-    private Label ISBNBook3;
-
-    @FXML
-    private Label PublishedDateBook1;
-
-    @FXML
-    private Label PublishedDateBook2;
-
-    @FXML
-    private Label PublishedDateBook3;
-
-    @FXML
-    private Button addBook1Button;
-
-    @FXML
-    private Button addBookButton;
-
-    @FXML
-    private Button addBookButton2;
-
-    @FXML
-    private Button addBookButton3;
-
-    @FXML
-    private Label bookAuthors;
-
-    @FXML
-    private ImageView bookCoverImage;
-
-    @FXML
-    private Text bookDescription;
-
-    @FXML
-    private Label bookISBN;
-
-    @FXML
-    private Label bookName;
-
-    @FXML
-    private Label bookPublisher;
-
-    @FXML
-    private HBox hboxBook1;
-
-    @FXML
-    private HBox hboxBook2;
-
-    @FXML
-    private HBox hboxBook3;
-
-    @FXML
-    private ImageView imageCoverBook1;
-
-    @FXML
-    private ImageView imageCoverBook2;
-
-    @FXML
-    private ImageView imageCoverBook3;
-
-    @FXML
-    private Label nameBook1;
-
-    @FXML
-    private Label nameBook2;
-
-    @FXML
-    private Label nameBook3;
-
-    @FXML
-    private Button nextBookButton;
-
-    @FXML
-    private Label publisherBook1;
-
-    @FXML
-    private Label publisherBook2;
-
-    @FXML
-    private Label publisherBook3;
+    private Label resultForBookNameLabel;
 
     @FXML
     private Button searchButton;
@@ -112,51 +35,60 @@ public class AddBookController extends Thread implements Initializable {
     @FXML
     private TextField searchTextField;
 
-    @FXML
-    private ChoiceBox<String> selectTypeSearch;
-
-    @FXML
-    private AnchorPane paneBookDetail;
-
-    @FXML
-    private AnchorPane paneSearchBook;
-
-    private String[] typeSearch = {"ISBN", "Name"};
-
-    public void searchBookByBooksAPI() throws GeneralSecurityException, IOException {
-
-        paneBookDetail.setVisible(true);
-        paneSearchBook.setVisible(false);
-
-        if (selectTypeSearch.getValue().equals("ISBN")) {
-            String ISBN = searchTextField.getText();
-
-            if (ISBN.isEmpty()) {
-                AlertMessage alertMessage = new AlertMessage();
-                alertMessage.errorMessage("Please enter ISBN to search!");
-                return;
-            }
-            else {
-                Volumes volumes = searchBookByISBN(ISBN);
-                if (volumes.getTotalItems() == 0) {
-                    AlertMessage alertMessage = new AlertMessage();
-                    alertMessage.errorMessage("No book found with the given ISBN!");
-                    return;
-                }
-                else {
-                    // Display the book details
-                    // ...
-                }
-
-            }
-        } else {
-            //search by name
-        }
-    }
+    private List<Volume> volumesList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        paneBookDetail.setVisible(false);
-        selectTypeSearch.getItems().addAll(typeSearch);
+        choiceBoxTypeSearch.getItems().addAll("ISBN", "Name");
+        choiceBoxTypeSearch.setValue("ISBN");
+    }
+
+    public void showSearchResult(ActionEvent event) {
+
+        bookContainer.getChildren().clear();
+        int column = 0;
+        int row = 1;
+
+        try {
+            if (choiceBoxTypeSearch.getValue().equals("ISBN")) {
+                volumesList = GoogleBooksAPI.searchBookByISBN(searchTextField.getText()).getItems();
+            } else if (choiceBoxTypeSearch.getValue().equals("Name")) {
+                volumesList = GoogleBooksAPI.searchBookByName(searchTextField.getText()).getItems();
+            }
+
+            if (volumesList == null || volumesList.isEmpty()) {
+                resultForBookNameLabel.setText("No result found for " + searchTextField.getText());
+                return;
+            }
+        } catch (Exception e) {
+            resultForBookNameLabel.setText("Error fetching data: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
+        resultForBookNameLabel.setText("Result for " + searchTextField.getText());
+        try {
+            for (Volume volume : volumesList) {
+                if (volume == null) {
+                    continue;
+                }
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("book-view-card.fxml"));
+                HBox bookBox = fxmlLoader.load();
+
+                SearchAddBookCardController searchAddBookCardController = fxmlLoader.getController();
+                searchAddBookCardController.setData(volume);
+
+                if (column == 1) {
+                    column = 0;
+                    ++row;
+                }
+
+                bookContainer.add(bookBox, column++, row);
+                GridPane.setMargin(bookBox, new Insets(10));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
