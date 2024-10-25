@@ -1,165 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .root {
-    -fx-background-color: #f5f5f7;
+    -fx-background-color: #ffffff; /* Clean white background */
+    -fx-font-family: 'Poppins', sans-serif;
 }
 
 .button {
-    -fx-background-color: #ed1c24;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+    -fx-text-fill: #17376e;
     -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 14px;
+    -fx-border-color: #17376e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px 5px 50px; /* Set left padding to 45px */
+    -fx-alignment: CENTER_LEFT; /* Align text to the left */
 }
 
 .button:hover {
-    -fx-background-color: #ff4e52;
+    -fx-background-color: #1f5db9;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #17376e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 0);
+    -fx-padding: 5px 10px 5px 50px; /* Set left padding to 45px */
+    -fx-alignment: CENTER_LEFT; /* Align text to the left */
+}
+
+.button2 {
+    -fx-background-color: #17376e;
     -fx-text-fill: #ffffff;
     -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-border-color: #17376e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px; /* Set left padding to 45px */
+    -fx-alignment: CENTER; /* Align text to the left */
 }
 
-.text-field {
+.button2:hover {
+    -fx-background-color: #1f5db9;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #17376e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 0);
+    -fx-padding: 10px; /* Set left padding to 45px */
+    -fx-alignment: CENTER; /* Align text to the left */
+}
+
+.button3 {
+    -fx-background-color: #f8f8f8; /* Màu nền mặc định */
+    -fx-text-fill: #17376e; /* Màu chữ xanh đậm cho dễ nhìn */
+    -fx-border-color: #c0c0c0; /* Màu viền */
+    -fx-border-radius: 0 20px 20px 0; /* Bo góc phải */
+    -fx-background-radius: 0 20px 20px 0; /* Bo góc phải */
+    -fx-padding: 8px 12px; /* Padding giống với search-text-field */
+    -fx-alignment: CENTER; /* Căn giữa chữ */
+}
+
+.button3:hover {
+    -fx-background-color: #f8f8f8; /* Màu nền khi hover */
+    -fx-text-fill: #17376e; /* Màu chữ xanh đậm cho dễ nhìn */
+    -fx-border-radius: 0 20px 20px 0; /* Bo góc phải */
+    -fx-border-color: #17376e; /* Màu viền */
+    -fx-background-radius: 0 20px 20px 0; /* Bo góc phải */
+    -fx-padding: 8px 12px; /* Padding giống với search-text-field */
+    -fx-alignment: CENTER; /* Căn giữa chữ */
+}
+
+.button4 {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-text-fill: #17376e; /* Text color */
+    -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent; /* No border */
+    -fx-padding: 5px 10px; /* Padding */
+    -fx-alignment: CENTER; /* Center align text */
+}
+
+.button4:hover {
+    -fx-background-color: #1f5db9; /* Blue background on hover */
+    -fx-text-fill: #ffffff; /* White text on hover */
+    -fx-border-color: transparent; /* No border */
+}
+
+.button5 {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-text-fill: #17376e; /* Text color */
+    -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent; /* No border */
+    -fx-padding: 5px 10px; /* Padding */
+    -fx-alignment: CENTER; /* Center align text */
+}
+
+.button5:hover {
+    -fx-background-color: transparent; /* Transparent background on hover */
+    -fx-text-fill: #17376e; /* Text color on hover */
+    -fx-border-color: transparent; /* No border */
+}
+
+
+.text-field, .password-field, .choice-box {
     -fx-background-color: #ffffff;
-    -fx-border-color: #c0c0c0;
+    -fx-border-color: #e0e0e0;
     -fx-border-radius: 4px;
     -fx-padding: 1px;
     -fx-text-fill: #000000;
+    -fx-font-family: 'Poppins', sans-serif;
 }
 
-.text-field:hover {
-    -fx-border-color: #a0a0a0;
-}
-
-.password-field {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #c0c0c0;
-    -fx-border-radius: 4px;
-    -fx-padding: 1px;
-    -fx-text-fill: #000000;
-}
-
-.choice-box {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #c0c0c0;
-    -fx-border-radius: 4px;
-    -fx-text-fill: #000000;
+.text-field:hover, .password-field:hover, .choice-box:hover {
+    -fx-border-color: #b0b0b0;
 }
 
 .label1 {
     -fx-text-fill: #000000;
-    -fx-font-family: "BlinkMacSystemFont";
+    -fx-font-family: 'Poppins', sans-serif;
 }
 
 .label2 {
-    -fx-text-fill: #fd4d51;
-    -fx-font-family: "BlinkMacSystemFont";
+    -fx-text-fill: #1f5db9;
+    -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: Bold;
 }
 
 .labelHeader {
-    -fx-text-fill: #ed1c24;
-    font-family: "BlinkMacSystemFont";
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: Bold;
 }
 
-
-/* Style for the search button */
-.search-button {
-    -fx-background-color: #ed1c24;
-    -fx-text-fill: #ffffff;
-    -fx-font-weight: Bold;
-    -fx-border-radius: 5px;
-}
-
-.search-button:hover {
-    -fx-background-color: #ff4e52;
-    -fx-text-fill: #ffffff;
-}
-
-/* Style for the search text field */
+/* Thanh tìm kiếm */
 .search-text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #c0c0c0;
-    -fx-border-radius: 4px;
+    -fx-border-radius: 20px 0 0 20px; /* Apply border-radius only to the right corners */
+    -fx-padding: 8px 60px 10px; /* Adjust padding to fit the new border-radius */
     -fx-text-fill: #000000;
     -fx-font-size: 14px;
+    -fx-font-family: 'Poppins', sans-serif;
 }
 
 .search-text-field:hover {
-    -fx-border-color: #a0a0a0;
+    -fx-border-color: #17376e;
 }
 
-/* Style for the result label */
-.result-label {
-    -fx-text-fill: #000000;
-    -fx-font-family: "BlinkMacSystemFont";
-    -fx-font-size: 16px;
-    -fx-padding: 10px 0;
-}
 
-/* Style for the book name label with ellipsis */
-.ellipsis-label {
-    -fx-text-overrun: ellipsis;
-    -fx-max-width: 500px; /* Adjust the width as needed */
-    -fx-wrap-text: false;
-}
-
-/* Style for the ScrollPane */
 .scroll-pane {
     -fx-background-color: #ffffff;
-    -fx-border-color: #c0c0c0;
+    -fx-border-color: #e0e0e0;
     -fx-border-radius: 4px;
 }
 
-/* Style for the vertical scroll bar */
-.scroll-pane .scroll-bar:vertical {
-    -fx-background-color: #ffffff;
-}
-
-.scroll-pane .scroll-bar:vertical .thumb {
-    -fx-background-color: #ed1c24;
-    -fx-background-insets: 0;
-    -fx-background-radius: 4px;
-}
-
-.scroll-pane .scroll-bar:vertical .track {
-    -fx-background-color: #c0c0c0;
-    -fx-background-insets: 0;
-    -fx-background-radius: 4px;
-}
-
-/* Style for the horizontal scroll bar */
+.scroll-pane .scroll-bar:vertical,
 .scroll-pane .scroll-bar:horizontal {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #f1f1f1;
 }
 
+.scroll-pane .scroll-bar:vertical .thumb,
 .scroll-pane .scroll-bar:horizontal .thumb {
-    -fx-background-color: #ed1c24;
-    -fx-background-insets: 0;
-    -fx-background-radius: 4px;
-}
-
-.scroll-pane .scroll-bar:horizontal .track {
     -fx-background-color: #c0c0c0;
     -fx-background-insets: 0;
     -fx-background-radius: 4px;
 }
 
-/* Style for the book-view-card */
 .book-view-card {
     -fx-background-color: #ffffff;
-    -fx-border-color: #c0c0c0;
+    -fx-border-color: #e0e0e0;
     -fx-border-radius: 5px;
     -fx-padding: 10px;
     -fx-spacing: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-font-family: 'Poppins', sans-serif;
 }
 
-/* Style for the book image */
 .book-view-card .book-image {
     -fx-fit-width: 80px;
     -fx-fit-height: 100px;
     -fx-border-radius: 5px;
 }
 
-/* Style for the book author label */
 .book-view-card .book-author {
     -fx-font-size: 14px;
     -fx-text-fill: #666666;
+}
+
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #f1f1f1;
+    -fx-border-radius: 4px;
+    -fx-font-family: 'Poppins', sans-serif;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f1f1f1;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: #f1f1f1;
+    -fx-text-fill: #000000;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #f1f1f1;
+    -fx-text-fill: #000000;
 }
