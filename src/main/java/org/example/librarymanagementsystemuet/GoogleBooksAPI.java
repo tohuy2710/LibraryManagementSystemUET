@@ -5,7 +5,6 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.books.Books;
-import com.google.api.services.books.model.Volume;
 import com.google.api.services.books.model.Volumes;
 
 import java.io.IOException;
@@ -13,7 +12,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
-import java.util.List;
 
 public class GoogleBooksAPI extends Thread {
 
@@ -36,7 +34,7 @@ public class GoogleBooksAPI extends Thread {
                 .setApplicationName(APPLICATION_NAME)
                 .build();
         URL url = new URL("https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN);
-        Books.Volumes.List volumesList = books.volumes().list(ISBN).setMaxResults(6L);
+        Books.Volumes.List volumesList = books.volumes().list(ISBN).setMaxResults(12L);
         Volumes volumes = volumesList.execute();
         return volumes;
     }
@@ -61,5 +59,4 @@ public class GoogleBooksAPI extends Thread {
         Volumes volumes = volumesList.execute();
         return volumes;
     }
-
 }

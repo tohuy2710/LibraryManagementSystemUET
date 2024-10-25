@@ -58,10 +58,6 @@ public class BookManagementController implements Initializable {
 
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
 
-    private Connection connect;
-    private PreparedStatement prepare;
-    private ResultSet result;
-    private Statement statement;
 
     public Connection connectDB() {
         try {
@@ -76,7 +72,7 @@ public class BookManagementController implements Initializable {
 
     public void searchBooks(ActionEvent event) {
         try {
-            connect = connectDB();
+            Database.connect = connectDB();
             String searchQuery = null;
             String searchValue = searchTextField.getText();
 
@@ -91,21 +87,21 @@ public class BookManagementController implements Initializable {
                 }
 
                 if (searchQuery != null) {
-                    prepare = connect.prepareStatement(searchQuery);
-                    prepare.setString(1, searchValue);
-                    result = prepare.executeQuery();
+                    Database.prepare = Database.connect.prepareStatement(searchQuery);
+                    Database.prepare.setString(1, searchValue);
+                    Database.result = Database.prepare.executeQuery();
                 }
 
                 bookList.clear();
 
-                while (result != null && result.next()) {
+                while (Database.result != null && Database.result.next()) {
                     Book book = new Book();
-                    book.setId(result.getInt("id"));
-                    book.setIsbn(result.getString("isbn"));
-                    book.setName(result.getString("name"));
-                    book.setAuthor(result.getString("author"));
-                    book.setPublisher(result.getString("publisher"));
-                    book.setAddedDate(result.getString("addedDate"));
+                    book.setId(Database.result.getInt("id"));
+                    book.setIsbn(Database.result.getString("isbn"));
+                    book.setName(Database.result.getString("name"));
+                    book.setAuthor(Database.result.getString("author"));
+                    book.setPublisher(Database.result.getString("publisher"));
+                    book.setAddedDate(Database.result.getString("addedDate"));
                     bookList.add(book);
                 }
             }

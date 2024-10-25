@@ -1,5 +1,6 @@
 package org.example.librarymanagementsystemuet;
 
+import com.google.api.client.util.Data;
 import com.google.api.services.books.model.Volume;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.text.Text;
 import package1.AlertMessage;
 
 import java.sql.*;
+
+import static org.example.librarymanagementsystemuet.Database.connectDB;
 
 public class AddBookBookDetailController {
 
@@ -49,22 +52,6 @@ public class AddBookBookDetailController {
     private Label bookDetailPublisher;
 
     Volume volume;
-
-    private Connection connect;
-    private PreparedStatement prepare;
-    private ResultSet result;
-    private Statement statement;
-
-    public Connection connectDB() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager
-                    .getConnection("jdbc:mysql://localhost:3307/library_management_system_uet",
-                            "root", "");
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void setBookDetails(Volume volume) {
 
@@ -153,69 +140,69 @@ public class AddBookBookDetailController {
     }
 
     public void addBookToDatabase(ActionEvent event) {
-        connect = connectDB();
+        Database.connect = connectDB();
         String query = "INSERT INTO books " +
                 "(isbn, name, author, publisher, description, linkCoverImage, " +
                 "avgRate, language, pageCount) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            prepare = connect.prepareStatement(query);
+            Database.prepare = Database.connect.prepareStatement(query);
             if (volume.getVolumeInfo().getIndustryIdentifiers().get(0).getIdentifier() == null) {
-                prepare.setString(1, "Unknown");
+                Database.prepare.setString(1, "Unknown");
             } else {
-                prepare.setString(1, volume.getVolumeInfo().getIndustryIdentifiers().get(0).getIdentifier());
+                Database.prepare.setString(1, volume.getVolumeInfo().getIndustryIdentifiers().get(0).getIdentifier());
             }
 
             if (volume.getVolumeInfo().getTitle() == null) {
-                prepare.setString(2, "Unknown");
+                Database.prepare.setString(2, "Unknown");
             } else {
-                prepare.setString(2, volume.getVolumeInfo().getTitle());
+                Database.prepare.setString(2, volume.getVolumeInfo().getTitle());
             }
 
             if (volume.getVolumeInfo().getAuthors() == null) {
-                prepare.setString(3, "Unknown");
+                Database.prepare.setString(3, "Unknown");
             } else {
-                prepare.setString(3, volume.getVolumeInfo().getAuthors().get(0));
+                Database.prepare.setString(3, volume.getVolumeInfo().getAuthors().get(0));
             }
 
             if (volume.getVolumeInfo().getPublisher() == null) {
-                prepare.setString(4, "Unknown");
+                Database.prepare.setString(4, "Unknown");
             } else {
-                prepare.setString(4, volume.getVolumeInfo().getPublisher());
+                Database.prepare.setString(4, volume.getVolumeInfo().getPublisher());
             }
 
             if (volume.getVolumeInfo().getDescription() == null) {
-                prepare.setString(5, "Unknown");
+                Database.prepare.setString(5, "Unknown");
             } else {
-                prepare.setString(5, volume.getVolumeInfo().getDescription());
+                Database.prepare.setString(5, volume.getVolumeInfo().getDescription());
             }
 
             if (volume.getVolumeInfo().getImageLinks() == null) {
-                prepare.setString(6, "Unknown");
+                Database.prepare.setString(6, "Unknown");
             } else {
-                prepare.setString(6, volume.getVolumeInfo().getImageLinks().getThumbnail());
+                Database.prepare.setString(6, volume.getVolumeInfo().getImageLinks().getThumbnail());
             }
 
             if (volume.getVolumeInfo().getAverageRating() == null) {
-                prepare.setDouble(7, 0);
+                Database.prepare.setDouble(7, 0);
             } else {
-                prepare.setDouble(7, volume.getVolumeInfo().getAverageRating());
+                Database.prepare.setDouble(7, volume.getVolumeInfo().getAverageRating());
             }
 
             if (volume.getVolumeInfo().getLanguage() == null) {
-                prepare.setString(8, "Unknown");
+                Database.prepare.setString(8, "Unknown");
             } else {
-                prepare.setString(8, volume.getVolumeInfo().getLanguage());
+                Database.prepare.setString(8, volume.getVolumeInfo().getLanguage());
             }
 
             if (volume.getVolumeInfo().getPageCount() == null) {
-                prepare.setInt(9, 0);
+                Database.prepare.setInt(9, 0);
             } else {
-                prepare.setInt(9, volume.getVolumeInfo().getPageCount());
+                Database.prepare.setInt(9, volume.getVolumeInfo().getPageCount());
             }
 
-            prepare.executeUpdate();
+            Database.prepare.executeUpdate();
 
             AlertMessage alertMessage = new AlertMessage();
             alertMessage.successMessage("Add Book To Database Successfully!");
