@@ -222,3 +222,21 @@
     -fx-background-color: #f1f1f1;
     -fx-text-fill: #000000;
 }
+
+.hbox1 {
+    -fx-border-color: linear-gradient(to right, yellow, orange); /* Gradient border */
+    -fx-border-width: 3px; /* Thicker border */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+.hbox2 {
+    -fx-border-color: linear-gradient(to right, silver, gray); /* Gradient border */
+    -fx-border-width: 3px; /* Thicker border */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+.hbox3 {
+    -fx-border-color: linear-gradient(to right, #b87333, #d4af37); /* Gradient border */
+    -fx-border-width: 3px; /* Thicker border */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
