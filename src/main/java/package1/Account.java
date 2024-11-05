@@ -1,73 +1,79 @@
 package package1;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Account {
-    private String id;
-    public String name;
-    public String username;
-    private String password;
-    private String email;
-    private String phoneNumber;
+    private SimpleStringProperty id;
+    private SimpleStringProperty name;
+    private SimpleStringProperty username;
+    private SimpleStringProperty password;
+    private SimpleStringProperty email;
+    private SimpleStringProperty phoneNumber;
 
     public Account() {
-
+        this.id = new SimpleStringProperty();
+        this.name = new SimpleStringProperty();
+        this.username = new SimpleStringProperty();
+        this.password = new SimpleStringProperty();
+        this.email = new SimpleStringProperty();
+        this.phoneNumber = new SimpleStringProperty();
     }
 
     public Account(String id, String name, String username, String password, String email, String phoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.id = new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.username = new SimpleStringProperty(username);
+        this.password = new SimpleStringProperty(password);
+        this.email = new SimpleStringProperty(email);
+        this.phoneNumber = new SimpleStringProperty(phoneNumber);
     }
 
     public String getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getUsername() {
-        return username;
+        return username.get();
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username.set(username);
     }
 
     public String getPassword() {
-        return password;
+        return password.get();
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password.set(password);
     }
 
     public String getEmail() {
-        return email;
+        return email.get();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email.set(email);
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phoneNumber.get();
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-
+        this.phoneNumber.set(phoneNumber);
     }
 
     public static boolean isValidUsername(String username) {
@@ -78,23 +84,19 @@ public class Account {
     }
 
     public static boolean isValidPassword(String password) {
-        // Check if the password contains at least one uppercase letter, one lowercase letter, one digit, one special character, and is at least 8 characters long
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
     }
 
     public static boolean isValidEmail(String email) {
-        // Regular expression to validate email format
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
     }
 
     public static boolean isValidName(String name) {
-        // Check if the name contains only letters and is not more than 28 characters long
         return name.matches("^[a-zA-Z]{1,28}$");
     }
 
     public static boolean isValidPhoneNumber(String phoneNumber) {
-        // Check if the phone number contains exactly 10 digits and starts with 0
         return phoneNumber.matches("^0\\d{9}$");
     }
 }

@@ -38,8 +38,8 @@
     -fx-border-color: #17376e;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
-    -fx-padding: 10px; /* Set left padding to 45px */
-    -fx-alignment: CENTER; /* Align text to the left */
+    -fx-padding: 10px;
+    -fx-alignment: CENTER;
 }
 
 .button2:hover {
@@ -73,7 +73,7 @@
     -fx-alignment: CENTER; /* Căn giữa chữ */
 }
 
-.button4 {
+.button4 { /* Tab button */
     -fx-background-color: transparent; /* Transparent background */
     -fx-text-fill: #17376e; /* Text color */
     -fx-font-weight: Bold;
@@ -90,7 +90,7 @@
     -fx-border-color: transparent; /* No border */
 }
 
-.button5 {
+.button5 { /* Transparent button */
     -fx-background-color: transparent; /* Transparent background */
     -fx-text-fill: #17376e; /* Text color */
     -fx-font-weight: Bold;
@@ -102,13 +102,56 @@
 }
 
 .button5:hover {
-    -fx-background-color: transparent; /* Transparent background on hover */
-    -fx-text-fill: #17376e; /* Text color on hover */
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-text-fill: #17376e; /* Text color */
+    -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 14px;
     -fx-border-color: transparent; /* No border */
+    -fx-padding: 5px 10px; /* Padding */
+    -fx-alignment: CENTER; /* Center align text */
 }
 
+.button6 {
+    -fx-background-color: transparent;
+    -fx-text-fill: #17376e;
+    -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 14px;
+    -fx-border-color: #17376e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-alignment: CENTER;
+}
 
-.text-field, .password-field, .choice-box {
+.button6:hover {
+    -fx-background-color: #1f5db9;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #17376e;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 0);
+    -fx-padding: 5px;
+    -fx-alignment: CENTER;
+}
+
+.book-name-text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-text-fill: #17376e;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Poppins', sans-serif;
+}
+
+.book-name-text-field:hover {
+    -fx-border-color: #17376e;
+}
+
+.text-field, .password-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #e0e0e0;
     -fx-border-radius: 4px;
@@ -117,7 +160,7 @@
     -fx-font-family: 'Poppins', sans-serif;
 }
 
-.text-field:hover, .password-field:hover, .choice-box:hover {
+.text-field:hover, .password-field:hover {
     -fx-border-color: #b0b0b0;
 }
 
@@ -138,8 +181,7 @@
     -fx-font-weight: Bold;
 }
 
-/* Thanh tìm kiếm */
-.search-text-field {
+.search-text-field { /*center top search bar*/
     -fx-background-color: #ffffff;
     -fx-border-color: #c0c0c0;
     -fx-border-radius: 20px 0 0 20px; /* Apply border-radius only to the right corners */
@@ -153,30 +195,45 @@
     -fx-border-color: #17376e;
 }
 
+.search-text-field2 {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #c0c0c0;
+    -fx-border-radius: 5px; /* Apply border-radius only to the right corners */
+    -fx-border-color: #17376e;
+    -fx-padding: 5px; /* Adjust padding to fit the new border-radius */
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Poppins', sans-serif;
+}
+
+.search-text-field2:hover {
+    -fx-border-color: #17376e;
+}
+
 
 .scroll-pane {
     -fx-background-color: #ffffff;
-    -fx-border-color: #e0e0e0;
+    -fx-border-color: #17376e;
     -fx-border-radius: 4px;
 }
 
 .scroll-pane .scroll-bar:vertical,
 .scroll-pane .scroll-bar:horizontal {
-    -fx-background-color: #f1f1f1;
+    -fx-background-color: #ffffff;
 }
 
 .scroll-pane .scroll-bar:vertical .thumb,
 .scroll-pane .scroll-bar:horizontal .thumb {
-    -fx-background-color: #c0c0c0;
+    -fx-background-color: #17376e;
     -fx-background-insets: 0;
     -fx-background-radius: 4px;
 }
 
 .book-view-card {
     -fx-background-color: #ffffff;
-    -fx-border-color: #e0e0e0;
+    -fx-border-width: 3px;
+    -fx-border-color: #17376e;
     -fx-border-radius: 5px;
-    -fx-padding: 10px;
     -fx-spacing: 10px;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 0);
     -fx-font-family: 'Poppins', sans-serif;
@@ -239,4 +296,48 @@
     -fx-border-color: linear-gradient(to right, #b87333, #d4af37); /* Gradient border */
     -fx-border-width: 3px; /* Thicker border */
     -fx-border-radius: 5px; /* Rounded corners */
+}
+
+.grid-pane {
+    -fx-background-color: #FFFFFF;
+}
+
+
+.choice-box1 {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #17376e;
+    -fx-border-radius: 4px;
+    -fx-padding: 1px;
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Poppins', sans-serif;
+}
+
+.choice-box1:hover {
+    -fx-border-color: #17376e;
+}
+
+.choice-box1 {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #17376e;
+    -fx-border-radius: 4px;
+    -fx-padding: 1px;
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Poppins', sans-serif;
+}
+
+.choice-box1:hover {
+    -fx-border-color: #17376e;
+}
+
+.choice-box2 {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b9b9b9;
+    -fx-border-radius: 4px;
+    -fx-padding: 1px;
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Poppins', sans-serif;
+}
+
+.choice-box2:hover {
+    -fx-border-color: #17376e;
 }
