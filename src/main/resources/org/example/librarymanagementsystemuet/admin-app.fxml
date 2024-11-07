@@ -40,7 +40,7 @@
             <Circle fx:id="adminAvatar" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </HBox>
-      <AnchorPane fx:id="paneMenuFull" layoutY="80.0" prefHeight="640.0" prefWidth="240.0">
+      <AnchorPane fx:id="paneMenuFull" layoutY="80.0" prefHeight="640.0" prefWidth="240.0" visible="false">
          <children>
             <Button fx:id="dashboardButton" layoutX="13.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="215.0" styleClass="button1" stylesheets="@style.css" text="Dashboard">
                <opaqueInsets>
@@ -131,15 +131,15 @@
       </AnchorPane>
       <HBox layoutX="240.0" prefHeight="80.0" prefWidth="740.0" spacing="10.0">
          <children>
-            <ChoiceBox fx:id="selectTypeSearch" prefHeight="40.0" prefWidth="76.0" styleClass="choice-box2" />
+            <ChoiceBox fx:id="selectTypeSearch" prefHeight="40.0" prefWidth="62.0" styleClass="choice-box2" />
             <HBox prefHeight="40.0" prefWidth="534.0">
                <children>
-                  <TextField fx:id="searchTextField" prefHeight="40.0" prefWidth="465.0" promptText="Search for books" styleClass="search-text-field">
+                  <TextField fx:id="searchTextField" prefHeight="40.0" prefWidth="465.0" promptText="Search for users" styleClass="search-text-field">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </TextField>
-                  <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="60.0">
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" prefHeight="40.0" prefWidth="60.0">
                      <font>
                         <Font size="6.0" />
                      </font>
@@ -155,7 +155,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </HBox>
-      <ImageView fitHeight="36.0" fitWidth="29.0" layoutX="365.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView disable="true" fitHeight="36.0" fitWidth="29.0" layoutX="812.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../asset/img/search-icon.png" />
          </image>

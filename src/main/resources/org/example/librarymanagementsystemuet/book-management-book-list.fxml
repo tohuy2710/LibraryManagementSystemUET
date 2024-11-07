@@ -7,7 +7,7 @@
 
 <HBox fx:id="searchBookResultBox" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookListController">
    <children>
-      <TableView fx:id="bookTable" prefHeight="640.0" prefWidth="1168.0">
+      <TableView fx:id="bookTable" prefHeight="640.0" prefWidth="1217.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="isbnCol" prefWidth="129.60000610351562" text="ISBN" />

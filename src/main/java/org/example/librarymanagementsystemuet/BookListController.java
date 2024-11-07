@@ -1,106 +1,92 @@
 package org.example.librarymanagementsystemuet;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import package1.AlertMessage;
+import package1.Book;
+
+import java.sql.SQLException;
 
 public class BookListController {
 
     @FXML
-    private TableColumn<?, ?> addedDateCol;
+    private TableColumn<Book, String> addedDateCol;
 
     @FXML
-    private TableColumn<?, ?> authorsCol;
+    private TableColumn<Book, String> authorsCol;
 
     @FXML
-    private TableColumn<?, ?> bookNameCol;
+    private TableColumn<Book, String> bookNameCol;
 
     @FXML
-    private TableView<?> bookTable;
+    private TableView<Book> bookTable;
 
     @FXML
-    private TableColumn<?, ?> idCol;
+    private TableColumn<Book, Integer> idCol;
 
     @FXML
-    private TableColumn<?, ?> isbnCol;
+    private TableColumn<Book, String> isbnCol;
 
     @FXML
-    private TableColumn<?, ?> publisherCol;
+    private TableColumn<Book, String> publisherCol;
 
     @FXML
     private HBox searchBookResultBox;
 
-}
+    @FXML
+    private TextField searchTextField;
 
-//            Database.connect = Database.connectDB();
-//            String searchQuery = null;
-//            String searchValue = searchTextField.getText();
-//
-//            if (!searchValue.isEmpty()) {
-//                if (selectTypeSearch.getValue().equals("ID")) {
-//                    searchQuery = "SELECT * FROM books WHERE id = ?";
-//                } else if (selectTypeSearch.getValue().equals("ISBN")) {
-//                    searchQuery = "SELECT * FROM books WHERE isbn = ?";
-//                } else if (selectTypeSearch.getValue().equals("Name")) {
-//                    searchQuery = "SELECT * FROM books WHERE name LIKE ?";
-//                    searchValue = "%" + searchValue + "%";
-//                }
-//
-//                if (searchQuery != null) {
-//                    Database.prepare = Database.connect.prepareStatement(searchQuery);
-//                    Database.prepare.setString(1, searchValue);
-//                    Database.result = Database.prepare.executeQuery();
-//                }
-//
-//                bookList.clear();
-//
-//                while (Database.result != null && Database.result.next()) {
-//                    Book book = new Book();
-//                    book.setId(Database.result.getInt("id"));
-//                    book.setIsbn(Database.result.getString("isbn"));
-//                    book.setName(Database.result.getString("name"));
-//                    book.setAuthor(Database.result.getString("author"));
-//                    book.setPublisher(Database.result.getString("publisher"));
-//                    book.setAddedDate(Database.result.getString("addedDate"));
-//                    bookList.add(book);
-//                }
-//            } else {
-//                AlertMessage alertMessage = new AlertMessage();
-//                alertMessage.errorMessage("Please enter a search value!");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        isbnCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-//        bookNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        authorsCol.setCellValueFactory(new PropertyValueFactory<>("author"));
-//        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
-//        addedDateCol.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
-//
-//        Callback<TableColumn<Book, String>, TableCell<Book, String>> cellFactory = (param) -> {
-//            final TableCell<Book, String> cell = new TableCell<Book, String>() {
-//                @Override
-//                protected void updateItem(String item, boolean empty) {
-//                    super.updateItem(item, empty);
-//
-//                    if (empty) {
-//                        setGraphic(null);
-//                        setText(null);
-//                    } else {
-//                        final Button editButton = new Button("Edit");
-//                        editButton.setOnAction(event -> {
-//                            Book book = getTableView().getItems().get(getIndex());
-//                            System.out.println(book.getId());
-//                        });
-//                        setGraphic(editButton);
-//                        setText(null);
-//                    }
-//                }
-//            };
-//            return cell;
-//        };
-//
-//        bookTable.setItems(bookList);
+    @FXML
+    private ChoiceBox<String> selectTypeSearch;
+
+    private ObservableList<Book> bookList = FXCollections.observableArrayList();
+
+    public void searchBooks(String searchValue) {
+        try {
+            Database.connect = Database.connectDB();
+            String searchQuery = null;
+
+            if (!searchValue.isEmpty()) {
+                searchQuery = "SELECT * FROM books WHERE id LIKE ? OR isbn LIKE ? OR name LIKE ?";
+
+                if (searchQuery != null) {
+                    Database.prepare = Database.connect.prepareStatement(searchQuery);
+                    for (int i = 1; i <= 3; i++) {
+                        Database.prepare.setString(i, "%" + searchValue + "%");
+                    }
+                    Database.result = Database.prepare.executeQuery();
+                }
+
+                bookList.clear();
+
+                while (Database.result != null && Database.result.next()) {
+                    Book book = new Book();
+                    book.setId(Database.result.getInt("id"));
+                    book.setIsbn(Database.result.getString("isbn"));
+                    book.setName(Database.result.getString("name"));
+                    book.setAuthor(Database.result.getString("author"));
+                    book.setPublisher(Database.result.getString("publisher"));
+                    book.setAddedDate(Database.result.getString("addedDate"));
+                    bookList.add(book);
+                }
+            } else {
+                return;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
+        bookNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        authorsCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+        publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
+        addedDateCol.setCellValueFactory(new PropertyValueFactory<>("addedDate"));
+
+        bookTable.setItems(bookList);
+    }
+}

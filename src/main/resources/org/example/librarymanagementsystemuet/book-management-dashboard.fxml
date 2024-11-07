@@ -55,10 +55,12 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TableView prefHeight="331.0" prefWidth="714.0">
+                  <TableView fx:id="recentlyUpdateTable" prefHeight="331.0" prefWidth="714.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="C1" />
-                        <TableColumn prefWidth="75.0" text="C2" />
+                        <TableColumn fx:id="timeCol" prefWidth="195.20001554489136" text="Time" />
+                        <TableColumn fx:id="bookIDCol" prefWidth="119.19999694824219" text="Book ID" />
+                        <TableColumn fx:id="bookNameCol" prefWidth="250.39993286132812" text="Book Name" />
+                        <TableColumn fx:id="typeCol" prefWidth="132.800048828125" text="Type" />
                      </columns>
                   </TableView>
                </children>

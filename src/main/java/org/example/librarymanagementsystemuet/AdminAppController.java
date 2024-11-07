@@ -12,10 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import package1.AlertMessage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AdminAppController implements Initializable {
@@ -73,8 +74,13 @@ public class AdminAppController implements Initializable {
     @FXML
     private Button usersManagementButtonMinimize;
 
+    String[] typeSearchArrays = {"User", "Book"};
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        selectTypeSearch.getItems().addAll(typeSearchArrays);
+        selectTypeSearch.setValue("User");
+
         paneMenuFull.setVisible(false);
         paneMenuMini.setVisible(true);
         paneMenuFull.visibleProperty().addListener((observable, oldValue, newValue) -> {
@@ -141,6 +147,58 @@ public class AdminAppController implements Initializable {
             adjustContentSize(); adjustHBoxSize();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void search(ActionEvent event) {
+        if (searchTextField.getText().isEmpty()) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("Please enter the search text");
+        }
+        else if (selectTypeSearch.getValue().equals("User")) {
+            showUserListResults();
+        } else if (selectTypeSearch.getValue().equals("Book")) {
+            showBookListResults();
+        }
+    }
+
+    public void showBookListResults() {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/book-management-book-list.fxml"));
+            HBox bookManagementBookListHBox = loader.load();
+            BookListController controller = loader.getController();
+            String searchText = searchTextField.getText();
+            controller.searchBooks(searchText);
+
+            contentPane.getChildren().add(bookManagementBookListHBox);
+            adjustContentSize(); adjustHBoxSize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showUserListResults() {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/user-management-user-list.fxml"));
+            HBox userManagementDashboardHBox = loader.load();
+
+            UserManagementController controller = loader.getController();
+
+            String searchText = searchTextField.getText();
+
+            controller.UserManagement(UserManagementController.LOAD_DATA_BY_INFO, searchText);
+
+            contentPane.getChildren().add(userManagementDashboardHBox);
+            adjustContentSize(); adjustHBoxSize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

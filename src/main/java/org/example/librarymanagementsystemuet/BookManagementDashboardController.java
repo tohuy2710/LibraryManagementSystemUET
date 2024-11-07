@@ -1,16 +1,24 @@
 package org.example.librarymanagementsystemuet;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import package1.Book;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class BookManagementDashboardController implements Initializable {
@@ -71,6 +79,67 @@ public class BookManagementDashboardController implements Initializable {
 
     @FXML
     private Label topBorrowedBook3Name;
+
+    @FXML
+    private TableView<Book> recentlyUpdateTable;
+
+    @FXML
+    private TableColumn<Book, String> timeCol;
+
+    @FXML
+    private TableColumn<Book, String> bookIDCol;
+
+    @FXML
+    private TableColumn<Book, String> bookNameCol;
+
+    @FXML
+    private TableColumn<Book, String> typeCol;
+
+    private ObservableList<Book> recentlyUpdateBookList = FXCollections.observableArrayList();
+
+    public void getRecentlyUpdatedBooks() {
+        recentlyUpdateTable.getItems().clear();
+        recentlyUpdateBookList.clear();
+
+        try {
+            Database.connect = Database.connectDB();
+            String query = "SELECT id, name, lastUpdateDate, " +
+                    "IF(lastUpdateDate = addedDate, 'ADD', 'MODIFY') AS type " +
+                    "FROM books " +
+                    "ORDER BY lastUpdateDate DESC " +
+                    "LIMIT 5;";
+            Database.prepare = Database.connect.prepareStatement(query);
+            Database.result = Database.prepare.executeQuery();
+
+            while (Database.result != null && Database.result.next()) {
+                Book book = new Book();
+                book.setId(Database.result.getInt("id"));
+                book.setName(Database.result.getString("name"));
+                book.setLastUpdateDate(Database.result.getString("lastUpdateDate"));
+                book.setTypeOfLastUpdate(Database.result.getString("type"));
+                recentlyUpdateBookList.add(book);
+            }
+
+            bookIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+            bookNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+            timeCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdateDate"));
+            typeCol.setCellValueFactory(new PropertyValueFactory<>("typeOfLastUpdate"));
+
+            recentlyUpdateTable.setItems(recentlyUpdateBookList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (Database.result != null) Database.result.close();
+                if (Database.prepare != null) Database.prepare.close();
+                if (Database.connect != null) Database.connect.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
 
     public void getTopBorrowedBooks(ActionEvent event) {
         try {
@@ -141,5 +210,6 @@ public class BookManagementDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getTopBorrowedBooks(null);
+        getRecentlyUpdatedBooks();
     }
 }

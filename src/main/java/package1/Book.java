@@ -9,6 +9,8 @@ public class Book {
     private SimpleStringProperty authors;
     private SimpleStringProperty publisher;
     private SimpleStringProperty addedDate;
+    private SimpleStringProperty lastUpdateDate;
+    private SimpleStringProperty typeOfLastUpdate;
 
     public Book() {
         this.id = new SimpleStringProperty();
@@ -17,6 +19,68 @@ public class Book {
         this.authors = new SimpleStringProperty();
         this.publisher = new SimpleStringProperty();
         this.addedDate = new SimpleStringProperty();
+        this.lastUpdateDate = new SimpleStringProperty();
+        this.typeOfLastUpdate = new SimpleStringProperty();
+    }
+
+    public String getLastUpdateDate() {
+        return lastUpdateDate.get();
+    }
+
+    public SimpleStringProperty lastUpdateDateProperty() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(String lastUpdateDate) {
+        this.lastUpdateDate.set(lastUpdateDate);
+    }
+
+    public SimpleStringProperty idProperty() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id.set(id);
+    }
+
+    public SimpleStringProperty isbnProperty() {
+        return isbn;
+    }
+
+    public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public String getAuthors() {
+        return authors.get();
+    }
+
+    public SimpleStringProperty authorsProperty() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors.set(authors);
+    }
+
+    public SimpleStringProperty publisherProperty() {
+        return publisher;
+    }
+
+    public SimpleStringProperty addedDateProperty() {
+        return addedDate;
+    }
+
+    public String getTypeOfLastUpdate() {
+        return typeOfLastUpdate.get();
+    }
+
+    public SimpleStringProperty typeOfLastUpdateProperty() {
+        return typeOfLastUpdate;
+    }
+
+    public void setTypeOfLastUpdate(String typeOfLastUpdate) {
+        this.typeOfLastUpdate.set(typeOfLastUpdate);
     }
 
     public int getId() {
