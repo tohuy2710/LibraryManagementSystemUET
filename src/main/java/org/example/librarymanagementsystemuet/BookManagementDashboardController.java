@@ -107,7 +107,7 @@ public class BookManagementDashboardController implements Initializable {
                     "IF(lastUpdateDate = addedDate, 'ADD', 'MODIFY') AS type " +
                     "FROM books " +
                     "ORDER BY lastUpdateDate DESC " +
-                    "LIMIT 5;";
+                    "LIMIT 10;";
             Database.prepare = Database.connect.prepareStatement(query);
             Database.result = Database.prepare.executeQuery();
 
@@ -146,8 +146,8 @@ public class BookManagementDashboardController implements Initializable {
             Database.connect = Database.connectDB();
             String query = "SELECT bookid, COUNT(userid) AS cnt, " +
                     "books.linkCoverImage, books.name, books.author, books.isbn " +
-                    "FROM borrowbooks " +
-                    "LEFT JOIN books ON books.id = borrowbooks.bookid " +
+                    "FROM usersrequest " +
+                    "LEFT JOIN books ON books.id = usersrequest.bookid " +
                     "GROUP BY bookid " +
                     "ORDER BY cnt DESC " +
                     "LIMIT 3;";

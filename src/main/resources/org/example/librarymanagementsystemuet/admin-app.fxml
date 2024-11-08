@@ -69,7 +69,7 @@
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="27.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../asset/img/dashboard-icon.png" />
+                  <Image url="@../../../asset/img/user-request-icon.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="27.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
@@ -113,7 +113,7 @@
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="26.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../asset/img/dashboard-icon.png" />
+                  <Image url="@../../../asset/img/user-request-icon.png" />
                </image>
             </ImageView>
             <Button fx:id="dashboardButtonMinimize" layoutY="6.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
