@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 import package1.AlertMessage;
 import package1.User;
@@ -21,29 +22,52 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static org.example.librarymanagementsystemuet.Database.connectDB;
+import static package1.Account.*;
 
 public class UserManagementController implements Initializable {
 
     @FXML
-    private TableView<User> userManagement_TV;
+    private Button cancelUpdateButton, saveUpdateButton;
+
     @FXML
-    private TableColumn<User, String> emailCol, fullnameCol, optionsCol, passwordCol, phoneNumberCol, userIdCol, usernameCol;
+    private TableColumn<User, String> usernameCol, emailCol, passwordCol, fullnameCol, userIdCol, phoneNumberCol, optionsCol;
+
     @FXML
-    private HBox userManagement_HB;
-    @FXML
-    private TextField emailUpdate, fullnameUpdate, phonenumberUpdate, usernameUpdate, passwordUpdate;
+    private TextField usernameUpdate, emailUpdate, passwordUpdate, phoneNumberUpdate;
+
     @FXML
     private Label labelUpdate;
-    @FXML
-    private Button saveButtonUpdate, cancelUpdateButton;
+
     @FXML
     private AnchorPane updateUserPane;
+
+    @FXML
+    private HBox userManagement_HB;
+
+    @FXML
+    private StackPane userManagement_SP;
+
+    @FXML
+    private TableView<User> userManagement_TV;
 
     private ObservableList<User> userList = FXCollections.observableArrayList();
     private ResultSet resultSet;
 
     protected static final String LOAD_FULL_DATA = "load-full-data";
     protected static final String LOAD_DATA_BY_INFO = "load-any-data";
+
+    public void setUserData(ResultSet resultSet) throws SQLException {
+        while (resultSet != null && resultSet.next()) {
+            User user = new User();
+            user.setId(resultSet.getString("id"));
+            user.setUsername(resultSet.getString("username"));
+            user.setPassword(resultSet.getString("password"));
+            user.setName(resultSet.getString("name"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPhoneNumber(resultSet.getString("phonenumber"));
+            userList.add(user);
+        }
+    }
 
     public void loadFullUsersData() throws SQLException {
         userList.clear();
@@ -53,16 +77,7 @@ public class UserManagementController implements Initializable {
              PreparedStatement preparedStatement = conn.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (resultSet != null && resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getString("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setName(resultSet.getString("name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPhoneNumber(resultSet.getString("phonenumber"));
-                userList.add(user);
-            }
+            setUserData(resultSet);
         }
         userManagement_TV.setItems(userList);
     }
@@ -76,7 +91,6 @@ public class UserManagementController implements Initializable {
 
         String query = "SELECT * FROM users WHERE id LIKE ? OR username LIKE ?";
 
-
         try (Connection conn = connectDB();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
 
@@ -84,16 +98,7 @@ public class UserManagementController implements Initializable {
             preparedStatement.setString(2, "%" + userInfo + "%");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet != null && resultSet.next()) {
-                    User user = new User();
-                    user.setId(resultSet.getString("id"));
-                    user.setUsername(resultSet.getString("username"));
-                    user.setPassword(resultSet.getString("password"));
-                    user.setName(resultSet.getString("name"));
-                    user.setEmail(resultSet.getString("email"));
-                    user.setPhoneNumber(resultSet.getString("phonenumber"));
-                    userList.add(user);
-                }
+                setUserData(resultSet);
             }
         }
 
@@ -147,7 +152,7 @@ public class UserManagementController implements Initializable {
                                                 loadFullUsersData();
                                                 new AlertMessage().successMessage("User deleted successfully!");
                                             } else {
-                                                new AlertMessage().errorMessage("Deletion failed. No rows affected.");
+                                                new AlertMessage().errorMessage("Deletion failed!");
                                             }
                                         }
                                     } else {
@@ -160,50 +165,87 @@ public class UserManagementController implements Initializable {
 
                             updateButton.setOnMouseClicked(event -> {
                                 try {
+                                    // Get the selected user
                                     User updatedUser = getTableView().getItems().get(getIndex());
+
+                                    saveUpdateButton.getStyleClass().add("button6");
+                                    cancelUpdateButton.getStyleClass().add("button6");
+
+                                    // Check if selected user is not null
                                     if (updatedUser != null) {
-                                        userManagement_HB.setVisible(false);
-                                        updateUserPane.setVisible(true);
+                                        // Prepare query to display current user data
+                                        String displayUserInfoQuery = "SELECT * FROM users WHERE id = ?";
+                                        Connection conn = connectDB();
+                                        PreparedStatement preparedStatement = conn.prepareStatement(displayUserInfoQuery);
+                                        preparedStatement.setString(1, updatedUser.getId());
+                                        resultSet = preparedStatement.executeQuery();
 
-                                        usernameUpdate.setText(updatedUser.getUsername());
-                                        fullnameUpdate.setText(updatedUser.getName());
-                                        passwordUpdate.setText(updatedUser.getPassword());
-                                        emailUpdate.setText(updatedUser.getEmail());
-                                        phonenumberUpdate.setText(updatedUser.getPhoneNumber());
+                                        if (resultSet != null && resultSet.next()) {
+                                            updateUserPane.setVisible(true);
 
-                                        saveButtonUpdate.setOnAction(event1 -> {
-                                            try (Connection conn = connectDB()) {
-                                                String updateQuery = "UPDATE users SET username = ?, name = ?, password = ?, email = ?, phonenumber = ? WHERE id = ?";
-                                                try (PreparedStatement updateStatement = conn.prepareStatement(updateQuery)) {
+                                            usernameUpdate.setText(updatedUser.getUsername());
+                                            passwordUpdate.setText(updatedUser.getPassword());
+                                            emailUpdate.setText(updatedUser.getEmail());
+                                            phoneNumberUpdate.setText(updatedUser.getPhoneNumber());
 
-                                                    updateStatement.setString(1, usernameUpdate.getText());
-                                                    updateStatement.setString(2, fullnameUpdate.getText());
-                                                    updateStatement.setString(3, passwordUpdate.getText());
-                                                    updateStatement.setString(4, emailUpdate.getText());
-                                                    updateStatement.setString(5, phonenumberUpdate.getText());
-                                                    updateStatement.setString(6, updatedUser.getId());
+                                            // Save new user data
+                                            saveUpdateButton.setOnAction(event1 -> {
+                                                try {
+                                                    String updateQuery = "UPDATE users " +
+                                                            "SET username = ?, " +
+                                                            "password = ?, " +
+                                                            "email = ?, " +
+                                                            "phonenumber = ? " +
+                                                            "WHERE id = ?";
+                                                    PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
 
-                                                    int updateSuccess = updateStatement.executeUpdate();
+                                                    AlertMessage alertMessage = new AlertMessage();
 
-                                                    if (updateSuccess > 0) {
-                                                        loadFullUsersData();
-                                                        updateUserPane.setVisible(false);
-                                                        new AlertMessage().successMessage("User information updated successfully!");
+                                                    if (usernameUpdate.getText().isEmpty() || passwordUpdate.getText().isEmpty()
+                                                            || emailUpdate.getText().isEmpty() || phoneNumberUpdate.getText().isEmpty()) {
+                                                        // Check if any field is empty
+                                                        alertMessage.errorMessage("Please fill in all fields.");
+                                                    } else if (!isValidUsername(usernameUpdate.getText())) {
+                                                        // Check if new username is valid
+                                                        alertMessage.errorMessage("Username must be between 6 and 12 characters.");
+                                                    } else if (!isValidPassword(passwordUpdate.getText())) {
+                                                        // Check if new password is valid
+                                                        alertMessage.errorMessage("Password must contain at least one uppercase letter, " +
+                                                                "one lowercase letter, one digit, one special character, and is at least 8 characters long.");
+                                                    } else if (!isValidEmail(emailUpdate.getText())) {
+                                                        // Check if new email is valid
+                                                        alertMessage.errorMessage("Invalid email format.");
+                                                    } else if (!isValidPhoneNumber(phoneNumberUpdate.getText())) {
+                                                        // Check if new phone number is valid
+                                                        alertMessage.errorMessage("Invalid phone number format.");
                                                     } else {
-                                                        new AlertMessage().errorMessage("Update failed. No rows affected.");
-                                                    }
-                                                }
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
-                                            }
-                                        });
+                                                        updateStatement.setString(1, usernameUpdate.getText());
+                                                        updateStatement.setString(2, passwordUpdate.getText());
+                                                        updateStatement.setString(3, emailUpdate.getText());
+                                                        updateStatement.setString(4, phoneNumberUpdate.getText());
+                                                        updateStatement.setString(5, updatedUser.getId());
 
-                                        cancelUpdateButton.setOnAction(event1 -> updateUserPane.setVisible(false));
-                                    } else {
-                                        new AlertMessage().errorMessage("No user selected.");
+                                                        int updateSuccess = updateStatement.executeUpdate();
+
+                                                        if (updateSuccess > 0) {
+                                                            loadFullUsersData();
+                                                            updateUserPane.setVisible(false);
+                                                            new AlertMessage().successMessage("User information updated successfully!");
+                                                        } else {
+                                                            new AlertMessage().errorMessage("Update failed. No rows affected.");
+                                                        }
+                                                    }
+                                                } catch (SQLException e) {
+                                                    throw new RuntimeException(e);
+                                                }
+                                            });
+
+                                            // // Cancel update and keep current user data
+                                            cancelUpdateButton.setOnAction(event1 -> updateUserPane.setVisible(false));
+                                        }
                                     }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
                                 }
                             });
 
@@ -224,6 +266,7 @@ public class UserManagementController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             UserManagement(LOAD_FULL_DATA, null);
+            updateUserPane.setVisible(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }

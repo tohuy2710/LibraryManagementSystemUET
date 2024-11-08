@@ -8,7 +8,7 @@ public class Account {
     private SimpleStringProperty username;
     private SimpleStringProperty password;
     private SimpleStringProperty email;
-    private SimpleStringProperty phoneNumber;
+    private SimpleStringProperty phonenumber;
 
     public Account() {
         this.id = new SimpleStringProperty();
@@ -16,16 +16,16 @@ public class Account {
         this.username = new SimpleStringProperty();
         this.password = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
-        this.phoneNumber = new SimpleStringProperty();
+        this.phonenumber = new SimpleStringProperty();
     }
 
-    public Account(String id, String name, String username, String password, String email, String phoneNumber) {
+    public Account(String id, String name, String username, String password, String email, String phonenumber) {
         this.id = new SimpleStringProperty(id);
         this.name = new SimpleStringProperty(name);
         this.username = new SimpleStringProperty(username);
         this.password = new SimpleStringProperty(password);
         this.email = new SimpleStringProperty(email);
-        this.phoneNumber = new SimpleStringProperty(phoneNumber);
+        this.phonenumber = new SimpleStringProperty(phonenumber);
     }
 
     public String getId() {
@@ -69,11 +69,11 @@ public class Account {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber.get();
+        return phonenumber.get();
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber.set(phoneNumber);
+    public void setPhoneNumber(String phonenumber) {
+        this.phonenumber.set(phonenumber);
     }
 
     public static boolean isValidUsername(String username) {
@@ -96,7 +96,7 @@ public class Account {
         return name.matches("^[a-zA-Z]{1,28}$");
     }
 
-    public static boolean isValidPhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("^0\\d{9}$");
+    public static boolean isValidPhoneNumber(String phonenumber) {
+        return phonenumber.matches("^0\\d{9}$");
     }
 }
