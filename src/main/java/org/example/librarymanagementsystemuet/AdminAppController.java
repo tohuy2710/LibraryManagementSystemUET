@@ -144,7 +144,22 @@ public class AdminAppController implements Initializable {
             HBox userManagementDashboardHBox = loader.load();
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userManagementDashboardHBox);
-            adjustContentSize(); adjustHBoxSize();
+            adjustContentSize();
+            System.out.println("curr");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showUserRequestManagementHBox(ActionEvent event) {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/user-request-management.fxml"));
+            HBox userRequestManagementHBox = loader.load();
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(userRequestManagementHBox);
+            adjustContentSize();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -174,7 +189,7 @@ public class AdminAppController implements Initializable {
             controller.searchBooks(searchText);
 
             contentPane.getChildren().add(bookManagementBookListHBox);
-            adjustContentSize(); adjustHBoxSize();
+            adjustContentSize();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -187,14 +202,16 @@ public class AdminAppController implements Initializable {
                     .getResource("/org/example/librarymanagementsystemuet/user-management-user-list.fxml"));
             HBox userManagementDashboardHBox = loader.load();
 
-            UserManagementController controller = loader.getController();
 
+            UserManagementController controller = loader.getController();
             String searchText = searchTextField.getText();
 
             controller.UserManagement(UserManagementController.LOAD_DATA_BY_INFO, searchText);
 
             contentPane.getChildren().add(userManagementDashboardHBox);
-            adjustContentSize(); adjustHBoxSize();
+
+            adjustContentSize();
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -210,5 +227,6 @@ public class AdminAppController implements Initializable {
             paneMenuFull.setVisible(true);
             paneMenuMini.setVisible(false);
         }
+        adjustHBoxSize(); adjustContentSize();
     }
 }

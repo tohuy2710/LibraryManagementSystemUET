@@ -342,3 +342,48 @@
 .choice-box2:hover {
     -fx-border-color: #17376e;
 }
+
+
+/* Common styles for all status cells */
+.status-common {
+    -fx-padding: 5px;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+}
+
+/* Specific status styles */
+.status-active {
+    -fx-background-color: #00ff00;
+    -fx-text-fill: #ffffff;
+}
+
+.status-denied {
+    -fx-background-color: lightcoral;
+    -fx-text-fill: white;
+}
+
+.status-canceled {
+    -fx-background-color: orange;
+    -fx-text-fill: #ffffff;
+}
+
+.status-overdue {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.status-completed {
+    -fx-background-color: #17376e;
+    -fx-text-fill: white;
+}
+
+.status-in-progress {
+    -fx-background-color: yellow;
+    -fx-text-fill: #000000;
+}
+
+.status-reserved {
+    -fx-background-color: lightblue;
+    -fx-text-fill: #ffffff;
+}
+

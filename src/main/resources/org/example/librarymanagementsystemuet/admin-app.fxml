@@ -49,7 +49,7 @@
             </Button>
             <Button fx:id="booksManagementButton" layoutX="12.0" layoutY="68.0" mnemonicParsing="false" onAction="#showBookManagementHBox" prefHeight="44.0" prefWidth="215.0" styleClass="button1" text="Books Management" />
             <Button fx:id="usersManagementButton" layoutX="13.0" layoutY="124.0" mnemonicParsing="false" onAction="#showUserManagementHBox" prefHeight="44.0" prefWidth="215.0" styleClass="button1" text="Users Management" />
-            <Button layoutX="12.0" layoutY="182.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="215.0" styleClass="button1" text="User Request" />
+            <Button layoutX="12.0" layoutY="182.0" mnemonicParsing="false" onAction="#showUserRequestManagementHBox" prefHeight="44.0" prefWidth="215.0" styleClass="button1" text="User Request" />
             <Button layoutX="12.0" layoutY="241.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="215.0" styleClass="button1" text="Email" />
             <Button fx:id="logoutButton" layoutX="13.0" layoutY="565.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="215.0" text="Logout" />
             <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="27.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
@@ -119,7 +119,7 @@
             <Button fx:id="dashboardButtonMinimize" layoutY="6.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
             <Button fx:id="booksManagementButtonMinimize" layoutY="62.0" mnemonicParsing="false" onAction="#showBookManagementHBox" prefHeight="57.0" prefWidth="82.0" styleClass="button4" />
             <Button fx:id="usersManagementButtonMinimize" layoutY="118.0" mnemonicParsing="false" onAction="#showUserManagementHBox" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
-            <Button layoutY="178.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
+            <Button layoutY="178.0" mnemonicParsing="false" onAction="#showUserRequestManagementHBox" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
             <Button layoutY="235.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="26.0" layoutY="561.0" pickOnBounds="true" preserveRatio="true">
                <image>

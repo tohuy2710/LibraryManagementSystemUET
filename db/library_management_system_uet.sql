@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3307
--- Thời gian đã tạo: Th10 07, 2024 lúc 03:11 PM
+-- Thời gian đã tạo: Th10 12, 2024 lúc 02:26 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -51,6 +51,7 @@ CREATE TABLE `books` (
   `name` varchar(255) NOT NULL,
   `author` varchar(255) DEFAULT NULL,
   `publisher` varchar(60) DEFAULT NULL,
+  `location` varchar(40) NOT NULL DEFAULT 'WAREHOUSE',
   `addedDate` datetime DEFAULT current_timestamp(),
   `description` text DEFAULT NULL,
   `linkCoverImage` text DEFAULT NULL,
@@ -65,19 +66,19 @@ CREATE TABLE `books` (
 -- Đang đổ dữ liệu cho bảng `books`
 --
 
-INSERT INTO `books` (`id`, `isbn`, `name`, `author`, `publisher`, `addedDate`, `description`, `linkCoverImage`, `lastUpdateDate`, `avgRate`, `language`, `publisherDate`, `pageCount`) VALUES
-(100000, '0', 'test', NULL, NULL, '2024-10-21 23:48:41', NULL, '', NULL, NULL, 'Unknown', NULL, NULL),
-(100001, '1', 'hello world', NULL, NULL, '2024-10-22 11:29:16', NULL, NULL, '2024-10-22 11:29:16', NULL, 'Unknown', NULL, NULL),
-(100002, '2', 'g', NULL, NULL, '2024-10-22 11:29:16', NULL, NULL, '2024-10-22 11:29:16', NULL, 'Unknown', NULL, NULL),
-(100003, '3', 'f', NULL, NULL, '2024-10-22 11:29:16', NULL, NULL, '2024-10-22 11:29:16', NULL, 'Unknown', NULL, NULL),
-(100004, '1', 'a b', NULL, NULL, '2024-10-22 11:31:49', NULL, NULL, '2024-10-22 11:31:49', NULL, 'Unknown', NULL, NULL),
-(100005, '2', 'a c', NULL, NULL, '2024-10-22 11:31:49', NULL, NULL, '2024-10-22 11:31:49', NULL, 'Unknown', NULL, NULL),
-(100006, '3', 'a c', NULL, NULL, '2024-10-22 11:31:49', NULL, NULL, '2024-10-22 11:31:49', NULL, 'Unknown', NULL, NULL),
-(100007, 'CHI:096622646', 'Report', 'Michigan. Adjutant-General\'s Office', 'Unknown', '2024-10-23 23:49:25', 'Unknown', 'http://books.google.com/books/content?id=H09GAQAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-23 23:49:25', 0.00, 'en', NULL, 278),
-(100008, '9781472136886', 'Sherlock Holmes\'s School for Detection', 'Simon Clark', 'Hachette UK', '2024-10-23 23:53:01', 'It\'s 1890. Sherlock Holmes and Doctor Watson return to Baker Street after a night pursuing a vicious criminal. Inspector Lestrade is waiting for Holmes with a proposition of national importance. Lestrade tells Holmes that a school of detection has been formed to train a new breed of modern investigators that will serve in Great Britain and the Empire. Most students will become police officers. Some, however, will become bodyguards and spies. Holmes begins instructing his decidedly curious assortment of students from home and abroad. He does so with his customary gusto and inventiveness. Scotland Yard, in the main, allocates crimes to solve and Holmes mentors his students. Occasionally, he shadows them in disguise in order to assess or even directly test their abilities with creative scenarios he devises. Certain crimes investigated by the students might appear trivial, such as the re-positioning of an ornament atop a garden wall, yet it will transpire an assassin has moved the ornament to create good sightlines in order to commit murder with a sniper\'s rifle. Other mysteries are considered outside the domain of the police. For example, the inexplicable disappearance of a stone gargoyle, which is linked to an ancient family curse. Or a man suffering from amnesia who discovers that not only has he acquired a secret life but also gained an implacable enemy, too. Holmes, with the ever- trustworthy Doctor Watson in his wake, is kept busy with his students\' cases, ranging from minor to serious, sometimes rectifying their mistakes and saving them from a variety of disasters. These eleven wonderful new adventures and intrigues include tales such as \'The Gargoyles of Killfellen House\', \'Sherlock Holmes and the Four Kings of Sweden\' and \'The Case of the Cannibal Club\'.', 'http://books.google.com/books/content?id=6BsvDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-23 23:53:01', 0.00, 'en', NULL, 412),
-(100009, '9781472136886', 'Sherlock Holmes\'s School for Detection', 'Simon Clark', 'Hachette UK', '2024-10-23 23:55:25', 'It\'s 1890. Sherlock Holmes and Doctor Watson return to Baker Street after a night pursuing a vicious criminal. Inspector Lestrade is waiting for Holmes with a proposition of national importance. Lestrade tells Holmes that a school of detection has been formed to train a new breed of modern investigators that will serve in Great Britain and the Empire. Most students will become police officers. Some, however, will become bodyguards and spies. Holmes begins instructing his decidedly curious assortment of students from home and abroad. He does so with his customary gusto and inventiveness. Scotland Yard, in the main, allocates crimes to solve and Holmes mentors his students. Occasionally, he shadows them in disguise in order to assess or even directly test their abilities with creative scenarios he devises. Certain crimes investigated by the students might appear trivial, such as the re-positioning of an ornament atop a garden wall, yet it will transpire an assassin has moved the ornament to create good sightlines in order to commit murder with a sniper\'s rifle. Other mysteries are considered outside the domain of the police. For example, the inexplicable disappearance of a stone gargoyle, which is linked to an ancient family curse. Or a man suffering from amnesia who discovers that not only has he acquired a secret life but also gained an implacable enemy, too. Holmes, with the ever- trustworthy Doctor Watson in his wake, is kept busy with his students\' cases, ranging from minor to serious, sometimes rectifying their mistakes and saving them from a variety of disasters. These eleven wonderful new adventures and intrigues include tales such as \'The Gargoyles of Killfellen House\', \'Sherlock Holmes and the Four Kings of Sweden\' and \'The Case of the Cannibal Club\'.', 'http://books.google.com/books/content?id=6BsvDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-23 23:55:25', 0.00, 'en', NULL, 412),
-(100010, 'UOM:39015086851550', 'Stories of Sherlock Holmes', 'Arthur Conan Doyle', 'Unknown', '2024-10-24 20:47:12', 'Unknown', 'http://books.google.com/books/content?id=ewI-AQAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-24 20:47:12', 0.00, 'en', NULL, 330),
-(100011, '0486270556', 'Six Great Sherlock Holmes Stories', 'Arthur Conan Doyle', 'Courier Corporation', '2024-10-25 13:40:07', 'A selection of six of the finest of the Sherlock Holmes mystery stories.', 'http://books.google.com/books/content?id=dnQz427Lc0wC&printsec=frontcover&img=1&zoom=1&source=gbs_api', '2024-10-25 13:40:07', 4.00, 'en', NULL, 116);
+INSERT INTO `books` (`id`, `isbn`, `name`, `author`, `publisher`, `location`, `addedDate`, `description`, `linkCoverImage`, `lastUpdateDate`, `avgRate`, `language`, `publisherDate`, `pageCount`) VALUES
+(100000, '0', 'test', NULL, NULL, '', '2024-10-21 23:48:41', NULL, '', NULL, NULL, 'Unknown', NULL, NULL),
+(100001, '1', 'hello world', NULL, NULL, '', '2024-10-22 11:29:16', NULL, NULL, '2024-10-22 11:29:16', NULL, 'Unknown', NULL, NULL),
+(100002, '2', 'g', NULL, NULL, '', '2024-10-22 11:29:16', NULL, NULL, '2024-10-22 11:29:16', NULL, 'Unknown', NULL, NULL),
+(100003, '3', 'f', NULL, NULL, '', '2024-10-22 11:29:16', NULL, NULL, '2024-10-22 11:29:16', NULL, 'Unknown', NULL, NULL),
+(100004, '1', 'a b', NULL, NULL, '', '2024-10-22 11:31:49', NULL, NULL, '2024-10-22 11:31:49', NULL, 'Unknown', NULL, NULL),
+(100005, '2', 'a c', NULL, NULL, '', '2024-10-22 11:31:49', NULL, NULL, '2024-10-22 11:31:49', NULL, 'Unknown', NULL, NULL),
+(100006, '3', 'a c', NULL, NULL, '', '2024-10-22 11:31:49', NULL, NULL, '2024-10-22 11:31:49', NULL, 'Unknown', NULL, NULL),
+(100007, 'CHI:096622646', 'Report', 'Michigan. Adjutant-General\'s Office', 'Unknown', '', '2024-10-23 23:49:25', 'Unknown', 'http://books.google.com/books/content?id=H09GAQAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-23 23:49:25', 0.00, 'en', NULL, 278),
+(100008, '9781472136886', 'Sherlock Holmes\'s School for Detection', 'Simon Clark', 'Hachette UK', '', '2024-10-23 23:53:01', 'It\'s 1890. Sherlock Holmes and Doctor Watson return to Baker Street after a night pursuing a vicious criminal. Inspector Lestrade is waiting for Holmes with a proposition of national importance. Lestrade tells Holmes that a school of detection has been formed to train a new breed of modern investigators that will serve in Great Britain and the Empire. Most students will become police officers. Some, however, will become bodyguards and spies. Holmes begins instructing his decidedly curious assortment of students from home and abroad. He does so with his customary gusto and inventiveness. Scotland Yard, in the main, allocates crimes to solve and Holmes mentors his students. Occasionally, he shadows them in disguise in order to assess or even directly test their abilities with creative scenarios he devises. Certain crimes investigated by the students might appear trivial, such as the re-positioning of an ornament atop a garden wall, yet it will transpire an assassin has moved the ornament to create good sightlines in order to commit murder with a sniper\'s rifle. Other mysteries are considered outside the domain of the police. For example, the inexplicable disappearance of a stone gargoyle, which is linked to an ancient family curse. Or a man suffering from amnesia who discovers that not only has he acquired a secret life but also gained an implacable enemy, too. Holmes, with the ever- trustworthy Doctor Watson in his wake, is kept busy with his students\' cases, ranging from minor to serious, sometimes rectifying their mistakes and saving them from a variety of disasters. These eleven wonderful new adventures and intrigues include tales such as \'The Gargoyles of Killfellen House\', \'Sherlock Holmes and the Four Kings of Sweden\' and \'The Case of the Cannibal Club\'.', 'http://books.google.com/books/content?id=6BsvDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-23 23:53:01', 0.00, 'en', NULL, 412),
+(100009, '9781472136886', 'Sherlock Holmes\'s School for Detection', 'Simon Clark', 'Hachette UK', '', '2024-10-23 23:55:25', 'It\'s 1890. Sherlock Holmes and Doctor Watson return to Baker Street after a night pursuing a vicious criminal. Inspector Lestrade is waiting for Holmes with a proposition of national importance. Lestrade tells Holmes that a school of detection has been formed to train a new breed of modern investigators that will serve in Great Britain and the Empire. Most students will become police officers. Some, however, will become bodyguards and spies. Holmes begins instructing his decidedly curious assortment of students from home and abroad. He does so with his customary gusto and inventiveness. Scotland Yard, in the main, allocates crimes to solve and Holmes mentors his students. Occasionally, he shadows them in disguise in order to assess or even directly test their abilities with creative scenarios he devises. Certain crimes investigated by the students might appear trivial, such as the re-positioning of an ornament atop a garden wall, yet it will transpire an assassin has moved the ornament to create good sightlines in order to commit murder with a sniper\'s rifle. Other mysteries are considered outside the domain of the police. For example, the inexplicable disappearance of a stone gargoyle, which is linked to an ancient family curse. Or a man suffering from amnesia who discovers that not only has he acquired a secret life but also gained an implacable enemy, too. Holmes, with the ever- trustworthy Doctor Watson in his wake, is kept busy with his students\' cases, ranging from minor to serious, sometimes rectifying their mistakes and saving them from a variety of disasters. These eleven wonderful new adventures and intrigues include tales such as \'The Gargoyles of Killfellen House\', \'Sherlock Holmes and the Four Kings of Sweden\' and \'The Case of the Cannibal Club\'.', 'http://books.google.com/books/content?id=6BsvDQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-23 23:55:25', 0.00, 'en', NULL, 412),
+(100010, 'UOM:39015086851550', 'Stories of Sherlock Holmes', 'Arthur Conan Doyle', 'Unknown', '', '2024-10-24 20:47:12', 'Unknown', 'http://books.google.com/books/content?id=ewI-AQAAMAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api', '2024-10-24 20:47:12', 0.00, 'en', NULL, 330),
+(100011, '0486270556', 'Six Great Sherlock Holmes Stories', 'Arthur Conan Doyle', 'Courier Corporation', '', '2024-10-25 13:40:07', 'A selection of six of the finest of the Sherlock Holmes mystery stories.', 'http://books.google.com/books/content?id=dnQz427Lc0wC&printsec=frontcover&img=1&zoom=1&source=gbs_api', '2024-10-25 13:40:07', 4.00, 'en', NULL, 116);
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,7 @@ CREATE TABLE `usersrequest` (
   `bookId` int(11) NOT NULL,
   `createdTime` datetime NOT NULL DEFAULT current_timestamp(),
   `lastUpdatedTime` datetime NOT NULL DEFAULT current_timestamp(),
-  `status` enum('AC','DE','CA','EX','OD','CP','RS') NOT NULL DEFAULT 'RS'
+  `status` enum('Approved for borrowing','Denied for borrowing','Cancelled by admin','Overdue for return book','Book has been returned','Pending','Book is currently on loan') NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -134,17 +135,17 @@ CREATE TABLE `usersrequest` (
 --
 
 INSERT INTO `usersrequest` (`id`, `userId`, `bookId`, `createdTime`, `lastUpdatedTime`, `status`) VALUES
-(14, 1, 100003, '2023-11-07 10:30:00', '2023-11-07 10:30:00', 'RS'),
-(15, 2, 100004, '2023-11-07 11:00:00', '2023-11-07 11:00:00', 'AC'),
-(16, 5, 100007, '2023-11-07 12:30:00', '2023-11-07 12:30:00', 'EX'),
-(17, 6, 100008, '2023-11-07 13:00:00', '2023-11-07 13:00:00', 'OD'),
-(18, 7, 100009, '2023-11-07 13:30:00', '2023-11-07 13:30:00', 'CP'),
-(19, 8, 100010, '2023-11-07 14:00:00', '2023-11-07 14:00:00', 'RS'),
-(20, 9, 100011, '2023-11-07 14:30:00', '2023-11-07 14:30:00', 'AC'),
-(21, 10, 100003, '2023-11-07 15:00:00', '2023-11-07 15:00:00', 'DE'),
-(22, 11, 100004, '2023-11-07 15:30:00', '2023-11-07 15:30:00', 'CA'),
-(23, 12, 100005, '2023-11-07 16:00:00', '2023-11-07 16:00:00', 'EX'),
-(24, 13, 100006, '2023-11-07 16:30:00', '2023-11-07 16:30:00', 'OD');
+(14, 1, 100003, '2023-11-07 10:30:00', '2023-11-07 10:30:00', 'Book has been returned'),
+(15, 2, 100004, '2023-11-07 11:00:00', '2023-11-07 11:00:00', 'Book is currently on loan'),
+(16, 5, 100007, '2023-11-07 12:30:00', '2023-11-07 12:30:00', 'Pending'),
+(17, 6, 100008, '2023-11-07 13:00:00', '2023-11-07 13:00:00', 'Pending'),
+(18, 7, 100009, '2023-11-07 13:30:00', '2023-11-07 13:30:00', 'Pending'),
+(19, 8, 100010, '2023-11-07 14:00:00', '2023-11-07 14:00:00', 'Pending'),
+(20, 9, 100011, '2023-11-07 14:30:00', '2023-11-07 14:30:00', 'Pending'),
+(21, 10, 100003, '2023-11-07 15:00:00', '2023-11-07 15:00:00', 'Pending'),
+(22, 11, 100004, '2023-11-07 15:30:00', '2023-11-07 15:30:00', 'Overdue for return book'),
+(23, 12, 100005, '2023-11-07 16:00:00', '2023-11-07 16:00:00', 'Denied for borrowing'),
+(24, 13, 100006, '2023-11-07 16:30:00', '2023-11-07 16:30:00', 'Pending');
 
 --
 -- Chỉ mục cho các bảng đã đổ

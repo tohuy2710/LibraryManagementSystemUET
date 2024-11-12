@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="updateUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2px; -fx-border-color: #17376e; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 5);" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserManagementController">
+   <children>
+      <Label fx:id="labelUpdate" layoutX="48.0" layoutY="84.0" styleClass="label2" text="Update User Information" textFill="#faf2f2">
+         <font>
+            <Font name="SansSerif Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="passwordUpdate" layoutX="57.0" layoutY="172.0" prefHeight="26.0" prefWidth="234.0" promptText="Password" />
+      <TextField fx:id="usernameUpdate" layoutX="58.0" layoutY="134.0" prefHeight="26.0" prefWidth="234.0" promptText="Username" styleClass="text-field" />
+      <TextField fx:id="emailUpdate" layoutX="58.0" layoutY="213.0" prefHeight="26.0" prefWidth="234.0" promptText="Email" />
+      <TextField fx:id="phoneNumberUpdate" layoutX="57.0" layoutY="256.0" prefHeight="26.0" prefWidth="234.0" promptText="Phone Number" />
+      <Button fx:id="saveUpdateButton" contentDisplay="CENTER" layoutX="58.0" layoutY="312.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="button6" text="Save" textFill="#f7f3f3">
+         <font>
+            <Font name="SansSerif Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelUpdateButton" contentDisplay="CENTER" layoutX="181.0" layoutY="312.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="button6" text="Cancel" textFill="#ece9e9">
+         <font>
+            <Font name="SansSerif Bold" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="53.0" fitWidth="48.0" layoutX="150.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../asset/img/user-modify-icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
