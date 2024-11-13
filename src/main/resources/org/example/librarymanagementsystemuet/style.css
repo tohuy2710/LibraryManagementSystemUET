@@ -171,15 +171,21 @@
 }
 
 .label2 {
-    -fx-text-fill: #1f5db9;
+    -fx-text-fill: #17376e;
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: Bold;
 }
 
 .labelHeader {
-    -fx-text-fill: #000000;
+    -fx-text-fill: #17376e;
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: Bold;
+}
+
+.label3 {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: Bold;
+    -fx-font-family: 'Poppins', sans-serif;
 }
 
 .search-text-field { /*center top search bar*/
@@ -298,6 +304,21 @@
     -fx-border-width: 3px; /* Thicker border */
     -fx-border-radius: 5px; /* Rounded corners */
 }
+
+.hbox-book-recommend-user {
+    -fx-border-color: linear-gradient(to right, #17376e, #1f5db9); /* Gradient border */
+    -fx-background-color: #f3f6ff;
+    -fx-border-width: 2px; /* Thicker border */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+.hbox-top-borrow-book-user {
+    -fx-border-color: linear-gradient(to right, #a2b9d8, #7fa6d1); /* Lighter gradient border */
+    -fx-background-color: linear-gradient(to right, #f0f8ff, #d3dce6, #b8c5d9, #a1b3d0); /* Soft, light colors */
+    -fx-border-width: 2px; /* Thicker border */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
 
 .grid-pane {
     -fx-background-color: #FFFFFF;

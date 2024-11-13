@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <VBox layoutY="-100.0" prefHeight="695.0" prefWidth="1200.0" spacing="5.0">
+         <children>
+            <HBox prefHeight="300.0" prefWidth="1200.0" spacing="10.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="400.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../asset/img/top-1-img.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@unknowCover.jpg" />
+                                 </image>
+                              </ImageView>
+                              <VBox prefHeight="90.0" prefWidth="282.0">
+                                 <children>
+                                    <Label styleClass="labelHeader" text="Label">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Label" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../asset/img/top-2-img.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@unknowCover.jpg" />
+                                 </image>
+                              </ImageView>
+                              <VBox prefHeight="90.0" prefWidth="282.0">
+                                 <children>
+                                    <Label styleClass="labelHeader" text="Label">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Label" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../asset/img/top-3-img.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@unknowCover.jpg" />
+                                 </image>
+                              </ImageView>
+                              <VBox prefHeight="90.0" prefWidth="282.0">
+                                 <children>
+                                    <Label styleClass="labelHeader" text="Label">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Label" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="300.0" prefWidth="784.0" spacing="10.0">
+                     <children>
+                        <VBox prefHeight="300.0" prefWidth="180.0" spacing="10.0">
+                           <children>
+                              <ImageView fitHeight="240.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@unknowCover.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="180.0" styleClass="button6" text="Borrow this Book" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="300.0" prefWidth="580.0">
+                           <children>
+                              <Label styleClass="labelHeader" text="Humami Book Name Label" textFill="#17376e">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Text strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label1" text="To Quang Huy">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label1" text="Humami Publisher">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <HBox prefHeight="20.0" prefWidth="580.0" spacing="10.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../asset/img/view-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="9999">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Doraemon (ドラえもん) is a Japanese manga series written and illustrated by Fujiko F. Fujio. First serialized in 1969, the manga's chapters were collected in 45 tankōbon volumes published by Shogakukan from 1974 to 1996. The story revolves around an earless robotic cat named Doraemon, who travels back in time from the 22nd century to aid a boy named Nobita Nobi.The manga spawned a media franchise. Three anime TV series have been ada" wrappingWidth="558.4479084014893">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children></HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

@@ -24,6 +24,7 @@ module org.example.librarymanagementsystemuet {
     requires google.api.client;
     requires java.net.http;
     requires org.json;
+    requires javafx.media;
 
     // Google API Client dependencies
 
