@@ -9,6 +9,7 @@ public class Book {
     private SimpleStringProperty authors;
     private SimpleStringProperty publisher;
     private SimpleStringProperty addedDate;
+    private SimpleStringProperty imageUrl;
 
     public Book() {
         this.id = new SimpleStringProperty();
@@ -17,6 +18,7 @@ public class Book {
         this.authors = new SimpleStringProperty();
         this.publisher = new SimpleStringProperty();
         this.addedDate = new SimpleStringProperty();
+        this.imageUrl = new SimpleStringProperty();
     }
 
     public int getId() {
@@ -65,5 +67,13 @@ public class Book {
 
     public void setAddedDate(String addedDate) {
         this.addedDate.set(addedDate);
+    }
+
+    public String getImageUrl() {
+        return imageUrl.get();
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl.set(imageUrl);
     }
 }
