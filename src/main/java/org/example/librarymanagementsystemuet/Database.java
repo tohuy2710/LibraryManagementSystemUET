@@ -5,7 +5,6 @@ import javafx.scene.image.ImageView;
 import package1.AlertMessage;
 
 import java.sql.*;
-import java.util.Timer;
 import java.util.concurrent.*;
 
 public class Database {

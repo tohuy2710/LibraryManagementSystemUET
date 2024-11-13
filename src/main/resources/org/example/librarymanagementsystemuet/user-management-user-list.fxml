@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="userManagement_HB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserManagementController">
-   <StackPane fx:id="userManagement_SP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0">
+   <StackPane prefHeight="640.0" prefWidth="1200.0">
       <children>
          <TableView fx:id="userManagement_TV" prefHeight="640.0" prefWidth="1200.0">
             <columns>
