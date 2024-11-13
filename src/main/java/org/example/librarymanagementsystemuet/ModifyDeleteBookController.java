@@ -116,11 +116,11 @@ public class ModifyDeleteBookController {
             try {
                 while (Database.result != null && Database.result.next()) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("book-view-card.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("book-view-card-user.fxml"));
                     HBox bookBox = fxmlLoader.load();
 
-                    BookViewCardController bookViewCardController = fxmlLoader.getController();
-                    bookViewCardController.setData(Database.result);
+                    BookViewCardControllerUser bookViewCardControllerUser = fxmlLoader.getController();
+                    bookViewCardControllerUser.setData(Database.result);
 
                     bookBox.setStyle("-fx-background-color: #ffffff");
 
@@ -130,7 +130,7 @@ public class ModifyDeleteBookController {
                         }
                         bookBox.setStyle("-fx-background-color: #bfd8ff");
                         selectedBookBox = bookBox;
-                        workingBookID = bookViewCardController.getID();
+                        workingBookID = bookViewCardControllerUser.getID();
                         setBookDetailInfo(null);
                     });
 
