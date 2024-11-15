@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="bookBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="500.0" spacing="10.0" styleClass="book-view-card" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookViewCardController">
+   <children>
+      <ImageView fx:id="bookImageAddBookResult" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../asset/img/cover-not-found-img.png" />
+         </image>
+      </ImageView>
+      <VBox prefHeight="119.0" prefWidth="489.0" spacing="5.0">
+         <children>
+            <Label fx:id="bookNameAddBookResult" maxWidth="426.0" prefHeight="27.0" prefWidth="426.0" styleClass="ellipsis-label" stylesheets="@style.css" text="Sherlock Holmes - Con chó của dòng họ Baskervilles">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="bookAuthorAddBookResult" styleClass="book-author" text="Authur Conan Doyle" />
+            <Label fx:id="bookPublisherAddBookResult" styleClass="book-author" text="Publisher" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</HBox>

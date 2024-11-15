@@ -62,7 +62,7 @@ public class UserAppBookshelfController {
 
     public void loadBooksByCategory(String category) {
         executorService.submit(() -> {
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/library_management_system_uet", "root", "");
                  PreparedStatement stmt = conn.prepareStatement("SELECT * FROM books WHERE category = ? ORDER BY id LIMIT 7")) {
                 stmt.setString(1, category);
                 ResultSet rs = stmt.executeQuery();
@@ -74,16 +74,16 @@ public class UserAppBookshelfController {
                 int i = 0;
                 while (rs.next() && i < 7) {
                     String imageUrl = rs.getString("linkCoverImage");
-                    if (imageUrl == null || imageUrl.isEmpty()) {
-                        imageUrl = "path/to/default/image.png"; // Đường dẫn ảnh mặc định
-                    }
-                    Image image = new Image(imageUrl, true);
+//                    if (imageUrl == null || imageUrl.isEmpty()) {
+//                        imageUrl = "asset/img/cover-not-found-img.png"; // Đường dẫn ảnh mặc định
+//                    }
+//                    Image image = new Image(imageUrl, true);
                     String name = rs.getString("name");
                     String author = rs.getString("author");
 
                     int finalI = i;
                     Platform.runLater(() -> {
-                        imageViews[finalI].setImage(image);
+                        Database.setImageByLink(imageViews[finalI], imageUrl);
                         nameLabels[finalI].setText(name);
                         authorLabels[finalI].setText(author);
                     });

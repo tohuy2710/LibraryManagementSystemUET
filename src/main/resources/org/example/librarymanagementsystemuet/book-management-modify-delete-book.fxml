@@ -112,7 +112,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="150.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Average Rate:  " />
-                                    <TextField fx:id="bookDetailAvgRate" prefHeight="22.0" prefWidth="26.0" text="5.0" />
+                                    <TextField fx:id="bookDetailAvgRate" prefHeight="22.0" prefWidth="36.0" text="5.0" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="284.0">
@@ -142,8 +142,8 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="592.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Preview Link: " />
-                              <TextField fx:id="bookDetailPreviewLink" prefHeight="22.0" prefWidth="357.0" text="Link" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
+                              <TextField fx:id="bookDetailLocation" prefHeight="22.0" prefWidth="170.0" text="Link" />
                            </children>
                         </HBox>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desciption:" />

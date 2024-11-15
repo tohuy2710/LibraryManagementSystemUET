@@ -60,7 +60,7 @@ public class ModifyDeleteBookController {
     private TextField bookDetailPageCount;
 
     @FXML
-    private TextField bookDetailPreviewLink;
+    private TextField bookDetailLocation;
 
     @FXML
     private TextField bookDetailPublishDate;
@@ -112,15 +112,20 @@ public class ModifyDeleteBookController {
             }
 
             Database.result = preparedStatement.executeQuery();
+            if (!Database.result.next()) {
+                resultForBookNameLabel.setText("No book found!");
+            } else {
+                resultForBookNameLabel.setText("Search results for: " + searchTextField.getText());
+            }
 
             try {
                 while (Database.result != null && Database.result.next()) {
                     FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(getClass().getResource("book-view-card-user.fxml"));
+                    fxmlLoader.setLocation(getClass().getResource("book-view-card.fxml"));
                     HBox bookBox = fxmlLoader.load();
 
-                    BookViewCardControllerUser bookViewCardControllerUser = fxmlLoader.getController();
-                    bookViewCardControllerUser.setData(Database.result);
+                    BookViewCardController bookViewCardController = fxmlLoader.getController();
+                    bookViewCardController.setData(Database.result);
 
                     bookBox.setStyle("-fx-background-color: #ffffff");
 
@@ -130,7 +135,7 @@ public class ModifyDeleteBookController {
                         }
                         bookBox.setStyle("-fx-background-color: #bfd8ff");
                         selectedBookBox = bookBox;
-                        workingBookID = bookViewCardControllerUser.getID();
+                        workingBookID = bookViewCardController.getID();
                         setBookDetailInfo(null);
                     });
 
@@ -197,12 +202,12 @@ public class ModifyDeleteBookController {
                     ? resultSet.getString("language") : "NULL");
             bookDetailPageCount.setText(resultSet.getString("pageCount") != null
                     ? resultSet.getString("pageCount") : "NULL");
-            bookDetailPublishDate.setText(resultSet.getString("publishDate") != null
-                    ? resultSet.getString("publishDate") : "NULL");
+            bookDetailPublishDate.setText(resultSet.getString("publisherDate") != null
+                    ? resultSet.getString("publisherDate") : "NULL");
             bookDetailAvgRate.setText(resultSet.getString("avgRate") != null
                     ? resultSet.getString("avgRate") : "NULL");
-            bookDetailPreviewLink.setText(resultSet.getString("previewLink") != null
-                    ? resultSet.getString("previewLink") : "NULL");
+            bookDetailLocation.setText(resultSet.getString("location") != null
+                    ? resultSet.getString("location") : "NULL");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -230,7 +235,7 @@ public class ModifyDeleteBookController {
                     || bookDetailPageCount.getText().equals("") || bookDetailPageCount.getText().equals("NULL")
                     || bookDetailPublishDate.getText().equals("") || bookDetailPublishDate.getText().equals("NULL")
                     || bookDetailAvgRate.getText().equals("") || bookDetailAvgRate.getText().equals("NULL")
-                    || bookDetailPreviewLink.getText().equals("") || bookDetailPreviewLink.getText().equals("NULL")) {
+                    || bookDetailLocation.getText().equals("") || bookDetailLocation.getText().equals("NULL")) {
                 AlertMessage alertMessage = new AlertMessage();
                 alertMessage.errorMessage("Please fill all the fields!");
                 return;
@@ -245,7 +250,7 @@ public class ModifyDeleteBookController {
             preparedStatement.setString(8, bookDetailPageCount.getText());
             preparedStatement.setString(9, bookDetailPublishDate.getText());
             preparedStatement.setString(10, bookDetailAvgRate.getText());
-            preparedStatement.setString(11, bookDetailPreviewLink.getText());
+            preparedStatement.setString(11, bookDetailLocation.getText());
             preparedStatement.setString(12, workingBookID);
             preparedStatement.executeUpdate();
             AlertMessage alertMessage = new AlertMessage();
@@ -287,7 +292,7 @@ public class ModifyDeleteBookController {
         bookDetailPageCount.setText("");
         bookDetailPublishDate.setText("");
         bookDetailAvgRate.setText("");
-        bookDetailPreviewLink.setText("");
+        bookDetailLocation.setText("");
         Database.setImageByLink(bookDetailCover, "NULL");
     }
 }

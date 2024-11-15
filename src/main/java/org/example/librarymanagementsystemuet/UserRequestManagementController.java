@@ -2,14 +2,14 @@ package org.example.librarymanagementsystemuet;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
+import package1.AlertMessage;
 import package1.UserRequest;
 
 import java.net.URL;
@@ -44,20 +44,110 @@ public class UserRequestManagementController implements Initializable {
     @FXML
     private TableView<UserRequest> userRequestTableView;
 
+    @FXML
+    private CheckBox pendingCheckBox;
+
+    @FXML
+    private CheckBox approvedCheckBox;
+
+    @FXML
+    private CheckBox deniedCheckBox;
+
+    @FXML
+    private CheckBox overdueCheckBox;
+
+    @FXML
+    private CheckBox returnedCheckBox;
+
+    @FXML
+    private CheckBox cancelledCheckBox;
+
+    @FXML
+    private CheckBox onLoanCheckBox;
+
+    @FXML
+    private TextField searchTextField;
+
     private ObservableList<UserRequest> userRequestList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setupDatabaseAndFetchData();
+        setupDatabaseAndFetchData("SELECT * FROM usersrequest " +
+                "LEFT JOIN books ON usersrequest.bookId = books.id" +
+                " WHERE status in (" +
+                "'Pending', 'Approved for borrowing', 'Overdue for return book')");
 
         initializeColumns();
     }
 
-    private void setupDatabaseAndFetchData() {
+    public void refreshData(ActionEvent event) {
+        String query = "SELECT * FROM usersrequest LEFT JOIN books ON usersrequest.bookId = books.id WHERE";
+
+        if (pendingCheckBox.isSelected()) {
+            query += " status = 'Pending' OR";
+        }
+
+        if (approvedCheckBox.isSelected()) {
+            query += " status = 'Approved for borrowing' OR";
+        }
+
+        if (deniedCheckBox.isSelected()) {
+            query += " status = 'Denied for borrowing' OR";
+        }
+
+        if (overdueCheckBox.isSelected()) {
+            query += " status = 'Overdue for return book' OR";
+        }
+
+        if (returnedCheckBox.isSelected()) {
+            query += " status = 'Book has been returned' OR";
+        }
+
+        if (cancelledCheckBox.isSelected()) {
+            query += " status = 'Cancelled by admin' OR";
+        }
+
+        if (onLoanCheckBox.isSelected()) {
+            query += " status = 'Book is currently on loan' OR";
+        }
+
+        if (returnedCheckBox.isSelected()) {
+            query += " status = 'Book has been returned' OR";
+        }
+
+        if (cancelledCheckBox.isSelected()) {
+            query += " status = 'Cancelled by admin' OR";
+        }
+
+        if (query.endsWith("WHERE")) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("Please select at least one status to filter the data.");
+        } else {
+            setupDatabaseAndFetchData(query.substring(0, query.length() - 2));
+        }
+    }
+
+    public void search(ActionEvent event) {
+        if (searchTextField.getText().isEmpty() || searchTextField.getText().isBlank()) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("Please enter a search query.");
+        } else {
+            String searchQuery = searchTextField.getText();
+            setupDatabaseAndFetchData("SELECT * FROM usersrequest " +
+                    "LEFT JOIN books ON usersrequest.bookId = books.id " +
+                    "WHERE bookId LIKE '%" + searchQuery + "%'" +
+                    "OR userId LIKE '%" + searchQuery + "%'" +
+                    "OR usersrequest.id LIKE '%" + searchQuery+ "%'" +
+                    "OR books.name LIKE '%" + searchQuery + "%'");
+        }
+
+    }
+
+    private void setupDatabaseAndFetchData(String query) {
         Database.connect = Database.connectDB();
-        String query = "SELECT * FROM usersrequest";
 
         userRequestList.clear();
+        userRequestTableView.getItems().clear();
 
         try {
             Database.prepare = Database.connect.prepareStatement(query);
@@ -67,6 +157,7 @@ public class UserRequestManagementController implements Initializable {
                 UserRequest userRequest = new UserRequest();
                 userRequest.setRequestID(Database.result.getString("id"));
                 userRequest.setBookID(Database.result.getString("bookId"));
+                userRequest.setBookName(Database.result.getString("name"));
                 userRequest.setUserID(Database.result.getString("userId"));
                 userRequest.setCreatedTime(Database.result.getString("createdTime"));
                 userRequest.setLastUpdatedTime(Database.result.getString("lastUpdatedTime"));
@@ -90,6 +181,7 @@ public class UserRequestManagementController implements Initializable {
     private void initializeColumns() {
         requestIdCol.setCellValueFactory(new PropertyValueFactory<>("requestID"));
         bookIDCol.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+        bookNameCol.setCellValueFactory(new PropertyValueFactory<>("bookName"));
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
         createdTimeCol.setCellValueFactory(new PropertyValueFactory<>("createdTime"));
         lastUpdatedTimeCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedTime"));

@@ -173,11 +173,13 @@
 .label2 {
     -fx-text-fill: #17376e;
     -fx-font-family: 'Poppins', sans-serif;
+
     -fx-font-weight: Bold;
 }
 
 .labelHeader {
     -fx-text-fill: #17376e;
+    -fx-font-size: 20px;
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: Bold;
 }

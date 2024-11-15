@@ -1,6 +1,7 @@
 // UserHomePageController.java
 package org.example.librarymanagementsystemuet;
 
+import com.google.api.client.util.Data;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -146,7 +147,7 @@ public class UserHomePageController {
     private void loadRecommendedBooks() {
         Callable<VBox[]> loadBooksTask = () -> {
             VBox[] books = new VBox[5];
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/library_management_system_uet", "root", "");
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT * FROM books ORDER BY id DESC LIMIT 5")) {
 
@@ -187,16 +188,16 @@ public class UserHomePageController {
 
     private void loadBookDetails() {
         Callable<Void> loadDetailsTask = () -> {
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/library_management_system_uet", "root", "");
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT * FROM books ORDER BY id DESC LIMIT 1")) {
 
                 if (rs.next()) {
                     String imageUrl = rs.getString("linkCoverImage");
-                    if (imageUrl == null || imageUrl.isEmpty()) {
-                        imageUrl = "path/to/default/image.png"; // Default image path
-                    }
-                    Image image = new Image(imageUrl, true);
+//                    if (imageUrl == null || imageUrl.isEmpty()) {
+//                        imageUrl = "path/to/default/image.png"; // Default image path
+//                    }
+//                    Image image = new Image(imageUrl, true);
                     String name = rs.getString("name");
                     String author = rs.getString("author");
                     String publisher = rs.getString("publisher");
@@ -205,7 +206,7 @@ public class UserHomePageController {
 
                     // Update UI elements on the JavaFX Application Thread
                     javafx.application.Platform.runLater(() -> {
-                        imageViewDetail.setImage(image);
+                        Database.setImageByLink(imageViewDetail, imageUrl);
                         bookNameDetail.setText(name);
                         authorDetail.setText(author);
                         publisherDetail.setText(publisher);
@@ -224,17 +225,17 @@ public class UserHomePageController {
 
     private void loadTopBorrowedBooks() {
         Callable<Void> loadTopBorrowedBooksTask = () -> {
-            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/library_management_system_uet", "root", "");
                  Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT * FROM books ORDER BY borrowCount DESC LIMIT 3")) {
 
                 int i = 0;
                 while (rs.next() && i < 3) {
                     String imageUrl = rs.getString("linkCoverImage");
-                    if (imageUrl == null || imageUrl.isEmpty()) {
-                        imageUrl = "path/to/default/image.png"; // Default image path
-                    }
-                    Image image = new Image(imageUrl, true);
+//                    if (imageUrl == null || imageUrl.isEmpty()) {
+//                        imageUrl = "asset/img/cover-not-found-img.png"; // Default image path
+//                    }
+//                    Image image = new Image(imageUrl, true);
                     String name = rs.getString("name");
                     String author = rs.getString("author");
 
@@ -243,17 +244,17 @@ public class UserHomePageController {
                     javafx.application.Platform.runLater(() -> {
                         switch (finalI) {
                             case 0 -> {
-                                borrowImageView1.setImage(image);
+                                Database.setImageByLink(borrowImageView1, imageUrl);
                                 borrowNameLabel1.setText(name);
                                 borrowAuthorLabel1.setText(author);
                             }
                             case 1 -> {
-                                borrowImageView2.setImage(image);
+                                Database.setImageByLink(borrowImageView2, imageUrl);
                                 borrowNameLabel2.setText(name);
                                 borrowAuthorLabel2.setText(author);
                             }
                             case 2 -> {
-                                borrowImageView3.setImage(image);
+                                Database.setImageByLink(borrowImageView3, imageUrl);
                                 borrowNameLabel3.setText(name);
                                 borrowAuthorLabel3.setText(author);
                             }
@@ -301,7 +302,9 @@ public class UserHomePageController {
     }
     private void loadBookshelf(String category, HBox targetHBox) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/librarymanagementsystemuet/user-app-bookshelf.fxml"));
+            FXMLLoader loader =
+                    new FXMLLoader(getClass()
+                            .getResource("/org/example/librarymanagementsystemuet/user-app-bookshelf.fxml"));
             HBox bookshelf = loader.load();
             UserAppBookshelfController controller = loader.getController();
             controller.loadBooksByCategory(category);

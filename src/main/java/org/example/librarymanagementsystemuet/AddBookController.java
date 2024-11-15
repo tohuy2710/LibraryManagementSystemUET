@@ -299,10 +299,10 @@ public class AddBookController implements Initializable {
                 }
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("book-view-card-user.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("book-view-card.fxml"));
                 HBox bookBox = fxmlLoader.load();
 
-                BookViewCardControllerUser bookViewCardController = fxmlLoader.getController();
+                BookViewCardController bookViewCardController = fxmlLoader.getController();
                 bookViewCardController.setData(volume);
 
                 // Set default style

@@ -6,6 +6,7 @@ import javafx.beans.property.StringProperty;
 public class UserRequest {
     private StringProperty requestID;
     private StringProperty bookID;
+    private StringProperty bookName;
     private StringProperty userID;
     private StringProperty createdTime;
     private StringProperty lastUpdatedTime;
@@ -14,6 +15,7 @@ public class UserRequest {
     public UserRequest() {
         this.requestID = new SimpleStringProperty();
         this.bookID = new SimpleStringProperty();
+        this.bookName = new SimpleStringProperty();
         this.userID = new SimpleStringProperty();
         this.createdTime = new SimpleStringProperty();
         this.lastUpdatedTime = new SimpleStringProperty();
@@ -23,6 +25,7 @@ public class UserRequest {
     public UserRequest(String requestID, String bookID, String userID, String createdTime, String lastUpdatedTime, String status) {
         this.requestID = new SimpleStringProperty(requestID);
         this.bookID = new SimpleStringProperty(bookID);
+        this.bookName = new SimpleStringProperty();
         this.userID = new SimpleStringProperty(userID);
         this.createdTime = new SimpleStringProperty(createdTime);
         this.lastUpdatedTime = new SimpleStringProperty(lastUpdatedTime);
@@ -52,4 +55,8 @@ public class UserRequest {
     public String getStatus() { return status.get(); }
     public void setStatus(String status) { this.status.set(status); }
     public StringProperty statusProperty() { return status; }
+
+    public String getBookName() { return bookName.get(); }
+    public void setBookName(String bookName) { this.bookName.set(bookName); }
+    public StringProperty bookNameProperty() { return bookName; }
 }
