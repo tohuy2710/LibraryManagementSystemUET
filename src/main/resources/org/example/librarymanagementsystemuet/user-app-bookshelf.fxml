@@ -10,25 +10,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="technologyBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="technologyBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserAppBookshelfController">
    <children>
       <VBox alignment="CENTER_LEFT" prefHeight="195.0" prefWidth="160.0">
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook1" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook1" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook1" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -42,19 +42,19 @@
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook2" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook2" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook2" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -68,19 +68,19 @@
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook3" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook3" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook3" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -94,19 +94,19 @@
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook4" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook4" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook4" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -120,19 +120,19 @@
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook5" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook5" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook5" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -146,19 +146,19 @@
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook6" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook6" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook6" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -172,19 +172,19 @@
          <children>
             <HBox alignment="CENTER" prefHeight="146.0" prefWidth="167.0">
                <children>
-                  <ImageView fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageBook7" fitHeight="127.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/cover-not-found-img.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
-            <Label prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+            <Label fx:id="nameBook7" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>
             </Label>
-            <Label text="Author Conan Doyle">
+            <Label fx:id="authorBook7" text="Author Conan Doyle">
                <padding>
                   <Insets left="10.0" />
                </padding>
