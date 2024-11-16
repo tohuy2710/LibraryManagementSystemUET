@@ -76,7 +76,7 @@ public class AddBookController implements Initializable {
     private TextField bookDetailPageCount;
 
     @FXML
-    private TextField bookDetailPreviewLink;
+    private TextField bookDetailLocation;
 
     @FXML
     private TextField bookDetailPublishDate;
@@ -118,23 +118,29 @@ public class AddBookController implements Initializable {
         Database.connect = Database.connectDB();
         String query = "INSERT INTO books " +
                 "(isbn, name, author, publisher, description, linkCoverImage, " +
-                "avgRate, language, pageCount) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "avgRate, language, pageCount, location) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Database.prepare = Database.connect.prepareStatement(query);
 
             // Kiểm tra và gán giá trị cho các trường
-            Database.prepare.setString(1, bookDetailISBN.getText().isEmpty() ? "Unknown" : bookDetailISBN.getText());
-            Database.prepare.setString(2, bookDetailName.getText().isEmpty() ? "Unknown" : bookDetailName.getText());
-            Database.prepare.setString(3, bookDetailAuthor.getText().isEmpty() ? "Unknown" : bookDetailAuthor.getText());
-            Database.prepare.setString(4, bookDetailPublisher.getText().isEmpty() ? "Unknown" : bookDetailPublisher.getText());
-            Database.prepare.setString(5, bookDetailDescription.getText().isEmpty() ? "Unknown" : bookDetailDescription.getText());
-            Database.prepare.setString(6, bookDetailCoverLink.getText().isEmpty() ? "Unknown" : bookDetailCoverLink.getText());
-
+            Database.prepare.setString(1, bookDetailISBN.getText().isEmpty()
+                    ? "Unknown" : bookDetailISBN.getText());
+            Database.prepare.setString(2, bookDetailName.getText().isEmpty()
+                    ? "Unknown" : bookDetailName.getText());
+            Database.prepare.setString(3, bookDetailAuthor.getText().isEmpty()
+                    ? "Unknown" : bookDetailAuthor.getText());
+            Database.prepare.setString(4, bookDetailPublisher.getText().isEmpty()
+                    ? "Unknown" : bookDetailPublisher.getText());
+            Database.prepare.setString(5, bookDetailDescription.getText().isEmpty()
+                    ? "Unknown" : bookDetailDescription.getText());
+            Database.prepare.setString(6, bookDetailCoverLink.getText().isEmpty()
+                    ? "Unknown" : bookDetailCoverLink.getText());
             // Kiểm tra và gán giá trị cho avgRate và pageCount
             try {
-                double avgRate = bookDetailAvgRate.getText().isEmpty() ? 0 : Double.parseDouble(bookDetailAvgRate.getText());
+                double avgRate = bookDetailAvgRate.getText().isEmpty()
+                        ? 0 : Double.parseDouble(bookDetailAvgRate.getText());
                 Database.prepare.setDouble(7, avgRate);
             } catch (NumberFormatException e) {
                 AlertMessage alertMessage = new AlertMessage();
@@ -152,6 +158,8 @@ public class AddBookController implements Initializable {
                 alertMessage.errorMessage("Page count is not a valid number");
                 return;
             }
+            Database.prepare.setString(10, bookDetailLocation.getText().isEmpty()
+                    ? "Unknown" : bookDetailLocation.getText());
 
             // Thực thi truy vấn
             Database.prepare.executeUpdate();
@@ -246,7 +254,7 @@ public class AddBookController implements Initializable {
             bookDetailPublishDate.setText("");
             bookDetailPageCount.setText("");
             bookDetailISBN.setText("");
-            bookDetailPreviewLink.setText("");
+            bookDetailLocation.setText("");
             bookDetailCoverLink.setText("");
             bookDetailCover.setImage(new Image(getClass().getResourceAsStream("unknowCover.jpg")));
             return;
@@ -278,8 +286,7 @@ public class AddBookController implements Initializable {
         bookDetailISBN.setText(volume.getVolumeInfo().getIndustryIdentifiers() != null
                 && !volume.getVolumeInfo().getIndustryIdentifiers().isEmpty()
                 ? volume.getVolumeInfo().getIndustryIdentifiers().get(0).getIdentifier() : "Unknown");
-        bookDetailPreviewLink.setText(volume.getVolumeInfo().getPreviewLink() != null
-                ? volume.getVolumeInfo().getPreviewLink() : "Unknown");
+        bookDetailLocation.setText("Unknown");
         bookDetailCoverLink.setText(volume.getVolumeInfo().getImageLinks() != null
                 ? volume.getVolumeInfo().getImageLinks().getThumbnail() : "Unknown");
     }

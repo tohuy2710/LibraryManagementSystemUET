@@ -144,8 +144,8 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="592.0" spacing="10.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Preview Link: " />
-                              <TextField fx:id="bookDetailPreviewLink" prefHeight="22.0" prefWidth="357.0" text="Link" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" />
+                              <TextField fx:id="bookDetailLocation" prefHeight="22.0" prefWidth="357.0" text="Link" />
                            </children>
                         </HBox>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Desciption:" />
