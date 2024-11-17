@@ -11,6 +11,33 @@ public class Book {
     private SimpleStringProperty addedDate;
     private SimpleStringProperty lastUpdateDate;
     private SimpleStringProperty typeOfLastUpdate;
+    private SimpleStringProperty imageLink;
+    private SimpleStringProperty category;
+    private SimpleStringProperty location;
+    private SimpleStringProperty quantity;
+    private SimpleStringProperty avgRate;
+    private SimpleStringProperty pageCount;
+    private SimpleStringProperty description;
+    private SimpleStringProperty views;
+    private SimpleStringProperty borrowCount;
+    private SimpleStringProperty language;
+    private SimpleStringProperty publisherDate;
+
+    public String getPublisherDate() {
+        return publisherDate.get();
+    }
+
+    public SimpleStringProperty publisherDateProperty() {
+        return publisherDate;
+    }
+
+    public void setPublisherDate(String publisherDate) {
+        if (publisherDate == null) {
+            publisherDate = "";
+        } else {
+            this.publisherDate.set(publisherDate);
+        }
+    }
 
     public Book() {
         this.id = new SimpleStringProperty();
@@ -21,6 +48,176 @@ public class Book {
         this.addedDate = new SimpleStringProperty();
         this.lastUpdateDate = new SimpleStringProperty();
         this.typeOfLastUpdate = new SimpleStringProperty();
+        this.imageLink = new SimpleStringProperty();
+        this.category = new SimpleStringProperty();
+        this.location = new SimpleStringProperty();
+        this.quantity = new SimpleStringProperty();
+        this.avgRate = new SimpleStringProperty();
+        this.pageCount = new SimpleStringProperty();
+        this.description = new SimpleStringProperty();
+        this.views = new SimpleStringProperty();
+        this.borrowCount = new SimpleStringProperty();
+        this.language = new SimpleStringProperty();
+    }
+
+    public String getCategory() {
+        return category.get();
+    }
+
+    public SimpleStringProperty categoryProperty() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        if (category == null){
+            category = "";
+        } else{
+            this.category.set(category);
+        }
+    }
+
+    public String getLocation() {
+        return location.get();
+    }
+
+    public SimpleStringProperty locationProperty() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        if (location == null){
+            location = "";
+        } else {
+            this.location.set(location);
+        }
+    }
+
+    public String getQuantity() {
+        return quantity.get();
+    }
+
+    public SimpleStringProperty quantityProperty() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        if (quantity == null){
+            quantity = "";
+        } else{
+            this.quantity.set(quantity);
+        }
+    }
+
+    public String getAvgRate() {
+        return avgRate.get();
+    }
+
+    public SimpleStringProperty avgRateProperty() {
+        return avgRate;
+    }
+
+    public void setAvgRate(String avgRate) {
+        if (avgRate == null){
+            avgRate = "";
+        } else{
+            this.avgRate.set(avgRate);
+        }
+    }
+
+    public String getPageCount() {
+        return pageCount.get();
+    }
+
+    public SimpleStringProperty pageCountProperty() {
+        return pageCount;
+    }
+
+    public void setPageCount(String pageCount) {
+        if (pageCount == null){
+            pageCount = "";
+        } else{
+            this.pageCount.set(pageCount);
+        }
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public SimpleStringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        if (description == null){
+            description = "";
+        } else {
+            this.description.set(description);
+        }
+    }
+
+    public String getViews() {
+        return views.get();
+    }
+
+    public SimpleStringProperty viewsProperty() {
+        return views;
+    }
+
+    public void setViews(String views) {
+        if (views == null){
+            views = "";
+        } else {
+            this.views.set(views);
+        }
+    }
+
+    public String getBorrowCount() {
+        return borrowCount.get();
+    }
+
+    public SimpleStringProperty borrowCountProperty() {
+        return borrowCount;
+    }
+
+    public void setBorrowCount(String borrowCount) {
+        if (borrowCount == null){
+            borrowCount = "";
+        } else {
+            this.borrowCount.set(borrowCount);
+        }
+    }
+
+    public String getLanguage() {
+        return language.get();
+    }
+
+    public SimpleStringProperty languageProperty() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        if (language == null){
+            language = "";
+        } else {
+            this.language.set(language);
+        }
+    }
+
+    public String getImageLink() {
+        return imageLink.get();
+    }
+
+    public SimpleStringProperty imageLinkProperty() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        if (imageLink == null){
+            imageLink = "";
+        } else {
+            this.imageLink.set(imageLink);
+        }
     }
 
     public String getLastUpdateDate() {
@@ -32,7 +229,11 @@ public class Book {
     }
 
     public void setLastUpdateDate(String lastUpdateDate) {
-        this.lastUpdateDate.set(lastUpdateDate);
+        if (lastUpdateDate == null){
+            lastUpdateDate = "";
+        } else {
+            this.lastUpdateDate.set(lastUpdateDate);
+        }
     }
 
     public SimpleStringProperty idProperty() {
@@ -60,7 +261,11 @@ public class Book {
     }
 
     public void setAuthors(String authors) {
-        this.authors.set(authors);
+        if (authors == null){
+            authors = "";
+        } else {
+            this.authors.set(authors);
+        }
     }
 
     public SimpleStringProperty publisherProperty() {
@@ -80,7 +285,11 @@ public class Book {
     }
 
     public void setTypeOfLastUpdate(String typeOfLastUpdate) {
-        this.typeOfLastUpdate.set(typeOfLastUpdate);
+        if (typeOfLastUpdate == null){
+            typeOfLastUpdate = "";
+        } else {
+            this.typeOfLastUpdate.set(typeOfLastUpdate);
+        }
     }
 
     public int getId() {
@@ -120,7 +329,11 @@ public class Book {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher.set(publisher);
+        if (publisher == null){
+            publisher = "";
+        } else {
+            this.publisher.set(publisher);
+        }
     }
 
     public String getAddedDate() {
@@ -128,6 +341,10 @@ public class Book {
     }
 
     public void setAddedDate(String addedDate) {
-        this.addedDate.set(addedDate);
+        if (addedDate == null){
+            addedDate = "";
+        } else {
+            this.addedDate.set(addedDate);
+        }
     }
 }

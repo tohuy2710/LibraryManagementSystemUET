@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookDetailController">
+   <children>
+      <VBox prefHeight="640.0" prefWidth="520.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <ImageView fitHeight="160.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox prefHeight="160.0" prefWidth="426.0">
+                     <children>
+                        <Label fx:id="nameLabel" styleClass="labelHeader" text="Name" />
+                        <HBox prefHeight="14.0" prefWidth="398.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="isbnLabel" text="ISBN:" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label fx:id="idLabel" text="ID:" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <Label fx:id="authorLabel" text="Authors:" />
+                        <Label fx:id="publisherLabel" text="Publisher:" />
+                        <Label fx:id="categoryLabel" text="Category:" />
+                        <Label fx:id="locationLabel" text="Location:" />
+                        <Label fx:id="quantityLabel" text="Quantity:" />
+                        <Label fx:id="avgRateLabel" text="Average Rate: " />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <VBox prefHeight="502.0" prefWidth="520.0">
+               <children>
+                  <HBox prefHeight="14.0" prefWidth="520.0">
+                     <children>
+                        <HBox prefHeight="18.0" prefWidth="232.0">
+                           <children>
+                              <Label fx:id="addedDateLabel" text="Added Date: " />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="18.0" prefWidth="293.0">
+                           <children>
+                              <Label fx:id="lastUpdatedTimeLabel" text="Last Updated Time: " />
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <Label fx:id="laguageLabel" text="Language: " />
+                  <Label fx:id="publisherDateLabel" text="Publisher Date: " />
+                  <Label fx:id="pageCountLabel" layoutX="10.0" layoutY="45.0" text="Page Count: " />
+                  <Label fx:id="descriptionLabel" text="Description: " />
+                  <Text fx:id="descriptionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="520.848030090332" />
+               </children>
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="640.0" prefWidth="679.0">
+         <children>
+            <ScrollPane prefHeight="638.0" prefWidth="678.0">
+               <content>
+                  <VBox prefHeight="611.0" prefWidth="634.0">
+                     <children>
+                        <TableView prefHeight="612.0" prefWidth="554.0">
+                          <columns>
+                            <TableColumn fx:id="userIDCol" prefWidth="150.0" text="User ID" />
+                            <TableColumn fx:id="startDateCol" prefWidth="150.0" text="Start Date" />
+                              <TableColumn fx:id="dueDateCol" prefWidth="150.0" text="Due Date" />
+                              <TableColumn fx:id="returnDateCol" prefWidth="150.0" text="Return Date" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>

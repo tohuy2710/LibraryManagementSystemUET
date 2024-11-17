@@ -145,7 +145,6 @@ public class AdminAppController implements Initializable {
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userManagementDashboardHBox);
             adjustContentSize();
-            System.out.println("curr");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -8,8 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import package1.AlertMessage;
+import package1.LogicException;
 import package1.UserRequest;
 
 import java.net.URL;
@@ -17,6 +17,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static package1.UserRequest.*;
 
 public class UserRequestManagementController implements Initializable {
 
@@ -161,10 +163,11 @@ public class UserRequestManagementController implements Initializable {
                 userRequest.setUserID(Database.result.getString("userId"));
                 userRequest.setCreatedTime(Database.result.getString("createdTime"));
                 userRequest.setLastUpdatedTime(Database.result.getString("lastUpdatedTime"));
+                userRequest.setPreviousStatus(Database.result.getString("status"));
                 userRequest.setStatus(Database.result.getString("status"));
                 userRequestList.add(userRequest);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | LogicException e) {
             throw new RuntimeException(e);
         } finally {
             try {
@@ -188,13 +191,13 @@ public class UserRequestManagementController implements Initializable {
 
         // Update status options to match the new descriptive statuses
         List<String> statusOptions = Arrays.asList(
-                "Approved for borrowing",
-                "Denied for borrowing",
-                "Cancelled by admin",
-                "Overdue for return book",
-                "Book has been returned",
-                "Pending",
-                "Book is currently on loan"
+                APPROVED_FOR_BORROWING,
+                DENIED_FOR_BORROWING,
+                CANCELLED_BY_ADMIN,
+                OVERDUE_FOR_RETURN,
+                BOOK_RETURNED,
+                PENDING,
+                ON_LOAN
         );
 
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -215,25 +218,25 @@ public class UserRequestManagementController implements Initializable {
 
                                 // Apply CSS based on the updated status values
                                 switch (status) {
-                                    case "Approved for borrowing":
+                                    case APPROVED_FOR_BORROWING:
                                         getStyleClass().add("status-active");
                                         break;
-                                    case "Denied for borrowing":
+                                    case DENIED_FOR_BORROWING:
                                         getStyleClass().add("status-denied");
                                         break;
-                                    case "Cancelled by admin":
+                                    case CANCELLED_BY_ADMIN:
                                         getStyleClass().add("status-canceled");
                                         break;
-                                    case "Overdue for return book":
+                                    case OVERDUE_FOR_RETURN:
                                         getStyleClass().add("status-overdue");
                                         break;
-                                    case "Book has been returned":
+                                    case BOOK_RETURNED:
                                         getStyleClass().add("status-completed");
                                         break;
-                                    case "Pending":
+                                    case PENDING:
                                         getStyleClass().add("status-in-progress");
                                         break;
-                                    case "Book is currently on loan":
+                                    case ON_LOAN:
                                         getStyleClass().add("status-reserved");
                                         break;
                                     default:
@@ -249,8 +252,16 @@ public class UserRequestManagementController implements Initializable {
         // Allow editing the status column
         statusCol.setOnEditCommit(event -> {
             UserRequest userRequest = event.getRowValue();
-            userRequest.setStatus(event.getNewValue());
-            updateStatus();
+            try {
+                userRequest.setStatus(event.getNewValue());
+            } catch (LogicException e) {
+                AlertMessage alertMessage = new AlertMessage();
+                alertMessage.errorMessage(e.getMessage());
+            }
+            userRequestTableView.refresh();
+            if (!userRequest.getStatus().equals(userRequest.getPreviousStatus())) {
+                updateStatus();
+            }
         });
 
         userRequestTableView.setEditable(true);
@@ -260,14 +271,27 @@ public class UserRequestManagementController implements Initializable {
 
     public void updateStatus() {
         Database.connect = Database.connectDB();
-        String query = "UPDATE usersrequest SET status = ? WHERE id = ?";
+        String queryUpdateStatus = "UPDATE usersrequest SET status = ? WHERE id = ?";
+        String queryAddToBorrowBooks = "INSERT INTO borrowbooks (request_id) VALUES (?)";
 
         try {
-            Database.prepare = Database.connect.prepareStatement(query);
             for (UserRequest userRequest : userRequestList) {
+                Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);
                 Database.prepare.setString(1, userRequest.getStatus());
                 Database.prepare.setString(2, userRequest.getRequestID());
                 Database.prepare.executeUpdate();
+
+                if (userRequest.getStatus().equals(ON_LOAN)) {
+                    Database.prepare = Database.connect.prepareStatement(queryAddToBorrowBooks);
+                    Database.prepare.setString(1, userRequest.getRequestID());
+                    Database.prepare.executeUpdate();
+                } else if (userRequest.getStatus().equals(BOOK_RETURNED)) {
+                    Database.prepare = Database.connect
+                                    .prepareStatement("UPDATE borrowbooks " +
+                                            "SET return_date = NOW() WHERE request_id = ?");
+                    Database.prepare.setString(1, userRequest.getRequestID());
+                    Database.prepare.executeUpdate();
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
