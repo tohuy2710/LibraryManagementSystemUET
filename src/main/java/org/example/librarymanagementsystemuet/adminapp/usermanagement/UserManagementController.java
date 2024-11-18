@@ -1,4 +1,4 @@
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.adminapp.usermanagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
-import package1.AlertMessage;
-import package1.User;
+import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.obj.User;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static org.example.librarymanagementsystemuet.Database.connectDB;
-import static package1.Account.*;
+import static org.example.librarymanagementsystemuet.obj.Account.*;
 
 public class UserManagementController implements Initializable {
 
@@ -53,8 +53,8 @@ public class UserManagementController implements Initializable {
     private ObservableList<User> userList = FXCollections.observableArrayList();
     private ResultSet resultSet;
 
-    protected static final String LOAD_FULL_DATA = "load-full-data";
-    protected static final String LOAD_DATA_BY_INFO = "load-any-data";
+    public static final String LOAD_FULL_DATA = "load-full-data";
+    public static final String LOAD_DATA_BY_INFO = "load-any-data";
 
     public void setUserData(ResultSet resultSet) throws SQLException {
         while (resultSet != null && resultSet.next()) {

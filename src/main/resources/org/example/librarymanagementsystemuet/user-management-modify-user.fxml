@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="updateUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2px; -fx-border-color: #17376e; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 5);" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserManagementController">
+<AnchorPane fx:id="updateUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2px; -fx-border-color: #17376e; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 5);" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.usermanagement.UserManagementController">
    <children>
       <Label fx:id="labelUpdate" layoutX="48.0" layoutY="84.0" styleClass="label2" text="Update User Information" textFill="#faf2f2">
          <font>

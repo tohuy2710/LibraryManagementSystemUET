@@ -31,8 +31,21 @@ module org.example.librarymanagementsystemuet {
     // Allow reflection-based access for FXML loading
     opens org.example.librarymanagementsystemuet to javafx.fxml;
 
-    opens package1 to javafx.base;
+    opens org.example.librarymanagementsystemuet.obj to javafx.base;
 
     // Export your base package to make it accessible for other modules
     exports org.example.librarymanagementsystemuet;
+    exports org.example.librarymanagementsystemuet.adminapp.bookmanagement;
+    opens org.example.librarymanagementsystemuet.adminapp.bookmanagement to javafx.fxml;
+    exports org.example.librarymanagementsystemuet.adminapp.bookmanagement.bookviewcard;
+    opens org.example.librarymanagementsystemuet.adminapp.bookmanagement.bookviewcard to javafx.fxml;
+    exports org.example.librarymanagementsystemuet.adminapp;
+    opens org.example.librarymanagementsystemuet.adminapp to javafx.fxml;
+    exports org.example.librarymanagementsystemuet.adminapp.usermanagement;
+    opens org.example.librarymanagementsystemuet.adminapp.usermanagement to javafx.fxml;
+    exports org.example.librarymanagementsystemuet.adminapp.userrequestcontroller;
+    opens org.example.librarymanagementsystemuet.adminapp.userrequestcontroller to javafx.fxml;
+    exports org.example.librarymanagementsystemuet.userapp;
+    opens org.example.librarymanagementsystemuet.userapp to javafx.fxml;
+    opens org.example.librarymanagementsystemuet.exception to javafx.base;
 }

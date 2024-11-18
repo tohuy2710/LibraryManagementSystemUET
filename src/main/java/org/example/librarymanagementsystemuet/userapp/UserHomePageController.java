@@ -1,7 +1,6 @@
 // UserHomePageController.java
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.userapp;
 
-import com.google.api.client.util.Data;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -13,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.example.librarymanagementsystemuet.Database;
 
 import java.io.IOException;
 import java.sql.Connection;

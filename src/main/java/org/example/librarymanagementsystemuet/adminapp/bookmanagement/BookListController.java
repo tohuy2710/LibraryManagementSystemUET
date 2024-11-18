@@ -1,4 +1,4 @@
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.adminapp.bookmanagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,8 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
-import package1.AlertMessage;
-import package1.Book;
+import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.obj.Book;
 
 import java.sql.SQLException;
 

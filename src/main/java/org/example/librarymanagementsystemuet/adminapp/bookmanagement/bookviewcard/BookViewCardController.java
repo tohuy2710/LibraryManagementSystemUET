@@ -1,4 +1,4 @@
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.adminapp.bookmanagement.bookviewcard;
 
 import com.google.api.services.books.model.Volume;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import org.example.librarymanagementsystemuet.Database;
 
 import java.net.URL;
 import java.sql.ResultSet;

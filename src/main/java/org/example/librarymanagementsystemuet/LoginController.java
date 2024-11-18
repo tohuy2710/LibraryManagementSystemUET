@@ -6,13 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import package1.AlertMessage;
+import org.example.librarymanagementsystemuet.obj.AlertMessage;
 
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-import static package1.Account.*;
+import static org.example.librarymanagementsystemuet.obj.Account.*;
 
 public class LoginController implements Initializable {
 

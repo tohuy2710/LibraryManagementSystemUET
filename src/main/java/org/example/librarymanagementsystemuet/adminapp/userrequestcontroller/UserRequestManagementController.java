@@ -1,4 +1,4 @@
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.adminapp.userrequestcontroller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,9 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import package1.AlertMessage;
-import package1.LogicException;
-import package1.UserRequest;
+import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.exception.LogicException;
+import org.example.librarymanagementsystemuet.obj.UserRequest;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static package1.UserRequest.*;
+import static org.example.librarymanagementsystemuet.obj.UserRequest.*;
 
 public class UserRequestManagementController implements Initializable {
 

@@ -1,4 +1,4 @@
-package package1;
+package org.example.librarymanagementsystemuet.obj;
 
 public class Admin extends Account {
 

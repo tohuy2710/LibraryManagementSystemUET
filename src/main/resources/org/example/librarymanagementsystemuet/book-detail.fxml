@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookDetailController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookDetailController">
    <children>
       <VBox prefHeight="640.0" prefWidth="520.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <ImageView fitHeight="160.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="bookCoverImageView" fitHeight="160.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" />
                   <VBox prefHeight="160.0" prefWidth="426.0">
                      <children>
                         <Label fx:id="nameLabel" styleClass="labelHeader" text="Name" />
@@ -68,7 +70,20 @@
                   <Label fx:id="publisherDateLabel" text="Publisher Date: " />
                   <Label fx:id="pageCountLabel" layoutX="10.0" layoutY="45.0" text="Page Count: " />
                   <Label fx:id="descriptionLabel" text="Description: " />
-                  <Text fx:id="descriptionText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="520.848030090332" />
+                  <TextArea fx:id="descriptionText" editable="false" prefHeight="296.0" prefWidth="510.0" wrapText="true" />
+                  <AnchorPane prefHeight="54.0" prefWidth="269.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backToBrowser" prefHeight="34.0" prefWidth="110.0" styleClass="button7" text="Back" />
+                        <ImageView disable="true" fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../asset/img/back-icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
                </children>
                <padding>
                   <Insets left="10.0" top="5.0" />
@@ -82,13 +97,13 @@
                <content>
                   <VBox prefHeight="611.0" prefWidth="634.0">
                      <children>
-                        <TableView prefHeight="612.0" prefWidth="554.0">
-                          <columns>
-                            <TableColumn fx:id="userIDCol" prefWidth="150.0" text="User ID" />
-                            <TableColumn fx:id="startDateCol" prefWidth="150.0" text="Start Date" />
+                        <TableView fx:id="borrowHistoryTable" prefHeight="612.0" prefWidth="554.0">
+                           <columns>
+                              <TableColumn fx:id="userIDCol" prefWidth="150.0" text="User ID" />
+                              <TableColumn fx:id="startDateCol" prefWidth="150.0" text="Start Date" />
                               <TableColumn fx:id="dueDateCol" prefWidth="150.0" text="Due Date" />
                               <TableColumn fx:id="returnDateCol" prefWidth="150.0" text="Return Date" />
-                          </columns>
+                           </columns>
                         </TableView>
                      </children>
                   </VBox>

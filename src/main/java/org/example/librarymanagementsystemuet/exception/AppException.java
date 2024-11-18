@@ -1,4 +1,4 @@
-package package1;
+package org.example.librarymanagementsystemuet.exception;
 
 public class AppException extends Exception {
     public AppException(String message) {

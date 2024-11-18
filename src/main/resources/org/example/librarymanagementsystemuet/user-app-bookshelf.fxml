@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="technologyBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserAppBookshelfController">
+<HBox fx:id="technologyBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.userapp.UserAppBookshelfController">
    <children>
       <VBox alignment="CENTER_LEFT" prefHeight="195.0" prefWidth="160.0">
          <children>

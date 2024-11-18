@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bookManagementMainBox" alignment="CENTER_LEFT" prefHeight="640.0" prefWidth="1200.0" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookManagementDashboardController">
+<HBox fx:id="bookManagementMainBox" alignment="CENTER_LEFT" prefHeight="640.0" prefWidth="1200.0" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="640.0" prefWidth="742.0" spacing="10.0" stylesheets="@style.css">
          <padding>

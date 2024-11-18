@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="bookVBox" alignment="TOP_CENTER" prefHeight="220.0" prefWidth="220.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookViewCardVerticalController">
+<VBox fx:id="bookVBox" alignment="TOP_CENTER" prefHeight="220.0" prefWidth="220.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.bookmanagement.bookviewcard.BookViewCardVerticalController">
    <children>
       <HBox alignment="TOP_CENTER" prefHeight="174.0" prefWidth="220.0">
          <children>
@@ -25,7 +25,7 @@
          <children>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="detailButton" layoutX="30.0" layoutY="5.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="170.0" styleClass="button6" stylesheets="@style.css" text="Detail" visible="false" />
+                  <Button fx:id="detailButton" layoutX="30.0" layoutY="5.0" mnemonicParsing="false" onAction="#showDetail" prefHeight="33.0" prefWidth="170.0" styleClass="button6" stylesheets="@style.css" text="Detail" visible="false" />
                   <VBox fx:id="infoVBox" prefHeight="45.0" prefWidth="220.0">
                      <children>
                         <Label fx:id="nameLabel" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">

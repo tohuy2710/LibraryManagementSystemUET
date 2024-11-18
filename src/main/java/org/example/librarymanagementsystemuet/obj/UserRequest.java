@@ -1,7 +1,8 @@
-package package1;
+package org.example.librarymanagementsystemuet.obj;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.example.librarymanagementsystemuet.exception.LogicException;
 
 public class UserRequest {
     public static final String APPROVED_FOR_BORROWING = "Approved for borrowing";

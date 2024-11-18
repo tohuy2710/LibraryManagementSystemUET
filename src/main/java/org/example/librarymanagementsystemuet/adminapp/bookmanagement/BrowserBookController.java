@@ -1,4 +1,4 @@
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.adminapp.bookmanagement;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,18 +8,23 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import package1.Book;
+import org.example.librarymanagementsystemuet.adminapp.bookmanagement.bookviewcard.BookViewCardVerticalController;
+import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.obj.Book;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static org.example.librarymanagementsystemuet.Database.connectDB;
 import static org.example.librarymanagementsystemuet.Database.preparedStatement;
 
 public class BrowserBookController implements Initializable {
+
+    @FXML
+    private HBox mainHBox;
 
     @FXML
     private GridPane gridPane;
@@ -40,8 +45,12 @@ public class BrowserBookController implements Initializable {
 
             while (Database.result != null && Database.result.next()) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("book-view-card-vertical.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("/org/example" +
+                        "/librarymanagementsystemuet/book-view-card-vertical.fxml"));
                 VBox bookBox = fxmlLoader.load();
+
+                BookViewCardVerticalController bookViewCardVerticalController = fxmlLoader.getController();
+                bookViewCardVerticalController.setParentController(this);
 
                 Book book = new Book();
                 book.setId(Database.result.getInt("id"));
@@ -63,7 +72,6 @@ public class BrowserBookController implements Initializable {
                 book.setViews(String.valueOf(Database.result.getInt("views")));
                 book.setBorrowCount(String.valueOf(Database.result.getInt("borrowCount")));
 
-                BookViewCardVerticalController bookViewCardVerticalController = fxmlLoader.getController();
                 bookViewCardVerticalController.setInfo(book);
 
                 GridPane.setHalignment(bookBox, HPos.CENTER);
@@ -83,11 +91,32 @@ public class BrowserBookController implements Initializable {
                 GridPane.setHalignment(gridPane, HPos.CENTER);
                 GridPane.setValignment(gridPane, VPos.TOP);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void showBookDetailHBox(Book book) {
+        if (book == null) {
+            return;
+        }
+        mainHBox.getChildren().clear();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/book-detail.fxml"));
+            HBox bookDetailHBox = fxmlLoader.load();
+            BookDetailController controller = fxmlLoader.getController();
+            controller.setDetail(book);
+            controller.getBorrowInfo(book.getId());
+            controller.setParentController(this);
+            mainHBox.getChildren().add(bookDetailHBox);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public HBox getMainHBox() {
+        return mainHBox;
     }
 
     @Override

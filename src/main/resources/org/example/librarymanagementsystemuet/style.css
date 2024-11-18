@@ -136,6 +136,21 @@
     -fx-alignment: CENTER;
 }
 
+.button7 {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: transparent;
+}
+
+.button7:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 16px;
+    -fx-text-fill: #17376e;
+    -fx-alignment: center-right;
+}
+
+
 .book-name-text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #c0c0c0;

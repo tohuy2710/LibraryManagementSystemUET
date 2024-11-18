@@ -1,6 +1,7 @@
-package package1;
+package org.example.librarymanagementsystemuet.obj;
 
 import javafx.beans.property.SimpleStringProperty;
+import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
 
 public class Book {
     private SimpleStringProperty id;
@@ -23,6 +24,29 @@ public class Book {
     private SimpleStringProperty language;
     private SimpleStringProperty publisherDate;
 
+    public static final String BOOK_DEFAULT_NAME = "No name";
+    public static final String BOOK_DEFAULT_AUTHOR = "No author";
+    public static final String BOOK_DEFAULT_ISBN = "No ISBN";
+    public static final String BOOK_DEFAULT_PUBLISHER = "No publisher";
+    public static final String BOOK_DEFAULT_ADDED_DATE = "2021-01-01";
+    public static final String BOOK_DEFAULT_DESCRIPTION = "No description";
+    public static final String BOOK_DEFAULT_LANGUAGE = "English";
+    public static final String BOOK_DEFAULT_IMAGE_LINK = "";
+    public static final String BOOK_DEFAULT_CATEGORY = "Literature";
+    public static final String BOOK_DEFAULT_LOCATION = "Not found";
+    public static final String BOOK_DEFAULT_QUANTITY = "1";
+    public static final String BOOK_DEFAULT_AVG_RATE = "0.00";
+    public static final String BOOK_DEFAULT_PAGE_COUNT = "1";
+    public static final String BOOK_DEFAULT_VIEWS = "0";
+    public static final String BOOK_COVER_NOT_FOUND = "unknowCover.jpg";
+
+    private static final String VALID_AVG_RATE = "^(?:[0-4](?:\\.\\d{1,2})?|5(?:\\.0{1,2})?)$";
+    private static final String VALID_NUMERIC = "\\d+";
+    private static final String VALID_LINK = "^(https?:\\/\\/)(www\\.)" +
+            "?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)$";
+    private static final String DEFAULT_DATE = "2021-01-01";
+
+
     public String getPublisherDate() {
         return publisherDate.get();
     }
@@ -31,9 +55,9 @@ public class Book {
         return publisherDate;
     }
 
-    public void setPublisherDate(String publisherDate) {
+    public void setPublisherDate(String publisherDate) throws InvalidDatatype {
         if (publisherDate == null) {
-            publisherDate = "";
+            publisherDate = DEFAULT_DATE;
         } else {
             this.publisherDate.set(publisherDate);
         }
@@ -58,6 +82,7 @@ public class Book {
         this.views = new SimpleStringProperty();
         this.borrowCount = new SimpleStringProperty();
         this.language = new SimpleStringProperty();
+        this.publisherDate = new SimpleStringProperty();
     }
 
     public String getCategory() {
@@ -86,7 +111,7 @@ public class Book {
 
     public void setLocation(String location) {
         if (location == null){
-            location = "";
+            location = "Not found";
         } else {
             this.location.set(location);
         }
@@ -100,10 +125,10 @@ public class Book {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
-        if (quantity == null){
-            quantity = "";
-        } else{
+    public void setQuantity(String quantity) throws InvalidDatatype {
+        if (quantity == null || !quantity.matches(VALID_NUMERIC)) {
+            throw new InvalidDatatype("Quantity must be a number");
+        } else {
             this.quantity.set(quantity);
         }
     }
@@ -116,13 +141,14 @@ public class Book {
         return avgRate;
     }
 
-    public void setAvgRate(String avgRate) {
-        if (avgRate == null){
-            avgRate = "";
-        } else{
-            this.avgRate.set(avgRate);
+    public void setAvgRate(String avgRate) throws InvalidDatatype {
+        if (avgRate == null || !avgRate.matches(VALID_AVG_RATE)) {
+            throw new InvalidDatatype("AVG Rate must be " +
+                    "a number between 0.00 and 5.00 with two decimal places.");
         }
+        this.avgRate.set(avgRate);
     }
+
 
     public String getPageCount() {
         return pageCount.get();
@@ -133,8 +159,8 @@ public class Book {
     }
 
     public void setPageCount(String pageCount) {
-        if (pageCount == null){
-            pageCount = "";
+        if (pageCount == null || !pageCount.matches(VALID_NUMERIC)){
+            pageCount = "1";
         } else{
             this.pageCount.set(pageCount);
         }
@@ -150,7 +176,7 @@ public class Book {
 
     public void setDescription(String description) {
         if (description == null){
-            description = "";
+            description = "No description";
         } else {
             this.description.set(description);
         }
@@ -165,8 +191,8 @@ public class Book {
     }
 
     public void setViews(String views) {
-        if (views == null){
-            views = "";
+        if (views == null || !views.matches(VALID_NUMERIC)){
+            views = "0";
         } else {
             this.views.set(views);
         }
@@ -181,8 +207,8 @@ public class Book {
     }
 
     public void setBorrowCount(String borrowCount) {
-        if (borrowCount == null){
-            borrowCount = "";
+        if (borrowCount == null || !borrowCount.matches(VALID_NUMERIC)){
+            borrowCount ="0";
         } else {
             this.borrowCount.set(borrowCount);
         }
@@ -196,9 +222,9 @@ public class Book {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(String language) throws InvalidDatatype {
         if (language == null){
-            language = "";
+            throw new InvalidDatatype("Language must not be null");
         } else {
             this.language.set(language);
         }
@@ -213,7 +239,7 @@ public class Book {
     }
 
     public void setImageLink(String imageLink) {
-        if (imageLink == null){
+        if (imageLink == null || !imageLink.matches(VALID_LINK)) {
             imageLink = "";
         } else {
             this.imageLink.set(imageLink);
@@ -347,4 +373,5 @@ public class Book {
             this.addedDate.set(addedDate);
         }
     }
+
 }
