@@ -76,7 +76,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#backToBrowser" prefHeight="34.0" prefWidth="110.0" styleClass="button7" text="Back" />
+                        <Button mnemonicParsing="false" onAction="#backToBrowser" prefHeight="33.0" prefWidth="110.0" styleClass="button7" text="Back" />
                         <ImageView disable="true" fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../asset/img/back-icon.png" />

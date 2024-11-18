@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.librarymanagementsystemuet.Database;
@@ -23,6 +24,9 @@ public class BookViewCardVerticalController implements Initializable {
 
     @FXML
     private Label authorLabel;
+
+    @FXML
+    private AnchorPane bookBox;
 
     @FXML
     private VBox bookVBox;

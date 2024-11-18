@@ -117,7 +117,7 @@ public class AdminAppController implements Initializable {
     }
 
     private void adjustHBoxSize() {
-        for (Node node : contentPane.getChildren()) { //HBox ở trong contentPane sẽ thay đổi kích thước theo contentPane
+        for (Node node : contentPane.getChildren()) {
             if (node instanceof HBox) {
                 ((HBox) node).prefWidthProperty().bind(contentPane.widthProperty());
             }
@@ -229,5 +229,13 @@ public class AdminAppController implements Initializable {
             paneMenuMini.setVisible(false);
         }
         adjustHBoxSize(); adjustContentSize();
+    }
+
+    public void disableChangeMenuSizeButton() {
+        changeMenuSize.setDisable(true);
+    }
+
+    public void enableChangeMenuSizeButton() {
+        changeMenuSize.setDisable(false);
     }
 }

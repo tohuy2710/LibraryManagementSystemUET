@@ -336,12 +336,6 @@
     -fx-border-radius: 5px; /* Rounded corners */
 }
 
-
-.grid-pane {
-    -fx-background-color: #FFFFFF;
-}
-
-
 .choice-box1 {
     -fx-background-color: #ffffff;
     -fx-border-color: #17376e;

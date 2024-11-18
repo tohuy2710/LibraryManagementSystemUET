@@ -206,6 +206,17 @@ public class BookManagementDashboardController implements Initializable {
         }
     }
 
+    public void showBrowserBookBox(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/librarymanagementsystemuet/browser-book.fxml"));
+            HBox browserBookBox = loader.load();
+            bookManagementMainBox.getChildren().clear();
+            bookManagementMainBox.getChildren().add(browserBookBox);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getTopBorrowedBooks(null);

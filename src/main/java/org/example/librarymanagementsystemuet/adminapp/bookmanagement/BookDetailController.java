@@ -100,29 +100,30 @@ public class BookDetailController {
     private Book book;
     public void setDetail(Book book) {
         this.book = book;
-        idLabel.setText(String.valueOf(book.getId()));
-        nameLabel.setText(book.getName());
-        authorLabel.setText(book.getAuthors());
-        isbnLabel.setText(book.getIsbn());
-        publisherLabel.setText(book.getPublisher());
-        addedDateLabel.setText(book.getAddedDate());
-        lastUpdatedTimeLabel.setText(book.getLastUpdateDate());
-        categoryLabel.setText(book.getCategory());
-        locationLabel.setText(book.getLocation());
-        quantityLabel.setText(book.getQuantity());
-        avgRateLabel.setText(book.getAvgRate());
-        pageCountLabel.setText(book.getPageCount());
-        descriptionLabel.setText(book.getDescription());
-        laguageLabel.setText(book.getLanguage());
-        publisherDateLabel.setText(book.getPublisherDate());
-
+        idLabel.setText("ID: " + book.getId());
+        nameLabel.setText("Name: " + book.getName());
+        authorLabel.setText("Author: " + book.getAuthors());
+        isbnLabel.setText("ISBN: " + book.getIsbn());
+        publisherLabel.setText("Publisher: " + book.getPublisher());
+        addedDateLabel.setText("Added Date: " + book.getAddedDate());
+        lastUpdatedTimeLabel.setText("Last Updated Time: " + book.getLastUpdateDate());
+        categoryLabel.setText("Category: " + book.getCategory());
+        locationLabel.setText("Location: " + book.getLocation());
+        quantityLabel.setText("Quantity: " + book.getQuantity());
+        avgRateLabel.setText("Average Rate: " + book.getAvgRate());
+        pageCountLabel.setText("Page Count: " + book.getPageCount());
+        laguageLabel.setText("Language: " + book.getLanguage());
+        publisherDateLabel.setText("Publisher Date: " + book.getPublisherDate());
         descriptionText.setText(book.getDescription());
+
         // Load book cover image
         Database.setImageByLink(bookCoverImageView, book.getImageLink());
     }
     public void getBorrowInfo(int bookId) {
         borrowHistoryTable.getItems().clear();
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/library_management_system_uet", "root", "");
+        try (Connection conn = DriverManager
+                .getConnection("jdbc:mysql://localhost:3307/library_management_system_uet",
+                        "root", "");
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT ur.userId, br.start_date, br.due_date, br.return_date " +
@@ -146,6 +147,7 @@ public class BookDetailController {
 
     @FXML
     public void backToBrowser(ActionEvent event) {
-
+        parentController.getMainPane().getChildren().remove(1);
+        parentController.getSearchBox().setVisible(true);
     }
 }
