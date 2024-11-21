@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" prefHeight="640.0" prefWidth="1200.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23" fx:controller="org.example.librarymanagementsystemuet.adminapp.usermanagement.PenaltyListViewController">
+    <TableView fx:id="userTable" prefHeight="640.0" prefWidth="1200.0">
+        <columns>
+            <!-- Cột User ID -->
+            <TableColumn fx:id="colUserId" prefWidth="300.0" text="User ID" />
+            <!-- Cột User Name -->
+            <TableColumn fx:id="colUserName" prefWidth="300.0" text="User Name" />
+            <!-- Cột Số Sách Chưa Trả -->
+            <TableColumn fx:id="colBooksNotReturned" prefWidth="300.0" text="Số Sách Chưa Trả" />
+            <!-- Cột Tiền Phạt -->
+            <TableColumn fx:id="colFineAmount" prefWidth="300.0" text="Tiền Phạt" />
+        </columns>
+    </TableView>
+</HBox>
