@@ -190,21 +190,21 @@ public class BookManagementDashboardController extends Controller implements Ini
                     topBorrowedBook1Name.setText(Database.result.getString("name"));
                     topBorrowedBook1Author.setText(Database.result.getString("author"));
                     topBorrowedBook1ISBN.setText("ISBN: " + Database.result.getString("isbn"));
-                    topBorrowedBook1BrrowedCount.setText("Borrowed By: "
+                    topBorrowedBook1BrrowedCount.setText("Requested by: "
                             + Database.result.getString("cnt") + " users");
                     Database.setImageByLink(topBorrowedBook1Image, Database.result.getString("linkCoverImage"));
                 } else if (i == 2) {
                     topBorrowedBook2Name.setText(Database.result.getString("name"));
                     topBorrowedBook2Author.setText(Database.result.getString("author"));
                     topBorrowedBook2ISBN.setText("ISBN: " + Database.result.getString("isbn"));
-                    topBorrowedBook2BrrowedCount.setText("Borrowed By: "
+                    topBorrowedBook2BrrowedCount.setText("Requested by: "
                             + Database.result.getString("cnt") + " users");
                     Database.setImageByLink(topBorrowedBook2Image, Database.result.getString("linkCoverImage"));
                 } else if (i == 3) {
                     topBorrowedBook3Name.setText(Database.result.getString("name"));
                     topBorrowedBook3Author.setText(Database.result.getString("author"));
                     topBorrowedBook3ISBN.setText("ISBN: " + Database.result.getString("isbn"));
-                    topBorrowedBook3BrrowedCount.setText("Borrowed By: "
+                    topBorrowedBook3BrrowedCount.setText("Requested by: "
                             + Database.result.getString("cnt") + " users");
                     Database.setImageByLink(topBorrowedBook3Image, Database.result.getString("linkCoverImage"));
                 }
