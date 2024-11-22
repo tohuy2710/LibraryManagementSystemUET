@@ -125,40 +125,38 @@ public class UserRequest {
     }
 
     public void setStatus(String status) throws LogicException {
-        if (previousStatus.get().equals(status)) {
-            this.status.set(status);
-        } else if (previousStatus.get().equals(PENDING)) {
-            if (status.equals(APPROVED_FOR_BORROWING)
-                    || status.equals(DENIED_FOR_BORROWING)
-                    || status.equals(CANCELLED_BY_ADMIN)) {
+        if (previousStatus.get() != null) {
+            if (previousStatus.get().equals(status)) {
                 this.status.set(status);
-            }
-            else {
+            } else if (previousStatus.get().equals(PENDING)) {
+                if (status.equals(APPROVED_FOR_BORROWING)
+                        || status.equals(DENIED_FOR_BORROWING)
+                        || status.equals(CANCELLED_BY_ADMIN)) {
+                    this.status.set(status);
+                } else {
+                    throw new LogicException("Invalid status change");
+                }
+            } else if (previousStatus.get().equals(APPROVED_FOR_BORROWING)) {
+                if (status.equals(ON_LOAN) || status.equals(CANCELLED_BY_ADMIN)) {
+                    this.status.set(status);
+                } else {
+                    throw new LogicException("Invalid status change");
+                }
+            } else if (previousStatus.get().equals(ON_LOAN)) {
+                if (status.equals(OVERDUE_FOR_RETURN) || status.equals(BOOK_RETURNED)) {
+                    this.status.set(status);
+                } else {
+                    throw new LogicException("Invalid status change");
+                }
+            } else if (previousStatus.get().equals(OVERDUE_FOR_RETURN)) {
+                if (status.equals(BOOK_RETURNED)) {
+                    this.status.set(status);
+                } else {
+                    throw new LogicException("Invalid status change");
+                }
+            } else {
                 throw new LogicException("Invalid status change");
             }
-        } else if (previousStatus.get().equals(APPROVED_FOR_BORROWING)) {
-            if (status.equals(ON_LOAN) || status.equals(CANCELLED_BY_ADMIN)) {
-                this.status.set(status);
-            }
-            else {
-                throw new LogicException("Invalid status change");
-            }
-        } else if (previousStatus.get().equals(ON_LOAN)) {
-            if (status.equals(OVERDUE_FOR_RETURN) || status.equals(BOOK_RETURNED)) {
-                this.status.set(status);
-            }
-            else {
-                throw new LogicException("Invalid status change");
-            }
-        } else if (previousStatus.get().equals(OVERDUE_FOR_RETURN)) {
-            if (status.equals(BOOK_RETURNED)) {
-                this.status.set(status);
-            }
-            else {
-                throw new LogicException("Invalid status change");
-            }
-        } else {
-            throw new LogicException("Invalid status change");
         }
     }
 

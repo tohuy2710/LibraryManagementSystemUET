@@ -1,10 +1,12 @@
 // UserHomePageController.java
-package org.example.librarymanagementsystemuet.userapp;
+package org.example.librarymanagementsystemuet;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -12,112 +14,79 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.exception.LogicException;
+import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.obj.Book;
+import org.example.librarymanagementsystemuet.userapp.UserAppBookshelfController;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class UserHomePageController {
-    @FXML
-    private ImageView featuredImage;
+import static org.example.librarymanagementsystemuet.Database.connectDB;
 
+public class UserHomePageController {
+    public Text recommendBooksHBox, descriptionBook;
+    public ImageView imageBook;
+
+    private final List<ImageView> recommendBookImageViewList = new ArrayList<>();
+    private final List<ImageView> topBorrowBookImageViewList = new ArrayList<>();
     private final List<Image> images = new ArrayList<>();
     private int currentImageIndex = 0;
-    @FXML
-    private ImageView imageViewDetail;
-    @FXML
-    private Label bookNameDetail;
-    @FXML
-    private Text authorDetail;
-    @FXML
-    private Text publisherDetail;
-    @FXML
-    private Text viewDetail;
-    @FXML
-    private Text countBorrowDetail;
 
     @FXML
-    private VBox bookBox1;
-    @FXML
-    private VBox bookBox2;
-    @FXML
-    private VBox bookBox3;
-    @FXML
-    private VBox bookBox4;
-    @FXML
-    private VBox bookBox5;
+    private Text authorDetail, publisherDetail, viewDetail, countBorrowDetail;
 
     @FXML
-    private ImageView imageView1;
-    @FXML
-    private ImageView imageView2;
-    @FXML
-    private ImageView imageView3;
-    @FXML
-    private ImageView imageView4;
-    @FXML
-    private ImageView imageView5;
+    private VBox bookBox1, bookBox2, bookBox3, bookBox4, bookBox5;
 
     @FXML
-    private Label nameLabel1;
-    @FXML
-    private Label nameLabel2;
-    @FXML
-    private Label nameLabel3;
-    @FXML
-    private Label nameLabel4;
-    @FXML
-    private Label nameLabel5;
+    private ImageView featuredImage, imageViewDetail,
+            imageView1, imageView2, imageView3, imageView4, imageView5,
+            borrowImageView1, borrowImageView2, borrowImageView3;
 
     @FXML
-    private Label authorLabel1;
-    @FXML
-    private Label authorLabel2;
-    @FXML
-    private Label authorLabel3;
-    @FXML
-    private Label authorLabel4;
-    @FXML
-    private Label authorLabel5;
+    private Label bookNameDetail, nameLabel1, nameLabel2, nameLabel3, nameLabel4, nameLabel5,
+            authorLabel1, authorLabel2, authorLabel3, authorLabel4, authorLabel5,
+            borrowNameLabel1, borrowNameLabel2, borrowNameLabel3,
+            borrowAuthorLabel1, borrowAuthorLabel2, borrowAuthorLabel3;
 
     @FXML
-    private ImageView borrowImageView1;
+    private HBox technologyBookshelfHBox, literatureBookshelfHBox,
+            economicsBookshelfHBox, foreignLanguageBookshelfHBox, bookDetailView_HB;
+
     @FXML
-    private ImageView borrowImageView2;
+    private Button borrowBookButton;
+
     @FXML
-    private ImageView borrowImageView3;
-    @FXML
-    private Label borrowNameLabel1;
-    @FXML
-    private Label borrowNameLabel2;
-    @FXML
-    private Label borrowNameLabel3;
-    @FXML
-    private Label borrowAuthorLabel1;
-    @FXML
-    private Label borrowAuthorLabel2;
-    @FXML
-    private Label borrowAuthorLabel3;
-    //
-    @FXML
-    private HBox technologyBookshelfHBox;
-    @FXML
-    private HBox literatureBookshelfHBox;
-    @FXML
-    private HBox economicsBookshelfHBox;
-    @FXML
-    private HBox foreignLanguageBookshelfHBox;
+    private ScrollPane userHomePage_ScrollPane;
+
+    public ScrollPane getUserHomePageScrollPane() {
+        return userHomePage_ScrollPane;
+    }
+
+    public HBox getBookDetailViewHB() {
+        return bookDetailView_HB;
+    }
 
     // ExecutorService to manage threads
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
-    public void initialize() {
+    private void addImageView() {
+        recommendBookImageViewList.add(imageView1);
+        recommendBookImageViewList.add(imageView2);
+        recommendBookImageViewList.add(imageView3);
+        recommendBookImageViewList.add(imageView4);
+        recommendBookImageViewList.add(imageView5);
+        topBorrowBookImageViewList.add(borrowImageView1);
+        topBorrowBookImageViewList.add(borrowImageView2);
+        topBorrowBookImageViewList.add(borrowImageView3);
+    }
+
+    public void initialize() throws SQLException, LogicException, IOException {
+        addImageView();
         loadImages();
         startImageSlideshow();
         loadRecommendedBooks();
@@ -127,7 +96,13 @@ public class UserHomePageController {
         loadBookshelf("Literature", literatureBookshelfHBox);
         loadBookshelf("Economics", economicsBookshelfHBox);
         loadBookshelf("Foreign Language", foreignLanguageBookshelfHBox);
+        userHomePage_ScrollPane.setVisible(true);
+        bookDetailView_HB.setVisible(false);
+//        loadUserRequestTableView("6", requestTable_HB);
+//        requestTable_HB.setVisible(false);
+//        handleAction();
     }
+
     private void loadImages() {
         images.add(new Image(getClass().getResourceAsStream("/asset/img/nen1.png")));
         images.add(new Image(getClass().getResourceAsStream("/asset/img/nen2.png")));
@@ -154,6 +129,28 @@ public class UserHomePageController {
                 int i = 0;
                 while (rs.next() && i < 5) {
                     VBox bookBox = new VBox();
+
+                    Book selectedBook = new Book();
+                    selectedBook.setId(rs.getInt("id"));
+                    selectedBook.setName(rs.getString("name"));
+                    selectedBook.setAuthor(rs.getString("author"));
+                    selectedBook.setPublisher(rs.getString("publisher"));
+                    selectedBook.setIsbn(rs.getString("isbn"));
+                    selectedBook.setDescription(rs.getString("description"));
+                    selectedBook.setAddedDate(rs.getString("addedDate"));
+                    selectedBook.setLastUpdateDate(rs.getString("lastUpdateDate"));
+                    selectedBook.setImageLink(rs.getString("linkCoverImage"));
+
+                    int finalI = i;
+                    recommendBookImageViewList.get(finalI).setOnMouseClicked(event -> {
+                        System.out.println("recommend book + " + finalI + " is clicked");
+                        try {
+                            loadBookDetailView(selectedBook.getId(), bookDetailView_HB);
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+
                     String imageUrl = rs.getString("linkCoverImage");
                     if (imageUrl == null || imageUrl.isEmpty()) {
                         imageUrl = "path/to/default/image.png"; // Default image path
@@ -204,6 +201,26 @@ public class UserHomePageController {
                     int views = rs.getInt("views");
                     int borrowCount = rs.getInt("borrowCount");
 
+                    Book selectedBook = new Book();
+                    selectedBook.setId(rs.getInt("id"));
+                    selectedBook.setName(rs.getString("name"));
+                    selectedBook.setAuthor(rs.getString("author"));
+                    selectedBook.setPublisher(rs.getString("publisher"));
+                    selectedBook.setIsbn(rs.getString("isbn"));
+                    selectedBook.setDescription(rs.getString("description"));
+                    selectedBook.setAddedDate(rs.getString("addedDate"));
+                    selectedBook.setLastUpdateDate(rs.getString("lastUpdateDate"));
+                    selectedBook.setImageLink(rs.getString("linkCoverImage"));
+
+                    imageViewDetail.setOnMouseClicked(event -> {
+                        System.out.println("book detail is clicked");
+                        try {
+                            loadBookDetailView(selectedBook.getId(), bookDetailView_HB);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+
                     // Update UI elements on the JavaFX Application Thread
                     javafx.application.Platform.runLater(() -> {
                         Database.setImageByLink(imageViewDetail, imageUrl);
@@ -239,8 +256,29 @@ public class UserHomePageController {
                     String name = rs.getString("name");
                     String author = rs.getString("author");
 
-                    // Update UI elements on the JavaFX Application Thread
+                    Book selectedBook = new Book();
+                    selectedBook.setId(rs.getInt("id"));
+                    selectedBook.setName(rs.getString("name"));
+                    selectedBook.setAuthor(rs.getString("author"));
+                    selectedBook.setPublisher(rs.getString("publisher"));
+                    selectedBook.setIsbn(rs.getString("isbn"));
+                    selectedBook.setDescription(rs.getString("description"));
+                    selectedBook.setAddedDate(rs.getString("addedDate"));
+                    selectedBook.setLastUpdateDate(rs.getString("lastUpdateDate"));
+                    selectedBook.setImageLink(rs.getString("linkCoverImage"));
+
+
                     int finalI = i;
+                    topBorrowBookImageViewList.get(finalI).setOnMouseClicked(event -> {
+                        System.out.println("top borrow book is clicked");
+                        try {
+                            loadBookDetailView(selectedBook.getId(), bookDetailView_HB);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+                    // Update UI elements on the JavaFX Application Thread
                     javafx.application.Platform.runLater(() -> {
                         switch (finalI) {
                             case 0 -> {
@@ -300,6 +338,7 @@ public class UserHomePageController {
         targetNameLabel.setText(sourceNameLabel.getText());
         targetAuthorLabel.setText(sourceAuthorLabel.getText());
     }
+
     private void loadBookshelf(String category, HBox targetHBox) {
         try {
             FXMLLoader loader =
@@ -314,6 +353,32 @@ public class UserHomePageController {
         }
     }
 
+    public void loadBookDetailView(int bookId, HBox targetHBox) throws IOException, SQLException {
+        FXMLLoader loader =
+                new FXMLLoader(getClass().getResource("/org/example/librarymanagementsystemuet/book-detail-view-pane.fxml"));
+        HBox bookDetailView = loader.load();
+        bookViewDetailPaneController controller = loader.getController();
+        targetHBox.getChildren().add(bookDetailView);
+
+        controller.loadBookDetailByID(bookId);
+
+        userHomePage_ScrollPane.setVisible(false);
+        bookDetailView_HB.setVisible(true);
+
+        controller.getBackButton().setOnMouseClicked(event -> {
+            userHomePage_ScrollPane.setVisible(true);
+            bookDetailView_HB.setVisible(false);
+        });
+
+        controller.getBorrowBookButton1().setOnMouseClicked(event -> {
+            try {
+                sendRequestToAdmin("6", bookId);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     // Ensure to shut down the ExecutorService when no longer needed
     public void shutdown() {
         executorService.shutdown();
@@ -324,5 +389,49 @@ public class UserHomePageController {
         } catch (InterruptedException e) {
             executorService.shutdownNow();
         }
+    }
+
+    // OKAY
+    public void loadUserRequestTableView(String userId, HBox targetHbox) throws IOException, SQLException, LogicException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("user-request-view-pane.fxml"));
+        HBox tableView = loader.load();
+        UserRequestTableController controller = loader.getController();
+        controller.loadUserRequestIntoTable(userId);
+        targetHbox.getChildren().add(tableView);
+    }
+
+    // OKAY
+    public void sendRequestToAdmin(String userId, int bookId) throws SQLException {
+        // Execute query to send user request to admin
+        String query = "INSERT INTO usersrequest (userId, bookId, createdTime, lastUpdatedTime, status)"
+                + "VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = connectDB();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+            preparedStatement.setString(1, userId);
+            preparedStatement.setInt(2, bookId);
+            preparedStatement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            preparedStatement.setString(5, "Pending");
+
+            int insertQuery = preparedStatement.executeUpdate();
+            AlertMessage alert = new AlertMessage();
+            if (insertQuery > 0) {
+                alert.successMessage("Your request is sent to admin. Let's wait for approval to start reading this book");
+            } else {
+                alert.errorMessage("Failed to send request to admin");
+            }
+        }
+    }
+
+    // OKAY
+    public void handleAction() {
+        borrowBookButton.setOnAction(event -> {
+           try {
+               sendRequestToAdmin("6", 100011);
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+        });
     }
 }
