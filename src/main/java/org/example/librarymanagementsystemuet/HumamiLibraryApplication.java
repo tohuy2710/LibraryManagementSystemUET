@@ -11,7 +11,8 @@ import java.io.IOException;
 public class HumamiLibraryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HumamiLibraryApplication.class.getResource("book-management-dashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HumamiLibraryApplication
+                .class.getResource("user-home-page.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
         stage.setTitle("Humami Library");
