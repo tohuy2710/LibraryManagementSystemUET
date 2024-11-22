@@ -2,18 +2,27 @@ package org.example.librarymanagementsystemuet.userapp;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.UserHomePageController;
+import org.example.librarymanagementsystemuet.bookViewDetailPaneController;
+import org.example.librarymanagementsystemuet.obj.Book;
+import org.example.librarymanagementsystemuet.obj.User;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static org.example.librarymanagementsystemuet.Database.connectDB;
+
 public class UserAppBookshelfController {
+    private final List<ImageView> bookImageViewList = new ArrayList<>();
 
     @FXML
     private ImageView imageBook1;
@@ -60,7 +69,19 @@ public class UserAppBookshelfController {
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
+    public void addImageView() {
+        bookImageViewList.add(imageBook1);
+        bookImageViewList.add(imageBook2);
+        bookImageViewList.add(imageBook3);
+        bookImageViewList.add(imageBook4);
+        bookImageViewList.add(imageBook5);
+        bookImageViewList.add(imageBook6);
+        bookImageViewList.add(imageBook7);
+    }
+
     public void loadBooksByCategory(String category) {
+        addImageView();
+
         executorService.submit(() -> {
             try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/library_management_system_uet", "root", "");
                  PreparedStatement stmt = conn.prepareStatement("SELECT * FROM books WHERE category = ? ORDER BY id LIMIT 7")) {
@@ -81,7 +102,22 @@ public class UserAppBookshelfController {
                     String name = rs.getString("name");
                     String author = rs.getString("author");
 
+                    Book selectedBook = new Book();
+                    selectedBook.setId(rs.getInt("id"));
+                    selectedBook.setName(rs.getString("name"));
+                    selectedBook.setAuthor(rs.getString("author"));
+                    selectedBook.setPublisher(rs.getString("publisher"));
+                    selectedBook.setIsbn(rs.getString("isbn"));
+                    selectedBook.setDescription(rs.getString("description"));
+                    selectedBook.setAddedDate(rs.getString("addedDate"));
+                    selectedBook.setLastUpdateDate(rs.getString("lastUpdateDate"));
+                    selectedBook.setImageLink(rs.getString("linkCoverImage"));
+
                     int finalI = i;
+                    bookImageViewList.get(finalI).setOnMouseClicked(event -> {
+                        System.out.println("image view is clicked");
+                    });
+
                     Platform.runLater(() -> {
                         Database.setImageByLink(imageViews[finalI], imageUrl);
                         nameLabels[finalI].setText(name);

@@ -1,9 +1,12 @@
 package org.example.librarymanagementsystemuet;
 
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.sql.*;
+import java.util.Objects;
 import java.util.concurrent.*;
 
 public class Database {
@@ -35,13 +38,16 @@ public class Database {
 
     public static void setImageByLink(ImageView imageView, String link) {
 
-        imageView.setImage(new Image(Database.class.getResourceAsStream("unknowCover.jpg")));
+        imageView.setImage(new Image(Objects.requireNonNull(
+                Database.class.getResourceAsStream("unknowCover.jpg"))));
 
         Callable<Image> loadImageTask = () -> {
             try {
                 return new Image(link, true);
-            } catch (Exception e) {
-                return new Image(Database.class.getResourceAsStream("unknowCover.jpg"));
+            } catch (IllegalArgumentException e) {
+                System.err.println("Error loading image: " + e.getMessage());
+                return new Image(Objects.requireNonNull(
+                        Database.class.getResourceAsStream("unknowCover.jpg")));
             }
         };
 
@@ -49,11 +55,17 @@ public class Database {
 
         executorService.submit(() -> {
             try {
-                Image image = future.get(5, TimeUnit.SECONDS);
-                imageView.setImage(image);
+                Image image = future.get(10, TimeUnit.SECONDS);
+                Platform.runLater(() -> imageView.setImage(image));
             } catch (TimeoutException e) {
                 future.cancel(true);
                 System.out.println("Image loading timed out.");
+
+                Platform.runLater(() -> {
+                    imageView.setImage(new Image(Objects.requireNonNull(
+                            Database.class.getResourceAsStream("unknowCover.jpg")
+                    )));
+                });
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }

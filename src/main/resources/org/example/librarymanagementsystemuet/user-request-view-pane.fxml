@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="userRequest_HB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserRequestTableController">
+   <TableView fx:id="userRequest_TV" prefHeight="640.0" prefWidth="1200.0">
+      <columns>
+         <TableColumn fx:id="userRequest_IdCol" prefWidth="106.39999085664749" style="-fx-alignment: center;" text="Request ID" />
+         <TableColumn fx:id="userRequest_BookIdCol" prefWidth="131.2000274658203" style="-fx-alignment: center;" text="Book ID" />
+         <TableColumn fx:id="userRequest_statusCol" minWidth="6.39996337890625" prefWidth="181.5999755859375" text="Status" />
+         <TableColumn fx:id="userRequest_createdTimeCol" prefWidth="195.99993896484375" text="Created Time" />
+         <TableColumn fx:id="userRequest_lastUpdatedTimeCol" prefWidth="216.0" text="Last Update Time" />
+      </columns>
+      <columnResizePolicy>
+         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+      </columnResizePolicy>
+   </TableView>
+</HBox>
