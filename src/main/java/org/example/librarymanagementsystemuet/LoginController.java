@@ -2,12 +2,17 @@ package org.example.librarymanagementsystemuet;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.obj.Admin;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -282,7 +287,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void login() {
+    public void loginUser() {
         AlertMessage alertMessage = new AlertMessage();
 
         if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
@@ -483,6 +488,11 @@ public class LoginController implements Initializable {
 
                 if (result.next()) {
                     alertMessage.successMessage("Login successful.");
+                    Admin admin = Admin.getInstance(result.getString("email"),
+                            result.getString("password"));
+                    OpenAdminApp();
+                    Stage stage = (Stage) loginAdmin_email.getScene().getWindow();
+                    stage.close();
                 } else {
                     alertMessage.errorMessage("Invalid email or password.");
                     adminLoginClearFields();
@@ -490,6 +500,8 @@ public class LoginController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
                 alertMessage.errorMessage("Database error: " + e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             } finally {
                 try {
                     if (result != null) result.close();
@@ -500,7 +512,11 @@ public class LoginController implements Initializable {
                 }
             }
         }
+    }
 
+    public void OpenAdminApp() throws IOException {
+        AdminApplication adminApplication = new AdminApplication();
+        adminApplication.start(new Stage());
     }
 
     public void loginClearFields() {

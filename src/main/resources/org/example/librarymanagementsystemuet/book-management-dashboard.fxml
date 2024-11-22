@@ -8,214 +8,236 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="bookManagementMainBox" alignment="CENTER_LEFT" prefHeight="640.0" prefWidth="1200.0" spacing="10.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController">
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController">
    <children>
-      <VBox alignment="TOP_CENTER" prefHeight="640.0" prefWidth="742.0" spacing="10.0" stylesheets="@style.css">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
+      <StackPane fx:id="bookManagementMainBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="249.0" prefWidth="709.0" spacing="55.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="640.0" prefWidth="1200.0" spacing="10.0" stylesheets="@style.css">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="283.0" prefWidth="193.0" spacing="10.0">
+                  <HBox prefHeight="640.0" prefWidth="739.0">
                      <children>
-                        <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../asset/img/add-book-img.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" onAction="#showAddBookSearchBox" prefHeight="42.0" prefWidth="240.0" styleClass="button2" text="Add Book" />
+                        <VBox alignment="TOP_CENTER" prefHeight="640.0" prefWidth="742.0" spacing="10.0" stylesheets="@style.css">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="249.0" prefWidth="709.0" spacing="55.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" prefHeight="283.0" prefWidth="193.0" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../asset/img/add-book-img.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Button mnemonicParsing="false" onAction="#showAddBookSearchBox" prefHeight="42.0" prefWidth="240.0" styleClass="button2" text="Add Book" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="283.0" prefWidth="193.0" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../asset/img/remove-book-img.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Button mnemonicParsing="false" onAction="#showModifyDeleteBookBox" prefHeight="42.0" prefWidth="240.0" styleClass="button2" text="Remove / Modify Book" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="283.0" prefWidth="193.0" spacing="10.0">
+                                       <children>
+                                          <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../asset/img/browser-book-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Button mnemonicParsing="false" onAction="#showBrowserBookBox" prefHeight="42.0" prefWidth="240.0" styleClass="button2" text="Browser Book" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox prefHeight="335.0" prefWidth="721.0" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="label2" text="Recently Update ">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="recentlyUpdateTable" prefHeight="331.0" prefWidth="714.0">
+                                       <columns>
+                                          <TableColumn fx:id="timeCol" prefWidth="195.20001554489136" text="Time" />
+                                          <TableColumn fx:id="bookIDCol" prefWidth="119.19999694824219" text="Book ID" />
+                                          <TableColumn fx:id="bookNameCol" prefWidth="250.39993286132812" text="Book Name" />
+                                          <TableColumn fx:id="typeCol" prefWidth="132.800048828125" text="Type" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </opaqueInsets>
+                              </VBox>
+                           </children>
+                        </VBox>
                      </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="283.0" prefWidth="193.0" spacing="10.0">
+                  </HBox>
+                  <HBox fx:id="topRequestedBookBox" prefHeight="640.0" prefWidth="453.0">
                      <children>
-                        <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../asset/img/remove-book-img.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" onAction="#showModifyDeleteBookBox" prefHeight="42.0" prefWidth="240.0" styleClass="button2" text="Remove / Modify Book" />
+                        <VBox prefHeight="640.0" prefWidth="489.0" spacing="20.0">
+                           <children>
+                              <Label styleClass="label2" stylesheets="@style.css" text="Top Requested Books">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="470.0" prefWidth="448.0">
+                                 <children>
+                                    <VBox prefHeight="511.0" prefWidth="455.0">
+                                       <children>
+                                          <VBox prefHeight="569.0" prefWidth="414.0" spacing="10.0">
+                                             <children>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../asset/img/top-1-img.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <HBox fx:id="topBorrowedBook1HBox" prefHeight="146.0" prefWidth="363.0" spacing="10.0" styleClass="hbox1">
+                                                         <children>
+                                                            <ImageView fx:id="topBorrowedBook1Image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../asset/img/cover-not-found-img.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="topBorrowedBook1Name" styleClass="label2" text="Book Name">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="topBorrowedBook1Author" text="Author: " />
+                                                                  <Label fx:id="topBorrowedBook1ISBN" text="ISBN: " />
+                                                                  <Label fx:id="topBorrowedBook1BrrowedCount" text="Request by:" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../asset/img/top-2-img.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <HBox fx:id="topBorrowedBook2HBox" prefHeight="146.0" prefWidth="368.0" spacing="10.0" styleClass="hbox2">
+                                                         <children>
+                                                            <ImageView fx:id="topBorrowedBook2Image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true">
+                                                               <image>
+                                                                  <Image url="@../../../asset/img/cover-not-found-img.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="topBorrowedBook2Name" styleClass="label2" text="Book Name">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="topBorrowedBook2Author" text="Author: " />
+                                                                  <Label fx:id="topBorrowedBook2ISBN" text="ISBN: " />
+                                                                  <Label fx:id="topBorrowedBook2BrrowedCount" text="Request by:" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
+                                                   <children>
+                                                      <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../asset/img/top-3-img.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <HBox fx:id="topBorrowedBook3HBox" prefHeight="146.0" prefWidth="358.0" spacing="10.0" styleClass="hbox3">
+                                                         <children>
+                                                            <ImageView fx:id="topBorrowedBook3Image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../../../asset/img/cover-not-found-img.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
+                                                               <children>
+                                                                  <Label fx:id="topBorrowedBook3Name" styleClass="label2" text="Book Name">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <Label fx:id="topBorrowedBook3Author" text="Author: " />
+                                                                  <Label fx:id="topBorrowedBook3ISBN" text="ISBN: " />
+                                                                  <Label fx:id="topBorrowedBook3BrrowedCount" text="Request by:" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                   </padding>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
                      </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </VBox>
-                  <VBox alignment="TOP_CENTER" prefHeight="283.0" prefWidth="193.0" spacing="10.0">
-                     <children>
-                        <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../asset/img/browser-book-icon.png" />
-                           </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" onAction="#showBrowserBookBox" prefHeight="42.0" prefWidth="240.0" styleClass="button2" text="Browser Book" />
-                     </children>
-                     <padding>
-                        <Insets top="10.0" />
-                     </padding>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox prefHeight="335.0" prefWidth="721.0" spacing="10.0">
-               <children>
-                  <Label styleClass="label2" text="Recently Update ">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="recentlyUpdateTable" prefHeight="331.0" prefWidth="714.0">
-                     <columns>
-                        <TableColumn fx:id="timeCol" prefWidth="195.20001554489136" text="Time" />
-                        <TableColumn fx:id="bookIDCol" prefWidth="119.19999694824219" text="Book ID" />
-                        <TableColumn fx:id="bookNameCol" prefWidth="250.39993286132812" text="Book Name" />
-                        <TableColumn fx:id="typeCol" prefWidth="132.800048828125" text="Type" />
-                     </columns>
-                  </TableView>
+                  </HBox>
                </children>
                <opaqueInsets>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets />
                </opaqueInsets>
-            </VBox>
+            </HBox>
          </children>
-      </VBox>
-      <VBox prefHeight="640.0" prefWidth="489.0" spacing="20.0">
-         <children>
-            <Label styleClass="label2" stylesheets="@style.css" text="Top Borrowed Books">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <VBox prefHeight="576.0" prefWidth="414.0">
-               <children>
-                  <VBox prefHeight="569.0" prefWidth="414.0" spacing="10.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/top-1-img.png" />
-                                 </image>
-                              </ImageView>
-                              <HBox fx:id="topBorrowedBook1HBox" prefHeight="146.0" prefWidth="363.0" spacing="10.0" styleClass="hbox1">
-                                 <children>
-                                    <ImageView fx:id="topBorrowedBook1Image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
-                                       <children>
-                                          <Label fx:id="topBorrowedBook1Name" styleClass="label2" text="Book Name">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="topBorrowedBook1Author" text="Author: " />
-                                          <Label fx:id="topBorrowedBook1ISBN" text="ISBN: " />
-                                          <Label fx:id="topBorrowedBook1BrrowedCount" text="Borrowed By:" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/top-2-img.png" />
-                                 </image>
-                              </ImageView>
-                              <HBox fx:id="topBorrowedBook2HBox" prefHeight="146.0" prefWidth="368.0" spacing="10.0" styleClass="hbox2">
-                                 <children>
-                                    <ImageView fx:id="topBorrowedBook2Image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
-                                       <children>
-                                          <Label fx:id="topBorrowedBook2Name" styleClass="label2" text="Book Name">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="topBorrowedBook2Author" text="Author: " />
-                                          <Label fx:id="topBorrowedBook2ISBN" text="ISBN: " />
-                                          <Label fx:id="topBorrowedBook2BrrowedCount" text="Borrowed By:" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/top-3-img.png" />
-                                 </image>
-                              </ImageView>
-                              <HBox fx:id="topBorrowedBook3HBox" prefHeight="146.0" prefWidth="358.0" spacing="10.0" styleClass="hbox3">
-                                 <children>
-                                    <ImageView fx:id="topBorrowedBook3Image" fitHeight="120.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                       </image>
-                                    </ImageView>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
-                                       <children>
-                                          <Label fx:id="topBorrowedBook3Name" styleClass="label2" text="Book Name">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="topBorrowedBook3Author" text="Author: " />
-                                          <Label fx:id="topBorrowedBook3ISBN" text="ISBN: " />
-                                          <Label fx:id="topBorrowedBook3BrrowedCount" text="Borrowed By:" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
+      </StackPane>
    </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
 </HBox>

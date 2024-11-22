@@ -9,17 +9,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController;
 import org.example.librarymanagementsystemuet.adminapp.usermanagement.UserManagementController;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookListController;
+import org.example.librarymanagementsystemuet.obj.Admin;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static org.example.librarymanagementsystemuet.obj.Admin.DEFAULT_AVATAR_PATH;
 
 public class AdminAppController implements Initializable {
     @FXML
@@ -76,15 +84,36 @@ public class AdminAppController implements Initializable {
     @FXML
     private Button usersManagementButtonMinimize;
 
+    Admin sessionAdmin;
+
     String[] typeSearchArrays = {"User", "Book"};
+
+    public void setAdminInfo() {
+        sessionAdmin = Admin.getInstance();
+    }
+
+    public void showAdminInfo() {
+        if (sessionAdmin == null) {
+            setAdminInfo();
+        }
+        // Correct the image path
+        Image adminAvatarImg = new Image(getClass().getResourceAsStream(DEFAULT_AVATAR_PATH));
+        this.adminAvatar.setFill(new ImagePattern(adminAvatarImg));
+        adminName.setText(sessionAdmin.getEmail());
+    }
+
+    public AnchorPane getMainBox() {
+        return contentPane;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         selectTypeSearch.getItems().addAll(typeSearchArrays);
         selectTypeSearch.setValue("User");
 
-        paneMenuFull.setVisible(false);
-        paneMenuMini.setVisible(true);
+        showAdminInfo();
+
+        showPaneMenuMini();
         paneMenuFull.visibleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue && paneMenuMini.isVisible()) {
                 paneMenuMini.setVisible(false);
@@ -129,10 +158,13 @@ public class AdminAppController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/org/example/librarymanagementsystemuet/book-management-dashboard.fxml"));
-            HBox bookManagementDashboardHBox = loader.load();
+            HBox bookManagementDashboardBox = loader.load();
+            BookManagementDashboardController controller = loader.getController();
+            controller.setParentController(this);
             contentPane.getChildren().clear();
-            contentPane.getChildren().add(bookManagementDashboardHBox);
-            adjustContentSize(); adjustHBoxSize();
+            contentPane.getChildren().add(bookManagementDashboardBox);
+            adjustContentSize();
+            enableChangeMenuSizeButton();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,6 +179,7 @@ public class AdminAppController implements Initializable {
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userManagementDashboardHBox);
             adjustContentSize();
+            enableChangeMenuSizeButton();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -161,6 +194,7 @@ public class AdminAppController implements Initializable {
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userRequestManagementHBox);
             adjustContentSize();
+            enableChangeMenuSizeButton();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -191,6 +225,7 @@ public class AdminAppController implements Initializable {
 
             contentPane.getChildren().add(bookManagementBookListHBox);
             adjustContentSize();
+            enableChangeMenuSizeButton();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -213,6 +248,7 @@ public class AdminAppController implements Initializable {
 
             adjustContentSize();
 
+            enableChangeMenuSizeButton();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -220,13 +256,23 @@ public class AdminAppController implements Initializable {
         }
     }
 
+    public void showPaneMenuMini() {
+        paneMenuFull.setVisible(false);
+        paneMenuMini.setVisible(true);
+        adjustHBoxSize(); adjustContentSize();
+    }
+
+    public void showPaneMenuFull() {
+        paneMenuFull.setVisible(true);
+        paneMenuMini.setVisible(false);
+        adjustHBoxSize(); adjustContentSize();
+    }
+
     public void changeMenuSize(ActionEvent event) {
         if (paneMenuFull.isVisible()) {
-            paneMenuFull.setVisible(false);
-            paneMenuMini.setVisible(true);
+            showPaneMenuMini();
         } else {
-            paneMenuFull.setVisible(true);
-            paneMenuMini.setVisible(false);
+            showPaneMenuFull();
         }
         adjustHBoxSize(); adjustContentSize();
     }
@@ -237,5 +283,9 @@ public class AdminAppController implements Initializable {
 
     public void enableChangeMenuSizeButton() {
         changeMenuSize.setDisable(false);
+    }
+
+    public boolean isShowingPaneMenuFull() {
+        return paneMenuFull.isVisible();
     }
 }

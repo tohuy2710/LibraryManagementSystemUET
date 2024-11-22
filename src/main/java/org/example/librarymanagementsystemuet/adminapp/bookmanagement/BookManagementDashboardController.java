@@ -11,19 +11,25 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.adminapp.AdminAppController;
+import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
 import org.example.librarymanagementsystemuet.obj.Book;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.cert.PolicyNode;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class BookManagementDashboardController implements Initializable {
-
+public class BookManagementDashboardController extends Controller implements Initializable {
+ //org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController.java
     @FXML
-    private HBox bookManagementMainBox;
+    private StackPane bookManagementMainBox;
 
     @FXML
     private Label topBorrowedBook1Author;
@@ -96,6 +102,19 @@ public class BookManagementDashboardController implements Initializable {
 
     private ObservableList<Book> recentlyUpdateBookList = FXCollections.observableArrayList();
 
+    private AdminAppController parentController;
+
+    private Book book1;
+    private Book book2;
+    private Book book3;
+
+    @FXML
+    private HBox topRequestedBookBox;
+
+    public void setParentController(AdminAppController parentController) {
+        this.parentController = parentController;
+    }
+
     public void getRecentlyUpdatedBooks() {
         recentlyUpdateTable.getItems().clear();
         recentlyUpdateBookList.clear();
@@ -143,13 +162,26 @@ public class BookManagementDashboardController implements Initializable {
     public void getTopBorrowedBooks(ActionEvent event) {
         try {
             Database.connect = Database.connectDB();
-            String query = "SELECT bookid, COUNT(userid) AS cnt, " +
-                    "books.linkCoverImage, books.name, books.author, books.isbn " +
-                    "FROM usersrequest " +
-                    "LEFT JOIN books ON books.id = usersrequest.bookid " +
-                    "GROUP BY bookid " +
-                    "ORDER BY cnt DESC " +
-                    "LIMIT 3;";
+            String query = "SELECT \n" +
+                    "    books.id, \n" +
+                    "    books.name AS name, \n" +
+                    "    books.isbn AS isbn, \n" +
+                    "    books.linkCoverImage AS linkCoverImage, \n" +
+                    "    books.author AS author, \n" +
+                    "    getCountRequestBook.cnt AS cnt \n" +
+                    "FROM \n" +
+                    "    books \n" +
+                    "INNER JOIN \n" +
+                    "    (SELECT \n" +
+                    "        bookId, \n" +
+                    "        COUNT(*) AS cnt \n" +
+                    "     FROM \n" +
+                    "        usersrequest \n" +
+                    "     GROUP BY \n" +
+                    "        bookId) AS getCountRequestBook \n" +
+                    "ON \n" +
+                    "    books.id = getCountRequestBook.bookId " +
+                    "LIMIT 3;\n";
             Database.prepare = Database.connect.prepareStatement(query);
             Database.result = Database.prepare.executeQuery();
             int i = 1;
@@ -184,6 +216,72 @@ public class BookManagementDashboardController implements Initializable {
         }
     }
 
+    public void getDetailTopBorrowedBooks(ActionEvent event) {
+        topBorrowedBook1HBox.setOnMouseClicked(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("/org/example/librarymanagementsystemuet/book-detail.fxml"));
+                AnchorPane bookDetailBox = loader.load();
+                BookDetailController bookDetailController = loader.getController();
+                bookDetailController.setParentController(this);
+
+                Database.connect = Database.connectDB();
+                String query = "SELECT * FROM books WHERE name = '" + topBorrowedBook1Name.getText() + "';";
+                Database.prepare = Database.connect.prepareStatement(query);
+                Database.result = Database.prepare.executeQuery();
+                if (Database.result.next()) {
+                    book1 = Database.setBookInfo();
+                }
+                bookDetailController.setDetail(book1);
+                bookManagementMainBox.getChildren().add(bookDetailBox);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        topBorrowedBook2HBox.setOnMouseClicked(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("/org/example/librarymanagementsystemuet/book-detail.fxml"));
+                AnchorPane bookDetailBox = loader.load();
+                BookDetailController bookDetailController = loader.getController();
+                bookDetailController.setParentController(this);
+
+                Database.connect = Database.connectDB();
+                String query = "SELECT * FROM books WHERE name = '" + topBorrowedBook2Name.getText() + "';";
+                Database.prepare = Database.connect.prepareStatement(query);
+                Database.result = Database.prepare.executeQuery();
+                if (Database.result.next()) {
+                    book2 = Database.setBookInfo();
+                }
+                bookDetailController.setDetail(book2);
+                bookManagementMainBox.getChildren().add(bookDetailBox);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        topBorrowedBook3HBox.setOnMouseClicked(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("/org/example/librarymanagementsystemuet/book-detail.fxml"));
+                AnchorPane bookDetailBox = loader.load();
+                BookDetailController bookDetailController = loader.getController();
+                bookDetailController.setParentController(this);
+
+                Database.connect = Database.connectDB();
+                String query = "SELECT * FROM books WHERE name = '" + topBorrowedBook3Name.getText() + "';";
+                Database.prepare = Database.connect.prepareStatement(query);
+                Database.result = Database.prepare.executeQuery();
+                if (Database.result.next()) {
+                    book3 = Database.setBookInfo();
+                }
+                bookDetailController.setDetail(book3);
+                bookManagementMainBox.getChildren().add(bookDetailBox);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+    }
+
     public void showAddBookSearchBox(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/librarymanagementsystemuet/book-management-add-book.fxml"));
@@ -208,18 +306,39 @@ public class BookManagementDashboardController implements Initializable {
 
     public void showBrowserBookBox(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/librarymanagementsystemuet/browser-book.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/browser-book.fxml"));
             HBox browserBookBox = loader.load();
-            bookManagementMainBox.getChildren().clear();
-            bookManagementMainBox.getChildren().add(browserBookBox);
+
+            parentController.getMainBox().getChildren().clear();
+            parentController.getMainBox().getChildren().add(browserBookBox);
+            parentController.showPaneMenuMini();
+            parentController.disableChangeMenuSizeButton();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void visibleTopRequestedBookBox() {
+        topRequestedBookBox.visibleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue && parentController.isShowingPaneMenuFull()) {
+                topRequestedBookBox.setVisible(false);
+            } else if (newValue && !parentController.isShowingPaneMenuFull()) {
+                topRequestedBookBox.setVisible(true);
+            }
+        });
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getTopBorrowedBooks(null);
         getRecentlyUpdatedBooks();
+        getDetailTopBorrowedBooks(null);
+        visibleTopRequestedBookBox();
+    }
+
+    public StackPane getMainPane() {
+        return bookManagementMainBox;
     }
 }

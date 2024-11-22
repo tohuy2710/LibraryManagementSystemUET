@@ -64,7 +64,7 @@ public class UserManagementController implements Initializable {
             user.setPassword(resultSet.getString("password"));
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
-            user.setPhoneNumber(resultSet.getString("phonenumber"));
+            user.setPhonenumber(resultSet.getString("phonenumber"));
             userList.add(user);
         }
     }
@@ -186,7 +186,7 @@ public class UserManagementController implements Initializable {
                                             usernameUpdate.setText(updatedUser.getUsername());
                                             passwordUpdate.setText(updatedUser.getPassword());
                                             emailUpdate.setText(updatedUser.getEmail());
-                                            phoneNumberUpdate.setText(updatedUser.getPhoneNumber());
+                                            phoneNumberUpdate.setText(updatedUser.getPhonenumber());
 
                                             // Save new user data
                                             saveUpdateButton.setOnAction(event1 -> {
