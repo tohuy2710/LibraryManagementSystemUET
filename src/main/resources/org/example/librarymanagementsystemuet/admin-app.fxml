@@ -27,17 +27,17 @@
          </image>
       </ImageView>
       <Button fx:id="changeMenuSize" layoutX="16.0" layoutY="16.0" mnemonicParsing="false" onAction="#changeMenuSize" prefHeight="50.0" prefWidth="50.0" styleClass="button5" />
-      <HBox fx:id="adminInfoBox" alignment="CENTER_RIGHT" layoutX="980.0" prefHeight="80.0" prefWidth="300.0" spacing="10.0">
+      <HBox fx:id="adminInfoBox" alignment="CENTER_RIGHT" layoutX="930.0" prefHeight="80.0" prefWidth="350.0" spacing="10.0">
          <padding>
             <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
          </padding>
          <children>
-            <Label fx:id="adminName" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="145.0" styleClass="label2" text="Huydeptrai123" textAlignment="RIGHT">
+            <Label fx:id="adminName" alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="260.0" styleClass="label2" text="Huydeptrai123" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Circle fx:id="adminAvatar" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="adminAvatar" fill="DODGERBLUE" radius="25.0" stroke="#17376e" strokeMiterLimit="1.0" strokeType="INSIDE" strokeWidth="0.5" />
          </children>
       </HBox>
       <AnchorPane fx:id="paneMenuFull" layoutY="80.0" prefHeight="640.0" prefWidth="240.0" visible="false">
@@ -74,7 +74,7 @@
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="27.0" layoutY="249.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../asset/img/dashboard-icon.png" />
+                  <Image url="@../../../asset/img/finance-icon.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="31.0" fitWidth="29.0" layoutX="27.0" layoutY="573.0" pickOnBounds="true" preserveRatio="true">
@@ -108,7 +108,7 @@
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="26.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../asset/img/dashboard-icon.png" />
+                  <Image url="@../../../asset/img/finance-icon.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="26.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
@@ -129,7 +129,7 @@
             <Button fx:id="logoutButtonMinimize" layoutX="2.0" layoutY="550.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="82.0" styleClass="button4" />
          </children>
       </AnchorPane>
-      <HBox layoutX="240.0" prefHeight="80.0" prefWidth="740.0" spacing="10.0">
+      <HBox layoutX="240.0" prefHeight="80.0" prefWidth="650.0" spacing="10.0">
          <children>
             <ChoiceBox fx:id="selectTypeSearch" prefHeight="40.0" prefWidth="62.0" styleClass="choice-box2" />
             <HBox prefHeight="40.0" prefWidth="534.0">

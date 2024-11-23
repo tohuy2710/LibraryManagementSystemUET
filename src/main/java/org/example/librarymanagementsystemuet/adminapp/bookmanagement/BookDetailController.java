@@ -2,15 +2,18 @@ package org.example.librarymanagementsystemuet.adminapp.bookmanagement;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.text.Text;
-import javafx.scene.image.Image;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.Book;
 import org.example.librarymanagementsystemuet.obj.BorrowRecord;
@@ -20,7 +23,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-public class BookDetailController {
+
+import static org.example.librarymanagementsystemuet.Database.connectDB;
+
+public class BookDetailController extends Controller {
 
     @FXML
     private Label addedDateLabel;
@@ -87,21 +93,21 @@ public class BookDetailController {
     private ImageView bookCoverImageView;
 
     @FXML
-    private BrowserBookController parentController;
+    private Controller parentController;
 
-    public BrowserBookController getParentController() {
+    private ObservableList<BorrowRecord> borrowRecordObservableList = FXCollections.observableArrayList();
+
+    public Controller getParentController() {
         return parentController;
     }
 
-    public void setParentController(BrowserBookController parentController) {
+    public void setParentController(Controller parentController) {
         this.parentController = parentController;
     }
 
-    private Book book;
     public void setDetail(Book book) {
-        this.book = book;
         idLabel.setText("ID: " + book.getId());
-        nameLabel.setText("Name: " + book.getName());
+        nameLabel.setText(book.getName());
         authorLabel.setText("Author: " + book.getAuthors());
         isbnLabel.setText("ISBN: " + book.getIsbn());
         publisherLabel.setText("Publisher: " + book.getPublisher());
@@ -115,15 +121,14 @@ public class BookDetailController {
         laguageLabel.setText("Language: " + book.getLanguage());
         publisherDateLabel.setText("Publisher Date: " + book.getPublisherDate());
         descriptionText.setText(book.getDescription());
-
-        // Load book cover image
         Database.setImageByLink(bookCoverImageView, book.getImageLink());
+
+        getBorrowInfo(book.getId());
     }
+
     public void getBorrowInfo(int bookId) {
         borrowHistoryTable.getItems().clear();
-        try (Connection conn = DriverManager
-                .getConnection("jdbc:mysql://localhost:3307/library_management_system_uet",
-                        "root", "");
+        try (Connection conn = connectDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT ur.userId, br.start_date, br.due_date, br.return_date " +
@@ -138,16 +143,27 @@ public class BookDetailController {
                         rs.getString("due_date"),
                         rs.getString("return_date")
                 );
-                borrowHistoryTable.getItems().add(record);
+                borrowRecordObservableList.add(record);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        userIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        dueDateCol.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        returnDateCol.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+
+        borrowHistoryTable.setItems(borrowRecordObservableList);
     }
 
     @FXML
     public void backToBrowser(ActionEvent event) {
-        parentController.getMainPane().getChildren().remove(1);
-        parentController.getSearchBox().setVisible(true);
+        if (parentController instanceof BrowserBookController) {
+            ((BrowserBookController) parentController).getMainPane().getChildren().remove(1);
+            ((BrowserBookController) parentController).getSearchBox().setVisible(true);
+        } else if (parentController instanceof BookManagementDashboardController) {
+            ((BookManagementDashboardController) parentController).getMainPane().getChildren().remove(1);
+        }
     }
 }

@@ -82,5 +82,10 @@ public class BookViewCardVerticalController implements Initializable {
             infoVBox.setVisible(true);
             detailButton.setVisible(false);
         });
+
+        detailButton.setOnMouseExited(event -> {
+            infoVBox.setVisible(true);
+            detailButton.setVisible(false);
+        });
     }
 }

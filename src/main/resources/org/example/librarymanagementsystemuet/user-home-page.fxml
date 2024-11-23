@@ -6,381 +6,296 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.userapp.UserHomePageController">
-   <content>
+<AnchorPane fx:id="userHomePage_AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserHomePageController">
+   <ScrollPane fx:id="userHomePage_ScrollPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@../../../org/example/librarymanagementsystemuet/style.css">
       <VBox prefHeight="2300.0" prefWidth="1100.0">
-         <children>
-            <HBox prefHeight="250.0" prefWidth="1161.0" spacing="10.0">
-               <children>
-                  <ImageView fx:id="featuredImage" fitHeight="250.0" fitWidth="750.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../asset/img/porsche_991_cgi-HD.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="252.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
-            <Text fx:id="recommendBooksHBox" fill="#17376e" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Recommend Books" wrappingWidth="237.75198364257812">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1161.0" styleClass="hbox-book-recommend-user">
-               <children>
-                  <VBox fx:id="bookBox1" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
-                           <children>
-                              <ImageView fx:id="imageView1" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label fx:id="nameLabel1" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="authorLabel1" text="Author Conan Doyle">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="bookBox2" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
-                           <children>
-                              <ImageView fx:id="imageView2" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label fx:id="nameLabel2" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="authorLabel2" text="Author Conan Doyle">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="bookBox3" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
-                           <children>
-                              <ImageView fx:id="imageView3" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label fx:id="nameLabel3" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="authorLabel3" text="Author Conan Doyle">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="bookBox4" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
-                           <children>
-                              <ImageView fx:id="imageView4" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label fx:id="nameLabel4" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="authorLabel4" text="Author Conan Doyle">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="bookBox5" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
-                           <children>
-                              <ImageView fx:id="imageView5" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/cover-not-found-img.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label fx:id="nameLabel5" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets left="10.0" right="10.0" />
-                           </padding>
-                        </Label>
-                        <Label fx:id="authorLabel5" text="Author Conan Doyle">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <Text fill="#17376e" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Top Borrow Books" wrappingWidth="632.1520233154297">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <HBox prefHeight="300.0" prefWidth="1200.0" spacing="10.0" styleClass="hbox-top-borrow-book-user">
-               <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="310.0" prefWidth="359.0" spacing="5.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/top-1-img.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="borrowImageView3" fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@unknowCover.jpg" />
-                                 </image>
-                              </ImageView>
-                              <VBox prefHeight="90.0" prefWidth="282.0">
-                                 <children>
-                                    <Label fx:id="borrowNameLabel3" styleClass="labelHeader" text="Label">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="borrowAuthorLabel3" text="Label" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/top-2-img.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="borrowImageView2" fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@unknowCover.jpg" />
-                                 </image>
-                              </ImageView>
-                              <VBox prefHeight="90.0" prefWidth="282.0">
-                                 <children>
-                                    <Label fx:id="borrowNameLabel2" styleClass="labelHeader" text="Label">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="borrowAuthorLabel2" text="Label" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../asset/img/top-3-img.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="borrowImageView1" fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@unknowCover.jpg" />
-                                 </image>
-                              </ImageView>
-                              <VBox prefHeight="90.0" prefWidth="282.0">
-                                 <children>
-                                    <Label fx:id="borrowNameLabel1" styleClass="labelHeader" text="Label">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="borrowAuthorLabel1" text="Label" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <ImageView fitHeight="309.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../asset/img/line.png" />
-                     </image>
-                  </ImageView>
-                  <HBox prefHeight="300.0" prefWidth="784.0" spacing="10.0">
-                     <children>
-                        <VBox prefHeight="300.0" prefWidth="180.0" spacing="10.0">
-                           <children>
-                              <ImageView fx:id="imageViewDetail" fitHeight="240.0" fitWidth="180.0" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@unknowCover.jpg" />
-                                 </image>
-                              </ImageView>
-                              <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="180.0" styleClass="button6" text="Borrow this Book" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="300.0" prefWidth="580.0">
-                           <children>
-                              <Label fx:id="bookNameDetail" styleClass="labelHeader" text="Humami Book Name Label" textFill="#17376e">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                              <Text fx:id="authorDetail" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label1" text="To Quang Huy">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="publisherDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label1" text="Humami Publisher">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Text>
-                              <HBox prefHeight="20.0" prefWidth="580.0" spacing="10.0">
-                                 <children>
-                                    <HBox prefHeight="20.0" prefWidth="75.0">
-                                       <children>
-                                          <ImageView fx:id="imageBook" fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../asset/img/view-icon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="viewDetail" strokeType="OUTSIDE" strokeWidth="0.0" text="9999">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="20.0" prefWidth="75.0">
-                                       <children>
-                                          <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../../../asset/img/borrow-icon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="countBorrowDetail" strokeType="OUTSIDE" strokeWidth="0.0" text="100">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                              <Text fx:id="descriptionBook" strokeType="OUTSIDE" strokeWidth="0.0" text="Doraemon (ドラえもん) is a Japanese manga series written and illustrated by Fujiko F. Fujio. First serialized in 1969, the manga's chapters were collected in 45 tankōbon volumes published by Shogakukan from 1974 to 1996. The story revolves around an earless robotic cat named Doraemon, who travels back in time from the 22nd century to aid a boy named Nobita Nobi.The manga spawned a media franchise. Three anime TV series have been ada" wrappingWidth="558.4479084014893">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </Text>
-                           </children>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-            </HBox>
-            <Text fill="#17376e" layoutX="10.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Technology Bookshelf" wrappingWidth="632.1520233154297">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </Text>
-            <HBox fx:id="technologyBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" />
-            <Text fill="#17376e" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Economics Bookshelf" wrappingWidth="632.1520233154297">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </Text>
-            <HBox fx:id="economicsBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" />
-            <Text fill="#17376e" layoutX="10.0" layoutY="1111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Literature Bookshelf" wrappingWidth="632.1520233154297">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </Text>
-            <HBox fx:id="literatureBookshelfHBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="1118.0" prefHeight="180.0" prefWidth="1162.0" />
-            <Text fill="#17376e" layoutX="10.0" layoutY="1418.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Foreign Language Bookshelf" wrappingWidth="632.1520233154297">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="40.0" />
-               </VBox.margin>
-            </Text>
-            <HBox fx:id="foreignLanguageBookshelfHBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="1425.0" prefHeight="180.0" prefWidth="1162.0" />
-            <ImageView fitHeight="300.0" fitWidth="1175.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../asset/img/footer.png" />
-               </image>
-               <VBox.margin>
-                  <Insets top="50.0" />
-               </VBox.margin>
+         <HBox prefHeight="250.0" prefWidth="1161.0" spacing="10.0">
+            <ImageView fx:id="featuredImage" fitHeight="250.0" fitWidth="750.0" pickOnBounds="true">
+               <Image url="@../../../asset/img/porsche_991_cgi-HD.jpg" />
             </ImageView>
-         </children>
+            <ImageView fitHeight="252.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+         </HBox>
+         <Text fx:id="recommendBooksHBox" fill="#17376e" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Recommend Books" wrappingWidth="237.75198364257812">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Text>
+         <HBox alignment="CENTER" prefHeight="200.0" prefWidth="1161.0" styleClass="hbox-book-recommend-user">
+            <VBox fx:id="bookBox1" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
+               <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
+                  <ImageView fx:id="imageView1" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/cover-not-found-img.png" />
+                  </ImageView>
+               </HBox>
+               <Label fx:id="nameLabel1" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" right="10.0" />
+                  </padding>
+               </Label>
+               <Label fx:id="authorLabel1" text="Author Conan Doyle">
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </VBox>
+            <VBox fx:id="bookBox2" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
+               <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
+                  <ImageView fx:id="imageView2" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/cover-not-found-img.png" />
+                  </ImageView>
+               </HBox>
+               <Label fx:id="nameLabel2" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" right="10.0" />
+                  </padding>
+               </Label>
+               <Label fx:id="authorLabel2" text="Author Conan Doyle">
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </VBox>
+            <VBox fx:id="bookBox3" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
+               <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
+                  <ImageView fx:id="imageView3" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/cover-not-found-img.png" />
+                  </ImageView>
+               </HBox>
+               <Label fx:id="nameLabel3" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" right="10.0" />
+                  </padding>
+               </Label>
+               <Label fx:id="authorLabel3" text="Author Conan Doyle">
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </VBox>
+            <VBox fx:id="bookBox4" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
+               <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
+                  <ImageView fx:id="imageView4" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/cover-not-found-img.png" />
+                  </ImageView>
+               </HBox>
+               <Label fx:id="nameLabel4" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" right="10.0" />
+                  </padding>
+               </Label>
+               <Label fx:id="authorLabel4" text="Author Conan Doyle">
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </VBox>
+            <VBox fx:id="bookBox5" alignment="CENTER_LEFT" prefHeight="239.0" prefWidth="220.0">
+               <HBox alignment="CENTER" prefHeight="146.0" prefWidth="220.0">
+                  <ImageView fx:id="imageView5" fitHeight="153.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/cover-not-found-img.png" />
+                  </ImageView>
+               </HBox>
+               <Label fx:id="nameLabel5" prefHeight="17.0" prefWidth="220.0" styleClass="label2" text="Sherlock Holmes BakerVillage">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+                  <padding>
+                     <Insets left="10.0" right="10.0" />
+                  </padding>
+               </Label>
+               <Label fx:id="authorLabel5" text="Author Conan Doyle">
+                  <padding>
+                     <Insets left="10.0" />
+                  </padding>
+               </Label>
+            </VBox>
+         </HBox>
+         <Text fill="#17376e" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Top Borrow Books" wrappingWidth="632.1520233154297">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Text>
+         <HBox prefHeight="300.0" prefWidth="1200.0" spacing="10.0" styleClass="hbox-top-borrow-book-user">
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+            <VBox alignment="CENTER_LEFT" prefHeight="310.0" prefWidth="359.0" spacing="5.0">
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
+                  <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/top-1-img.png" />
+                  </ImageView>
+                  <ImageView fx:id="borrowImageView3" fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/unknowCover.jpg" />
+                  </ImageView>
+                  <VBox prefHeight="90.0" prefWidth="282.0">
+                     <Label fx:id="borrowNameLabel3" styleClass="labelHeader" text="Label">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="borrowAuthorLabel3" text="Label" />
+                  </VBox>
+               </HBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
+                  <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/top-2-img.png" />
+                  </ImageView>
+                  <ImageView fx:id="borrowImageView2" fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/unknowCover.jpg" />
+                  </ImageView>
+                  <VBox prefHeight="90.0" prefWidth="282.0">
+                     <Label fx:id="borrowNameLabel2" styleClass="labelHeader" text="Label">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="borrowAuthorLabel2" text="Label" />
+                  </VBox>
+               </HBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="10.0">
+                  <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/top-3-img.png" />
+                  </ImageView>
+                  <ImageView fx:id="borrowImageView1" fitHeight="100.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../../../asset/img/unknowCover.jpg" />
+                  </ImageView>
+                  <VBox prefHeight="90.0" prefWidth="282.0">
+                     <Label fx:id="borrowNameLabel1" styleClass="labelHeader" text="Label">
+                        <font>
+                           <Font size="14.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="borrowAuthorLabel1" text="Label" />
+                  </VBox>
+               </HBox>
+            </VBox>
+            <ImageView fitHeight="309.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../../asset/img/line.png" />
+            </ImageView>
+            <HBox prefHeight="300.0" prefWidth="784.0" spacing="10.0">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <VBox prefHeight="300.0" prefWidth="180.0" spacing="10.0">
+                  <ImageView fx:id="imageViewDetail" fitHeight="240.0" fitWidth="180.0" pickOnBounds="true">
+                     <Image url="@../../../asset/img/unknowCover.jpg" />
+                  </ImageView>
+                  <Button fx:id="borrowBookButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="180.0" styleClass="button6" text="Borrow Book" />
+               </VBox>
+               <VBox prefHeight="300.0" prefWidth="580.0">
+                  <Label fx:id="bookNameDetail" styleClass="labelHeader" text="Humami Book Name Label" textFill="#17376e">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="authorDetail" strokeMiterLimit="0.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label1" text="To Quang Huy">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="publisherDetail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label1" text="Humami Publisher">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <HBox prefHeight="20.0" prefWidth="580.0" spacing="10.0">
+                     <HBox prefHeight="20.0" prefWidth="75.0">
+                        <ImageView fx:id="imageBook" fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../../asset/img/view-icon.png" />
+                        </ImageView>
+                        <Text fx:id="viewDetail" strokeType="OUTSIDE" strokeWidth="0.0" text="9999">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </HBox>
+                     <HBox prefHeight="20.0" prefWidth="75.0">
+                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <Image url="@../../../asset/img/borrow-icon.png" />
+                        </ImageView>
+                        <Text fx:id="countBorrowDetail" strokeType="OUTSIDE" strokeWidth="0.0" text="100">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </HBox>
+                  </HBox>
+                  <Text fx:id="descriptionBook" strokeType="OUTSIDE" strokeWidth="0.0" text="Doraemon (ドラえもん) is a Japanese manga series written and illustrated by Fujiko F. Fujio. First serialized in 1969, the manga's chapters were collected in 45 tankōbon volumes published by Shogakukan from 1974 to 1996. The story revolves around an earless robotic cat named Doraemon, who travels back in time from the 22nd century to aid a boy named Nobita Nobi.The manga spawned a media franchise. Three anime TV series have been ada" wrappingWidth="558.4479084014893">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Text>
+               </VBox>
+            </HBox>
+         </HBox>
+         <Text fill="#17376e" layoutX="10.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Technology Bookshelf" wrappingWidth="632.1520233154297">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="40.0" />
+            </VBox.margin>
+         </Text>
+         <HBox fx:id="technologyBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" />
+         <Text fill="#17376e" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Economics Bookshelf" wrappingWidth="632.1520233154297">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="40.0" />
+            </VBox.margin>
+         </Text>
+         <HBox fx:id="economicsBookshelfHBox" alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="1162.0" />
+         <Text fill="#17376e" layoutX="10.0" layoutY="1111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Literature Bookshelf" wrappingWidth="632.1520233154297">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="40.0" />
+            </VBox.margin>
+         </Text>
+         <HBox fx:id="literatureBookshelfHBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="1118.0" prefHeight="180.0" prefWidth="1162.0" />
+         <Text fill="#17376e" layoutX="10.0" layoutY="1418.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="labelHeader" text="Foreign Language Bookshelf" wrappingWidth="632.1520233154297">
+            <font>
+               <Font size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="40.0" />
+            </VBox.margin>
+         </Text>
+         <HBox fx:id="foreignLanguageBookshelfHBox" alignment="CENTER_LEFT" layoutX="10.0" layoutY="1425.0" prefHeight="180.0" prefWidth="1162.0" />
+         <ImageView fitHeight="300.0" fitWidth="1175.0" pickOnBounds="true" preserveRatio="true">
+            <VBox.margin>
+               <Insets top="50.0" />
+            </VBox.margin>
+            <Image url="@../../../asset/img/footer.png" />
+         </ImageView>
       </VBox>
-   </content>
-</ScrollPane>
+   </ScrollPane>
+   <HBox fx:id="requestTable_HB" prefHeight="640.0" prefWidth="1200.0" visible="false" />
+   <HBox fx:id="bookDetailView_HB" prefHeight="640.0" prefWidth="1200.0" visible="false" />
+</AnchorPane>
