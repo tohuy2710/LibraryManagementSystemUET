@@ -2,14 +2,26 @@ package org.example.librarymanagementsystemuet.adminapp.usermanagement;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.obj.BookDetail;
+import org.example.librarymanagementsystemuet.obj.UserPenaltyRecord;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 
 public class PenaltyListViewController {
 
@@ -27,6 +39,82 @@ public class PenaltyListViewController {
 
     @FXML
     private TableColumn<UserPenaltyRecord, String> colFineAmount;
+    //
+    @FXML
+    private TableColumn<UserPenaltyRecord, Void> colDetail;
+
+    private void addDetailButtonToTable() {
+        colDetail.setCellFactory(param -> new TableCell<>() {
+            private final Button detailButton = new Button("Detail");
+            private final HBox hbox = new HBox(detailButton);
+
+            {
+                hbox.setAlignment(Pos.CENTER);
+                detailButton.getStyleClass().add("button-detail");
+                detailButton.setOnAction(event -> {
+                    UserPenaltyRecord record = getTableView().getItems().get(getIndex());
+                    showBookDetails(record.getUserId());
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(hbox);
+                }
+            }
+        });
+    }
+
+    private void showBookDetails(String userId) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(
+                     "SELECT b.name, br.start_date, br.return_date, br.due_date " +
+                             "FROM borrowbooks br " +
+                             "JOIN usersrequest ur ON br.request_id = ur.id " +
+                             "JOIN books b ON b.id = ur.bookId " +
+                             "WHERE ur.userId = " + userId)) {
+
+            TableView<BookDetail> bookDetailTable = new TableView<>();
+            bookDetailTable.setPrefWidth(800); // Set preferred width for the TableView
+
+            TableColumn<BookDetail, String> colName = new TableColumn<>("Name");
+            colName.setPrefWidth(200); // Set preferred width for the column
+            TableColumn<BookDetail, String> colStartDate = new TableColumn<>("Start Date");
+            colStartDate.setPrefWidth(200); // Set preferred width for the column
+            TableColumn<BookDetail, String> colReturnDate = new TableColumn<>("Return Date");
+            colReturnDate.setPrefWidth(200); // Set preferred width for the column
+            TableColumn<BookDetail, String> colDueDate = new TableColumn<>("Due Date");
+            colDueDate.setPrefWidth(200); // Set preferred width for the column
+
+            colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+            colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
+            colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+
+            bookDetailTable.getColumns().addAll(colName, colStartDate, colReturnDate, colDueDate);
+
+            while (rs.next()) {
+                bookDetailTable.getItems().add(new BookDetail(
+                        rs.getString("name"),
+                        rs.getString("start_date"),
+                        rs.getString("return_date"),
+                        rs.getString("due_date")
+                ));
+            }
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(new HBox(bookDetailTable)));
+            stage.setTitle("Book Details");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void initialize() {
@@ -35,6 +123,7 @@ public class PenaltyListViewController {
         colBooksNotReturned.setCellValueFactory(new PropertyValueFactory<>("booksNotReturned"));
         colFineAmount.setCellValueFactory(new PropertyValueFactory<>("fineAmount"));
 
+        addDetailButtonToTable();
         loadPenaltyData();
     }
 
@@ -62,52 +151,6 @@ public class PenaltyListViewController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public static class UserPenaltyRecord {
-        private final StringProperty userId;
-        private final StringProperty userName;
-        private final StringProperty booksNotReturned;
-        private final StringProperty fineAmount;
-
-        public UserPenaltyRecord(int userId, String userName, int booksNotReturned, double fineAmount) {
-            this.userId = new SimpleStringProperty(String.valueOf(userId));
-            this.userName = new SimpleStringProperty(userName);
-            this.booksNotReturned = new SimpleStringProperty(String.valueOf(booksNotReturned));
-            this.fineAmount = new SimpleStringProperty(String.valueOf(fineAmount));
-        }
-
-        public String getUserId() {
-            return userId.get();
-        }
-
-        public StringProperty userIdProperty() {
-            return userId;
-        }
-
-        public String getUserName() {
-            return userName.get();
-        }
-
-        public StringProperty userNameProperty() {
-            return userName;
-        }
-
-        public String getBooksNotReturned() {
-            return booksNotReturned.get();
-        }
-
-        public StringProperty booksNotReturnedProperty() {
-            return booksNotReturned;
-        }
-
-        public String getFineAmount() {
-            return fineAmount.get();
-        }
-
-        public StringProperty fineAmountProperty() {
-            return fineAmount;
         }
     }
 }
