@@ -4,24 +4,29 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class User extends Account {
     private SimpleStringProperty name;
-    private SimpleStringProperty username;
     private SimpleStringProperty phonenumber;
     private SimpleStringProperty id;
+    private SimpleStringProperty question;
+    private SimpleStringProperty answer;
 
     public User() {
         super();
         this.name = new SimpleStringProperty();
         this.phonenumber = new SimpleStringProperty();
         this.id = new SimpleStringProperty();
-        this.username = new SimpleStringProperty();
+        this.question = new SimpleStringProperty();
+        this.answer = new SimpleStringProperty();
     }
 
-    public User(String id, String name, String username, String password, String email, String phonenumber) {
-        super(email, password);
+    public User(String id, String name, String username,
+                String password, String email, String phonenumber,
+                String question, String answer) {
+        super(password, email);
         this.phonenumber = new SimpleStringProperty(phonenumber);
         this.name = new SimpleStringProperty(name);
-        this.username = new SimpleStringProperty(username);
         this.id = new SimpleStringProperty(id);
+        this.question = new SimpleStringProperty(question);
+        this.answer = new SimpleStringProperty(answer);
     }
 
     public String getName() {
@@ -34,18 +39,6 @@ public class User extends Account {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public String getUsername() {
-        return username.get();
-    }
-
-    public SimpleStringProperty usernameProperty() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username.set(username);
     }
 
     public SimpleStringProperty phonenumberProperty() {
@@ -70,5 +63,29 @@ public class User extends Account {
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber.set(phonenumber);
+    }
+
+    public SimpleStringProperty questionProperty() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question.set(question);
+    }
+
+    public String getQuestion() {
+        return question.get();
+    }
+
+    public SimpleStringProperty answerProperty() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer.set(answer);
+    }
+
+    public String getAnswer() {
+        return answer.get();
     }
 }
