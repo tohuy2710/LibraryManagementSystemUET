@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController">
    <children>
       <StackPane fx:id="bookManagementMainBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0">
@@ -122,14 +121,18 @@
                                                                   <Image url="@../../../asset/img/cover-not-found-img.png" />
                                                                </image>
                                                             </ImageView>
-                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="5.0">
                                                                <children>
                                                                   <Label fx:id="topBorrowedBook1Name" styleClass="label2" text="Book Name">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <Label fx:id="topBorrowedBook1Author" text="Author: " />
+                                                                  <Label fx:id="topBorrowedBook1Author" style="-fx-font-style: ITALIC;" text="Author: ">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font></Label>
+                                                                  <Label fx:id="topBorrowedBook1ID" style="-fx-font-weight: BOLD; -fx-text-fill: #17376e;" text="ID: " />
                                                                   <Label fx:id="topBorrowedBook1ISBN" text="ISBN: " />
                                                                   <Label fx:id="topBorrowedBook1BrrowedCount" text="Request by:" />
                                                                </children>
@@ -141,7 +144,7 @@
                                                       </HBox>
                                                    </children>
                                                    <padding>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                      <Insets bottom="10.0" right="10.0" top="10.0" />
                                                    </padding>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
@@ -158,14 +161,18 @@
                                                                   <Image url="@../../../asset/img/cover-not-found-img.png" />
                                                                </image>
                                                             </ImageView>
-                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="5.0">
                                                                <children>
                                                                   <Label fx:id="topBorrowedBook2Name" styleClass="label2" text="Book Name">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <Label fx:id="topBorrowedBook2Author" text="Author: " />
+                                                                  <Label fx:id="topBorrowedBook2Author" style="-fx-font-style: ITALIC;" text="Author: ">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font></Label>
+                                                                  <Label fx:id="topBorrowedBook2ID" style="-fx-text-fill: #17376e; -fx-font-weight: BOLD;" text="ID: " />
                                                                   <Label fx:id="topBorrowedBook2ISBN" text="ISBN: " />
                                                                   <Label fx:id="topBorrowedBook2BrrowedCount" text="Request by:" />
                                                                </children>
@@ -177,7 +184,7 @@
                                                       </HBox>
                                                    </children>
                                                    <padding>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                      <Insets bottom="10.0" right="10.0" top="10.0" />
                                                    </padding>
                                                 </HBox>
                                                 <HBox alignment="CENTER_LEFT" prefHeight="142.0" prefWidth="414.0" spacing="10.0">
@@ -194,14 +201,18 @@
                                                                   <Image url="@../../../asset/img/cover-not-found-img.png" />
                                                                </image>
                                                             </ImageView>
-                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="10.0">
+                                                            <VBox alignment="CENTER_LEFT" prefHeight="122.0" prefWidth="313.0" spacing="5.0">
                                                                <children>
                                                                   <Label fx:id="topBorrowedBook3Name" styleClass="label2" text="Book Name">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <Label fx:id="topBorrowedBook3Author" text="Author: " />
+                                                                  <Label fx:id="topBorrowedBook3Author" style="-fx-font-style: italic;" text="Author: ">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font></Label>
+                                                                  <Label fx:id="topBorrowedBook3ID" style="-fx-font-weight: bold; -fx-text-fill: #17376e;" text="ID: " />
                                                                   <Label fx:id="topBorrowedBook3ISBN" text="ISBN: " />
                                                                   <Label fx:id="topBorrowedBook3BrrowedCount" text="Request by:" />
                                                                </children>
@@ -213,7 +224,7 @@
                                                       </HBox>
                                                    </children>
                                                    <padding>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                      <Insets bottom="10.0" right="10.0" top="10.0" />
                                                    </padding>
                                                 </HBox>
                                              </children>

@@ -2,24 +2,16 @@ package org.example.librarymanagementsystemuet.userapp;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import org.example.librarymanagementsystemuet.Database;
-import org.example.librarymanagementsystemuet.UserHomePageController;
-import org.example.librarymanagementsystemuet.bookViewDetailPaneController;
 import org.example.librarymanagementsystemuet.obj.Book;
-import org.example.librarymanagementsystemuet.obj.User;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static org.example.librarymanagementsystemuet.Database.connectDB;
 
 public class UserAppBookshelfController {
     private final List<ImageView> bookImageViewList = new ArrayList<>();

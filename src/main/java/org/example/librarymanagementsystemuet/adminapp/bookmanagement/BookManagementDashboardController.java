@@ -17,12 +17,10 @@ import javafx.scene.layout.StackPane;
 import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.adminapp.AdminAppController;
-import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
 import org.example.librarymanagementsystemuet.obj.Book;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.cert.PolicyNode;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -109,7 +107,13 @@ public class BookManagementDashboardController extends Controller implements Ini
     private Book book3;
 
     @FXML
-    private HBox topRequestedBookBox;
+    private Label topBorrowedBook1ID;
+
+    @FXML
+    private Label topBorrowedBook2ID;
+
+    @FXML
+    private Label topBorrowedBook3ID;
 
     public void setParentController(AdminAppController parentController) {
         this.parentController = parentController;
@@ -159,11 +163,11 @@ public class BookManagementDashboardController extends Controller implements Ini
     }
 
 
-    public void getTopBorrowedBooks(ActionEvent event) {
+    public void getTopRequestedBooks(ActionEvent event) {
         try {
             Database.connect = Database.connectDB();
             String query = "SELECT \n" +
-                    "    books.id, \n" +
+                    "    books.id as id, \n" +
                     "    books.name AS name, \n" +
                     "    books.isbn AS isbn, \n" +
                     "    books.linkCoverImage AS linkCoverImage, \n" +
@@ -178,7 +182,7 @@ public class BookManagementDashboardController extends Controller implements Ini
                     "     FROM \n" +
                     "        usersrequest \n" +
                     "     GROUP BY \n" +
-                    "        bookId) AS getCountRequestBook \n" +
+                    "        bookId ORDER BY cnt DESC LIMIT 3) AS getCountRequestBook \n" +
                     "ON \n" +
                     "    books.id = getCountRequestBook.bookId " +
                     "LIMIT 3;\n";
@@ -187,6 +191,7 @@ public class BookManagementDashboardController extends Controller implements Ini
             int i = 1;
             while (Database.result != null && Database.result.next()) {
                 if (i == 1) {
+                    topBorrowedBook1ID.setText("ID: " + Database.result.getInt("id"));
                     topBorrowedBook1Name.setText(Database.result.getString("name"));
                     topBorrowedBook1Author.setText(Database.result.getString("author"));
                     topBorrowedBook1ISBN.setText("ISBN: " + Database.result.getString("isbn"));
@@ -194,6 +199,7 @@ public class BookManagementDashboardController extends Controller implements Ini
                             + Database.result.getString("cnt") + " users");
                     Database.setImageByLink(topBorrowedBook1Image, Database.result.getString("linkCoverImage"));
                 } else if (i == 2) {
+                    topBorrowedBook2ID.setText("ID: " + Database.result.getInt("id"));
                     topBorrowedBook2Name.setText(Database.result.getString("name"));
                     topBorrowedBook2Author.setText(Database.result.getString("author"));
                     topBorrowedBook2ISBN.setText("ISBN: " + Database.result.getString("isbn"));
@@ -201,6 +207,7 @@ public class BookManagementDashboardController extends Controller implements Ini
                             + Database.result.getString("cnt") + " users");
                     Database.setImageByLink(topBorrowedBook2Image, Database.result.getString("linkCoverImage"));
                 } else if (i == 3) {
+                    topBorrowedBook3ID.setText("ID: " + Database.result.getInt("id"));
                     topBorrowedBook3Name.setText(Database.result.getString("name"));
                     topBorrowedBook3Author.setText(Database.result.getString("author"));
                     topBorrowedBook3ISBN.setText("ISBN: " + Database.result.getString("isbn"));
@@ -226,7 +233,8 @@ public class BookManagementDashboardController extends Controller implements Ini
                 bookDetailController.setParentController(this);
 
                 Database.connect = Database.connectDB();
-                String query = "SELECT * FROM books WHERE name = '" + topBorrowedBook1Name.getText() + "';";
+                String query = "SELECT * FROM books WHERE id = '"
+                        + topBorrowedBook1ID.getText().substring(4) + "';";
                 Database.prepare = Database.connect.prepareStatement(query);
                 Database.result = Database.prepare.executeQuery();
                 if (Database.result.next()) {
@@ -247,7 +255,8 @@ public class BookManagementDashboardController extends Controller implements Ini
                 bookDetailController.setParentController(this);
 
                 Database.connect = Database.connectDB();
-                String query = "SELECT * FROM books WHERE name = '" + topBorrowedBook2Name.getText() + "';";
+                String query = "SELECT * FROM books WHERE id = '"
+                        + topBorrowedBook2ID.getText().substring(4) + "';";
                 Database.prepare = Database.connect.prepareStatement(query);
                 Database.result = Database.prepare.executeQuery();
                 if (Database.result.next()) {
@@ -268,7 +277,8 @@ public class BookManagementDashboardController extends Controller implements Ini
                 bookDetailController.setParentController(this);
 
                 Database.connect = Database.connectDB();
-                String query = "SELECT * FROM books WHERE name = '" + topBorrowedBook3Name.getText() + "';";
+                String query = "SELECT * FROM books WHERE id = '"
+                        + topBorrowedBook3ID.getText().substring(4) + "';";
                 Database.prepare = Database.connect.prepareStatement(query);
                 Database.result = Database.prepare.executeQuery();
                 if (Database.result.next()) {
@@ -320,22 +330,11 @@ public class BookManagementDashboardController extends Controller implements Ini
         }
     }
 
-    public void visibleTopRequestedBookBox() {
-        topRequestedBookBox.visibleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue && parentController.isShowingPaneMenuFull()) {
-                topRequestedBookBox.setVisible(false);
-            } else if (newValue && !parentController.isShowingPaneMenuFull()) {
-                topRequestedBookBox.setVisible(true);
-            }
-        });
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        getTopBorrowedBooks(null);
+        getTopRequestedBooks(null);
         getRecentlyUpdatedBooks();
         getDetailTopBorrowedBooks(null);
-        visibleTopRequestedBookBox();
     }
 
     public StackPane getMainPane() {

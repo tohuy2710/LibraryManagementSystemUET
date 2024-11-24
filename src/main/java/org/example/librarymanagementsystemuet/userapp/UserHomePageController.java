@@ -1,5 +1,5 @@
 // UserHomePageController.java
-package org.example.librarymanagementsystemuet;
+package org.example.librarymanagementsystemuet.userapp;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,10 +14,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.UserRequestTableController;
+import org.example.librarymanagementsystemuet.bookViewDetailPaneController;
 import org.example.librarymanagementsystemuet.exception.LogicException;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.obj.Book;
-import org.example.librarymanagementsystemuet.userapp.UserAppBookshelfController;
 
 import java.io.IOException;
 import java.sql.*;
@@ -328,6 +330,10 @@ public class UserHomePageController {
             }
         });
     }
+
+    //void showBook(Book book)
+    //void sendrequest -> userId, BookId, -> ....
+
 
     private void updateBookBox(VBox targetBox, ImageView targetImageView, Label targetNameLabel, Label targetAuthorLabel, VBox sourceBox) {
         ImageView sourceImageView = (ImageView) sourceBox.getChildren().get(0);

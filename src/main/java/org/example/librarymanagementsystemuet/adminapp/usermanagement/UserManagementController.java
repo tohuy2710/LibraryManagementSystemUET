@@ -114,13 +114,13 @@ public class UserManagementController implements Initializable {
         }
     }
 
-    public void setBorrowBookData(ResultSet resultSet) throws SQLException {
+    public void setBorrowBookData(ResultSet resultSet, String userID) throws SQLException {
         while (resultSet != null && resultSet.next()) {
-            BorrowRecord borrowRecord = new BorrowRecord();
-            borrowRecord.setRequestId(String.valueOf(resultSet.getInt("request_id")));
-            borrowRecord.setDueDate(resultSet.getString("due_date"));
-            borrowRecord.setReturnDate(resultSet.getString("return_date"));
-            borrowRecord.setStartDate(resultSet.getString("start_date"));
+            BorrowRecord borrowRecord = new BorrowRecord(resultSet.getString("request_id"),
+                    userID,
+                    resultSet.getString("start_date"),
+                    resultSet.getString("due_date"),
+                    resultSet.getString("return_date"));
             borrowBookList.add(borrowRecord);
         }
     }
@@ -182,7 +182,7 @@ public class UserManagementController implements Initializable {
         PreparedStatement preparedStatement = conn.prepareStatement(query);
         preparedStatement.setString(1, userID);
         resultSet = preparedStatement.executeQuery();
-        setBorrowBookData(resultSet);
+        setBorrowBookData(resultSet, userID);
         borrowBook_TV.setItems(borrowBookList);
     }
 

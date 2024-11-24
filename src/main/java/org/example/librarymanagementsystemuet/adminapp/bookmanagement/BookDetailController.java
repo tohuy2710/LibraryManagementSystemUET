@@ -131,14 +131,15 @@ public class BookDetailController extends Controller {
         try (Connection conn = connectDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
-                     "SELECT ur.userId, br.start_date, br.due_date, br.return_date " +
+                     "SELECT ur.id, ur.userId, br.start_date, br.due_date, br.return_date " +
                              "FROM borrowbooks br " +
                              "JOIN usersrequest ur ON br.request_id = ur.id " +
                              "WHERE ur.bookId = " + bookId)) {
 
             while (rs.next()) {
                 BorrowRecord record = new BorrowRecord(
-                        rs.getInt("userId"),
+                        rs.getString("Id"),
+                        rs.getString("userId"),
                         rs.getString("start_date"),
                         rs.getString("due_date"),
                         rs.getString("return_date")
