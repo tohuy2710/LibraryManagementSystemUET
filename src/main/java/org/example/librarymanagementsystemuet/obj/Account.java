@@ -3,7 +3,6 @@ package org.example.librarymanagementsystemuet.obj;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Account {
-
     private  SimpleStringProperty username;
     private SimpleStringProperty password;
     private SimpleStringProperty email;
@@ -22,7 +21,7 @@ public class Account {
         this.email = new SimpleStringProperty();
     }
 
-    public Account(String email, String password) {
+    public Account(String password, String email) {
         if (email.contains("@")) {
             this.username = new SimpleStringProperty(email.substring(0, email.indexOf("@")));
         } else {
