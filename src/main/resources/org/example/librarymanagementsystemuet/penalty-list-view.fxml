@@ -2,10 +2,20 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER" prefHeight="640.0" prefWidth="1200.0" spacing="10" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.usermanagement.PenaltyListViewController" stylesheets="@style.css">
-    <TableView fx:id="userTable" prefHeight="640.0" prefWidth="1200.0">
+<VBox alignment="CENTER" spacing="10" prefHeight="640.0" prefWidth="1200.0"
+      xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.librarymanagementsystemuet.adminapp.usermanagement.PenaltyListViewController"
+      stylesheets="@style.css">
+
+    <HBox alignment="CENTER">
+        <TextField fx:id="searchField" promptText="Search by User Name" styleClass="search-bar" prefWidth="800.0" />
+    </HBox>
+
+    <TableView fx:id="userTable" prefHeight="570.0" prefWidth="1200.0">
         <columns>
             <TableColumn fx:id="colUserId" prefWidth="240.0" text="User ID" />
             <TableColumn fx:id="colUserName" prefWidth="240.0" text="User Name" />
@@ -14,4 +24,4 @@
             <TableColumn fx:id="colDetail" prefWidth="240.0" text="Detail" />
         </columns>
     </TableView>
-</HBox>
+</VBox>

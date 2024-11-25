@@ -419,3 +419,86 @@
     -fx-text-fill: #ffffff;
 }
 
+/* style.css 25.11.2024 fix */
+/* General styling */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: #f0f4f8;
+}
+
+/* Statistic labels */
+.statistic-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+/* Statistic panes */
+.anchor-pane {
+    -fx-background-color: #3f51b5; /* Lighter navy blue */
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 10px; /* Reduced padding */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 0);
+    -fx-alignment: center;
+    -fx-pref-width: 200px; /* Smaller width */
+    -fx-pref-height: 80px; /* Smaller height */
+}
+
+/* VBox for statistics */
+.vbox-statistic {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+/* Labels for numbers */
+.label-number {
+    -fx-font-size: 30px; /* 1.5 times larger than text */
+    -fx-text-fill: #ffeb3b; /* Bright yellow for prominence */
+    -fx-font-weight: bold;
+    -fx-alignment: center; /* Center text */
+}
+
+/* Labels for text */
+.label-text {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center; /* Center text */
+}
+.button6:hover {
+    -fx-background-color: #3949ab; /* Change color on hover */
+}
+/* Admin info labels */
+.labelHeader {
+    -fx-font-size: 24px;
+    -fx-text-fill: #1a237e;
+    -fx-font-weight: bold;
+}
+
+/* Penalty */
+/* Định dạng chung cho TextField */
+.search-bar {
+    -fx-background-radius: 15;        /* Bo tròn góc */
+    -fx-padding: 10;                 /* Không gian bên trong */
+    -fx-background-color: #ffffff;  /* Nền màu trắng */
+    -fx-border-color: #cccccc;       /* Viền màu xám nhạt */
+    -fx-border-radius: 15;           /* Bo tròn viền */
+    -fx-border-width: 1;             /* Độ dày viền */
+    -fx-font-size: 14px;             /* Kích thước chữ */
+    -fx-prompt-text-fill: #aaaaaa;   /* Màu chữ placeholder */
+}
+
+.search-bar:focused {
+    -fx-border-color: #0078d7;       /* Màu viền khi focus */
+    -fx-background-color: #f0f0f0;  /* Nền khi focus */
+}
+
+/* Định dạng chung cho TableView */
+.table-view {
+    -fx-background-color: transparent; /* Nền trong suốt */
+    -fx-padding: 10;                   /* Không gian xung quanh */
+}
+
+.table-column {
+    -fx-alignment: CENTER; /* Canh giữa nội dung */
+}

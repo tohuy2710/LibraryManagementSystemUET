@@ -4,24 +4,21 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.BookDetail;
 import org.example.librarymanagementsystemuet.obj.UserPenaltyRecord;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
 
 public class PenaltyListViewController {
 
@@ -39,9 +36,39 @@ public class PenaltyListViewController {
 
     @FXML
     private TableColumn<UserPenaltyRecord, String> colFineAmount;
-    //
+
     @FXML
     private TableColumn<UserPenaltyRecord, Void> colDetail;
+
+    @FXML
+    private TextField searchField;
+
+    private ObservableList<UserPenaltyRecord> masterData = FXCollections.observableArrayList();
+
+    //done
+    @FXML
+    public void initialize() {
+        colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        colBooksNotReturned.setCellValueFactory(new PropertyValueFactory<>("booksNotReturned"));
+        colFineAmount.setCellValueFactory(new PropertyValueFactory<>("fineAmount"));
+
+        addDetailButtonToTable();
+        loadPenaltyData();
+
+        FilteredList<UserPenaltyRecord> filteredData = new FilteredList<>(masterData, p -> true);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(record -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return record.getUserName().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        userTable.setItems(filteredData);
+    }
 
     private void addDetailButtonToTable() {
         colDetail.setCellFactory(param -> new TableCell<>() {
@@ -50,7 +77,7 @@ public class PenaltyListViewController {
 
             {
                 hbox.setAlignment(Pos.CENTER);
-                detailButton.getStyleClass().add("button-detail");
+                detailButton.getStyleClass().add("button6");
                 detailButton.setOnAction(event -> {
                     UserPenaltyRecord record = getTableView().getItems().get(getIndex());
                     showBookDetails(record.getUserId());
@@ -70,7 +97,7 @@ public class PenaltyListViewController {
     }
 
     private void showBookDetails(String userId) {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+        try (Connection conn = Database.connectDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT b.name, br.start_date, br.return_date, br.due_date " +
@@ -78,18 +105,19 @@ public class PenaltyListViewController {
                              "JOIN usersrequest ur ON br.request_id = ur.id " +
                              "JOIN books b ON b.id = ur.bookId " +
                              "WHERE ur.userId = " + userId)) {
+            //chinh kick thuoc
 
             TableView<BookDetail> bookDetailTable = new TableView<>();
-            bookDetailTable.setPrefWidth(800); // Set preferred width for the TableView
+            bookDetailTable.setPrefWidth(800);
 
             TableColumn<BookDetail, String> colName = new TableColumn<>("Name");
-            colName.setPrefWidth(200); // Set preferred width for the column
+            colName.setPrefWidth(200);
             TableColumn<BookDetail, String> colStartDate = new TableColumn<>("Start Date");
-            colStartDate.setPrefWidth(200); // Set preferred width for the column
+            colStartDate.setPrefWidth(200);
             TableColumn<BookDetail, String> colReturnDate = new TableColumn<>("Return Date");
-            colReturnDate.setPrefWidth(200); // Set preferred width for the column
+            colReturnDate.setPrefWidth(200);
             TableColumn<BookDetail, String> colDueDate = new TableColumn<>("Due Date");
-            colDueDate.setPrefWidth(200); // Set preferred width for the column
+            colDueDate.setPrefWidth(200);
 
             colName.setCellValueFactory(new PropertyValueFactory<>("name"));
             colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
@@ -116,19 +144,9 @@ public class PenaltyListViewController {
         }
     }
 
-    @FXML
-    public void initialize() {
-        colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
-        colBooksNotReturned.setCellValueFactory(new PropertyValueFactory<>("booksNotReturned"));
-        colFineAmount.setCellValueFactory(new PropertyValueFactory<>("fineAmount"));
-
-        addDetailButtonToTable();
-        loadPenaltyData();
-    }
-
+    //check query
     private void loadPenaltyData() {
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/library_management_system_uet", "root", "");
+        try (Connection conn = Database.connectDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT u.id, u.username, COUNT(ur.id) AS booksNotReturned, " +
@@ -147,7 +165,7 @@ public class PenaltyListViewController {
                         rs.getInt("booksNotReturned"),
                         rs.getDouble("fineAmount")
                 );
-                userTable.getItems().add(record);
+                masterData.add(record);
             }
         } catch (Exception e) {
             e.printStackTrace();
