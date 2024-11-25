@@ -46,7 +46,7 @@ public class AdminAppController implements Initializable {
     private Button booksManagementButtonMinimize;
 
     @FXML
-    private Button changeMenuSize;
+    private Button changeMenuSizeButton;
 
     @FXML
     protected AnchorPane contentPane;
@@ -278,11 +278,11 @@ public class AdminAppController implements Initializable {
     }
 
     public void disableChangeMenuSizeButton() {
-        changeMenuSize.setDisable(true);
+        changeMenuSizeButton.setDisable(true);
     }
 
     public void enableChangeMenuSizeButton() {
-        changeMenuSize.setDisable(false);
+        changeMenuSizeButton.setDisable(false);
     }
 
     public boolean isShowingPaneMenuFull() {

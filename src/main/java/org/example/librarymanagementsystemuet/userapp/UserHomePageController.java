@@ -332,7 +332,7 @@ public class UserHomePageController {
     }
 
     //void showBook(Book book)
-    //void sendrequest -> userId, BookId, -> ....
+    //void sendrequest -> userId, BookId, -> ....giowf
 
 
     private void updateBookBox(VBox targetBox, ImageView targetImageView, Label targetNameLabel, Label targetAuthorLabel, VBox sourceBox) {
