@@ -12,7 +12,7 @@ public class HumamiLibraryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HumamiLibraryApplication
-                .class.getResource("penalty-list-view.fxml"));
+                .class.getResource("admin-app.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setResizable(false);
         stage.setTitle("Humami Library");

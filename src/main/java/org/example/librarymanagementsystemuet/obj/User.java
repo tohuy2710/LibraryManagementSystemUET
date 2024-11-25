@@ -3,46 +3,85 @@ package org.example.librarymanagementsystemuet.obj;
 import javafx.beans.property.SimpleStringProperty;
 
 public class User extends Account {
-    private SimpleStringProperty name;
-    private SimpleStringProperty phonenumber;
+
     private SimpleStringProperty id;
+    private SimpleStringProperty username;
+    private SimpleStringProperty name;
+    private SimpleStringProperty password;
+    private SimpleStringProperty email;
+    private SimpleStringProperty registeredDate;
+    private SimpleStringProperty phonenumber;
     private SimpleStringProperty question;
     private SimpleStringProperty answer;
 
+    public final static User DEFAULT_USER = new User(
+            "14",
+            "humami_test",
+            "Humami Reader",
+            "1",
+            "humami@hmm.com",
+            "2021-01-01",
+            "0123456789",
+            "Who is your crush?",
+            "you"
+    );
+
     public User() {
         super();
-        this.name = new SimpleStringProperty();
-        this.phonenumber = new SimpleStringProperty();
         this.id = new SimpleStringProperty();
+        this.username = new SimpleStringProperty();
+        this.name = new SimpleStringProperty();
+        this.password = new SimpleStringProperty();
+        this.email = new SimpleStringProperty();
+        this.registeredDate = new SimpleStringProperty();
+        this.phonenumber = new SimpleStringProperty();
         this.question = new SimpleStringProperty();
         this.answer = new SimpleStringProperty();
     }
 
-    public User(String id, String name, String username,
-                String password, String email, String phonenumber,
+    public User(User user) {
+        super.setEmail(user.getEmail());
+        super.setPassword(user.getPassword());
+        this.id = user.id;
+        this.username = user.username;
+        this.name = user.name;
+        this.password = user.password;
+        this.email = user.email;
+        this.registeredDate = user.registeredDate;
+        this.phonenumber = user.phonenumber;
+        this.question = user.question;
+        this.answer = user.answer;
+    }
+
+    public User(SimpleStringProperty id, SimpleStringProperty username,
+                SimpleStringProperty name, SimpleStringProperty password,
+                SimpleStringProperty email, SimpleStringProperty registeredDate,
+                SimpleStringProperty phonenumber, SimpleStringProperty question,
+                SimpleStringProperty answer) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.registeredDate = registeredDate;
+        this.phonenumber = phonenumber;
+        this.question = question;
+        this.answer = answer;
+    }
+
+    public User(String id, String username, String name, String password,
+                String email, String registeredDate, String phonenumber,
                 String question, String answer) {
-        super(password, email);
-        this.phonenumber = new SimpleStringProperty(phonenumber);
-        this.name = new SimpleStringProperty(name);
         this.id = new SimpleStringProperty(id);
+        this.username = new SimpleStringProperty(username);
+        this.name = new SimpleStringProperty(name);
+        this.password = new SimpleStringProperty(password);
+        this.email = new SimpleStringProperty(email);
+        this.registeredDate = new SimpleStringProperty(registeredDate);
+        this.phonenumber = new SimpleStringProperty(phonenumber);
         this.question = new SimpleStringProperty(question);
         this.answer = new SimpleStringProperty(answer);
-    }
 
-    public String getName() {
-        return name.get();
-    }
-
-    public SimpleStringProperty nameProperty() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name.set(name);
-    }
-
-    public SimpleStringProperty phonenumberProperty() {
-        return phonenumber;
     }
 
     public String getId() {
@@ -57,12 +96,84 @@ public class User extends Account {
         this.id.set(id);
     }
 
+    public String getUserName() {
+        return username.get();
+    }
+
+    public SimpleStringProperty userNameProperty() {
+        return username;
+    }
+
+    public void setUserName(String name) {
+        this.username.set(name);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    @Override
+    public String getPassword() {
+        return password.get();
+    }
+
+    @Override
+    public SimpleStringProperty passwordProperty() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password.set(password);
+    }
+
+    @Override
+    public String getEmail() {
+        return email.get();
+    }
+
+    @Override
+    public SimpleStringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
+
+    public String getRegisteredDate() {
+        return registeredDate.get();
+    }
+
+    public SimpleStringProperty registeredDateProperty() {
+        return registeredDate;
+    }
+
+    public void setRegisteredDate(String registeredDate) {
+        this.registeredDate.set(registeredDate);
+    }
+
     public String getPhonenumber() {
         return phonenumber.get();
     }
 
+    public SimpleStringProperty phonenumberProperty() {
+        return phonenumber;
+    }
+
     public void setPhonenumber(String phonenumber) {
         this.phonenumber.set(phonenumber);
+    }
+
+    public String getQuestion() {
+        return question.get();
     }
 
     public SimpleStringProperty questionProperty() {
@@ -73,8 +184,8 @@ public class User extends Account {
         this.question.set(question);
     }
 
-    public String getQuestion() {
-        return question.get();
+    public String getAnswer() {
+        return answer.get();
     }
 
     public SimpleStringProperty answerProperty() {
@@ -83,9 +194,5 @@ public class User extends Account {
 
     public void setAnswer(String answer) {
         this.answer.set(answer);
-    }
-
-    public String getAnswer() {
-        return answer.get();
     }
 }

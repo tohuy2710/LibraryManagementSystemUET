@@ -19,8 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static org.example.librarymanagementsystemuet.Database.connectDB;
-import static org.example.librarymanagementsystemuet.Database.preparedStatement;
+import static org.example.librarymanagementsystemuet.Database.*;
 
 public class BrowserBookController extends Controller implements Initializable {
 
@@ -56,25 +55,7 @@ public class BrowserBookController extends Controller implements Initializable {
                 BookViewCardVerticalController bookViewCardVerticalController = fxmlLoader.getController();
                 bookViewCardVerticalController.setParentController(this);
 
-                Book book = new Book();
-                book.setId(Database.result.getInt("id"));
-                book.setName(Database.result.getString("name"));
-                book.setIsbn(Database.result.getString("isbn"));
-                book.setAuthor(Database.result.getString("author"));
-                book.setPublisher(Database.result.getString("publisher"));
-                book.setCategory(Database.result.getString("category"));
-                book.setLocation(Database.result.getString("location"));
-                book.setQuantity(String.valueOf(Database.result.getInt("quantity")));
-                book.setAddedDate(Database.result.getString("addedDate"));
-                book.setDescription(Database.result.getString("description"));
-                book.setImageLink(Database.result.getString("linkCoverImage"));
-                book.setLastUpdateDate(Database.result.getString("lastUpdateDate"));
-                book.setAvgRate(String.valueOf(Database.result.getFloat("avgRate")));
-                book.setLanguage(Database.result.getString("language"));
-                book.setPublisherDate(Database.result.getString("publisherDate"));
-                book.setPageCount(String.valueOf(Database.result.getInt("pageCount")));
-                book.setViews(String.valueOf(Database.result.getInt("views")));
-                book.setBorrowCount(String.valueOf(Database.result.getInt("borrowCount")));
+                Book book = setBookInfo();
 
                 bookViewCardVerticalController.setInfo(book);
 

@@ -277,7 +277,8 @@ public class AddBookController implements Initializable {
                 ? volume.getVolumeInfo().getPublisher() : BOOK_DEFAULT_PUBLISHER);
         bookDetailDescription.setText(volume.getVolumeInfo().getDescription() != null
                 ? volume.getVolumeInfo().getDescription() : BOOK_DEFAULT_DESCRIPTION);
-        Database.setImageByLink(bookDetailCover, volume.getVolumeInfo().getImageLinks().getThumbnail());
+        Database.setImageByLink(bookDetailCover, volume.getVolumeInfo().getImageLinks() != null
+                ? volume.getVolumeInfo().getImageLinks().getThumbnail() : BOOK_DEFAULT_IMAGE_LINK);
         bookDetailAvgRate.setText(volume.getVolumeInfo().getAverageRating() != null
                 ? String.valueOf(volume.getVolumeInfo().getAverageRating()) : BOOK_DEFAULT_AVG_RATE);
         bookDetailLanguage.setText(volume.getVolumeInfo().getLanguage() != null

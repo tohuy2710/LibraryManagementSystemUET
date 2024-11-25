@@ -93,7 +93,7 @@ public class UserManagementController implements Initializable {
             user.setId(resultSet.getString("id"));
             user.setUsername(resultSet.getString("username"));
             user.setPassword(resultSet.getString("password"));
-            user.setName(resultSet.getString("name"));
+            user.setUserName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
             user.setPhonenumber(resultSet.getString("phonenumber"));
             user.setQuestion(resultSet.getString("question"));
@@ -340,7 +340,7 @@ public class UserManagementController implements Initializable {
                                             usernameField.setText(updatedUser.getUsername());
                                             passwordField.setText(updatedUser.getPassword());
                                             emailField.setText(updatedUser.getEmail());
-                                            fullNameField.setText(updatedUser.getName());
+                                            fullNameField.setText(updatedUser.getUserName());
                                             phoneNumberField.setText(updatedUser.getPhonenumber());
                                             questionField.setValue(updatedUser.getQuestion());
                                             answerField.setText(updatedUser.getAnswer());

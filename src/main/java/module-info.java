@@ -43,8 +43,8 @@ module org.example.librarymanagementsystemuet {
     opens org.example.librarymanagementsystemuet.adminapp to javafx.fxml;
     exports org.example.librarymanagementsystemuet.adminapp.usermanagement;
     opens org.example.librarymanagementsystemuet.adminapp.usermanagement to javafx.fxml;
-    exports org.example.librarymanagementsystemuet.adminapp.userrequestcontroller;
-    opens org.example.librarymanagementsystemuet.adminapp.userrequestcontroller to javafx.fxml;
+    exports org.example.librarymanagementsystemuet.adminapp.userrequestmanagement;
+    opens org.example.librarymanagementsystemuet.adminapp.userrequestmanagement to javafx.fxml;
     exports org.example.librarymanagementsystemuet.userapp;
     opens org.example.librarymanagementsystemuet.userapp to javafx.fxml;
     opens org.example.librarymanagementsystemuet.exception to javafx.base;

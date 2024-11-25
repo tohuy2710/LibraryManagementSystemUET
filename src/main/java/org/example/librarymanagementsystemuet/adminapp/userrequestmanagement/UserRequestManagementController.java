@@ -1,4 +1,4 @@
-package org.example.librarymanagementsystemuet.adminapp.userrequestcontroller;
+package org.example.librarymanagementsystemuet.adminapp.userrequestmanagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.exception.LogicException;
@@ -45,6 +46,10 @@ public class UserRequestManagementController implements Initializable {
     private TableColumn<UserRequest, String> userIDCol;
 
     @FXML
+    private TableColumn<UserRequest, String> noOfBooksCol;
+
+
+    @FXML
     private TableView<UserRequest> userRequestTableView;
 
     @FXML
@@ -73,14 +78,32 @@ public class UserRequestManagementController implements Initializable {
 
     private ObservableList<UserRequest> userRequestList = FXCollections.observableArrayList();
 
+    @FXML
+    private TextField offlineUserID;
+
+    @FXML
+    private TextField offlineBookID;
+
+    @FXML
+    private TextField offlineBookNoOfBooks;
+
+    @FXML
+    private DatePicker offlineStartDate;
+
+    @FXML
+    private HBox offlineRecordBox;
+
+    @FXML
+    private Button addOfflineRecordButton;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupDatabaseAndFetchData("SELECT * FROM usersrequest " +
                 "LEFT JOIN books ON usersrequest.bookId = books.id" +
                 " WHERE status in (" +
                 "'Pending', 'Approved for borrowing', 'Overdue for return book')");
-
         initializeColumns();
+        offlineRecordBox.setVisible(false);
     }
 
     public void refreshData(ActionEvent event) {
@@ -151,6 +174,7 @@ public class UserRequestManagementController implements Initializable {
 
         userRequestList.clear();
         userRequestTableView.getItems().clear();
+        statusCol.getColumns().clear();
 
         try {
             Database.prepare = Database.connect.prepareStatement(query);
@@ -166,6 +190,7 @@ public class UserRequestManagementController implements Initializable {
                 userRequest.setLastUpdatedTime(Database.result.getString("lastUpdatedTime"));
                 userRequest.setPreviousStatus(Database.result.getString("status"));
                 userRequest.setStatus(Database.result.getString("status"));
+                userRequest.setNoOfBooks(Database.result.getString("noOfBooks"));
                 userRequestList.add(userRequest);
             }
         } catch (SQLException | LogicException e) {
@@ -189,6 +214,7 @@ public class UserRequestManagementController implements Initializable {
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
         createdTimeCol.setCellValueFactory(new PropertyValueFactory<>("createdTime"));
         lastUpdatedTimeCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedTime"));
+        noOfBooksCol.setCellValueFactory(new PropertyValueFactory<>("noOfBooks"));
 
         // Update status options to match the new descriptive statuses
         List<String> statusOptions = Arrays.asList(
@@ -261,39 +287,35 @@ public class UserRequestManagementController implements Initializable {
             }
             userRequestTableView.refresh();
             if (!userRequest.getStatus().equals(userRequest.getPreviousStatus())) {
-                updateStatus();
+                updateStatus(userRequest);
+                refreshData(null);
             }
         });
 
         userRequestTableView.setEditable(true);
     }
 
-
-
-    public void updateStatus() {
+    public void updateStatus(UserRequest userRequest) {
         Database.connect = Database.connectDB();
         String queryUpdateStatus = "UPDATE usersrequest SET status = ? WHERE id = ?";
         String queryAddToBorrowBooks = "INSERT INTO borrowbooks (request_id) VALUES (?)";
 
         try {
-            for (UserRequest userRequest : userRequestList) {
                 Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);
                 Database.prepare.setString(1, userRequest.getStatus());
                 Database.prepare.setString(2, userRequest.getRequestID());
                 Database.prepare.executeUpdate();
-
                 if (userRequest.getStatus().equals(ON_LOAN)) {
                     Database.prepare = Database.connect.prepareStatement(queryAddToBorrowBooks);
                     Database.prepare.setString(1, userRequest.getRequestID());
                     Database.prepare.executeUpdate();
                 } else if (userRequest.getStatus().equals(BOOK_RETURNED)) {
                     Database.prepare = Database.connect
-                                    .prepareStatement("UPDATE borrowbooks " +
-                                            "SET return_date = NOW() WHERE request_id = ?");
+                            .prepareStatement("UPDATE borrowbooks " +
+                                    "SET return_date = NOW() WHERE request_id = ?");
                     Database.prepare.setString(1, userRequest.getRequestID());
                     Database.prepare.executeUpdate();
                 }
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
@@ -306,4 +328,70 @@ public class UserRequestManagementController implements Initializable {
         }
     }
 
+    private void clearOfflineFields() {
+        offlineUserID.clear();
+        offlineBookID.clear();
+        offlineBookNoOfBooks.clear();
+        offlineStartDate.getEditor().clear();
+    }
+
+    public void showHideAddOfflineRequest(ActionEvent event) {
+        if (!offlineRecordBox.isVisible()) {
+            offlineRecordBox.setVisible(true);
+            addOfflineRecordButton.setText("Hide");
+        } else {
+            offlineRecordBox.setVisible(false);
+            addOfflineRecordButton.setText("Add offline book loan record");
+            clearOfflineFields();
+        }
+    }
+
+    public void addOfflineRequestToDatabase(ActionEvent event) {
+
+        if (offlineUserID.getText().isEmpty() || offlineUserID.getText().isBlank() ||
+                offlineBookID.getText().isEmpty() || offlineBookID.getText().isBlank()
+                || offlineBookNoOfBooks.getText().isEmpty()
+                || offlineBookNoOfBooks.getText().isBlank() ||
+                offlineStartDate.getEditor().getText().isEmpty()
+                || offlineStartDate.getEditor().getText().isBlank()) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("Please fill in all the fields.");
+            return;
+        }
+
+        if (!offlineBookNoOfBooks.getText().matches("^[1-9]\\d*$")) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("Please enter a valid number of books.");
+            return;
+        }
+
+        String query = "INSERT INTO usersrequest (userId, bookId, noOfBooks, status, createdTime) " +
+                "VALUES (?, ?, ?, ?, NOW());";
+
+        Database.connect = Database.connectDB();
+
+        try {
+            Database.prepare = Database.connect.prepareStatement(query);
+            Database.prepare.setString(1, offlineUserID.getText());
+            Database.prepare.setString(2, offlineBookID.getText());
+            Database.prepare.setString(3, offlineBookNoOfBooks.getText());
+            Database.prepare.setString(4, PENDING);
+            Database.prepare.executeUpdate();
+
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.successMessage("Offline request added successfully.");
+        } catch (SQLException e) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("UserID or BookID doesn't exist in the database.");
+        } finally {
+            try {
+                if (Database.prepare != null) Database.prepare.close();
+                if (Database.connect != null) Database.connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        clearOfflineFields();
+        showHideAddOfflineRequest(event);
+    }
 }
