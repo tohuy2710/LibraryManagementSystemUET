@@ -16,6 +16,7 @@ public class UserRequest {
     private StringProperty requestID;
     private StringProperty bookID;
     private StringProperty bookName;
+    private StringProperty noOfBooks;
     private StringProperty userID;
     private StringProperty createdTime;
     private StringProperty lastUpdatedTime;
@@ -31,9 +32,11 @@ public class UserRequest {
         this.lastUpdatedTime = new SimpleStringProperty();
         this.status = new SimpleStringProperty();
         this.previousStatus = new SimpleStringProperty();
+        this.noOfBooks = new SimpleStringProperty();
     }
 
-    public UserRequest(String requestID, String bookID, String userID, String createdTime, String lastUpdatedTime, String status) {
+    public UserRequest(String requestID, String bookID, String userID,
+                       String createdTime, String lastUpdatedTime, String status, String noOfBooks) {
         this.requestID = new SimpleStringProperty(requestID);
         this.bookID = new SimpleStringProperty(bookID);
         this.bookName = new SimpleStringProperty();
@@ -42,6 +45,19 @@ public class UserRequest {
         this.lastUpdatedTime = new SimpleStringProperty(lastUpdatedTime);
         this.status = new SimpleStringProperty(status);
         this.previousStatus = new SimpleStringProperty(status);
+        this.noOfBooks = new SimpleStringProperty(noOfBooks);
+    }
+
+    public String getNoOfBooks() {
+        return noOfBooks.get();
+    }
+
+    public StringProperty noOfBooksProperty() {
+        return noOfBooks;
+    }
+
+    public void setNoOfBooks(String noOfBooks) {
+        this.noOfBooks.set(noOfBooks);
     }
 
     public String getRequestID() {
@@ -157,8 +173,6 @@ public class UserRequest {
             } else {
                 throw new LogicException("Invalid status change");
             }
-        } else {
-            this.status.set(status);
         }
     }
 
