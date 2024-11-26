@@ -99,7 +99,7 @@ public class AdminAppController implements Initializable {
         // Correct the image path
         Image adminAvatarImg = new Image(getClass().getResourceAsStream(DEFAULT_AVATAR_PATH));
         this.adminAvatar.setFill(new ImagePattern(adminAvatarImg));
-        adminName.setText(sessionAdmin.getEmail());
+        adminName.setText(sessionAdmin.getName());
     }
 
     public AnchorPane getMainBox() {
@@ -179,7 +179,7 @@ public class AdminAppController implements Initializable {
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userManagementDashboardHBox);
             adjustContentSize();
-            enableChangeMenuSizeButton();
+            disableChangeMenuSizeButton();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -193,6 +193,21 @@ public class AdminAppController implements Initializable {
             HBox userRequestManagementHBox = loader.load();
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userRequestManagementHBox);
+            adjustContentSize();
+            enableChangeMenuSizeButton();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showUserPenaltyHBox(ActionEvent event) {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/penalty-list-view.fxml"));
+            HBox userPenaltyHBox = loader.load();
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(userPenaltyHBox);
             adjustContentSize();
             enableChangeMenuSizeButton();
         } catch (IOException e) {

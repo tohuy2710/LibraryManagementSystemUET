@@ -304,6 +304,9 @@
     -fx-text-fill: #000000;
 }
 
+.hbox {
+}
+
 .hbox1 {
     -fx-border-color: linear-gradient(to right, yellow, orange); /* Gradient border */
     -fx-border-width: 3px; /* Thicker border */
@@ -419,4 +422,11 @@
     -fx-text-fill: #ffffff;
 }
 
+.custom-textarea {
+    -fx-control-inner-background: transparent; /* Transparent background */
+    -fx-border-color: #17376e;                   /* Border color */
+    -fx-border-width: 1;                      /* Border width */
+    -fx-text-fill: white;                     /* Text color */
+    -fx-font-size: 14px;                      /* Font size */
+}
 

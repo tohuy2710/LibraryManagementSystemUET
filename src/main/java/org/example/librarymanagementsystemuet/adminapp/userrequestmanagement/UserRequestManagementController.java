@@ -301,21 +301,21 @@ public class UserRequestManagementController implements Initializable {
         String queryAddToBorrowBooks = "INSERT INTO borrowbooks (request_id) VALUES (?)";
 
         try {
-                Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);
-                Database.prepare.setString(1, userRequest.getStatus());
-                Database.prepare.setString(2, userRequest.getRequestID());
+            Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);
+            Database.prepare.setString(1, userRequest.getStatus());
+            Database.prepare.setString(2, userRequest.getRequestID());
+            Database.prepare.executeUpdate();
+            if (userRequest.getStatus().equals(ON_LOAN)) {
+                Database.prepare = Database.connect.prepareStatement(queryAddToBorrowBooks);
+                Database.prepare.setString(1, userRequest.getRequestID());
                 Database.prepare.executeUpdate();
-                if (userRequest.getStatus().equals(ON_LOAN)) {
-                    Database.prepare = Database.connect.prepareStatement(queryAddToBorrowBooks);
-                    Database.prepare.setString(1, userRequest.getRequestID());
-                    Database.prepare.executeUpdate();
-                } else if (userRequest.getStatus().equals(BOOK_RETURNED)) {
-                    Database.prepare = Database.connect
-                            .prepareStatement("UPDATE borrowbooks " +
-                                    "SET return_date = NOW() WHERE request_id = ?");
-                    Database.prepare.setString(1, userRequest.getRequestID());
-                    Database.prepare.executeUpdate();
-                }
+            } else if (userRequest.getStatus().equals(BOOK_RETURNED)) {
+                Database.prepare = Database.connect
+                        .prepareStatement("UPDATE borrowbooks " +
+                                "SET return_date = NOW() WHERE request_id = ?");
+                Database.prepare.setString(1, userRequest.getRequestID());
+                Database.prepare.executeUpdate();
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {

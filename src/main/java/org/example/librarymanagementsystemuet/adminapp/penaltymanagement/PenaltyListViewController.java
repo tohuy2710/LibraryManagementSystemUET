@@ -1,7 +1,5 @@
-package org.example.librarymanagementsystemuet.adminapp.usermanagement;
+package org.example.librarymanagementsystemuet.adminapp.penaltymanagement;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -124,6 +122,7 @@ public class PenaltyListViewController {
             colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
             colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
 
+            bookDetailTable.getStyleClass().add("table-view");
             bookDetailTable.getColumns().addAll(colName, colStartDate, colReturnDate, colDueDate);
 
             while (rs.next()) {
@@ -150,12 +149,12 @@ public class PenaltyListViewController {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT u.id, u.username, COUNT(ur.id) AS booksNotReturned, " +
-                             "SUM(DATEDIFF(br.return_date, br.start_date) * 1000 + b.pageCount * 5) AS fineAmount " +
+                             "SUM(DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000 + b.pageCount * 5) AS fineAmount " +
                              "FROM users u " +
                              "JOIN usersrequest ur ON u.id = ur.userId " +
                              "JOIN borrowbooks br ON ur.id = br.request_id " +
                              "JOIN books b ON ur.bookId = b.id " +
-                             "WHERE br.return_date > br.due_date " +
+                             "WHERE IFNULL(br.return_date, NOW()) > br.due_date " +
                              "GROUP BY u.id, u.username")) {
 
             while (rs.next()) {

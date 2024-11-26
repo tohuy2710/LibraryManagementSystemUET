@@ -55,16 +55,16 @@
             <ScrollPane prefHeight="549.0" prefWidth="1180.0">
                <content>
                   <TableView fx:id="userRequestTableView" focusTraversable="false" prefHeight="538.0" prefWidth="1150.0">
-                    <columns>
-                      <TableColumn fx:id="requestIdCol" maxWidth="120.0" prefWidth="120.0" style="-fx-alignment: center;" text="Request ID" />
-                      <TableColumn fx:id="userIDCol" maxWidth="120.0" prefWidth="120.0" style="-fx-alignment: center;" text="User ID" />
+                     <columns>
+                        <TableColumn fx:id="requestIdCol" maxWidth="120.0" prefWidth="120.0" style="-fx-alignment: center;" text="Request ID" />
+                        <TableColumn fx:id="userIDCol" maxWidth="120.0" prefWidth="120.0" style="-fx-alignment: center;" text="User ID" />
                         <TableColumn fx:id="bookIDCol" maxWidth="120.0" prefWidth="120.0" style="-fx-alignment: center;" text="Book ID" />
                         <TableColumn fx:id="bookNameCol" maxWidth="300.0" prefWidth="250.4000244140625" text="Book Name" />
                         <TableColumn fx:id="noOfBooksCol" prefWidth="88.00006103515625" text="No. Of Books" />
                         <TableColumn fx:id="statusCol" maxWidth="300.0" minWidth="6.39996337890625" prefWidth="122.39996337890625" text="Status" />
                         <TableColumn fx:id="createdTimeCol" maxWidth="300.0" prefWidth="195.99993896484375" text="Created Time" />
                         <TableColumn fx:id="lastUpdatedTimeCol" maxWidth="300.0" prefWidth="216.0" text="Last Update Time" />
-                    </columns>
+                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>

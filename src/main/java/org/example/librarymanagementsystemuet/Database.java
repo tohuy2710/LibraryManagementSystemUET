@@ -19,11 +19,8 @@ public class Database {
     public static PreparedStatement preparedStatement;
 
     public static final String VALID_DATE_FORMAT_REGEX = "^(19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$\n";
-    public static final String VALID_YEAR_REGEX = "^(19|20)\\d{2}$";
-    public static final String VALID_YEAR_MONTH_REGEX = "^(19|20)\\d{2}-(0[1-9]|1[0-2])$\n";
 
     public static final String DEFAULT_DATE = "1970-01-01";
-
 
     public static Connection connectDB() {
         try {
@@ -70,12 +67,6 @@ public class Database {
     public static String validateDate(String date) {
         if (date.matches(VALID_DATE_FORMAT_REGEX)) {
             return date;
-        } else {
-            if (date.matches(VALID_YEAR_MONTH_REGEX)) {
-                return date + "-01";
-            } else if (date.matches(VALID_YEAR_REGEX)) {
-                return date + "-01-01";
-            }
         }
         return DEFAULT_DATE;
     }

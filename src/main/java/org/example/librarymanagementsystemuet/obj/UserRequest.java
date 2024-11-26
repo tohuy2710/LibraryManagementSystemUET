@@ -1,3 +1,4 @@
+
 package org.example.librarymanagementsystemuet.obj;
 
 import javafx.beans.property.SimpleStringProperty;
