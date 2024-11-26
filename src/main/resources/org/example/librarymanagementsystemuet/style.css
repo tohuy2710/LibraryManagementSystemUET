@@ -418,5 +418,77 @@
     -fx-background-color: lightblue;
     -fx-text-fill: #ffffff;
 }
-
-
+/* style.css 25.11.2024 fix */
+/* General styling */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-color: #f0f4f8;
+}
+/* Statistic labels */
+.statistic-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+/* Statistic panes */
+.anchor-pane {
+    -fx-background-color: #3f51b5;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 0);
+    -fx-alignment: center;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 80px;
+}
+/* VBox for statistics */
+.vbox-statistic {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+/* Labels for numbers */
+.label-number {
+    -fx-font-size: 30px;
+    -fx-text-fill: #ffeb3b;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+/* Labels for text */
+.label-text {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+}
+.button6:hover {
+    -fx-background-color: #3949ab;
+}
+/* Admin info labels */
+.labelHeader {
+    -fx-font-size: 24px;
+    -fx-text-fill: #1a237e;
+    -fx-font-weight: bold;
+}
+/* Penalty */
+/* Định dạng chung cho TextField */
+.search-bar {
+    -fx-background-radius: 15;
+    -fx-padding: 10;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #aaaaaa;
+}
+.search-bar:focused {
+    -fx-border-color: #0078d7;
+    -fx-background-color: #f0f0f0;
+}
+/* Định dạng chung cho TableView */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+}
+.table-column {
+    -fx-alignment: CENTER; 
+}
