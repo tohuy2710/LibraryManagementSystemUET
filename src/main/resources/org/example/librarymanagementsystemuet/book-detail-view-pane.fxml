@@ -83,16 +83,36 @@
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
             </Text>
-            <Label fx:id="bookDescriptionLabel" layoutX="33.0" layoutY="220.0" text="Book Description">
+            <Label fx:id="bookDescriptionLabel" layoutX="35.0" layoutY="250.0" text="Book Description">
                <font>
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
             </Label>
-            <TextArea fx:id="bookDescriptionField" editable="false" layoutX="33.0" layoutY="250.0" prefHeight="369.0" prefWidth="588.0" text="Bestselling Programming Tutorial and Reference Completely Rewritten for the New C++11 StandardFully updated and recast for the newly released C++11 standard, this authoritative and comprehensive introduction to C++ will help you to learn the language fast, and to use it in modern, highly effective ways. Highlighting today’s best practices, the authors show how to use both the core language and its standard library to write efficient, readable, and powerful code.C++ Primer, Fifth Edition, introduces the C++ standard library from the outset, drawing on its common functions and facilities to help you write useful programs without first having to master every language detail. The book’s many examples have been revised to use the new language features and demonstrate how to make the best use of them. This book is a proven tutorial for those new to C++, an authoritative discussion of core C++ concepts and techniques, and a valuable resource for experienced programmers, especially those eager to see C++11 enhancements illuminated." wrapText="true">
+            <TextArea fx:id="bookDescriptionField" editable="false" layoutX="33.0" layoutY="288.0" prefHeight="332.0" prefWidth="588.0" text="Bestselling Programming Tutorial and Reference Completely Rewritten for the New C++11 StandardFully updated and recast for the newly released C++11 standard, this authoritative and comprehensive introduction to C++ will help you to learn the language fast, and to use it in modern, highly effective ways. Highlighting today’s best practices, the authors show how to use both the core language and its standard library to write efficient, readable, and powerful code.C++ Primer, Fifth Edition, introduces the C++ standard library from the outset, drawing on its common functions and facilities to help you write useful programs without first having to master every language detail. The book’s many examples have been revised to use the new language features and demonstrate how to make the best use of them. This book is a proven tutorial for those new to C++, an authoritative discussion of core C++ concepts and techniques, and a valuable resource for experienced programmers, especially those eager to see C++11 enhancements illuminated." wrapText="true">
                <font>
                   <Font name="SansSerif Regular" size="13.0" />
                </font>
             </TextArea>
+            <Label fx:id="bookCategoryLabel" layoutX="33.0" layoutY="200.0" text="Category" textFill="#918c8c">
+               <font>
+                  <Font name="SansSerif Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="bookQuantityLabel" layoutX="33.0" layoutY="225.0" text="Quantity" textFill="#918c8c">
+               <font>
+                  <Font name="SansSerif Bold" size="13.0" />
+               </font>
+            </Label>
+            <Text fx:id="bookCategoryField" layoutX="240.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
+               <font>
+                  <Font name="SansSerif Regular" size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="bookQuantityField" layoutX="240.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
+               <font>
+                  <Font name="SansSerif Regular" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
