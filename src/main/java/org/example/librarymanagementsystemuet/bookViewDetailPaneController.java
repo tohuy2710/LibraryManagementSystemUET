@@ -1,61 +1,38 @@
 package org.example.librarymanagementsystemuet;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
 import org.example.librarymanagementsystemuet.obj.Book;
 
 import java.sql.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.librarymanagementsystemuet.Database.connectDB;
 
 public class bookViewDetailPaneController {
     @FXML
-    private Button backButton;
-
-    @FXML
-    private Text bookAuthorField;
-
-    @FXML
-    private Label bookAuthorLabel;
+    private Button backButton, borrowBookButton1;
 
     @FXML
     private TextArea bookDescriptionField;
 
     @FXML
-    private Label bookDescriptionLabel;
-
-    @FXML
-    private Text bookIdField;
-
-    @FXML
-    private Label bookIdLabel;
+    private Label bookNameLabel;
 
     @FXML
     private ImageView bookImage;
 
     @FXML
-    private Text bookIsbnField;
-
-    @FXML
-    private Label bookNameLabel;
-
-    @FXML
-    private Text bookPublisherField;
+    private Text bookIsbnField, bookPublisherField, bookIdField,
+            bookAuthorField, bookQuantityField, bookCategoryField;
 
     @FXML
     HBox book_detail_HB;
-
-    @FXML
-    private Button borrowBookButton1;
 
     public HBox getBookDetailHBox() {
         return book_detail_HB;
@@ -69,7 +46,6 @@ public class bookViewDetailPaneController {
         return borrowBookButton1;
     }
 
-    // OKAY
     public void loadBookDetailByID(int bookId) throws SQLException {
         // Execute query to find data about book with provided id
         String query = "SELECT * FROM books WHERE id = ?";
@@ -86,19 +62,23 @@ public class bookViewDetailPaneController {
                     selectedBook.setDescription(resultSet.getString("description"));
                     selectedBook.setPublisher(resultSet.getString("publisher"));
                     selectedBook.setIsbn(resultSet.getString("isbn"));
+                    selectedBook.setCategory(resultSet.getString("category"));
+                    selectedBook.setQuantity(resultSet.getString("quantity"));
                     selectedBook.setImageLink(resultSet.getString("linkCoverImage"));
 
                     // Display detail data about book
-                    Platform.runLater(() -> {
-                        bookNameLabel.setText(selectedBook.getName());
-                        bookIdField.setText(String.valueOf(selectedBook.getId()));
-                        bookAuthorField.setText(selectedBook.getAuthor());
-                        bookIsbnField.setText(selectedBook.getIsbn());
-                        bookPublisherField.setText(selectedBook.getPublisher());
-                        bookDescriptionField.setText(selectedBook.getDescription());
-                        Database.setImageByLink(bookImage, selectedBook.getImageLink());
-                    });
+                    bookNameLabel.setText(selectedBook.getName());
+                    bookIdField.setText(String.valueOf(selectedBook.getId()));
+                    bookAuthorField.setText(selectedBook.getAuthor());
+                    bookIsbnField.setText(selectedBook.getIsbn());
+                    bookPublisherField.setText(selectedBook.getPublisher());
+                    bookDescriptionField.setText(selectedBook.getDescription());
+                    bookCategoryField.setText(selectedBook.getCategory());
+                    bookQuantityField.setText(String.valueOf(selectedBook.getQuantity()));
+                    Database.setImageByLink(bookImage, selectedBook.getImageLink());
                 }
+            } catch (InvalidDatatype e) {
+                throw new RuntimeException(e);
             }
         }
     }
