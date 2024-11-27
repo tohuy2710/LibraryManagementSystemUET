@@ -39,17 +39,11 @@ public class GoogleBooksAPI {
 
         private final String ISBN;
         private Volumes volumes;
-        private int startIndex;
 
         public SearchByISBN(String ISBN) {
             this.ISBN = ISBN;
-            this.startIndex = 0;
         }
 
-        public SearchByISBN(String ISBN, int startIndex) {
-            this.ISBN = ISBN;
-            this.startIndex = startIndex;
-        }
 
         public String getISBN() {
             return ISBN;
@@ -63,22 +57,12 @@ public class GoogleBooksAPI {
             return volumes;
         }
 
-        public int getStartIndex() {
-            return startIndex;
-        }
-
-        public void setStartIndex(int startIndex) {
-            this.startIndex = startIndex;
-        }
-
         public void run() {
             try {
                 Books books = getBooksService();
                 Books.Volumes.List volumesList = books.volumes()
                         .list("isbn:" + ISBN)
-                        .setStartIndex((long) startIndex)
-                        .setMaxResults(12L);
-                startIndex += 12;
+                        .setMaxResults(40L);
                 this.volumes = volumesList.execute();
             } catch (GeneralSecurityException | IOException e) {
                 e.printStackTrace();
@@ -100,11 +84,18 @@ public class GoogleBooksAPI {
         public void run() {
             try {
                 Books books = getBooksService();
-                Books.Volumes.List volumesList = books.volumes().list(bookName).setMaxResults(12L);
+                Books.Volumes.List volumesList = books.volumes().list(bookName).setMaxResults(40L);
                 this.volumes = volumesList.execute();
             } catch (GeneralSecurityException | IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        SearchByName searchByName = new SearchByName("Java Programming");
+        searchByName.run();
+        Volumes volumes = searchByName.getVolumes();
+        System.out.println(volumes);
     }
 }

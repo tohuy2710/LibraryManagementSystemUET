@@ -2,8 +2,6 @@ package org.example.librarymanagementsystemuet.obj;
 
 import javafx.beans.property.SimpleStringProperty;
 
-import java.util.Objects;
-
 public abstract class User extends Account {
 
     private SimpleStringProperty id;

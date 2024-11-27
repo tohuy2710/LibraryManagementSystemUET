@@ -8,6 +8,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.HumamiLibraryApplication;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController;
 
 import java.io.IOException;
@@ -56,6 +58,14 @@ public class UserAppController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void logout(ActionEvent event) throws IOException {
+        Stage stage = (Stage) contentPane.getScene().getWindow();
+        stage.close();
+
+        HumamiLibraryApplication humamiLibraryApplication = new HumamiLibraryApplication();
+        humamiLibraryApplication.start(new Stage());
     }
 
     private void adjustContentSize() {
@@ -127,6 +137,8 @@ public class UserAppController implements Initializable {
             }
             adjustContentSize();
         });
+
+        showHomePageBox(null);
 
         contentPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             adjustHBoxSize();

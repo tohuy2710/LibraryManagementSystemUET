@@ -20,7 +20,6 @@ public class Book {
     private SimpleStringProperty pageCount;
     private SimpleStringProperty description;
     private SimpleStringProperty views;
-    private SimpleStringProperty borrowCount;
     private SimpleStringProperty language;
     private SimpleStringProperty publisherDate;
 
@@ -37,7 +36,6 @@ public class Book {
     public static final String BOOK_DEFAULT_QUANTITY = "1";
     public static final String BOOK_DEFAULT_AVG_RATE = "0.00";
     public static final String BOOK_DEFAULT_PAGE_COUNT = "1";
-    public static final String BOOK_DEFAULT_VIEWS = "0";
     public static final String BOOK_COVER_NOT_FOUND = "unknowCover.jpg";
 
     private static final String VALID_AVG_RATE = "^(?:[0-4](?:\\.\\d{1,2})?|5(?:\\.0{1,2})?)$";
@@ -80,7 +78,6 @@ public class Book {
         this.pageCount = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
         this.views = new SimpleStringProperty();
-        this.borrowCount = new SimpleStringProperty();
         this.language = new SimpleStringProperty();
         this.publisherDate = new SimpleStringProperty();
     }
@@ -195,22 +192,6 @@ public class Book {
             views = "0";
         } else {
             this.views.set(views);
-        }
-    }
-
-    public String getBorrowCount() {
-        return borrowCount.get();
-    }
-
-    public SimpleStringProperty borrowCountProperty() {
-        return borrowCount;
-    }
-
-    public void setBorrowCount(String borrowCount) {
-        if (borrowCount == null || !borrowCount.matches(VALID_NUMERIC)){
-            borrowCount ="0";
-        } else {
-            this.borrowCount.set(borrowCount);
         }
     }
 

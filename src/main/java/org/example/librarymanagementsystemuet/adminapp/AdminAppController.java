@@ -16,6 +16,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.HumamiLibraryApplication;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController;
 import org.example.librarymanagementsystemuet.adminapp.usermanagement.UserManagementController;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookListController;
@@ -106,8 +108,18 @@ public class AdminAppController implements Initializable {
         return contentPane;
     }
 
+    public void logout(ActionEvent event) throws IOException {
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        stage.close();
+
+        HumamiLibraryApplication humamiLibraryApplication = new HumamiLibraryApplication();
+        humamiLibraryApplication.start(new Stage());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showHomePageHBox(null);
+
         selectTypeSearch.getItems().addAll(typeSearchArrays);
         selectTypeSearch.setValue("User");
 
@@ -150,6 +162,21 @@ public class AdminAppController implements Initializable {
             if (node instanceof HBox) {
                 ((HBox) node).prefWidthProperty().bind(contentPane.widthProperty());
             }
+        }
+    }
+
+    public void showHomePageHBox(ActionEvent event) {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/app-home-page.fxml"));
+            HBox homePageHBox = loader.load();
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(homePageHBox);
+            adjustContentSize();
+            enableChangeMenuSizeButton();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

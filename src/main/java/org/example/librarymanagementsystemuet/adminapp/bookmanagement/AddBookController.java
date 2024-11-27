@@ -189,8 +189,8 @@ public class AddBookController implements Initializable {
 
     @FXML
     void reloadBookImage(ActionEvent event) {
-        bookDetailCover.setImage(new Image(getClass().getResourceAsStream("unknowCover.jpg")));
         String imageLink = bookDetailCoverLink.getText();
+        Database.setImageByLink(bookDetailCover, imageLink);
         AlertMessage alertMessage = new AlertMessage();
 
         if (imageLink.isEmpty()) {

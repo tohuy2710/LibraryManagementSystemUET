@@ -11,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.librarymanagementsystemuet.obj.Admin;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.obj.User;
+import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
@@ -304,6 +306,19 @@ public class LoginController implements Initializable {
 
                 if (result.next()) {
                     alertMessage.successMessage("Login successful.");
+                    User user = UserSession.getInstance(result.getString("id"),
+                            result.getString("username"),
+                            result.getString("name"),
+                            result.getString("password"),
+                            result.getString("email"),
+                            result.getString("registered_date"),
+                            result.getString("phonenumber"),
+                            result.getString("question"),
+                            result.getString("answer"),
+                            result.getInt("vipPoint"));
+                    OpenUserApp();
+                    Stage stage = (Stage) login_username.getScene().getWindow();
+                    stage.close();
                 } else {
                     alertMessage.errorMessage("Invalid username or password.");
                     loginClearFields();
@@ -311,6 +326,8 @@ public class LoginController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
                 alertMessage.errorMessage("Database error: " + e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             } finally {
                 try {
                     if (result != null) result.close();
@@ -517,6 +534,11 @@ public class LoginController implements Initializable {
     public void OpenAdminApp() throws IOException {
         AdminApplication adminApplication = new AdminApplication();
         adminApplication.start(new Stage());
+    }
+
+    public void OpenUserApp() throws IOException {
+        UserApplication userApplication = new UserApplication();
+        userApplication.start(new Stage());
     }
 
     public void loginClearFields() {

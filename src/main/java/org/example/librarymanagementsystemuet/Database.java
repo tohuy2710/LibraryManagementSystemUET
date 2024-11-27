@@ -13,7 +13,7 @@ import java.util.concurrent.*;
 
 public class Database {
 
-    public static Connection connect;
+    public static Connection connect = connectDB();
     public static PreparedStatement prepare;
     public static ResultSet result;
     public static PreparedStatement preparedStatement;
@@ -90,7 +90,6 @@ public class Database {
         book.setPublisherDate(Database.result.getString("publisherDate"));
         book.setPageCount(String.valueOf(Database.result.getInt("pageCount")));
         book.setViews(String.valueOf(Database.result.getInt("views")));
-        book.setBorrowCount(String.valueOf(Database.result.getInt("borrowCount")));
         return book;
     }
 }
