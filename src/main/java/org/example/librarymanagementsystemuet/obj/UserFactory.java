@@ -9,7 +9,7 @@ public class UserFactory {
                                   String email, String registeredDate, String phonenumber,
                                   String question, String answer, int vipPoint) {
         if (vipPoint <= 0) {
-            return new UserNormal(id, username, name,
+            return new UserClassic(id, username, name,
                     password, email, registeredDate,
                     phonenumber, question, answer);
         } else {
