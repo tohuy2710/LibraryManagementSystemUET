@@ -4,7 +4,7 @@ public final class Admin extends Account {
 
     private static Admin instance;
 
-    public static final String DEFAULT_EMAIL = "tohuy.2710";
+    public static final String DEFAULT_EMAIL = "humami@uet.vnu";
     public static final String DEFAULT_PASSWORD = "1";
     public static final String DEFAULT_AVATAR_PATH = "/asset/img/admin-avatar.png";
 
@@ -24,7 +24,10 @@ public final class Admin extends Account {
     }
 
     public String getName() {
-        String name = getInstance().getName();
-        return name.substring(0, name.indexOf('@'));
+        String name = getInstance().getEmail();
+        if (name.contains("@")) {
+            return name.substring(0, name.indexOf("@"));
+        }
+        return name;
     }
 }

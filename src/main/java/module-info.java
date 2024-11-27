@@ -48,4 +48,6 @@ module org.example.librarymanagementsystemuet {
     exports org.example.librarymanagementsystemuet.userapp;
     opens org.example.librarymanagementsystemuet.userapp to javafx.fxml;
     opens org.example.librarymanagementsystemuet.exception to javafx.base;
+    exports org.example.librarymanagementsystemuet.adminapp.penaltymanagement;
+    opens org.example.librarymanagementsystemuet.adminapp.penaltymanagement to javafx.fxml;
 }

@@ -21,7 +21,7 @@ public class Account {
         this.email = new SimpleStringProperty();
     }
 
-    public Account(String password, String email) {
+    public Account(String email, String password) {
         if (email.contains("@")) {
             this.username = new SimpleStringProperty(email.substring(0, email.indexOf("@")));
         } else {

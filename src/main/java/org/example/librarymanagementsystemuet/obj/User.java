@@ -2,7 +2,9 @@ package org.example.librarymanagementsystemuet.obj;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class User extends Account {
+import java.util.Objects;
+
+public abstract class User extends Account {
 
     private SimpleStringProperty id;
     private SimpleStringProperty username;
@@ -14,17 +16,7 @@ public class User extends Account {
     private SimpleStringProperty question;
     private SimpleStringProperty answer;
 
-    public final static User DEFAULT_USER = new User(
-            "14",
-            "humami_test",
-            "Humami Reader",
-            "1",
-            "humami@hmm.com",
-            "2021-01-01",
-            "0123456789",
-            "Who is your crush?",
-            "you"
-    );
+    public abstract String getUserType();
 
     public User() {
         super();
@@ -194,5 +186,13 @@ public class User extends Account {
 
     public void setAnswer(String answer) {
         this.answer.set(answer);
+    }
+
+    public double getPenaltyCoefficient() {
+        if (this.getUserType().equals("VIP")) {
+            return 0.8;
+        } else {
+            return 1.0;
+        }
     }
 }

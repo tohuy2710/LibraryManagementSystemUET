@@ -1,7 +1,5 @@
-package org.example.librarymanagementsystemuet.adminapp.usermanagement;
+package org.example.librarymanagementsystemuet.adminapp.penaltymanagement;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -124,6 +122,7 @@ public class PenaltyListViewController {
             colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
             colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
 
+            bookDetailTable.getStyleClass().add("table-view");
             bookDetailTable.getColumns().addAll(colName, colStartDate, colReturnDate, colDueDate);
 
             while (rs.next()) {
