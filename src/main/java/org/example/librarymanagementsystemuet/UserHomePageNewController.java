@@ -147,7 +147,7 @@ public class UserHomePageNewController implements Initializable {
                     Database.setImageByLink(topBorrowedBook1Image, Database.result.getString("linkCoverImage"));
 
                     int bookID = Database.result.getInt("id");
-                    topBorrowedBook1HBox11.setOnMouseClicked(event1 -> {
+                    topBorrowedBook1HBox.setOnMouseClicked(event1 -> {
                         loadBookDetailView(bookID);
                     });
                 } else if (i == 2) {
@@ -160,7 +160,7 @@ public class UserHomePageNewController implements Initializable {
                     Database.setImageByLink(topBorrowedBook2Image, Database.result.getString("linkCoverImage"));
 
                     int bookID = Database.result.getInt("id");
-                    topBorrowedBook1HBox11.setOnMouseClicked(event1 -> {
+                    topBorrowedBook1HBox1.setOnMouseClicked(event1 -> {
                         loadBookDetailView(bookID);
                     });
                 } else if (i == 3) {
