@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -24,11 +23,7 @@
                         <Font name="SansSerif Bold" size="20.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="141.0" fitWidth="200.0" layoutX="129.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../../asset/img/admin-avatar.png" />
-                    </image>
-                </ImageView>
+                <ImageView fx:id="userAvatar" fitHeight="141.0" fitWidth="200.0" layoutX="100.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
                 <Label layoutX="49.0" layoutY="233.0" text="User ID" />
                 <TextField fx:id="userIdField" editable="false" layoutX="152.0" layoutY="228.0" prefHeight="26.0" prefWidth="201.0" />
                 <Label layoutX="49.0" layoutY="268.0" text="Username" />
