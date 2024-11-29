@@ -1,18 +1,22 @@
 package org.example.librarymanagementsystemuet.obj;
 
 public class UserVip extends User {
-    private int vipPoint;
+    private String expiredVipDate;
 
     public UserVip(String id, String username, String name,
                    String password, String email,
                    String registeredDate, String phonenumber,
-                   String question, String answer, int vipPoint) {
-        super(id, username, name, password, email, registeredDate, phonenumber, question, answer);
-        this.vipPoint = vipPoint;
+                   String question, String answer, int hmCoin, String expiredVipDate) {
+        super(id, username, name, password, email, registeredDate, phonenumber, question, answer, hmCoin);
+        this.expiredVipDate = expiredVipDate;
     }
 
     @Override
     public String getUserType() {
         return "VIP";
+    }
+
+    public String getExpiredVipDate() {
+        return expiredVipDate;
     }
 }

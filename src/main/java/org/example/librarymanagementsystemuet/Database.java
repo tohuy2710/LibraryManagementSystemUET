@@ -8,6 +8,8 @@ import org.example.librarymanagementsystemuet.obj.Book;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.*;
 
@@ -21,6 +23,18 @@ public class Database {
     public static final String VALID_DATE_FORMAT_REGEX = "^(19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$\n";
 
     public static final String DEFAULT_DATE = "1970-01-01";
+
+    private static String today = null;
+
+    public static String getTimeNow() {
+        if (today != null) {
+            return today;
+        }
+        LocalDate todayLocalDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        today = todayLocalDate.format(formatter);
+        return today;
+    }
 
     public static Connection connectDB() {
         try {

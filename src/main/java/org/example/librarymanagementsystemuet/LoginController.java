@@ -19,6 +19,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import static org.example.librarymanagementsystemuet.Database.connectDB;
 import static org.example.librarymanagementsystemuet.obj.Account.*;
 
 public class LoginController implements Initializable {
@@ -188,16 +189,16 @@ public class LoginController implements Initializable {
             "What is the name of your first school?", "What is your favorite movie?",
             "What is your favorite book?", "What is your favorite food?", "What is your favorite color?"};
 
-    public Connection connectDB() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager
-                    .getConnection("jdbc:mysql://localhost:3307/library_management_system_uet",
-                            "root", "");
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public Connection connectDB() {
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            return DriverManager
+//                    .getConnection("jdbc:mysql://localhost:3307/library_management_system_uet",
+//                            "root", "");
+//        } catch (SQLException | ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public void switchForm(ActionEvent e) {
         if (e.getSource() == login_buttonSignUp) {
@@ -315,7 +316,8 @@ public class LoginController implements Initializable {
                             result.getString("phonenumber"),
                             result.getString("question"),
                             result.getString("answer"),
-                            result.getInt("vipPoint"));
+                            result.getInt("hmCoin"),
+                            result.getString("expiredVipDate"));
                     OpenUserApp();
                     Stage stage = (Stage) login_username.getScene().getWindow();
                     stage.close();

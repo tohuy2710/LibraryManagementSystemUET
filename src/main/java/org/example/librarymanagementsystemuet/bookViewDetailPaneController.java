@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -32,7 +33,19 @@ public class bookViewDetailPaneController {
             bookAuthorField, bookQuantityField, bookCategoryField;
 
     @FXML
+    private TextField borrowCountField;
+
+    @FXML
+    private  Button decreaseButton, increaseButton;
+
+    @FXML
     HBox book_detail_HB;
+
+    int quantityOfBook = 0;
+
+    public int getQuantityOfBook() {
+        return quantityOfBook;
+    }
 
     public HBox getBookDetailHBox() {
         return book_detail_HB;
@@ -46,6 +59,54 @@ public class bookViewDetailPaneController {
         return borrowBookButton1;
     }
 
+    public Button getDecreaseButton() {
+        return decreaseButton;
+    }
+
+    public Button getIncreaseButton() {
+        return increaseButton;
+    }
+
+    public TextField getBorrowCountField() {
+        return borrowCountField;
+    }
+
+    public Book getSelectedBookByID(int bookId) throws SQLException {
+        Book book = new Book();
+
+        // Execute query to find data about book with provided id
+        String query = "SELECT * FROM books WHERE id = ?";
+        try (Connection conn = connectDB();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, bookId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet != null && resultSet.next()) {
+                    book.setId(resultSet.getInt("id"));
+                    book.setIsbn(resultSet.getString("isbn"));
+                    book.setName(resultSet.getString("name"));
+                    book.setAuthor(resultSet.getString("author"));
+                    book.setPublisher(resultSet.getString("publisher"));
+                    book.setCategory(resultSet.getString("category"));
+                    book.setLocation(resultSet.getString("location"));
+                    book.setQuantity(resultSet.getString("quantity"));
+                    book.setAddedDate(resultSet.getString("addedDate"));
+                    book.setDescription(resultSet.getString("description"));
+                    book.setImageLink(resultSet.getString("linkCoverImage"));
+                    book.setLastUpdateDate(resultSet.getString("lastUpdateDate"));
+                    book.setAvgRate(String.valueOf(resultSet.getDouble("avgRate")));
+                    book.setLanguage(resultSet.getString("language"));
+                    book.setPublisherDate(resultSet.getString("publisherDate"));
+                    book.setPageCount(resultSet.getString("pageCount"));
+                    book.setViews(resultSet.getString("views"));
+                }
+            } catch (SQLException | InvalidDatatype e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return book;
+    }
+
     public void loadBookDetailByID(int bookId) throws SQLException {
         // Execute query to find data about book with provided id
         String query = "SELECT * FROM books WHERE id = ?";
@@ -55,16 +116,7 @@ public class bookViewDetailPaneController {
             preparedStatement.setInt(1, bookId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet != null && resultSet.next()) {
-                    Book selectedBook = new Book();
-                    selectedBook.setId(resultSet.getString("id"));
-                    selectedBook.setName(resultSet.getString("name"));
-                    selectedBook.setAuthor(resultSet.getString("author"));
-                    selectedBook.setDescription(resultSet.getString("description"));
-                    selectedBook.setPublisher(resultSet.getString("publisher"));
-                    selectedBook.setIsbn(resultSet.getString("isbn"));
-                    selectedBook.setCategory(resultSet.getString("category"));
-                    selectedBook.setQuantity(resultSet.getString("quantity"));
-                    selectedBook.setImageLink(resultSet.getString("linkCoverImage"));
+                    Book selectedBook = getSelectedBookByID(bookId);
 
                     // Display detail data about book
                     bookNameLabel.setText(selectedBook.getName());
@@ -77,8 +129,6 @@ public class bookViewDetailPaneController {
                     bookQuantityField.setText(String.valueOf(selectedBook.getQuantity()));
                     Database.setImageByLink(bookImage, selectedBook.getImageLink());
                 }
-            } catch (InvalidDatatype e) {
-                throw new RuntimeException(e);
             }
         }
     }

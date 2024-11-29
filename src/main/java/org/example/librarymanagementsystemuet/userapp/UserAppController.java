@@ -8,9 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import org.example.librarymanagementsystemuet.HumamiLibraryApplication;
-import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,12 +57,19 @@ public class UserAppController implements Initializable {
         }
     }
 
-    public void logout(ActionEvent event) throws IOException {
-        Stage stage = (Stage) contentPane.getScene().getWindow();
-        stage.close();
-
-        HumamiLibraryApplication humamiLibraryApplication = new HumamiLibraryApplication();
-        humamiLibraryApplication.start(new Stage());
+    public void showUserDetailsBox(ActionEvent event) {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/user-detail-view-pane.fxml"));
+            HBox userDetailsBox = loader.load();
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(userDetailsBox);
+            adjustContentSize();
+            enableChangeMenuSizeButton();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void adjustContentSize() {
@@ -137,8 +141,6 @@ public class UserAppController implements Initializable {
             }
             adjustContentSize();
         });
-
-        showHomePageBox(null);
 
         contentPane.widthProperty().addListener((observable, oldValue, newValue) -> {
             adjustHBoxSize();
