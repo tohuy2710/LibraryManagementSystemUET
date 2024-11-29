@@ -24,6 +24,8 @@ public class Database {
 
     public static final String DEFAULT_DATE = "1970-01-01";
 
+    public static final String NUMBER_REGEX = "^-?\\d+$";
+
     private static String today = null;
 
     public static String getTimeNow() {
@@ -47,7 +49,7 @@ public class Database {
         }
     }
 
-    private static final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(12);
 
     public static void setImageByLink(ImageView imageView, String link) {
 
@@ -67,12 +69,10 @@ public class Database {
 
         executorService.submit(() -> {
             try {
-                Image image = future.get(5, TimeUnit.SECONDS);
+                Image image = future.get(100, TimeUnit.MILLISECONDS);
                 imageView.setImage(image);
-            } catch (TimeoutException e) {
+            } catch (Exception e) {
                 future.cancel(true);
-                System.out.println("Image loading timed out.");
-            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         });
