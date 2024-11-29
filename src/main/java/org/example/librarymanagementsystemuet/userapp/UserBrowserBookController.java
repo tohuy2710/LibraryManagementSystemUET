@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.Book;
 
@@ -20,7 +21,7 @@ import java.util.ResourceBundle;
 
 import static org.example.librarymanagementsystemuet.Database.*;
 
-public class UserBrowserBookController implements Initializable {
+public class UserBrowserBookController extends Controller implements Initializable {
 
     @FXML
     private GridPane gridPane;
@@ -28,7 +29,25 @@ public class UserBrowserBookController implements Initializable {
     @FXML
     private StackPane mainPane;
 
-    private void showFullBooks() {
+    private final String queryInit = "(\n" +
+            "    SELECT * \n" +
+            "    FROM books\n" +
+            "    WHERE category = \"Information Technology\"\n" +
+            "    LIMIT 5\n" +
+            ")\n" +
+            "UNION ALL\n" +
+            "(\n" +
+            "    SELECT * \n" +
+            "    FROM books\n" +
+            "    WHERE category = \"Economics\"\n" +
+            "    LIMIT 5\n" +
+            ");\n";
+
+    public StackPane getMainPane() {
+        return mainPane;
+    }
+
+    private void showBooks(String query) {
         gridPane.getChildren().clear();
         int row = 0;
         int col = 0;
@@ -36,19 +55,6 @@ public class UserBrowserBookController implements Initializable {
 
         try {
             Database.connect = connectDB();
-            String query = "(\n" +
-                    "    SELECT * \n" +
-                    "    FROM books\n" +
-                    "    WHERE category = \"Information Technology\"\n" +
-                    "    LIMIT 5\n" +
-                    ")\n" +
-                    "UNION ALL\n" +
-                    "(\n" +
-                    "    SELECT * \n" +
-                    "    FROM books\n" +
-                    "    WHERE category = \"Economics\"\n" +
-                    "    LIMIT 5\n" +
-                    ");\n";
 
             preparedStatement = Database.connect.prepareStatement(query);
             Database.result = preparedStatement.executeQuery();
@@ -74,7 +80,7 @@ public class UserBrowserBookController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/org/example" +
                         "/librarymanagementsystemuet/borrow-book-view-card-vertical.fxml"));
-                VBox bookBox = fxmlLoader.load();
+                AnchorPane bookBox = fxmlLoader.load();
 
                 BorrowBookViewCardVerticalController
                         borrowBookViewCardVerticalController = fxmlLoader.getController();
@@ -104,9 +110,18 @@ public class UserBrowserBookController implements Initializable {
         }
     }
 
+    public void searchBooks(String searchKey) {
+        String query = "SELECT * FROM books WHERE name LIKE '%" + searchKey + "%' " +
+                "OR id LIKE '%" + searchKey + "%' " +
+                "OR author LIKE '%" + searchKey + "%' " +
+                "OR category LIKE '%" + searchKey + "%' " +
+                "OR isbn LIKE '%" + searchKey + "%' ";
+        showBooks(query);
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showFullBooks();
+        showBooks(queryInit);
     }
 }

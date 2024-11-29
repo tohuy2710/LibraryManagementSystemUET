@@ -13,6 +13,7 @@ import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.obj.Book;
 import org.example.librarymanagementsystemuet.obj.BorrowRecord;
+import org.example.librarymanagementsystemuet.userapp.UserBrowserBookController;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
 
@@ -230,6 +231,9 @@ public class BookViewDetailPaneController extends Controller {
     public void backToBrowser(ActionEvent event) {
         if (parentController instanceof UserHomePageNewController) {
             ((UserHomePageNewController) parentController).getMainPane().getChildren().remove(1);
+        }
+        else if (parentController instanceof UserBrowserBookController) {
+            ((UserBrowserBookController) parentController).getMainPane().getChildren().remove(1);
         }
     }
 }

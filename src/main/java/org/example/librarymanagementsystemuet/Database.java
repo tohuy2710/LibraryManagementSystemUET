@@ -1,14 +1,13 @@
 package org.example.librarymanagementsystemuet;
 
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
 import org.example.librarymanagementsystemuet.obj.Book;
 
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.*;
@@ -28,7 +27,7 @@ public class Database {
 
     private static String today = null;
 
-    public static String getTimeNow() {
+    public static String getDateNow() {
         if (today != null) {
             return today;
         }
@@ -37,6 +36,13 @@ public class Database {
         today = todayLocalDate.format(formatter);
         return today;
     }
+
+    public static String getTimeNow() {
+        LocalTime time = LocalTime.now();
+        return time.toString();
+    }
+
+
 
     public static Connection connectDB() {
         try {

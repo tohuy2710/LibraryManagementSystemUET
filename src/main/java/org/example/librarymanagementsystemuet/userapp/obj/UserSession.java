@@ -1,7 +1,12 @@
 package org.example.librarymanagementsystemuet.userapp.obj;
 
+import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.User;
 import org.example.librarymanagementsystemuet.obj.UserFactory;
+import org.example.librarymanagementsystemuet.obj.UserVip;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class UserSession {
 
@@ -46,5 +51,9 @@ public class UserSession {
             );
         }
         return user;
+    }
+
+    public static void logout() {
+        user = null;
     }
 }

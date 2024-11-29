@@ -127,16 +127,20 @@ public class UserHomePageNewController extends Controller implements Initializab
     public AnchorPane mainPane;
 
     public void loadBookDetailView(int bookID) {
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/org/example/librarymanagementsystemuet/book-detail-view-pane.fxml"));
-            AnchorPane homePageBox = loader.load();
-            mainPane.getChildren().add(homePageBox);
-            BookViewDetailPaneController controller = loader.getController();
-            controller.loadBookDetailByID(bookID);
-            controller.setParentController(this);
-        } catch (IOException e) {
-            e.printStackTrace();
+        try {
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass()
+                        .getResource("/org/example/librarymanagementsystemuet/book-detail-view-pane.fxml"));
+                AnchorPane homePageBox = loader.load();
+                mainPane.getChildren().add(homePageBox);
+                BookViewDetailPaneController controller = loader.getController();
+                controller.loadBookDetailByID(bookID);
+                controller.setParentController(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
