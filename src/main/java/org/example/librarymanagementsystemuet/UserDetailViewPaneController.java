@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.librarymanagementsystemuet.Database.connectDB;
@@ -149,14 +150,14 @@ public class UserDetailViewPaneController {
         resultSet = preparedStatement.executeQuery();
         questionField.getItems().addAll(questionList);
         if (resultSet != null && resultSet.next()) {
-            userIdField.setText(resultSet.getString("id"));
-            usernameField.setText(resultSet.getString("username"));
-            fullNameField.setText(resultSet.getString("name"));
-            passwordField.setText(resultSet.getString("password"));
-            emailField.setText(resultSet.getString("email"));
-            phoneNumberField.setText(resultSet.getString("phoneNumber"));
-            questionField.setValue(resultSet.getString("question"));
-            answerField.setText(resultSet.getString("answer"));
+            userIdField.setText(resultSet.getString("id") == null ? "" : resultSet.getString("id"));
+            usernameField.setText(resultSet.getString("username") == null ? "" : resultSet.getString("username"));
+            fullNameField.setText(resultSet.getString("name") == null ? "" : resultSet.getString("name"));
+            passwordField.setText(resultSet.getString("password") == null ? "" : resultSet.getString("password"));
+            emailField.setText(resultSet.getString("email") == null ? "" : resultSet.getString("email"));
+            phoneNumberField.setText(resultSet.getString("phoneNumber") == null ? "" : resultSet.getString("phoneNumber"));
+            questionField.setValue(resultSet.getString("question") == null ? "" : resultSet.getString("question"));
+            answerField.setText(resultSet.getString("answer") == null ? "" : resultSet.getString("answer"));
             if (resultSet.getString("avatarImg") == null) {
                 Database.setImageByLink(userAvatar,
                         getClass().getResource("/asset/img/user-avatar.png").toString());
@@ -165,7 +166,7 @@ public class UserDetailViewPaneController {
             }
 
             AtomicReference<File> file = new AtomicReference<>();
-            if (UserSession.getInstance().getUserType() == "VIP") {
+            if (Objects.equals(UserSession.getInstance().getUserType(), "VIP")) {
                 userAvatar.setOnMouseClicked(event1 -> {
                     FileChooser fileChooser = new FileChooser();
                     fileChooser.setTitle("Open Resource File");
