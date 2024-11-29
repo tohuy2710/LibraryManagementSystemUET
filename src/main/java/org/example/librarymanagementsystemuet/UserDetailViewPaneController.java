@@ -5,20 +5,23 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import org.example.librarymanagementsystemuet.exception.LogicException;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.obj.BorrowRecord;
-import org.example.librarymanagementsystemuet.obj.User;
 import org.example.librarymanagementsystemuet.obj.UserRequest;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.example.librarymanagementsystemuet.Database.connectDB;
 import static org.example.librarymanagementsystemuet.obj.Account.*;
@@ -55,6 +58,10 @@ public class UserDetailViewPaneController {
 
     @FXML
     private HBox viewUserDetailPane_HB;
+
+    @FXML
+    private ImageView userAvatar;
+
 
     private final ObservableList<UserRequest> userRequestList = FXCollections.observableArrayList();
     private final ObservableList<BorrowRecord> borrowBookList = FXCollections.observableArrayList();
@@ -150,6 +157,37 @@ public class UserDetailViewPaneController {
             phoneNumberField.setText(resultSet.getString("phoneNumber"));
             questionField.setValue(resultSet.getString("question"));
             answerField.setText(resultSet.getString("answer"));
+            if (resultSet.getString("avatarImg") == null) {
+                Database.setImageByLink(userAvatar,
+                        getClass().getResource("/asset/img/user-avatar.png").toString());
+            } else {
+                Database.setImageByLink(userAvatar, resultSet.getString("avatarImg"));
+            }
+
+            AtomicReference<File> file = new AtomicReference<>();
+            if (UserSession.getInstance().getUserType() == "VIP") {
+                userAvatar.setOnMouseClicked(event1 -> {
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Open Resource File");
+
+                    // Set the file extension filter
+                    FileChooser.ExtensionFilter extensionFilter =
+                            new FileChooser.ExtensionFilter("Image Files",
+                                    "*.png",
+                                    "*.jpg",
+                                    "*.jpeg",
+                                    "*.gif");
+                    fileChooser.getExtensionFilters().add(extensionFilter);
+
+                    // Show open file dialog
+                    file.set(fileChooser.showOpenDialog(viewUserDetailPane_HB.getScene().getWindow()));
+
+                    if (file.get() != null) {
+                        Image image = new Image(file.get().toURI().toString());
+                        userAvatar.setImage(image);
+                    }
+                });
+            }
 
             saveButton.setOnAction(event -> {
                 try {
@@ -160,7 +198,8 @@ public class UserDetailViewPaneController {
                             "email = ?, " +
                             "phonenumber = ?, " +
                             "question = ?, " +
-                            "answer = ? " +
+                            "answer = ? ," +
+                            "avatarImg = ? " +
                             "WHERE id = ?";
 
                     try (PreparedStatement updateStatement = conn.prepareStatement(updateQuery)) {
@@ -191,7 +230,10 @@ public class UserDetailViewPaneController {
                             updateStatement.setString(5, phoneNumberField.getText());
                             updateStatement.setString(6, questionField.getValue());
                             updateStatement.setString(7, answerField.getText());
-                            updateStatement.setString(8, userId);
+                            if (UserSession.getInstance().getUserType() == "VIP") {
+                                updateStatement.setString(8, file.get().toURI().toString());
+                            }
+                            updateStatement.setString(9, userId);
 
                             int updateSuccess = updateStatement.executeUpdate();
                             if (updateSuccess > 0) {
