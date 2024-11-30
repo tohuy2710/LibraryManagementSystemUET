@@ -77,7 +77,7 @@ public class PaymentAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     public static List<Transaction> getTransactions() {

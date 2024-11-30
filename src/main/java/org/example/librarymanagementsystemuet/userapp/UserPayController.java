@@ -123,7 +123,7 @@ public class UserPayController implements Initializable {
     }
 
     public String getPenaltyAmount() {
-
+        return null;
     }
 
     @FXML
