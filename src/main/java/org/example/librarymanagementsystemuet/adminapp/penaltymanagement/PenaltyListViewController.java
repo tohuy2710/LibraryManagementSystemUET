@@ -149,12 +149,12 @@ public class PenaltyListViewController {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT u.id, u.username, COUNT(ur.id) AS booksNotReturned, " +
-                             "SUM(DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000 + b.pageCount * 5) AS fineAmount " +
+                             "(SUM(DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000 + b.pageCount * 5))*ur.noOfbooks AS fineAmount " +
                              "FROM users u " +
                              "JOIN usersrequest ur ON u.id = ur.userId " +
                              "JOIN borrowbooks br ON ur.id = br.request_id " +
                              "JOIN books b ON ur.bookId = b.id " +
-                             "WHERE IFNULL(br.return_date, NOW()) > br.due_date " +
+                             "WHERE IFNULL(br.return_date, NOW()) > br.due_date AND ur.status = 'Book is currently on loan'" +
                              "GROUP BY u.id, u.username")) {
 
             while (rs.next()) {

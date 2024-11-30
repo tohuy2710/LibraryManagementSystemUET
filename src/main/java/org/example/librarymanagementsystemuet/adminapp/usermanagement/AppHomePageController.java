@@ -67,7 +67,7 @@ public class AppHomePageController {
     private Label adminEmailLabel;
 
     private Connection connection;
-
+    //
     public void initialize() {
         connection = Database.connectDB();
         if (connection != null) {
@@ -134,12 +134,12 @@ public class AppHomePageController {
                 updateStatisticPane(totalBooksPane, rs.getInt("totalBooks"), "Total Books");
             }
 
-            rs = stmt.executeQuery("SELECT COUNT(*) AS booksOnLoan FROM usersrequest WHERE status = 'Book is currently on loan'");
+            rs = stmt.executeQuery("SELECT COUNT(*)*usersrequest.noOfBooks AS booksOnLoan FROM usersrequest WHERE status = 'Book is currently on loan'");
             if (rs.next()) {
                 updateStatisticPane(booksOnLoanPane, rs.getInt("booksOnLoan"), "Books on Loan");
             }
 
-            rs = stmt.executeQuery("SELECT COUNT(*) AS overdueBooks FROM usersrequest WHERE status = 'Overdue for return book'");
+            rs = stmt.executeQuery("SELECT COUNT(*)*usersrequest.noOfBooks AS overdueBooks FROM usersrequest WHERE status = 'Overdue for return book'");
             if (rs.next()) {
                 updateStatisticPane(overdueBooksPane, rs.getInt("overdueBooks"), "Overdue Books");
             }
