@@ -2,16 +2,19 @@ package org.example.librarymanagementsystemuet.userapp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.example.librarymanagementsystemuet.BookViewDetailPaneController;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BrowserBookController;
 import org.example.librarymanagementsystemuet.obj.Book;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,7 +24,7 @@ public class BorrowBookViewCardVerticalController implements Initializable {
     private Label authorLabel;
 
     @FXML
-    private VBox bookBox;
+    private AnchorPane bookBox;
 
     @FXML
     private Button detailButton;
@@ -56,6 +59,20 @@ public class BorrowBookViewCardVerticalController implements Initializable {
             authorLabel.setText("UNKNOWN");
         }
         Database.setImageByLink(imageView, book.getImageLink());
+    }
+
+    public void loadBookDetailView(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/book-detail-view-pane.fxml"));
+            AnchorPane homePageBox = loader.load();
+            parentController.getMainPane().getChildren().add(homePageBox);
+            BookViewDetailPaneController controller = loader.getController();
+            controller.loadBookDetailByID(book.getId());
+            controller.setParentController(parentController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

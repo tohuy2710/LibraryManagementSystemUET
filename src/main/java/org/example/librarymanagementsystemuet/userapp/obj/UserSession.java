@@ -1,7 +1,12 @@
 package org.example.librarymanagementsystemuet.userapp.obj;
 
+import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.User;
 import org.example.librarymanagementsystemuet.obj.UserFactory;
+import org.example.librarymanagementsystemuet.obj.UserVip;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class UserSession {
 
@@ -19,7 +24,8 @@ public class UserSession {
                     "0123456789",
                     "Who is your crush?",
                     "you",
-                    0
+                    5,
+                    "2025-10-10"
             );
         }
         return user;
@@ -28,7 +34,7 @@ public class UserSession {
     public static User getInstance(String id, String username, String name,
                                    String password, String email, String registeredDate,
                                    String phonenumber, String question, String answer,
-                                   int vipPoint) {
+                                   int hmCoin, String expiredVipDate) {
         if (user == null) {
             user = UserFactory.createUser(
                     id,
@@ -40,9 +46,14 @@ public class UserSession {
                     phonenumber,
                     question,
                     answer,
-                    vipPoint
+                    hmCoin,
+                    expiredVipDate
             );
         }
         return user;
+    }
+
+    public static void logout() {
+        user = null;
     }
 }

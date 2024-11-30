@@ -1,13 +1,14 @@
 package org.example.librarymanagementsystemuet;
 
-import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
 import org.example.librarymanagementsystemuet.obj.Book;
 
-import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.*;
 
@@ -22,6 +23,27 @@ public class Database {
 
     public static final String DEFAULT_DATE = "1970-01-01";
 
+    public static final String NUMBER_REGEX = "^-?\\d+$";
+
+    private static String today = null;
+
+    public static String getDateNow() {
+        if (today != null) {
+            return today;
+        }
+        LocalDate todayLocalDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        today = todayLocalDate.format(formatter);
+        return today;
+    }
+
+    public static String getTimeNow() {
+        LocalTime time = LocalTime.now();
+        return time.toString();
+    }
+
+
+
     public static Connection connectDB() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,7 +55,7 @@ public class Database {
         }
     }
 
-    private static final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private static final ExecutorService executorService = Executors.newFixedThreadPool(12);
 
     public static void setImageByLink(ImageView imageView, String link) {
 
@@ -53,12 +75,10 @@ public class Database {
 
         executorService.submit(() -> {
             try {
-                Image image = future.get(5, TimeUnit.SECONDS);
+                Image image = future.get(100, TimeUnit.MILLISECONDS);
                 imageView.setImage(image);
-            } catch (TimeoutException e) {
+            } catch (Exception e) {
                 future.cancel(true);
-                System.out.println("Image loading timed out.");
-            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         });

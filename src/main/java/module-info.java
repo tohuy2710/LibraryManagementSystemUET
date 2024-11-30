@@ -25,6 +25,9 @@ module org.example.librarymanagementsystemuet {
     requires java.net.http;
     requires org.json;
     requires javafx.media;
+    requires jdk.httpserver;
+    requires okhttp3;
+    requires nanohttpd;
 
     // Google API Client dependencies
 

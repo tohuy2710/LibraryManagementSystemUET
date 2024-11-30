@@ -95,7 +95,8 @@ public class UserManagementController implements Initializable {
                     resultSet.getString("phonenumber"),
                     resultSet.getString("question"),
                     resultSet.getString("answer"),
-                    resultSet.getInt("vipPoint"));
+                    resultSet.getInt("hmCoin"),
+                    resultSet.getString("expiredVipDate"));
             userList.add(user);
         }
     }

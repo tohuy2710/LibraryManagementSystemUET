@@ -1,119 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="book_detail_HB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.bookViewDetailPaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.BookViewDetailPaneController">
    <children>
-      <AnchorPane fx:id="left_book_detail_pane" prefHeight="200.0" prefWidth="550.0">
+      <HBox fx:id="mainHBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;" stylesheets="@style.css">
          <children>
-            <ImageView fx:id="bookImage" fitHeight="390.0" fitWidth="290.0" layoutX="130.0" layoutY="69.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../asset/img/unknowCover.jpg" />
-               </image>
-            </ImageView>
-            <Button fx:id="borrowBookButton1" layoutX="130.0" layoutY="471.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="290.0" style="-fx-background-color: #1B5094;" text="Borrow Book" textFill="#efebeb">
-               <font>
-                  <Font name="SansSerif Bold" size="20.0" />
-               </font>
-            </Button>
-            <Button fx:id="backButton" layoutX="14.0" layoutY="595.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #1B5094;" text="Back" textFill="#f2eeee">
-               <font>
-                  <Font name="SansSerif Bold" size="15.0" />
-               </font>
-            </Button>
+            <VBox prefHeight="640.0" prefWidth="520.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="bookCoverImageView" fitHeight="160.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" />
+                        <VBox prefHeight="160.0" prefWidth="426.0">
+                           <children>
+                              <Label fx:id="nameLabel" styleClass="labelHeader" text="Name" />
+                              <HBox prefHeight="14.0" prefWidth="398.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="isbnLabel" text="ISBN:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label fx:id="idLabel" text="ID:" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <Label fx:id="authorLabel" text="Authors:" />
+                              <Label fx:id="publisherLabel" text="Publisher:" />
+                              <Label fx:id="categoryLabel" text="Category:" />
+                              <Label fx:id="locationLabel" text="Location:" />
+                              <Label fx:id="quantityLabel" text="Quantity:" />
+                              <Label fx:id="avgRateLabel" text="Average Rate: " />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="520.0" spacing="20.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#BorrowBook" prefHeight="33.0" prefWidth="92.0" styleClass="button6" text="Borrow" />
+                        <TextField fx:id="noWantBorrowTextField" alignment="CENTER" prefHeight="33.0" prefWidth="131.0" promptText="No. want borrow" styleClass="search-text-field2" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <VBox prefHeight="406.0" prefWidth="520.0">
+                     <children>
+                        <HBox prefHeight="14.0" prefWidth="520.0">
+                           <children>
+                              <HBox prefHeight="18.0" prefWidth="232.0">
+                                 <children>
+                                    <Label fx:id="addedDateLabel" text="Added Date: " />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="18.0" prefWidth="293.0">
+                                 <children>
+                                    <Label fx:id="lastUpdatedTimeLabel" text="Last Updated Time: " />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <Label fx:id="laguageLabel" text="Language: " />
+                        <Label fx:id="publisherDateLabel" text="Publisher Date: " />
+                        <Label fx:id="pageCountLabel" layoutX="10.0" layoutY="45.0" text="Page Count: " />
+                        <Label fx:id="descriptionLabel" text="Description: " />
+                        <TextArea fx:id="descriptionText" editable="false" prefHeight="296.0" prefWidth="511.0" wrapText="true" />
+                        <AnchorPane prefHeight="54.0" prefWidth="269.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#backToBrowser" prefHeight="33.0" prefWidth="110.0" styleClass="button7" text="Back" />
+                              <ImageView disable="true" fitHeight="43.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../asset/img/back-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="640.0" prefWidth="679.0">
+               <children>
+                  <Label styleClass="labelHeader" text="Borrow History">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ScrollPane prefHeight="539.0" prefWidth="658.0">
+                     <content>
+                        <VBox prefHeight="505.0" prefWidth="634.0">
+                           <children>
+                              <TableView fx:id="borrowHistoryTable" prefHeight="514.0" prefWidth="634.0">
+                                 <columns>
+                                    <TableColumn fx:id="userIDCol" prefWidth="150.0" text="User ID" />
+                                    <TableColumn fx:id="startDateCol" prefWidth="150.0" text="Start Date" />
+                                    <TableColumn fx:id="dueDateCol" prefWidth="150.0" text="Due Date" />
+                                    <TableColumn fx:id="returnDateCol" prefWidth="150.0" text="Return Date" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
          </children>
-      </AnchorPane>
-      <AnchorPane fx:id="right_book_detail_pane" minHeight="0.0" minWidth="0.0" prefHeight="617.0" prefWidth="650.0">
-         <children>
-            <Label fx:id="bookNameLabel" alignment="CENTER" layoutX="80.0" layoutY="25.0" prefHeight="43.0" prefWidth="486.0" text="NAME BOOK">
-               <font>
-                  <Font name="SansSerif Bold" size="22.0" />
-               </font>
-            </Label>
-            <Label fx:id="detailInfoLabel" layoutX="33.0" layoutY="68.0" text="Detail Information">
-               <font>
-                  <Font name="SansSerif Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="bookIdLabel" layoutX="33.0" layoutY="100.0" text="Book ID" textFill="#918c8c">
-               <font>
-                  <Font name="SansSerif Bold" size="13.0" />
-               </font>
-            </Label>
-            <Text fx:id="bookIdField" layoutX="240.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </Text>
-            <Label fx:id="bookAuthorLabel" layoutX="33.0" layoutY="125.0" text="Author" textFill="#918c8c">
-               <font>
-                  <Font name="SansSerif Bold" size="13.0" />
-               </font>
-            </Label>
-            <Text fx:id="bookAuthorField" layoutX="240.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </Text>
-            <Label fx:id="bookPublisherLabel" layoutX="33.0" layoutY="150.0" text="Publisher" textFill="#918c8c">
-               <font>
-                  <Font name="SansSerif Bold" size="13.0" />
-               </font>
-            </Label>
-            <Text fx:id="bookPublisherField" layoutX="240.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </Text>
-            <Label fx:id="bookIsbnLabel" layoutX="33.0" layoutY="175.0" text="ISBN" textFill="#918c8c">
-               <font>
-                  <Font name="SansSerif Bold" size="13.0" />
-               </font>
-            </Label>
-            <Text fx:id="bookIsbnField" layoutX="240.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </Text>
-            <Label fx:id="bookDescriptionLabel" layoutX="35.0" layoutY="250.0" text="Book Description">
-               <font>
-                  <Font name="SansSerif Bold" size="20.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="bookDescriptionField" editable="false" layoutX="33.0" layoutY="288.0" prefHeight="332.0" prefWidth="588.0" text="Bestselling Programming Tutorial and Reference Completely Rewritten for the New C++11 StandardFully updated and recast for the newly released C++11 standard, this authoritative and comprehensive introduction to C++ will help you to learn the language fast, and to use it in modern, highly effective ways. Highlighting today’s best practices, the authors show how to use both the core language and its standard library to write efficient, readable, and powerful code.C++ Primer, Fifth Edition, introduces the C++ standard library from the outset, drawing on its common functions and facilities to help you write useful programs without first having to master every language detail. The book’s many examples have been revised to use the new language features and demonstrate how to make the best use of them. This book is a proven tutorial for those new to C++, an authoritative discussion of core C++ concepts and techniques, and a valuable resource for experienced programmers, especially those eager to see C++11 enhancements illuminated." wrapText="true">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </TextArea>
-            <Label fx:id="bookCategoryLabel" layoutX="33.0" layoutY="200.0" text="Category" textFill="#918c8c">
-               <font>
-                  <Font name="SansSerif Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="bookQuantityLabel" layoutX="33.0" layoutY="225.0" text="Quantity" textFill="#918c8c">
-               <font>
-                  <Font name="SansSerif Bold" size="13.0" />
-               </font>
-            </Label>
-            <Text fx:id="bookCategoryField" layoutX="240.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="bookQuantityField" layoutX="240.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.3498229980469">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
+      </HBox>
    </children>
-</HBox>
+</AnchorPane>

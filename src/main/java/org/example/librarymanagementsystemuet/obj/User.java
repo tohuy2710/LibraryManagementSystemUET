@@ -1,5 +1,6 @@
 package org.example.librarymanagementsystemuet.obj;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class User extends Account {
@@ -13,6 +14,7 @@ public abstract class User extends Account {
     private SimpleStringProperty phonenumber;
     private SimpleStringProperty question;
     private SimpleStringProperty answer;
+    private SimpleIntegerProperty hmCoin;
 
     public abstract String getUserType();
 
@@ -27,6 +29,7 @@ public abstract class User extends Account {
         this.phonenumber = new SimpleStringProperty();
         this.question = new SimpleStringProperty();
         this.answer = new SimpleStringProperty();
+        this.hmCoin = new SimpleIntegerProperty();
     }
 
     public User(User user) {
@@ -41,13 +44,14 @@ public abstract class User extends Account {
         this.phonenumber = user.phonenumber;
         this.question = user.question;
         this.answer = user.answer;
+        this.hmCoin = user.hmCoin;
     }
 
     public User(SimpleStringProperty id, SimpleStringProperty username,
                 SimpleStringProperty name, SimpleStringProperty password,
                 SimpleStringProperty email, SimpleStringProperty registeredDate,
                 SimpleStringProperty phonenumber, SimpleStringProperty question,
-                SimpleStringProperty answer) {
+                SimpleStringProperty answer, SimpleIntegerProperty hmCoin) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -57,11 +61,12 @@ public abstract class User extends Account {
         this.phonenumber = phonenumber;
         this.question = question;
         this.answer = answer;
+        this.hmCoin = hmCoin;
     }
 
     public User(String id, String username, String name, String password,
                 String email, String registeredDate, String phonenumber,
-                String question, String answer) {
+                String question, String answer, int hmCoin) {
         this.id = new SimpleStringProperty(id);
         this.username = new SimpleStringProperty(username);
         this.name = new SimpleStringProperty(name);
@@ -71,7 +76,7 @@ public abstract class User extends Account {
         this.phonenumber = new SimpleStringProperty(phonenumber);
         this.question = new SimpleStringProperty(question);
         this.answer = new SimpleStringProperty(answer);
-
+        this.hmCoin = new SimpleIntegerProperty(hmCoin);
     }
 
     public String getId() {
@@ -184,6 +189,18 @@ public abstract class User extends Account {
 
     public void setAnswer(String answer) {
         this.answer.set(answer);
+    }
+
+    public int getHmCoin() {
+        return hmCoin.get();
+    }
+
+    public SimpleIntegerProperty hmCoinProperty() {
+        return hmCoin;
+    }
+
+    public void setHmCoin(int hmCoin) {
+        this.hmCoin.set(hmCoin);
     }
 
     public double getPenaltyCoefficient() {

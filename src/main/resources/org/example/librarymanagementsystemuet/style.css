@@ -307,6 +307,13 @@
 .hbox {
 }
 
+.hboxCoin {
+    -fx-border-color: linear-gradient(to right, #a8c0ff, #667eea, #3b5998, #1e3a5f); /* Gradient border */
+    -fx-border-width: 2px; /* Thicker border */
+    -fx-border-radius: 8px; /* Softer, rounded corners */
+    -fx-background-color: #f5f7fa; /* Light background for contrast */
+}
+
 .hbox1 {
     -fx-border-color: linear-gradient(to right, yellow, orange); /* Gradient border */
     -fx-border-width: 3px; /* Thicker border */
