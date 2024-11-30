@@ -15,44 +15,87 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.usermanagement.AppHomePageController">
    <children>
-      <VBox prefHeight="640.0" prefWidth="900.0" spacing="10.0">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="910.0" spacing="10.0">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" />
          </padding>
          <children>
-            <ImageView fitHeight="200.0" fitWidth="880.0" pickOnBounds="true" preserveRatio="true" />
+            <Label styleClass="labelHeader" text="TOP USER VIP" />
+            <HBox prefHeight="170.0" prefWidth="926.0">
+               <children>
+                  <VBox fx:id="userBox1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                     <children>
+                        <ImageView fx:id="userImage1" fitHeight="51.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="userName1" text="UserName" />
+                        <Label fx:id="userHmPoint1" text="hmPoit:" />
+                        <Label fx:id="userRegisterDate1" text="register_date:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Label>
+                        <Label fx:id="userExpiredVipDate1" text="expiredVipDate:" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="userBox2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                     <children>
+                        <ImageView fx:id="userImage2" fitHeight="51.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="userName2" text="UserName" />
+                        <Label fx:id="userHmPoint2" text="hmPoit:" />
+                        <Label fx:id="userRegisterDate2" text="register_date:" />
+                        <Label fx:id="userExpiredVipDate2" text="expiredVipDate:" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="userBox3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                     <children>
+                        <ImageView fx:id="userImage3" fitHeight="49.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="userName3" text="UserName" />
+                        <Label fx:id="userHmPoint3" text="hmPoit:" />
+                        <Label fx:id="userRegisterDate3" text="register_date:" />
+                        <Label fx:id="userExpiredVipDate3" text="expiredVipDate:" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="userBox4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                     <children>
+                        <ImageView fx:id="userImage4" fitHeight="49.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="userName4" text="UserName" />
+                        <Label fx:id="userHmPoint4" text="hmPoit:" />
+                        <Label fx:id="userRegisterDate4" text="register_date:" />
+                        <Label fx:id="userExpiredVipDate4" text="expiredVipDate:" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="userBox5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                     <children>
+                        <ImageView fx:id="userImage5" fitHeight="52.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="userName5" text="UserName" />
+                        <Label fx:id="userHmPoint5" text="hmPoit:" />
+                        <Label fx:id="userRegisterDate5" text="register_date:" />
+                        <Label fx:id="userExpiredVipDate5" text="expiredVipDate:" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </VBox>
+               </children>
+            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <AnchorPane fx:id="totalBooksPane" prefHeight="100.0" prefWidth="250.0" styleClass="anchor-pane">
-                     <children>
-                        <VBox fx:id="totalBooksVBox" layoutX="50.0" layoutY="20.0" styleClass="vbox-statistic">
-                           <children>
-                              <Label fx:id="totalBooksLabel" styleClass="label-number" text="0" />
-                              <Label styleClass="label-text" text="Total Books" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="booksOnLoanPane" prefHeight="100.0" prefWidth="250.0" styleClass="anchor-pane">
-                     <children>
-                        <VBox fx:id="booksOnLoanVBox" layoutX="50.0" layoutY="20.0" styleClass="vbox-statistic">
-                           <children>
-                              <Label fx:id="booksOnLoanLabel" styleClass="label-number" text="0" />
-                              <Label styleClass="label-text" text="Books on Loan" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="overdueBooksPane" prefHeight="100.0" prefWidth="250.0" styleClass="anchor-pane">
-                     <children>
-                        <VBox fx:id="overdueBooksVBox" layoutX="50.0" layoutY="20.0" styleClass="vbox-statistic">
-                           <children>
-                              <Label fx:id="overdueBooksLabel" styleClass="label-number" text="0" />
-                              <Label styleClass="label-text" text="Overdue Books" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane fx:id="totalBooksPane" prefHeight="100.0" prefWidth="250.0" styleClass="hbox-top-borrow-book-user" />
+                  <AnchorPane fx:id="booksOnLoanPane" prefHeight="100.0" prefWidth="250.0" styleClass="hbox-top-borrow-book-user" />
+                  <AnchorPane fx:id="overdueBooksPane" prefHeight="100.0" prefWidth="250.0" styleClass="hbox-top-borrow-book-user" />
                </children>
             </HBox>
             <VBox fx:id="chartContainer" prefHeight="320.0" prefWidth="880.0" spacing="20.0" styleClass="chart-container">
@@ -74,7 +117,13 @@
                   <children>
                      <VBox alignment="CENTER" prefHeight="94.0" prefWidth="300.0">
                         <children>
-                           <Circle fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                           <StackPane>
+                              <ImageView fx:id="adminProfileImageView" fitHeight="80.0" fitWidth="80.0" preserveRatio="true">
+                                 <clip>
+                                    <Circle radius="40.0" />
+                                 </clip>
+                              </ImageView>
+                           </StackPane>
                         </children>
                      </VBox>
                      <StackPane prefHeight="150.0" prefWidth="200.0">
@@ -105,7 +154,7 @@
                   </children>
                </VBox>
             </StackPane>
-            <ScrollPane prefHeight="469.0" prefWidth="279.0" />
+            <ScrollPane prefHeight="431.0" prefWidth="270.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

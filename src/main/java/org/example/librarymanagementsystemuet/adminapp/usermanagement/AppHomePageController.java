@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -23,6 +25,20 @@ import java.util.Map;
 
 public class AppHomePageController {
 
+    @FXML
+    private VBox userBox1, userBox2, userBox3, userBox4, userBox5;
+    @FXML
+    private ImageView userImage1, userImage2, userImage3, userImage4, userImage5;
+    @FXML
+    private Label userName1, userHmPoint1, userRegisterDate1, userExpiredVipDate1;
+    @FXML
+    private Label userName2, userHmPoint2, userRegisterDate2, userExpiredVipDate2;
+    @FXML
+    private Label userName3, userHmPoint3, userRegisterDate3, userExpiredVipDate3;
+    @FXML
+    private Label userName4, userHmPoint4, userRegisterDate4, userExpiredVipDate4;
+    @FXML
+    private Label userName5, userHmPoint5, userRegisterDate5, userExpiredVipDate5;
     @FXML
     private AnchorPane totalBooksPane;
     @FXML
@@ -54,13 +70,63 @@ public class AppHomePageController {
 
     public void initialize() {
         connection = Database.connectDB();
+        if (connection != null) {
+            displayTopUsers();
+        } else {
+            System.out.println("Failed to connect to the database.");
+        }
         updateStatistics();
         createPieChart();
         createBarChart();
         displayAdminEmail();
     }
 
-    //ok
+    private void displayTopUsers() {
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users ORDER BY hmCoin DESC LIMIT 5");
+            int index = 1;
+            while (rs.next()) {
+                String userName = rs.getString("username");
+                int hmCoin = rs.getInt("hmCoin");
+                String registerDate = rs.getString("registered_date");
+                String expiredVipDate = rs.getString("expiredVipDate");
+                String avatarImg = rs.getString("avatarImg");
+
+                switch (index) {
+                    case 1:
+                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName1, userHmPoint1, userRegisterDate1, userExpiredVipDate1, userImage1);
+                        break;
+                    case 2:
+                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName2, userHmPoint2, userRegisterDate2, userExpiredVipDate2, userImage2);
+                        break;
+                    case 3:
+                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName3, userHmPoint3, userRegisterDate3, userExpiredVipDate3, userImage3);
+                        break;
+                    case 4:
+                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName4, userHmPoint4, userRegisterDate4, userExpiredVipDate4, userImage4);
+                        break;
+                    case 5:
+                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName5, userHmPoint5, userRegisterDate5, userExpiredVipDate5, userImage5);
+                        break;
+                }
+                index++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateUserBox(String userName, int hmCoin, String registerDate, String expiredVipDate, String avatarImg, Label userNameLabel, Label hmPointLabel, Label registerDateLabel, Label expiredVipDateLabel, ImageView userImageView) {
+        userNameLabel.setText(userName);
+        hmPointLabel.setText("hmPoit: " + hmCoin);
+        registerDateLabel.setText(registerDate);
+        expiredVipDateLabel.setText("expiredVipDate: " + expiredVipDate);
+        if (avatarImg != null && !avatarImg.isEmpty()) {
+            userImageView.setImage(new Image(avatarImg));
+        }
+    }
+
+    //hbox 3 anchorpane -> hiện count
     private void updateStatistics() {
         try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS totalBooks FROM books");
@@ -81,7 +147,7 @@ public class AppHomePageController {
             e.printStackTrace();
         }
     }
-    //ok
+
     private void updateStatisticPane(AnchorPane pane, int count, String label) {
         VBox vbox = new VBox();
         vbox.setStyle("-fx-alignment: center; -fx-spacing: 5px;");
@@ -103,7 +169,8 @@ public class AppHomePageController {
         AnchorPane.setLeftAnchor(vbox, 0.0);
         AnchorPane.setRightAnchor(vbox, 0.0);
     }
-    //
+
+    // bd 25.11.2024
     private void createPieChart() {
         Map<String, Integer> data = fetchDataForPieChart();
         PieChart pieChart = new PieChart();
@@ -119,7 +186,6 @@ public class AppHomePageController {
         pieChartContainer.getChildren().add(pieChart);
     }
 
-    //
     private Map<String, Integer> fetchDataForPieChart() {
         Map<String, Integer> data = new HashMap<>();
         try (Statement stmt = connection.createStatement()) {
@@ -133,7 +199,6 @@ public class AppHomePageController {
         return data;
     }
 
-    //
     private Map<String, Integer> fetchDataForBarChart() {
         Map<String, Integer> data = new HashMap<>();
         try (Statement stmt = connection.createStatement()) {
@@ -153,7 +218,8 @@ public class AppHomePageController {
         }
         return data;
     }
-    //
+
+
     private void createBarChart() {
         Map<String, Integer> data = fetchDataForBarChart();
         CategoryAxis xAxis = new CategoryAxis();
@@ -176,6 +242,7 @@ public class AppHomePageController {
         barChartContainer.getChildren().add(barChart);
     }
 
+    //modify info
     private void displayAdminEmail() {
         Admin admin = Admin.getInstance();
         adminEmailLabel.setText(admin.getEmail());
@@ -231,6 +298,8 @@ public class AppHomePageController {
 
     //ok
     private void showAlert(String title, String message) {
+        connection = Database.connectDB();
+        displayTopUsers();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
