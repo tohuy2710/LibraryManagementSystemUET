@@ -299,6 +299,7 @@ public class UserRequestManagementController implements Initializable {
         Database.connect = Database.connectDB();
         String queryUpdateStatus = "UPDATE usersrequest SET status = ? WHERE id = ?";
         String queryAddToBorrowBooks = "INSERT INTO borrowbooks (request_id) VALUES (?)";
+//        String queryReturnCoin = "UPDATE users SET hmCoin = hmCoin + noOfBooks WHERE id = (SELECT userId FROM usersrequest WHERE id = ?)";
 
         try {
             Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);

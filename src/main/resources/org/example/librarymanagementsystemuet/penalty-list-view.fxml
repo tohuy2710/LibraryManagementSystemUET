@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.adminapp.penaltymanagement.PenaltyListViewController">
    <children>
       <VBox alignment="CENTER" prefHeight="640.0" prefWidth="1200.0" spacing="10" stylesheets="@style.css">
@@ -24,7 +23,7 @@
                      <columns>
                         <TableColumn fx:id="colUserId" prefWidth="125.60003852844238" text="User ID" />
                         <TableColumn fx:id="colUserName" prefWidth="339.1999740600586" text="User Name" />
-                        <TableColumn fx:id="colBooksNotReturned" prefWidth="204.79995727539062" text="Number Of Overdue Books" />
+                        <TableColumn fx:id="colBooksNotReturned" prefWidth="204.79995727539062" text="Count late request" />
                         <TableColumn fx:id="colFineAmount" prefWidth="321.5999755859375" style="-fx-alignment: center; -fx-font-weight: bold;" text="Overdue Fines (VNĐ)" />
                         <TableColumn fx:id="colDetail" minWidth="-1.0" prefWidth="163.2000732421875" text="Detail" />
                      </columns>

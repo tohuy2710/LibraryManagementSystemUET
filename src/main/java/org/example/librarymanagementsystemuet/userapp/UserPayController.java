@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import org.example.librarymanagementsystemuet.Database;
@@ -47,6 +48,9 @@ public class UserPayController implements Initializable {
 
     @FXML
     private Button bankCheckbtn;
+
+    @FXML
+    private ImageView penaltyImg;
 
     List<PaymentAPI.Transaction> initTrans = new ArrayList<>();
 
@@ -98,12 +102,32 @@ public class UserPayController implements Initializable {
             packNameLabel.setText("Donate");
             String transDesciption = String.valueOf(System.currentTimeMillis());
             PaymentAPI.Transaction tran
-                    = new PaymentAPI.Transaction("999999", transDesciption, Database.getDateNow(), DONATE);
+                    = new PaymentAPI.Transaction("0", transDesciption, Database.getDateNow(), DONATE);
             initTrans.add(tran);
             String qrLink = PaymentAPI.getLinkQr(0, transDesciption);
             Database.setImageByLink(qrImg, qrLink);
         });
+
+        penaltyImg.setOnMouseClicked(event -> {
+            visiblePanePay();
+            penTextArea.setVisible(true);
+
+            packNameLabel.setText("Penalty Payment");
+            String transDesciption = String.valueOf(System.currentTimeMillis());
+            PaymentAPI.Transaction tran
+                    = new PaymentAPI.Transaction("999999", transDesciption, Database.getDateNow(), "Penalty Payment");
+            initTrans.add(tran);
+            String qrLink = PaymentAPI.getLinkQr(999999, transDesciption);
+            Database.setImageByLink(qrImg, qrLink);
+        });
     }
+
+    public String getPenaltyAmount() {
+        return null;
+    }
+
+    @FXML
+    TextArea penTextArea;
 
     public void checkBanked() {
         new Thread(this::checkBankedThr).start();
