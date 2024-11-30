@@ -1,5 +1,6 @@
 package org.example.librarymanagementsystemuet.adminapp.userrequestmanagement;
 
+import com.google.api.client.util.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -299,7 +300,9 @@ public class UserRequestManagementController implements Initializable {
         Database.connect = Database.connectDB();
         String queryUpdateStatus = "UPDATE usersrequest SET status = ? WHERE id = ?";
         String queryAddToBorrowBooks = "INSERT INTO borrowbooks (request_id) VALUES (?)";
-//        String queryReturnCoin = "UPDATE users SET hmCoin = hmCoin + noOfBooks WHERE id = (SELECT userId FROM usersrequest WHERE id = ?)";
+        String queryReturnCoin = "UPDATE users " +
+                "SET hmCoin = hmCoin + (SELECT noOfBooks FROM usersrequest WHERE id = ?)" +
+                " where id = (SELECT userId FROM usersrequest WHERE id = ?)";
 
         try {
             Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);
@@ -316,6 +319,11 @@ public class UserRequestManagementController implements Initializable {
                                 "SET return_date = NOW() WHERE request_id = ?");
                 Database.prepare.setString(1, userRequest.getRequestID());
                 Database.prepare.executeUpdate();
+            } else if (userRequest.getStatus().equals(CANCELLED_BY_ADMIN)
+                    || userRequest.getStatus().equals(DENIED_FOR_BORROWING)) {
+                Database.prepare = Database.connect.prepareStatement(queryReturnCoin);
+                Database.prepare.setString(1, userRequest.getRequestID());
+                Database.prepare.setString(2, userRequest.getRequestID());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
