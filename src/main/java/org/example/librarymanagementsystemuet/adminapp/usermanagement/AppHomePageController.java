@@ -118,7 +118,7 @@ public class AppHomePageController {
 
     private void updateUserBox(String userName, int hmCoin, String registerDate, String expiredVipDate, String avatarImg, Label userNameLabel, Label hmPointLabel, Label registerDateLabel, Label expiredVipDateLabel, ImageView userImageView) {
         userNameLabel.setText(userName);
-        hmPointLabel.setText("hmPoit: " + hmCoin);
+        hmPointLabel.setText("hmPoint: " + hmCoin);
         registerDateLabel.setText(registerDate);
         expiredVipDateLabel.setText("expiredVipDate: " + expiredVipDate);
         if (avatarImg != null && !avatarImg.isEmpty()) {
