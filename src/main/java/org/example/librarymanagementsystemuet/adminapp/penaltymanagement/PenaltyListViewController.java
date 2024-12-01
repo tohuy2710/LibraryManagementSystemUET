@@ -37,6 +37,11 @@ public class PenaltyListViewController {
 
     @FXML
     private TableColumn<UserPenaltyRecord, Void> colDetail;
+    @FXML
+    private TableColumn<UserPenaltyRecord, Double> paidAmountColumn;
+
+    @FXML
+    private TableColumn<UserPenaltyRecord, Double> unpaidAmountColumn;
 
     @FXML
     private TextField searchField;
@@ -50,6 +55,8 @@ public class PenaltyListViewController {
         colUserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         colBooksNotReturned.setCellValueFactory(new PropertyValueFactory<>("booksNotReturned"));
         colFineAmount.setCellValueFactory(new PropertyValueFactory<>("fineAmount"));
+        paidAmountColumn.setCellValueFactory(new PropertyValueFactory<>("paidAmount"));
+        unpaidAmountColumn.setCellValueFactory(new PropertyValueFactory<>("unpaidAmount"));
 
         addDetailButtonToTable();
         loadPenaltyData();
@@ -94,44 +101,67 @@ public class PenaltyListViewController {
         });
     }
 
+    // dk pay date >= 0 -> view
     private void showBookDetails(String userId) {
         try (Connection conn = Database.connectDB();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
-                     "SELECT b.name, br.start_date, br.return_date, br.due_date " +
+                     "SELECT ur.id AS requestId, b.name, br.start_date, br.return_date, br.due_date, ur.noOfBooks " +
                              "FROM borrowbooks br " +
                              "JOIN usersrequest ur ON br.request_id = ur.id " +
                              "JOIN books b ON b.id = ur.bookId " +
                              "WHERE ur.userId = " + userId)) {
-            //chinh kick thuoc
 
             TableView<BookDetail> bookDetailTable = new TableView<>();
-            bookDetailTable.setPrefWidth(800);
+            bookDetailTable.setPrefWidth(1000);
 
+            TableColumn<BookDetail, Integer> colRequestId = new TableColumn<>("Request ID");
+            colRequestId.setPrefWidth(100);
             TableColumn<BookDetail, String> colName = new TableColumn<>("Name");
             colName.setPrefWidth(200);
             TableColumn<BookDetail, String> colStartDate = new TableColumn<>("Start Date");
-            colStartDate.setPrefWidth(200);
+            colStartDate.setPrefWidth(150);
             TableColumn<BookDetail, String> colReturnDate = new TableColumn<>("Return Date");
-            colReturnDate.setPrefWidth(200);
+            colReturnDate.setPrefWidth(150);
             TableColumn<BookDetail, String> colDueDate = new TableColumn<>("Due Date");
-            colDueDate.setPrefWidth(200);
+            colDueDate.setPrefWidth(150);
+            TableColumn<BookDetail, Integer> colNoOfBooks = new TableColumn<>("No of Books");
+            colNoOfBooks.setPrefWidth(100);
+            TableColumn<BookDetail, String> colDaysLate = new TableColumn<>("Days Late");
+            colDaysLate.setPrefWidth(150);
 
+            colRequestId.setCellValueFactory(new PropertyValueFactory<>("requestId"));
             colName.setCellValueFactory(new PropertyValueFactory<>("name"));
             colStartDate.setCellValueFactory(new PropertyValueFactory<>("startDate"));
             colReturnDate.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
             colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+            colNoOfBooks.setCellValueFactory(new PropertyValueFactory<>("noOfBooks"));
+            colDaysLate.setCellValueFactory(new PropertyValueFactory<>("daysLate"));
 
             bookDetailTable.getStyleClass().add("table-view");
-            bookDetailTable.getColumns().addAll(colName, colStartDate, colReturnDate, colDueDate);
+            bookDetailTable.getColumns().addAll(colRequestId, colName, colStartDate, colReturnDate, colDueDate, colNoOfBooks, colDaysLate);
 
             while (rs.next()) {
-                bookDetailTable.getItems().add(new BookDetail(
-                        rs.getString("name"),
-                        rs.getString("start_date"),
-                        rs.getString("return_date"),
-                        rs.getString("due_date")
-                ));
+                String returnDate = rs.getString("return_date");
+                long daysLate;
+                if (returnDate == null) {
+                    returnDate = "Not returned";
+                    daysLate = java.time.Duration.between(rs.getTimestamp("due_date").toInstant(), java.time.Instant.now()).toDays();
+                } else {
+                    daysLate = java.time.Duration.between(rs.getTimestamp("due_date").toInstant(), rs.getTimestamp("return_date").toInstant()).toDays();
+                }
+                //ok
+                if (daysLate >= 0) {
+                    bookDetailTable.getItems().add(new BookDetail(
+                            rs.getInt("requestId"),
+                            rs.getString("name"),
+                            rs.getString("start_date"),
+                            returnDate,
+                            rs.getString("due_date"),
+                            rs.getInt("noOfBooks"),
+                            String.valueOf(daysLate)
+                    ));
+                }
             }
 
             Stage stage = new Stage();
@@ -149,21 +179,25 @@ public class PenaltyListViewController {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(
                      "SELECT u.id, u.username, COUNT(ur.id) AS booksNotReturned, " +
-                             "(SUM(DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000 + b.pageCount * 5))" +
-                             "*ur.noOfbooks AS fineAmount " +
+                             "(SUM(DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000 + b.pageCount * 5) * ur.noOfbooks) AS fineAmount, " +
+                             "IFNULL(p.money, 0) AS paidAmount, " +
+                             "((SUM(DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000 + b.pageCount * 5) * ur.noOfbooks) - IFNULL(p.money, 0)) AS unpaidAmount " +
                              "FROM users u " +
                              "JOIN usersrequest ur ON u.id = ur.userId " +
                              "JOIN borrowbooks br ON ur.id = br.request_id " +
                              "JOIN books b ON ur.bookId = b.id " +
+                             "LEFT JOIN penaltypayments p ON p.userId = u.id " +
                              "WHERE IFNULL(br.return_date, NOW()) > br.due_date " +
-                             "GROUP BY u.id, u.username")) {
+                             "GROUP BY u.id, u.username;")) {
 
             while (rs.next()) {
                 UserPenaltyRecord record = new UserPenaltyRecord(
                         rs.getInt("id"),
                         rs.getString("username"),
                         rs.getInt("booksNotReturned"),
-                        rs.getDouble("fineAmount")
+                        rs.getDouble("fineAmount"),
+                        rs.getDouble("paidAmount"),
+                        rs.getDouble("unpaidAmount")
                 );
                 masterData.add(record);
             }

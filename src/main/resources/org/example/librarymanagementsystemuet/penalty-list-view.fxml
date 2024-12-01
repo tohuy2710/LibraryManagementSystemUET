@@ -21,11 +21,13 @@
                <content>
                   <TableView fx:id="userTable" prefHeight="570.0" prefWidth="1160.0">
                      <columns>
-                        <TableColumn fx:id="colUserId" prefWidth="125.60003852844238" text="User ID" />
-                        <TableColumn fx:id="colUserName" prefWidth="339.1999740600586" text="User Name" />
-                        <TableColumn fx:id="colBooksNotReturned" prefWidth="204.79995727539062" text="Count late request" />
-                        <TableColumn fx:id="colFineAmount" prefWidth="321.5999755859375" style="-fx-alignment: center; -fx-font-weight: bold;" text="Overdue Fines (VNĐ)" />
-                        <TableColumn fx:id="colDetail" minWidth="-1.0" prefWidth="163.2000732421875" text="Detail" />
+                        <TableColumn fx:id="colUserId" prefWidth="100.0" text="User ID" />
+                        <TableColumn fx:id="colUserName" prefWidth="200.0" text="User Name" />
+                        <TableColumn fx:id="paidAmountColumn" prefWidth="150.0" text="Paid Amount" />
+                        <TableColumn fx:id="unpaidAmountColumn" prefWidth="150.0" text="Unpaid Amount" />
+                        <TableColumn fx:id="colBooksNotReturned" prefWidth="150.0" text="Overdue books" />
+                        <TableColumn fx:id="colFineAmount" prefWidth="250.0" style="-fx-alignment: center; -fx-font-weight: bold;" text="Overdue Fines (VNĐ)" />
+                        <TableColumn fx:id="colDetail" prefWidth="154.4" text="Detail" />
                      </columns>
                   </TableView>
                </content>
