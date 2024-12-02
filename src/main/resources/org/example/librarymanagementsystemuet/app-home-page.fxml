@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -25,29 +28,19 @@
                <children>
                   <VBox fx:id="userBox1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <ImageView fx:id="userImage1" fitHeight="51.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="userName1" text="UserName" />
-                        <Label fx:id="userHmPoint1" text="hmPoit:" />
-                        <Label fx:id="userRegisterDate1" text="register_date:">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin></Label>
-                        <Label fx:id="userExpiredVipDate1" text="expiredVipDate:" />
+                        <Circle fx:id="userCircle1" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="userName1" styleClass="label2" text="UserName" />
+                        <Label fx:id="userHmPoint1" styleClass="label2" text="hmPoit:" />
                      </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
                   <VBox fx:id="userBox2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <ImageView fx:id="userImage2" fitHeight="51.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="userName2" text="UserName" />
-                        <Label fx:id="userHmPoint2" text="hmPoit:" />
-                        <Label fx:id="userRegisterDate2" text="register_date:" />
-                        <Label fx:id="userExpiredVipDate2" text="expiredVipDate:" />
+                        <Circle fx:id="userCircle2" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="userName2" styleClass="label2" text="UserName" />
+                        <Label fx:id="userHmPoint2" styleClass="label2" text="hmPoit:" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -55,11 +48,9 @@
                   </VBox>
                   <VBox fx:id="userBox3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <ImageView fx:id="userImage3" fitHeight="49.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="userName3" text="UserName" />
-                        <Label fx:id="userHmPoint3" text="hmPoit:" />
-                        <Label fx:id="userRegisterDate3" text="register_date:" />
-                        <Label fx:id="userExpiredVipDate3" text="expiredVipDate:" />
+                        <Circle fx:id="userCircle3" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="userName3" styleClass="label2" text="UserName" />
+                        <Label fx:id="userHmPoint3" styleClass="label2" text="hmPoit:" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -67,11 +58,9 @@
                   </VBox>
                   <VBox fx:id="userBox4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <ImageView fx:id="userImage4" fitHeight="49.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="userName4" text="UserName" />
-                        <Label fx:id="userHmPoint4" text="hmPoit:" />
-                        <Label fx:id="userRegisterDate4" text="register_date:" />
-                        <Label fx:id="userExpiredVipDate4" text="expiredVipDate:" />
+                        <Circle fx:id="userCircle4" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="userName4" styleClass="label2" text="UserName" />
+                        <Label fx:id="userHmPoint4" styleClass="label2" text="hmPoit:" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -79,11 +68,9 @@
                   </VBox>
                   <VBox fx:id="userBox5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <ImageView fx:id="userImage5" fitHeight="52.0" fitWidth="158.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="userName5" text="UserName" />
-                        <Label fx:id="userHmPoint5" text="hmPoit:" />
-                        <Label fx:id="userRegisterDate5" text="register_date:" />
-                        <Label fx:id="userExpiredVipDate5" text="expiredVipDate:" />
+                        <Circle fx:id="userCircle5" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Label fx:id="userName5" styleClass="label2" text="UserName" />
+                        <Label fx:id="userHmPoint5" styleClass="label2" text="hmPoit:" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -93,17 +80,67 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                <children>
-                  <AnchorPane fx:id="totalBooksPane" prefHeight="100.0" prefWidth="250.0" styleClass="hbox-top-borrow-book-user" />
-                  <AnchorPane fx:id="booksOnLoanPane" prefHeight="100.0" prefWidth="250.0" styleClass="hbox-top-borrow-book-user" />
-                  <AnchorPane fx:id="overdueBooksPane" prefHeight="100.0" prefWidth="250.0" styleClass="hbox-top-borrow-book-user" />
+                  <AnchorPane fx:id="totalBooksPane" prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <Label fx:id="totalBooksLabel" alignment="CENTER" layoutX="0.0" layoutY="10.0" prefWidth="250.0" styleClass="label2" text="NUMBER">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="0.0" layoutY="52.0" prefWidth="250.0" styleClass="label2" text="Total Books">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="booksOnLoanPane" layoutX="330.0" layoutY="10.0" prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <Label fx:id="booksOnLoanLabel" alignment="CENTER" layoutX="0.0" layoutY="10.0" prefWidth="250.0" styleClass="label2" text="NUMBER">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="0.0" layoutY="52.0" prefWidth="250.0" styleClass="label2" text="Books on Loan">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="overdueBooksPane" layoutX="470.0" layoutY="10.0" prefHeight="100.0" prefWidth="250.0">
+                     <children>
+                        <Label fx:id="overdueBooksLabel" alignment="CENTER" layoutX="0.0" layoutY="10.0" prefWidth="250.0" styleClass="label2" text="NUMBER">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="0.0" layoutY="52.0" prefWidth="250.0" styleClass="label2" text="Overdue Books">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
             </HBox>
             <VBox fx:id="chartContainer" prefHeight="320.0" prefWidth="880.0" spacing="20.0" styleClass="chart-container">
                <children>
-                  <HBox spacing="20.0">
+                  <HBox prefHeight="323.0" prefWidth="890.0">
                      <children>
-                        <VBox fx:id="pieChartContainer" prefWidth="440.0" />
-                        <VBox fx:id="barChartContainer" prefWidth="440.0" />
+                        <PieChart fx:id="pieChart" prefHeight="600.0" prefWidth="800.0">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </PieChart>
+                        <BarChart fx:id="barChart" legendVisible="false">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </BarChart>
                      </children>
                   </HBox>
                </children>
@@ -117,20 +154,14 @@
                   <children>
                      <VBox alignment="CENTER" prefHeight="94.0" prefWidth="300.0">
                         <children>
-                           <StackPane>
-                              <ImageView fx:id="adminProfileImageView" fitHeight="80.0" fitWidth="80.0" preserveRatio="true">
-                                 <clip>
-                                    <Circle radius="40.0" />
-                                 </clip>
-                              </ImageView>
-                           </StackPane>
+                           <Circle fx:id="adminProfileCircle" fill="DODGERBLUE" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
                         </children>
                      </VBox>
                      <StackPane prefHeight="150.0" prefWidth="200.0">
                         <children>
                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                               <children>
-                                 <Label styleClass="label1" text="AdminName" />
+                                 <Label styleClass="labelHeader" text="AdminName" />
                                  <Label fx:id="adminEmailLabel" styleClass="label2" text="manh123@gmail.com" />
                                  <Label styleClass="label2" text="0379905205" />
                                  <Label styleClass="label2" text="Nghe An, VN" />
@@ -146,7 +177,8 @@
                      <Label styleClass="label2" text="Change Password Information">
                         <font>
                            <Font size="16.0" />
-                        </font></Label>
+                        </font>
+                     </Label>
                      <TextField fx:id="currentPasswordField" prefHeight="34.0" prefWidth="279.0" promptText="Current Password" styleClass="text-field" />
                      <TextField fx:id="newPasswordField" prefHeight="34.0" prefWidth="279.0" promptText="New Password" styleClass="text-field" />
                      <TextField fx:id="confirmPasswordField" prefHeight="34.0" prefWidth="279.0" promptText="Confirm Password" styleClass="text-field" />

@@ -11,45 +11,43 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.obj.Account;
 import org.example.librarymanagementsystemuet.obj.Admin;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class AppHomePageController {
 
     @FXML
-    private VBox userBox1, userBox2, userBox3, userBox4, userBox5;
+    private Label userName1, userHmPoint1;
     @FXML
-    private ImageView userImage1, userImage2, userImage3, userImage4, userImage5;
+    private Label userName2, userHmPoint2;
     @FXML
-    private Label userName1, userHmPoint1, userRegisterDate1, userExpiredVipDate1;
+    private Label userName3, userHmPoint3;
     @FXML
-    private Label userName2, userHmPoint2, userRegisterDate2, userExpiredVipDate2;
+    private Label userName4, userHmPoint4;
     @FXML
-    private Label userName3, userHmPoint3, userRegisterDate3, userExpiredVipDate3;
+    private Label userName5, userHmPoint5;
     @FXML
-    private Label userName4, userHmPoint4, userRegisterDate4, userExpiredVipDate4;
-    @FXML
-    private Label userName5, userHmPoint5, userRegisterDate5, userExpiredVipDate5;
-    @FXML
-    private AnchorPane totalBooksPane;
-    @FXML
-    private AnchorPane booksOnLoanPane;
-    @FXML
-    private AnchorPane overdueBooksPane;
+    private Circle adminProfileCircle;
 
     @FXML
-    private VBox pieChartContainer;
+    private Circle userCircle1, userCircle2, userCircle3, userCircle4, userCircle5;
     @FXML
-    private VBox barChartContainer;
+    private PieChart pieChart;
+    @FXML
+    private BarChart<String, Number> barChart;
 
     @FXML
     private VBox adminInfoVBox;
@@ -65,9 +63,46 @@ public class AppHomePageController {
 
     @FXML
     private Label adminEmailLabel;
+    @FXML
 
     private Connection connection;
-    //
+
+    @FXML
+    private Label totalBooksLabel;
+    @FXML
+    private Label booksOnLoanLabel;
+    @FXML
+    private Label overdueBooksLabel;
+
+    private void displayBookStatistics() {
+        try {
+            Connection connection = Database.connectDB();
+            Statement statement = connection.createStatement();
+
+            ResultSet totalBooksResult = statement.executeQuery("SELECT COUNT(*) AS totalBooks FROM books");
+            if (totalBooksResult.next()) {
+                int totalBooks = totalBooksResult.getInt("totalBooks");
+                totalBooksLabel.setText(String.valueOf(totalBooks));
+            }
+
+            ResultSet booksOnLoanResult = statement.executeQuery("SELECT COUNT(*) AS booksOnLoan FROM borrowbooks WHERE return_date IS NULL");
+            if (booksOnLoanResult.next()) {
+                int booksOnLoan = booksOnLoanResult.getInt("booksOnLoan");
+                booksOnLoanLabel.setText(String.valueOf(booksOnLoan));
+            }
+
+            ResultSet overdueBooksResult = statement.executeQuery("SELECT COUNT(*) AS overdueBooks FROM borrowbooks WHERE return_date IS NULL AND due_date < NOW()");
+            if (overdueBooksResult.next()) {
+                int overdueBooks = overdueBooksResult.getInt("overdueBooks");
+                overdueBooksLabel.setText(String.valueOf(overdueBooks));
+            }
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void initialize() {
         connection = Database.connectDB();
         if (connection != null) {
@@ -75,7 +110,7 @@ public class AppHomePageController {
         } else {
             System.out.println("Failed to connect to the database.");
         }
-        updateStatistics();
+        displayBookStatistics();
         createPieChart();
         createBarChart();
         displayAdminEmail();
@@ -88,25 +123,23 @@ public class AppHomePageController {
             while (rs.next()) {
                 String userName = rs.getString("username");
                 int hmCoin = rs.getInt("hmCoin");
-                String registerDate = rs.getString("registered_date");
-                String expiredVipDate = rs.getString("expiredVipDate");
                 String avatarImg = rs.getString("avatarImg");
 
                 switch (index) {
                     case 1:
-                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName1, userHmPoint1, userRegisterDate1, userExpiredVipDate1, userImage1);
+                        updateUserBox(userName, hmCoin, avatarImg, userName1, userHmPoint1, userCircle1);
                         break;
                     case 2:
-                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName2, userHmPoint2, userRegisterDate2, userExpiredVipDate2, userImage2);
+                        updateUserBox(userName, hmCoin, avatarImg, userName2, userHmPoint2, userCircle2);
                         break;
                     case 3:
-                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName3, userHmPoint3, userRegisterDate3, userExpiredVipDate3, userImage3);
+                        updateUserBox(userName, hmCoin, avatarImg, userName3, userHmPoint3, userCircle3);
                         break;
                     case 4:
-                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName4, userHmPoint4, userRegisterDate4, userExpiredVipDate4, userImage4);
+                        updateUserBox(userName, hmCoin, avatarImg, userName4, userHmPoint4, userCircle4);
                         break;
                     case 5:
-                        updateUserBox(userName, hmCoin, registerDate, expiredVipDate, avatarImg, userName5, userHmPoint5, userRegisterDate5, userExpiredVipDate5, userImage5);
+                        updateUserBox(userName, hmCoin, avatarImg, userName5, userHmPoint5, userCircle5);
                         break;
                 }
                 index++;
@@ -116,74 +149,36 @@ public class AppHomePageController {
         }
     }
 
-    private void updateUserBox(String userName, int hmCoin, String registerDate, String expiredVipDate, String avatarImg, Label userNameLabel, Label hmPointLabel, Label registerDateLabel, Label expiredVipDateLabel, ImageView userImageView) {
+    private void updateUserBox(String userName, int hmCoin, String avatarImg, Label userNameLabel, Label hmPointLabel, Circle userCircle) {
         userNameLabel.setText(userName);
         hmPointLabel.setText("hmPoint: " + hmCoin);
-        registerDateLabel.setText(registerDate);
-        expiredVipDateLabel.setText("expiredVipDate: " + expiredVipDate);
         if (avatarImg != null && !avatarImg.isEmpty()) {
-            userImageView.setImage(new Image(avatarImg));
+            Image image = new Image(avatarImg);
+            userCircle.setFill(new ImagePattern(image));
         }
     }
 
-    //hbox 3 anchorpane -> hiện count
-    private void updateStatistics() {
-        try (Statement stmt = connection.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS totalBooks FROM books");
-            if (rs.next()) {
-                updateStatisticPane(totalBooksPane, rs.getInt("totalBooks"), "Total Books");
-            }
-
-            rs = stmt.executeQuery("SELECT SUM(noOfBooks) AS booksOnLoan FROM usersrequest WHERE status = 'Book is currently on loan'");
-            if (rs.next()) {
-                updateStatisticPane(booksOnLoanPane, rs.getInt("booksOnLoan"), "Books on Loan");
-            }
-
-            rs = stmt.executeQuery("SELECT SUM(noOfBooks) AS overdueBooks FROM usersrequest WHERE status = 'Overdue for return book'");
-            if (rs.next()) {
-                updateStatisticPane(overdueBooksPane, rs.getInt("overdueBooks"), "Overdue Books");
-            }
-        } catch (Exception e) {
+    private void displayAdminEmail() {
+        Admin admin = Admin.getInstance();
+        adminEmailLabel.setText(admin.getEmail());
+        String avatarPath = Admin.DEFAULT_AVATAR_PATH;
+        try {
+            Image image = new Image(getClass().getResource(avatarPath).toExternalForm());
+            adminProfileCircle.setFill(new ImagePattern(image));
+        } catch (NullPointerException e) {
+            System.err.println("Resource not found: " + avatarPath);
             e.printStackTrace();
         }
     }
 
-    private void updateStatisticPane(AnchorPane pane, int count, String label) {
-        VBox vbox = new VBox();
-        vbox.setStyle("-fx-alignment: center; -fx-spacing: 5px;");
-
-        Label countLabel = new Label(String.valueOf(count));
-        countLabel.setFont(new Font(30));
-        countLabel.setStyle("-fx-text-fill: #ffeb3b; -fx-font-weight: bold; -fx-alignment: center;");
-
-        Label textLabel = new Label(label);
-        textLabel.setFont(new Font(20));
-        textLabel.setStyle("-fx-text-fill: #ffffff; -fx-alignment: center;");
-
-        vbox.getChildren().addAll(countLabel, textLabel);
-        vbox.setAlignment(Pos.CENTER);
-        pane.getChildren().clear();
-        pane.getChildren().add(vbox);
-        AnchorPane.setTopAnchor(vbox, 0.0);
-        AnchorPane.setBottomAnchor(vbox, 0.0);
-        AnchorPane.setLeftAnchor(vbox, 0.0);
-        AnchorPane.setRightAnchor(vbox, 0.0);
-    }
-
-    // bd 25.11.2024
     private void createPieChart() {
         Map<String, Integer> data = fetchDataForPieChart();
-        PieChart pieChart = new PieChart();
         pieChart.setTitle("Books by Category");
 
         for (Map.Entry<String, Integer> entry : data.entrySet()) {
             PieChart.Data slice = new PieChart.Data(entry.getKey(), entry.getValue());
             pieChart.getData().add(slice);
-            Tooltip tooltip = new Tooltip(entry.getKey() + ": " + entry.getValue());
-            Tooltip.install(slice.getNode(), tooltip);
         }
-
-        pieChartContainer.getChildren().add(pieChart);
     }
 
     private Map<String, Integer> fetchDataForPieChart() {
@@ -197,6 +192,26 @@ public class AppHomePageController {
             e.printStackTrace();
         }
         return data;
+    }
+
+    private void createBarChart() {
+        Map<String, Integer> data = fetchDataForBarChart();
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Month");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Books Borrowed");
+
+        barChart.setTitle("Books Borrowed by Month");
+        barChart.getXAxis().setLabel("Month");
+        barChart.getYAxis().setLabel("Books Borrowed");
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        for (Map.Entry<String, Integer> entry : data.entrySet()) {
+            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        barChart.getData().add(series);
     }
 
     private Map<String, Integer> fetchDataForBarChart() {
@@ -219,42 +234,12 @@ public class AppHomePageController {
         return data;
     }
 
-
-    private void createBarChart() {
-        Map<String, Integer> data = fetchDataForBarChart();
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Month");
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Books Borrowed");
-
-        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setTitle("Books Borrowed by Month");
-
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for (Map.Entry<String, Integer> entry : data.entrySet()) {
-            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(entry.getKey(), entry.getValue());
-            series.getData().add(dataPoint);
-            Tooltip tooltip = new Tooltip(entry.getKey() + ": " + entry.getValue());
-            Tooltip.install(dataPoint.getNode(), tooltip);
-        }
-
-        barChart.getData().add(series);
-        barChartContainer.getChildren().add(barChart);
-    }
-
-    //modify info
-    private void displayAdminEmail() {
-        Admin admin = Admin.getInstance();
-        adminEmailLabel.setText(admin.getEmail());
-    }
-
     @FXML
     private void showModifyInfo() {
         adminInfoVBox.setVisible(false);
         modifyInfoVBox.setVisible(true);
     }
 
-    //check currentPass, email <-> pass ???
     @FXML
     private void saveAdminInfo() {
         String currentPassword = currentPasswordField.getText();
@@ -296,7 +281,6 @@ public class AppHomePageController {
         adminInfoVBox.setVisible(true);
     }
 
-    //ok
     private void showAlert(String title, String message) {
         connection = Database.connectDB();
         displayTopUsers();
