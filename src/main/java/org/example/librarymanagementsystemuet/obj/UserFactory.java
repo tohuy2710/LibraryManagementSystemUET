@@ -12,7 +12,6 @@ public class UserFactory {
                                   String question, String answer, int hmCoin, String expiredVipDate) {
         if (expiredVipDate == null || expiredVipDate.compareTo(Database.getDateNow()) < 0) {
             return new UserClassic(id, username, name, password, email, registeredDate, phonenumber, question, answer, hmCoin);
-
         } else {
             return new UserVip(id, username, name,
                     password, email, registeredDate,

@@ -174,6 +174,8 @@ public class UserRequest {
             } else {
                 throw new LogicException("Invalid status change");
             }
+        } else {
+            this.status.set(status);
         }
     }
 
