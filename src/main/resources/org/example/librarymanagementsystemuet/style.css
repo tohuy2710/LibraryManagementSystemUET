@@ -437,3 +437,83 @@
     -fx-font-size: 14px;                      /* Font size */
 }
 
+/*30.11.2024
+/* style.css */
+
+.chart-container .chart {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.3, 0, 0);
+    -fx-padding: 10;
+    -fx-border-color: #1f5db9;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.chart .chart-legend {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1f5db9;
+}
+
+.chart .chart-legend-item-symbol {
+    -fx-background-color: #1f5db9;
+}
+
+.chart .chart-legend-item {
+    -fx-text-fill: #1f5db9;
+}
+
+.chart .chart-pie-label-line {
+    -fx-stroke: #1f5db9;
+}
+
+.chart .chart-pie-label {
+    -fx-text-fill: #1f5db9;
+}
+
+.chart .default-color0.chart-bar {
+    -fx-bar-fill: #1f5db9;
+}
+
+.chart .default-color1.chart-bar {
+    -fx-bar-fill: #3b5998;
+}
+
+.chart .default-color2.chart-bar {
+    -fx-bar-fill: #4a69bd;
+}
+
+.chart .default-color3.chart-bar {
+    -fx-bar-fill: #6a89cc;
+}
+
+.chart .default-color4.chart-bar {
+    -fx-bar-fill: #82ccdd;
+}
+
+.chart .default-color0.chart-pie {
+    -fx-pie-color: #1f5db9;
+}
+
+.chart .default-color1.chart-pie {
+    -fx-pie-color: #3b5998;
+}
+
+.chart .default-color2.chart-pie {
+    -fx-pie-color: #4a69bd;
+}
+
+.chart .default-color3.chart-pie {
+    -fx-pie-color: #6a89cc;
+}
+
+.chart .default-color4.chart-pie {
+    -fx-pie-color: #82ccdd;
+}
+.image-view-circle {
+    -fx-background-radius: 100%; /* Bo góc tròn */
+    -fx-border-radius: 50%;    /* Viền tròn */
+    -fx-border-color: #cccccc; /* Màu viền (tuỳ chỉnh) */
+    -fx-border-width: 2px;     /* Độ dày viền */
+    -fx-padding: 5px;          /* Khoảng cách giữa viền và ảnh */
+    -fx-shape: "M0,0 L1,0 L1,1 L0,1 Z"; /* Hình dạng vuông (tránh lỗi clip) */
+}
