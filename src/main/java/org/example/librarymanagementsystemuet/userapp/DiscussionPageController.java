@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -145,6 +146,6 @@ public class DiscussionPageController {
     }
 
     private int getCurrentUserID() {
-        return 5; // Replace with actual logic to get the current user's ID
+        return Integer.parseInt(UserSession.getInstance().getId());
     }
 }
