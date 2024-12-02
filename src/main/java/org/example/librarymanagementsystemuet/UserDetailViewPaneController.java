@@ -7,10 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import org.example.librarymanagementsystemuet.exception.LogicException;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.obj.Book;
 import org.example.librarymanagementsystemuet.obj.BorrowRecord;
 import org.example.librarymanagementsystemuet.obj.UserRequest;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
@@ -32,7 +34,7 @@ public class UserDetailViewPaneController {
 
     @FXML
     private TextField answerField, emailField, fullNameField,
-            passwordField, phoneNumberField, userIdField, usernameField;
+            passwordField, phoneNumberField, userIdField, usernameField, expiredVIPDateField;
 
     @FXML
     private Button saveButton;
@@ -44,8 +46,12 @@ public class UserDetailViewPaneController {
     private TableView<BorrowRecord> borrowBook_TV;
 
     @FXML
-    private TableColumn<UserRequest, String> lastUpdatedTimeCol_UserRequestTable,
-            requestIdCol_UserRequestTable, statusCol_UserRequestTable, createdTimeCol_UserRequestTable;
+    private TableColumn<UserRequest, String> lastUpdateTimeCol_UserRequestTable,
+            requestIdCol_UserRequestTable, statusCol_UserRequestTable, createdTimeCol_UserRequestTable,
+            numberOfRequestsCol_UserRequestTable;
+
+    @FXML
+    private TableColumn<Book, String> bookNameCol_UserRequestTable;
 
     @FXML
     private ChoiceBox<String> questionField;
@@ -91,6 +97,7 @@ public class UserDetailViewPaneController {
             userRequest.setStatus(resultSet.getString("status"));
             userRequest.setCreatedTime(resultSet.getString("createdTime"));
             userRequest.setLastUpdatedTime(resultSet.getString("lastUpdatedTime"));
+            userRequest.setNoOfBooks(resultSet.getString("noOfBooks"));
             userRequestList.add(userRequest);
         }
     }
@@ -111,7 +118,8 @@ public class UserDetailViewPaneController {
         bookIdCol_UserRequestTable.setCellValueFactory(new PropertyValueFactory<>("bookID"));
         statusCol_UserRequestTable.setCellValueFactory(new PropertyValueFactory<>("status"));
         createdTimeCol_UserRequestTable.setCellValueFactory(new PropertyValueFactory<>("createdTime"));
-        lastUpdatedTimeCol_UserRequestTable.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedTime"));
+        lastUpdateTimeCol_UserRequestTable.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedTime"));
+        numberOfRequestsCol_UserRequestTable.setCellValueFactory(new PropertyValueFactory<>("noOfBooks"));
 
         String query = "SELECT * FROM usersrequest WHERE userId = ?";
         userRequestList.clear();
