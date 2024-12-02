@@ -31,10 +31,10 @@ import static org.example.librarymanagementsystemuet.obj.Account.*;
 
 public class UserManagementController implements Initializable {
 
-    public Label labelUpdate, vipPointLabel;
+    public Label labelUpdate, expiredVIPDateField;
 
     @FXML
-    private Button cancelUpdateButton, saveUpdateButton, viewUserDetailButton, backButton, saveButton1;
+    private Button backButton, saveButton1;
 
     @FXML
     private TableColumn<User, String> usernameCol, emailCol, passwordCol,
@@ -44,10 +44,9 @@ public class UserManagementController implements Initializable {
     private ImageView userAvatar;
 
     @FXML
-    private TextField usernameUpdate, emailUpdate, passwordUpdate,
-            phoneNumberUpdate, emailField, fullNameField,
+    private TextField emailField, fullNameField,
             passwordField, phoneNumberField, userIdField,
-            usernameField, answerField, vipPointField;
+            usernameField, answerField;
 
     @FXML
     private AnchorPane updateUserPane;
@@ -277,6 +276,7 @@ public class UserManagementController implements Initializable {
                                 phoneNumberField.setText(resultSet.getString("phoneNumber"));
                                 questionField.setValue(resultSet.getString("question"));
                                 answerField.setText(resultSet.getString("answer"));
+                                expiredVIPDateField.setText(resultSet.getString("expiredVipDate"));
                                 if (resultSet.getString("avatarImg") == null) {
                                     Database.setImageByLink(userAvatar,
                                             getClass().getResource("/asset/img/user-avatar.png").toString());
@@ -332,7 +332,7 @@ public class UserManagementController implements Initializable {
                                                     || emailField.getText() == null
                                                     || phoneNumberField.getText() == null
                                                     || fullNameField.getText() == null
-                                            ){
+                                            ) {
                                                 alertMessage.errorMessage("Please fill in all fields.");
                                             } else if (!isValidUsername(usernameField.getText())) {
                                                 alertMessage.errorMessage("Username must be between 6 and 12 characters.");
@@ -409,7 +409,6 @@ public class UserManagementController implements Initializable {
         try {
             UserManagement(LOAD_FULL_DATA, null);
             userManagement_TV.setVisible(true);
-            updateUserPane.setVisible(false);
             viewUserDetailPane_HB.setVisible(false);
         } catch (SQLException e) {
             e.printStackTrace();

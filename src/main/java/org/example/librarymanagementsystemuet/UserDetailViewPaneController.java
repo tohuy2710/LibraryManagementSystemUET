@@ -7,12 +7,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import org.example.librarymanagementsystemuet.exception.LogicException;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
-import org.example.librarymanagementsystemuet.obj.Book;
 import org.example.librarymanagementsystemuet.obj.BorrowRecord;
 import org.example.librarymanagementsystemuet.obj.UserRequest;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
@@ -37,7 +35,7 @@ public class UserDetailViewPaneController {
             passwordField, phoneNumberField, userIdField, usernameField;
 
     @FXML
-    private  Label expiredVIPDateField;
+    private Label expiredVIPDateField;
 
     @FXML
     private Button saveButton;
@@ -52,9 +50,6 @@ public class UserDetailViewPaneController {
     private TableColumn<UserRequest, String> lastUpdateTimeCol_UserRequestTable,
             requestIdCol_UserRequestTable, statusCol_UserRequestTable, createdTimeCol_UserRequestTable,
             numberOfRequestsCol_UserRequestTable;
-
-    @FXML
-    private TableColumn<Book, String> bookNameCol_UserRequestTable;
 
     @FXML
     private ChoiceBox<String> questionField;

@@ -40,7 +40,7 @@
         <Label layoutX="22.0" layoutY="478.0" prefHeight="18.0" prefWidth="120.0" styleClass="label2" text="Answer" />
         <Button fx:id="saveButton" layoutX="152.0" layoutY="550.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="button6" text="Save" />
         <Label layoutX="22.0" layoutY="513.0" prefHeight="18.0" prefWidth="120.0" styleClass="label2" text="Expired VIP Date" />
-      <Label fx:id="expiredVIPDateField" layoutX="152.0" layoutY="513.0" styleClass="label2" text="Label" />
+      <Label fx:id="expiredVIPDateField" layoutX="152.0" layoutY="513.0" styleClass="label2" />
     </AnchorPane>
     <SplitPane dividerPositions="0.4999999999999999" orientation="VERTICAL" prefHeight="641.0" prefWidth="773.0" style="-fx-background-color: #ffffff;">
         <AnchorPane fx:id="userRequest_AnchorPane" prefHeight="318.0" prefWidth="774.0">

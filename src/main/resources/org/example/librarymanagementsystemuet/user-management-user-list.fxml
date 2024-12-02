@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -25,7 +24,7 @@
                   <TableView fx:id="userManagement_TV" prefHeight="640.0" prefWidth="1153.0">
                      <columns>
                         <TableColumn fx:id="userIdCol" prefWidth="100.0" text="User ID" />
-                        <TableColumn fx:id="usernameCol" prefWidth="150.0" text="Username" />
+                        <TableColumn fx:id="usernameCol" prefWidth="100.0" text="Username" />
                         <TableColumn fx:id="fullnameCol" prefWidth="150.0" text="Full Name" />
                         <TableColumn fx:id="passwordCol" prefWidth="150.0" text="Password" />
                         <TableColumn fx:id="emailCol" prefWidth="150.0" text="Email" />
@@ -46,31 +45,6 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </StackPane.margin>
       </ScrollPane>
-      <AnchorPane fx:id="updateUserPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="350.0" style="-fx-background-color: #ffffff; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2px; -fx-border-color: #17376e; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 5);" stylesheets="@style.css" visible="false">
-         <Label fx:id="labelUpdate" layoutX="48.0" layoutY="84.0" styleClass="label2" text="Update User Information" textFill="#faf2f2">
-            <font>
-               <Font name="SansSerif Bold" size="20.0" />
-            </font>
-         </Label>
-         <TextField fx:id="passwordUpdate" layoutX="57.0" layoutY="172.0" prefHeight="26.0" prefWidth="234.0" promptText="Password" />
-         <TextField fx:id="usernameUpdate" layoutX="58.0" layoutY="134.0" prefHeight="26.0" prefWidth="234.0" promptText="Username" styleClass="text-field" />
-         <TextField fx:id="emailUpdate" layoutX="58.0" layoutY="213.0" prefHeight="26.0" prefWidth="234.0" promptText="Email" />
-         <TextField fx:id="phoneNumberUpdate" layoutX="57.0" layoutY="256.0" prefHeight="26.0" prefWidth="234.0" promptText="Phone Number" />
-         <Button fx:id="saveUpdateButton" contentDisplay="CENTER" layoutX="58.0" layoutY="312.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="button6" text="Save" textFill="#f7f3f3">
-            <font>
-               <Font name="SansSerif Bold" size="15.0" />
-            </font>
-         </Button>
-         <Button fx:id="cancelUpdateButton" contentDisplay="CENTER" layoutX="181.0" layoutY="312.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="110.0" styleClass="button6" text="Cancel" textFill="#ece9e9">
-            <font>
-               <Font name="SansSerif Bold" size="15.0" />
-            </font>
-         </Button>
-         <ImageView fitHeight="53.0" fitWidth="48.0" layoutX="150.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../../asset/img/user-modify-icon.png" />
-         </ImageView>
-         <Button fx:id="viewUserDetailButton" alignment="CENTER" contentDisplay="CENTER" layoutX="57.0" layoutY="362.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="234.0" text="View User Detail" />
-      </AnchorPane>
       <HBox fx:id="viewUserDetailPane_HB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;" visible="false">
          <AnchorPane fx:id="userDetailView_AnchorPane" prefHeight="640.0" prefWidth="400.0">
             <Label layoutX="78.0" layoutY="185.0" styleClass="labelHeader" text=" User Information Detail">
@@ -79,26 +53,26 @@
                </font>
             </Label>
             <ImageView fx:id="userAvatar" fitHeight="141.0" fitWidth="200.0" layoutX="100.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-            <Label layoutX="49.0" layoutY="233.0" styleClass="label2" text="User ID" />
+            <Label layoutX="22.0" layoutY="233.0" styleClass="label2" text="User ID" />
             <TextField fx:id="userIdField" editable="false" layoutX="152.0" layoutY="228.0" prefHeight="26.0" prefWidth="201.0" />
-            <Label layoutX="49.0" layoutY="268.0" styleClass="label2" text="Username" />
+            <Label layoutX="22.0" layoutY="268.0" styleClass="label2" text="Username" />
             <TextField fx:id="usernameField" editable="false" layoutX="152.0" layoutY="263.0" prefHeight="26.0" prefWidth="202.0" />
-            <Label layoutX="49.0" layoutY="303.0" styleClass="label2" text="Full Name" />
+            <Label layoutX="22.0" layoutY="303.0" styleClass="label2" text="Full Name" />
             <TextField fx:id="fullNameField" layoutX="152.0" layoutY="298.0" prefHeight="26.0" prefWidth="202.0" />
-            <Label layoutX="49.0" layoutY="338.0" styleClass="label2" text="Password" />
+            <Label layoutX="22.0" layoutY="338.0" styleClass="label2" text="Password" />
             <TextField fx:id="passwordField" layoutX="152.0" layoutY="333.0" prefHeight="26.0" prefWidth="202.0" />
-            <Label layoutX="50.0" layoutY="373.0" styleClass="label2" text="Email" />
+            <Label layoutX="22.0" layoutY="373.0" styleClass="label2" text="Email" />
             <TextField fx:id="emailField" layoutX="152.0" layoutY="368.0" prefHeight="26.0" prefWidth="202.0" />
-            <Label layoutX="50.0" layoutY="408.0" styleClass="label2" text="Phone Number" />
+            <Label layoutX="22.0" layoutY="408.0" styleClass="label2" text="Phone Number" />
             <TextField fx:id="phoneNumberField" layoutX="152.0" layoutY="403.0" prefHeight="26.0" prefWidth="202.0" />
             <ChoiceBox fx:id="questionField" disable="true" layoutX="152.0" layoutY="438.0" prefHeight="26.0" prefWidth="202.0" />
-            <Label layoutX="49.0" layoutY="443.0" prefHeight="18.0" prefWidth="81.0" styleClass="label2" text="Question" />
+            <Label layoutX="22.0" layoutY="443.0" prefHeight="18.0" prefWidth="81.0" styleClass="label2" text="Question" />
             <TextField fx:id="answerField" editable="false" layoutX="152.0" layoutY="473.0" prefHeight="26.0" prefWidth="202.0" />
-            <Label layoutX="49.0" layoutY="478.0" prefHeight="18.0" prefWidth="81.0" styleClass="label2" text="Answer" />
+            <Label layoutX="22.0" layoutY="478.0" prefHeight="18.0" prefWidth="81.0" styleClass="label2" text="Answer" />
             <Button fx:id="backButton" layoutX="14.0" layoutY="599.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" styleClass="button6" text="Back" />
-            <Label fx:id="vipPointLabel" layoutX="49.0" layoutY="513.0" prefHeight="18.0" prefWidth="81.0" styleClass="label2" text="Expired VIP" />
-            <TextField fx:id="vipPointField" editable="false" layoutX="152.0" layoutY="508.0" prefHeight="26.0" prefWidth="202.0" />
+            <Label layoutX="22.0" layoutY="513.0" prefHeight="18.0" prefWidth="120.0" styleClass="label2" text=" Expired VIP Date" />
             <Button fx:id="saveButton1" layoutX="152.0" layoutY="551.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="200.0" styleClass="button6" text="Save" />
+            <Label fx:id="expiredVIPDateField" layoutX="152.0" layoutY="513.0" />
          </AnchorPane>
          <SplitPane dividerPositions="0.4999999999999999" orientation="VERTICAL" prefHeight="640.0" prefWidth="800.0">
             <AnchorPane fx:id="userRequest_AnchorPane" prefHeight="320.0" prefWidth="800.0">

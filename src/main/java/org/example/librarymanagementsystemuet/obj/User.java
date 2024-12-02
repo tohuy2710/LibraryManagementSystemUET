@@ -95,7 +95,7 @@ public abstract class User extends Account {
         return username.get();
     }
 
-    public SimpleStringProperty userNameProperty() {
+    public SimpleStringProperty usernameProperty() {
         return username;
     }
 
