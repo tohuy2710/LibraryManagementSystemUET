@@ -225,7 +225,7 @@ public class UserManagementController implements Initializable {
                     setText(null);
                 } else {
                     Button deleteButton = new Button("Delete");
-                    Button updateButton = new Button("Update");
+                    Button updateButton = new Button("Detail");
 
                     deleteButton.getStyleClass().add("button6");
                     updateButton.getStyleClass().add("button6");
@@ -285,7 +285,6 @@ public class UserManagementController implements Initializable {
                                 }
 
                                 AtomicReference<File> file = new AtomicReference<>();
-                                System.out.println(updatedUser.getUserType());
                                 if (updatedUser.getHmCoin() > 0) {
                                     userAvatar.setOnMouseClicked(event1 -> {
                                         FileChooser fileChooser = new FileChooser();
@@ -333,8 +332,7 @@ public class UserManagementController implements Initializable {
                                                     || emailField.getText() == null
                                                     || phoneNumberField.getText() == null
                                                     || fullNameField.getText() == null
-                                                    || questionField.getValue() == null
-                                                    || answerField.getText() == null) {
+                                            ){
                                                 alertMessage.errorMessage("Please fill in all fields.");
                                             } else if (!isValidUsername(usernameField.getText())) {
                                                 alertMessage.errorMessage("Username must be between 6 and 12 characters.");

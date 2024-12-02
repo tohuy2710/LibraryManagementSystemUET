@@ -7,89 +7,54 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane
-        prefHeight="700"
-        prefWidth="1200"
-        xmlns="http://javafx.com/javafx/23"
-        xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="org.example.librarymanagementsystemuet.userapp.DiscussionPageController">
 
-    <top>
-        <Label
-                text="HUMAMI FORUM"
-                style="-fx-font-size: 24px; -fx-font-weight: bold;"
-                BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets top="10" bottom="10"/>
-            </BorderPane.margin>
-        </Label>
-    </top>
-
-    <left>
-        <VBox
-                prefWidth="250"
-                spacing="10"
-                BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets left="10" right="10"/>
-            </BorderPane.margin>
-            <ListView
-                    fx:id="topicListView"
-                    VBox.vgrow="ALWAYS"
-                    prefHeight="550"/>
-
-            <HBox
-                    spacing="10"
-                    alignment="CENTER_LEFT">
-                <TextArea
-                        fx:id="newTopicTextArea"
-                        HBox.hgrow="ALWAYS"
-                        prefHeight="80"
-                        prefWidth="180"
-                        promptText="Enter new topic"
-                        wrapText="true"/>
-
-                <Button
-                        onAction="#handleAddTopic"
-                        text="Add"
-                        prefWidth="60"
-                        prefHeight="80"/>
-            </HBox>
-        </VBox>
-    </left>
-
-    <center>
-        <VBox
-                spacing="10"
-                BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets left="10" right="10"/>
-            </BorderPane.margin>
-            <ListView
-                    fx:id="commentListView"
-                    VBox.vgrow="ALWAYS"
-                    prefHeight="550"/>
-
-            <HBox
-                    spacing="10"
-                    alignment="CENTER_LEFT">
-                <TextArea
-                        fx:id="commentTextArea"
-                        HBox.hgrow="ALWAYS"
-                        prefHeight="80"
-                        prefWidth="900"
-                        promptText="Write your comment here"
-                        wrapText="true"/>
-
-                <Button
-                        onAction="#handleAddComment"
-                        text="Send"
-                        prefWidth="100"
-                        prefHeight="80"/>
-            </HBox>
-        </VBox>
-    </center>
-</BorderPane>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.userapp.DiscussionPageController">
+   <children>
+      <BorderPane prefHeight="640.0" prefWidth="1200" stylesheets="@style.css">
+         <left>
+            <VBox prefWidth="250" spacing="10" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="10" right="10" />
+               </BorderPane.margin>
+               <children>
+                  <ListView fx:id="topicListView" prefHeight="537.0" prefWidth="250.0" styleClass="hboxCoin" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <children>
+                        <TextArea fx:id="newTopicTextArea" prefHeight="20.0" prefWidth="177.0" promptText="Enter new topic" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Button onAction="#handleAddTopic" prefHeight="44.0" prefWidth="65.0" styleClass="button6" text="Add" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <VBox spacing="10" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="10" right="10" />
+               </BorderPane.margin>
+               <children>
+                  <ListView fx:id="commentListView" prefHeight="550.0" styleClass="hbox-book-recommend-user" stylesheets="@style.css" VBox.vgrow="ALWAYS" />
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <children>
+                        <TextArea fx:id="commentTextArea" prefHeight="22.0" prefWidth="740.0" promptText="Write your comment here" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <Button onAction="#handleAddComment" prefHeight="42.0" prefWidth="85.0" styleClass="button6" text="Send" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <top>
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="361.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" styleClass="labelHeader" text="Humami VIP Forum" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" />
+         </padding>
+      </BorderPane>
+   </children>
+</HBox>

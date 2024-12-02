@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.userapp.UserPayController">
    <children>
       <VBox prefHeight="640.0" prefWidth="510.0" spacing="10.0">
@@ -43,27 +42,25 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </HBox>
-            <Label prefHeight="36.0" prefWidth="66.0" style="-fx-font-size: 25px;" styleClass="labelHeader" text="OR">
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-            </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="666.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="35.0" prefWidth="666.0" spacing="30.0">
                <children>
-                  <ImageView fx:id="donate" fitHeight="50.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="donate" fitHeight="129.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../asset/img/donate.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="penaltyImg" fitHeight="50.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="penaltyImg" fitHeight="121.0" fitWidth="266.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../asset/img/donate.png" />
+                        <Image url="@../../../asset/img/penalty-img.png" />
                      </image>
                   </ImageView>
                </children>
                <padding>
                   <Insets left="5.0" />
                </padding>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="603.0" spacing="10.0">
                <padding>

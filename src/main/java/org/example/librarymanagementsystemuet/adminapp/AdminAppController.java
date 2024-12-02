@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -174,7 +175,7 @@ public class AdminAppController implements Initializable {
             contentPane.getChildren().clear();
             contentPane.getChildren().add(homePageHBox);
             adjustContentSize();
-            enableChangeMenuSizeButton();
+            disableChangeMenuSizeButton();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -235,6 +236,21 @@ public class AdminAppController implements Initializable {
             HBox userPenaltyHBox = loader.load();
             contentPane.getChildren().clear();
             contentPane.getChildren().add(userPenaltyHBox);
+            adjustContentSize();
+            enableChangeMenuSizeButton();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showVIPForumBox(ActionEvent event) {
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/discussion-page.fxml"));
+            HBox vipForumBox = loader.load();
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(vipForumBox);
             adjustContentSize();
             enableChangeMenuSizeButton();
         } catch (IOException e) {

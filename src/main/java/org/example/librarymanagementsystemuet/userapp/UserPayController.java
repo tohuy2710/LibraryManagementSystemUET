@@ -111,19 +111,74 @@ public class UserPayController implements Initializable {
         penaltyImg.setOnMouseClicked(event -> {
             visiblePanePay();
             penTextArea.setVisible(true);
-
-            packNameLabel.setText("Penalty Payment");
             String transDesciption = String.valueOf(System.currentTimeMillis());
+
+            String penaltyAmount = getPenaltyAmount();
+            packNameLabel.setText("Penalty Payment:" + " " + penaltyAmount);
+
             PaymentAPI.Transaction tran
-                    = new PaymentAPI.Transaction("999999", transDesciption, Database.getDateNow(), "Penalty Payment");
+                    = new PaymentAPI.Transaction(String.valueOf(penaltyAmount),
+                    transDesciption, Database.getDateNow(), PENALTLY);
             initTrans.add(tran);
-            String qrLink = PaymentAPI.getLinkQr(999999, transDesciption);
+            String qrLink = PaymentAPI.getLinkQr(penaltyAmount, transDesciption);
             Database.setImageByLink(qrImg, qrLink);
         });
     }
 
     public String getPenaltyAmount() {
-        return null;
+        Database.connect = Database.connectDB();
+        String query = "SELECT \n" +
+                "    a.fineAmount, \n" +
+                "    a.paidAmount, \n" +
+                "    a.unpaidAmount as unpaidAmount\n" +
+                "FROM\n" +
+                "(\n" +
+                "    SELECT \n" +
+                "        u.id AS userId, \n" +
+                "        u.username, \n" +
+                "        COUNT(ur.id) AS booksNotReturned,\n" +
+                "        (\n" +
+                "            SUM(\n" +
+                "                (DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000) + \n" +
+                "                (b.pageCount * 5)\n" +
+                "            ) * ur.noOfbooks\n" +
+                "        ) AS fineAmount,\n" +
+                "        IFNULL(p.money, 0) AS paidAmount,\n" +
+                "        (\n" +
+                "            (\n" +
+                "                SUM(\n" +
+                "                    (DATEDIFF(IFNULL(br.return_date, NOW()), br.start_date) * 1000) + \n" +
+                "                    (b.pageCount * 5)\n" +
+                "                ) * ur.noOfbooks\n" +
+                "            ) - IFNULL(p.money, 0)\n" +
+                "        ) AS unpaidAmount\n" +
+                "    FROM \n" +
+                "        users u\n" +
+                "    JOIN \n" +
+                "        usersrequest ur ON u.id = ur.userId\n" +
+                "    JOIN \n" +
+                "        borrowbooks br ON ur.id = br.request_id\n" +
+                "    JOIN \n" +
+                "        books b ON ur.bookId = b.id\n" +
+                "    LEFT JOIN \n" +
+                "        penaltypayments p ON p.userId = u.id\n" +
+                "    WHERE \n" +
+                "        IFNULL(br.return_date, NOW()) > br.due_date\n" +
+                "    GROUP BY \n" +
+                "        u.id, u.username\n" +
+                ") a\n" +
+                "WHERE \n" +
+                "    a.userId = " + UserSession.getInstance().getId();
+        try {
+            Database.preparedStatement = Database.connect.prepareStatement(query);
+            Database.result = Database.preparedStatement.executeQuery();
+            if (Database.result.next()) {
+                return Database.result.getString("paidAmount");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "0";
     }
 
     @FXML
@@ -158,6 +213,8 @@ public class UserPayController implements Initializable {
                     } else if (transaction.getInitType().equals(DONATE)) {
                         UserSession.getInstance().setHmCoin(UserSession.getInstance().getHmCoin()
                                 + Integer.parseInt(transaction.getAmount())%1000);
+                    } else if (transaction.getInitType().equals(PENALTLY)) {
+                        setChangeToDB(-1);
                     }
                     initTrans.remove(transaction);
 
@@ -180,6 +237,9 @@ public class UserPayController implements Initializable {
             query = "UPDATE users SET hmCoin = " + UserSession.getInstance().getHmCoin()
                     + ", expiredVipDate = NOW() + INTERVAL 999 MONTH"
                     + " WHERE id = " + UserSession.getInstance().getId();
+        } else if (pack == -1) {
+            query = "INSERT INTO penaltypayments (userId, money) VALUES ("
+                    + UserSession.getInstance().getId() + ", " + getPenaltyAmount() + ")";
         }
         try {
             Database.preparedStatement = Database.connect.prepareStatement(query);

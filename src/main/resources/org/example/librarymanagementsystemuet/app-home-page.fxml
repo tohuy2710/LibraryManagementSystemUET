@@ -7,8 +7,9 @@
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -24,11 +25,11 @@
          </padding>
          <children>
             <Label styleClass="labelHeader" text="TOP USER VIP" />
-            <HBox prefHeight="170.0" prefWidth="926.0">
+            <HBox prefHeight="151.0" prefWidth="900.0">
                <children>
-                  <VBox fx:id="userBox1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                  <VBox fx:id="userBox1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <Circle fx:id="userCircle1" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="userCircle1" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label fx:id="userName1" styleClass="label2" text="UserName" />
                         <Label fx:id="userHmPoint1" styleClass="label2" text="hmPoit:" />
                      </children>
@@ -36,9 +37,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox fx:id="userBox2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                  <VBox fx:id="userBox2" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <Circle fx:id="userCircle2" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="userCircle2" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label fx:id="userName2" styleClass="label2" text="UserName" />
                         <Label fx:id="userHmPoint2" styleClass="label2" text="hmPoit:" />
                      </children>
@@ -46,9 +47,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox fx:id="userBox3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                  <VBox fx:id="userBox3" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <Circle fx:id="userCircle3" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="userCircle3" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label fx:id="userName3" styleClass="label2" text="UserName" />
                         <Label fx:id="userHmPoint3" styleClass="label2" text="hmPoit:" />
                      </children>
@@ -56,9 +57,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox fx:id="userBox4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                  <VBox fx:id="userBox4" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <Circle fx:id="userCircle4" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="userCircle4" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label fx:id="userName4" styleClass="label2" text="UserName" />
                         <Label fx:id="userHmPoint4" styleClass="label2" text="hmPoit:" />
                      </children>
@@ -66,9 +67,9 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox fx:id="userBox5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
+                  <VBox fx:id="userBox5" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="170.0" styleClass="hbox-book-recommend-user">
                      <children>
-                        <Circle fx:id="userCircle5" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle fx:id="userCircle5" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
                         <Label fx:id="userName5" styleClass="label2" text="UserName" />
                         <Label fx:id="userHmPoint5" styleClass="label2" text="hmPoit:" />
                      </children>
@@ -154,39 +155,49 @@
                   <children>
                      <VBox alignment="CENTER" prefHeight="94.0" prefWidth="300.0">
                         <children>
-                           <Circle fx:id="adminProfileCircle" fill="DODGERBLUE" radius="35.0" stroke="BLACK" strokeType="INSIDE" />
+                           <Circle fx:id="adminProfileCircle" fill="DODGERBLUE" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
                         </children>
                      </VBox>
                      <StackPane prefHeight="150.0" prefWidth="200.0">
                         <children>
-                           <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="3.0">
                               <children>
-                                 <Label styleClass="labelHeader" text="AdminName" />
-                                 <Label fx:id="adminEmailLabel" styleClass="label2" text="manh123@gmail.com" />
-                                 <Label styleClass="label2" text="0379905205" />
-                                 <Label styleClass="label2" text="Nghe An, VN" />
-                                 <Button mnemonicParsing="false" onAction="#showModifyInfo" styleClass="button6" stylesheets="@style.css" text="Modify Infomation" />
+                                 <Label fx:id="adminNameLabel" styleClass="labelHeader" text="AdminName" />
+                                 <Label fx:id="adminEmailLabel" style="-fx-font-size: 16px;" styleClass="label2" text="manh123@gmail.com" />
+                                 <Button mnemonicParsing="false" onAction="#showModifyInfo" styleClass="button6" stylesheets="@style.css" text="Change Password" />
                               </children>
+                              <StackPane.margin>
+                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              </StackPane.margin>
                            </VBox>
                         </children>
                      </StackPane>
                   </children>
                </VBox>
-               <VBox fx:id="modifyInfoVBox" alignment="CENTER" prefHeight="235.0" prefWidth="300.0" visible="false">
+               <VBox fx:id="modifyInfoVBox" alignment="CENTER" prefHeight="235.0" prefWidth="300.0" spacing="10.0" visible="false">
                   <children>
                      <Label styleClass="label2" text="Change Password Information">
                         <font>
                            <Font size="16.0" />
                         </font>
                      </Label>
-                     <TextField fx:id="currentPasswordField" prefHeight="34.0" prefWidth="279.0" promptText="Current Password" styleClass="text-field" />
-                     <TextField fx:id="newPasswordField" prefHeight="34.0" prefWidth="279.0" promptText="New Password" styleClass="text-field" />
-                     <TextField fx:id="confirmPasswordField" prefHeight="34.0" prefWidth="279.0" promptText="Confirm Password" styleClass="text-field" />
-                     <Button mnemonicParsing="false" onAction="#saveAdminInfo" styleClass="button2" text="Save" />
+                     <TextField fx:id="currentPasswordField" prefHeight="30.0" prefWidth="279.0" promptText="Current Password" styleClass="text-field" />
+                     <TextField fx:id="newPasswordField" prefHeight="30.0" prefWidth="270.0" promptText="New Password" styleClass="text-field" />
+                     <TextField fx:id="confirmPasswordField" prefHeight="30.0" prefWidth="279.0" promptText="Confirm Password" styleClass="text" />
+                     <HBox alignment="CENTER" prefHeight="39.0" prefWidth="270.0" spacing="30.0">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#saveAdminInfo" prefHeight="42.0" prefWidth="80.0" styleClass="button2" text="Save" />
+                           <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#hideModifyInfo" prefHeight="42.0" prefWidth="80.0" styleClass="button2" text="Cancel" />
+                        </children>
+                     </HBox>
                   </children>
                </VBox>
             </StackPane>
-            <ScrollPane prefHeight="431.0" prefWidth="270.0" />
+            <ImageView fitHeight="384.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../asset/img/decor-element-4.png" />
+               </image>
+            </ImageView>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

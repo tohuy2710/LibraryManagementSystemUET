@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -13,38 +14,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="viewUserDetailPane_HB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserDetailViewPaneController">
-    <AnchorPane fx:id="userDetailView_AnchorPane" prefHeight="640.0" prefWidth="400.0">
-        <Label layoutX="87.0" layoutY="187.0" text=" User Information Detail">
+<HBox fx:id="viewUserDetailPane_HB" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.UserDetailViewPaneController">
+    <AnchorPane fx:id="userDetailView_AnchorPane" prefHeight="640.0" prefWidth="400.0" stylesheets="@style.css">
+        <Label layoutX="64.0" layoutY="185.0" styleClass="labelHeader" text=" User Information Detail">
             <font>
                 <Font name="SansSerif Bold" size="20.0" />
             </font>
         </Label>
         <ImageView fx:id="userAvatar" fitHeight="141.0" fitWidth="200.0" layoutX="100.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
-        <Label layoutX="22.0" layoutY="233.0" text="User ID" />
+        <Label layoutX="22.0" layoutY="233.0" styleClass="label2" text="User ID" />
         <TextField fx:id="userIdField" editable="false" layoutX="152.0" layoutY="228.0" prefHeight="26.0" prefWidth="201.0" />
-        <Label layoutX="22.0" layoutY="268.0" text="Username" />
+        <Label layoutX="22.0" layoutY="268.0" styleClass="label2" text="Username" />
         <TextField fx:id="usernameField" layoutX="152.0" layoutY="263.0" prefHeight="26.0" prefWidth="202.0" />
-        <Label layoutX="22.0" layoutY="303.0" text="Full Name" />
+        <Label layoutX="22.0" layoutY="303.0" styleClass="label2" text="Full Name" />
         <TextField fx:id="fullNameField" layoutX="152.0" layoutY="298.0" prefHeight="26.0" prefWidth="202.0" />
-        <Label layoutX="22.0" layoutY="338.0" text="Password" />
+        <Label layoutX="22.0" layoutY="338.0" styleClass="label2" text="Password" />
         <TextField fx:id="passwordField" layoutX="152.0" layoutY="333.0" prefHeight="26.0" prefWidth="202.0" />
-        <Label layoutX="22.0" layoutY="378.0" text="Email" />
+        <Label layoutX="22.0" layoutY="378.0" styleClass="label2" text="Email" />
         <TextField fx:id="emailField" layoutX="152.0" layoutY="368.0" prefHeight="26.0" prefWidth="202.0" />
-        <Label layoutX="22.0" layoutY="408.0" text="Phone Number" />
+        <Label layoutX="22.0" layoutY="408.0" styleClass="label2" text="Phone Number" />
         <TextField fx:id="phoneNumberField" layoutX="152.0" layoutY="403.0" prefHeight="26.0" prefWidth="202.0" />
         <ChoiceBox fx:id="questionField" layoutX="152.0" layoutY="438.0" prefHeight="26.0" prefWidth="202.0" />
-        <Label layoutX="22.0" layoutY="443.0" prefHeight="18.0" prefWidth="120.0" text="Question" />
+        <Label layoutX="22.0" layoutY="443.0" prefHeight="18.0" prefWidth="120.0" styleClass="label2" text="Question" />
         <TextField fx:id="answerField" layoutX="152.0" layoutY="473.0" prefHeight="26.0" prefWidth="202.0" />
-        <Label layoutX="22.0" layoutY="478.0" prefHeight="18.0" prefWidth="120.0" text="Answer" />
-        <Button fx:id="saveButton" layoutX="152.0" layoutY="550.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="Save" />
-        <Label layoutX="22.0" layoutY="513.0" prefHeight="18.0" prefWidth="120.0" text="Expired VIP Date" />
-        <TextField fx:id="expiredVIPDateField" layoutX="152.0" layoutY="508.0" prefHeight="26.0" prefWidth="202.0" />
+        <Label layoutX="22.0" layoutY="478.0" prefHeight="18.0" prefWidth="120.0" styleClass="label2" text="Answer" />
+        <Button fx:id="saveButton" layoutX="152.0" layoutY="550.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="button6" text="Save" />
+        <Label layoutX="22.0" layoutY="513.0" prefHeight="18.0" prefWidth="120.0" styleClass="label2" text="Expired VIP Date" />
+      <Label fx:id="expiredVIPDateField" layoutX="152.0" layoutY="513.0" styleClass="label2" text="Label" />
     </AnchorPane>
-    <SplitPane dividerPositions="0.4999999999999999" orientation="VERTICAL" prefHeight="640.0" prefWidth="800.0">
-        <AnchorPane fx:id="userRequest_AnchorPane" prefHeight="320.0" prefWidth="800.0">
-            <ScrollPane fx:id="userRequest_ScrollPane" layoutY="51.0" prefHeight="265.0" prefWidth="800.0">
-                <TableView fx:id="userRequest_TV" prefHeight="640.0" prefWidth="800.0">
+    <SplitPane dividerPositions="0.4999999999999999" orientation="VERTICAL" prefHeight="641.0" prefWidth="773.0" style="-fx-background-color: #ffffff;">
+        <AnchorPane fx:id="userRequest_AnchorPane" prefHeight="318.0" prefWidth="774.0">
+            <ScrollPane fx:id="userRequest_ScrollPane" layoutY="51.0" prefHeight="266.0" prefWidth="800.0">
+                <TableView fx:id="userRequest_TV" prefHeight="640.0" prefWidth="770.0">
                     <columns>
                         <TableColumn fx:id="requestIdCol_UserRequestTable" prefWidth="100.0" style="-fx-alignment: center;" text="Request ID" />
                         <TableColumn fx:id="bookIdCol_UserRequestTable" prefWidth="100.0" style="-fx-alignment: center;" text="Book ID" />
@@ -58,15 +59,15 @@
                     </columnResizePolicy>
                 </TableView>
             </ScrollPane>
-            <Label fx:id="userRequestInfo_Label" layoutX="353.0" layoutY="14.0" text=" User Request Table" textAlignment="CENTER">
+            <Label fx:id="userRequestInfo_Label" layoutX="300.0" layoutY="14.0" styleClass="labelHeader" text=" User Request Table" textAlignment="CENTER">
                 <font>
                     <Font name="SansSerif Bold" size="20.0" />
                 </font>
             </Label>
         </AnchorPane>
         <AnchorPane fx:id="borrowBook_AnchorPane" prefHeight="320.0" prefWidth="800.0">
-            <ScrollPane fx:id="borrowBook_ScrollPane" layoutY="49.0" prefHeight="266.0" prefWidth="800.0">
-                <TableView fx:id="borrowBook_TV" prefHeight="268.0" prefWidth="800.0">
+            <ScrollPane fx:id="borrowBook_ScrollPane" layoutY="49.0" prefHeight="258.0" prefWidth="800.0">
+                <TableView fx:id="borrowBook_TV" prefHeight="268.0" prefWidth="779.0">
                     <columns>
                         <TableColumn fx:id="requestIdCol_BorrowBookTable" prefWidth="100.0" text="Request ID" />
                         <TableColumn fx:id="startDateCol_borrowBookTable" prefWidth="233.0" text="Start Date" />
@@ -75,11 +76,17 @@
                     </columns>
                 </TableView>
             </ScrollPane>
-            <Label fx:id="borrowBook_Label" layoutX="362.0" layoutY="14.0" text="Borrow Book Table">
+            <Label fx:id="borrowBook_Label" layoutX="305.0" layoutY="14.0" styleClass="labelHeader" text="Borrow Book Table">
                 <font>
                     <Font name="SansSerif Bold" size="20.0" />
                 </font>
             </Label>
         </AnchorPane>
+      <HBox.margin>
+         <Insets />
+      </HBox.margin>
+      <padding>
+         <Insets right="10.0" />
+      </padding>
     </SplitPane>
 </HBox>

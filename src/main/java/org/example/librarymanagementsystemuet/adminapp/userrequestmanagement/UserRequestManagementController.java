@@ -303,6 +303,12 @@ public class UserRequestManagementController implements Initializable {
         String queryReturnCoin = "UPDATE users " +
                 "SET hmCoin = hmCoin + (SELECT noOfBooks FROM usersrequest WHERE id = ?)" +
                 " where id = (SELECT userId FROM usersrequest WHERE id = ?)";
+        String queryMinusBookQuantity = "UPDATE books " +
+                "SET quantity = quantity - (SELECT noOfBooks FROM usersrequest WHERE id = ?) " +
+                "WHERE id = (SELECT bookId FROM usersrequest WHERE id = ?)";
+        String queryAddBookQuantity = "UPDATE books " +
+                "SET quantity = quantity + (SELECT noOfBooks FROM usersrequest WHERE id = ?) " +
+                "WHERE id = (SELECT bookId FROM usersrequest WHERE id = ?)";
 
         try {
             Database.prepare = Database.connect.prepareStatement(queryUpdateStatus);
@@ -319,11 +325,22 @@ public class UserRequestManagementController implements Initializable {
                                 "SET return_date = NOW() WHERE request_id = ?");
                 Database.prepare.setString(1, userRequest.getRequestID());
                 Database.prepare.executeUpdate();
+
+                Database.prepare = Database.connect.prepareStatement(queryAddBookQuantity);
+                Database.prepare.setString(1, userRequest.getRequestID());
+                Database.prepare.setString(2, userRequest.getRequestID());
+                Database.prepare.executeUpdate();
             } else if (userRequest.getStatus().equals(CANCELLED_BY_ADMIN)
                     || userRequest.getStatus().equals(DENIED_FOR_BORROWING)) {
                 Database.prepare = Database.connect.prepareStatement(queryReturnCoin);
                 Database.prepare.setString(1, userRequest.getRequestID());
                 Database.prepare.setString(2, userRequest.getRequestID());
+                Database.prepare.executeUpdate();
+            } else if (userRequest.getStatus().equals(APPROVED_FOR_BORROWING)) {
+                Database.prepare = Database.connect.prepareStatement(queryMinusBookQuantity);
+                Database.prepare.setString(1, userRequest.getRequestID());
+                Database.prepare.setString(2, userRequest.getRequestID());
+                Database.prepare.executeUpdate();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

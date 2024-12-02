@@ -34,7 +34,10 @@ public class UserDetailViewPaneController {
 
     @FXML
     private TextField answerField, emailField, fullNameField,
-            passwordField, phoneNumberField, userIdField, usernameField, expiredVIPDateField;
+            passwordField, phoneNumberField, userIdField, usernameField;
+
+    @FXML
+    private  Label expiredVIPDateField;
 
     @FXML
     private Button saveButton;
@@ -166,6 +169,7 @@ public class UserDetailViewPaneController {
             phoneNumberField.setText(resultSet.getString("phoneNumber") == null ? "" : resultSet.getString("phoneNumber"));
             questionField.setValue(resultSet.getString("question") == null ? "" : resultSet.getString("question"));
             answerField.setText(resultSet.getString("answer") == null ? "" : resultSet.getString("answer"));
+            expiredVIPDateField.setText(resultSet.getString("expiredVipDate") == null ? "" : resultSet.getString("expiredVipDate"));
             if (resultSet.getString("avatarImg") == null) {
                 Database.setImageByLink(userAvatar,
                         getClass().getResource("/asset/img/user-avatar.png").toString());
@@ -239,8 +243,10 @@ public class UserDetailViewPaneController {
                             updateStatement.setString(5, phoneNumberField.getText());
                             updateStatement.setString(6, questionField.getValue());
                             updateStatement.setString(7, answerField.getText());
-                            if (UserSession.getInstance().getUserType() == "VIP") {
+                            if (Objects.equals(UserSession.getInstance().getUserType(), "VIP") && file.get() != null) {
                                 updateStatement.setString(8, file.get().toURI().toString());
+                            } else {
+                                updateStatement.setString(8, "NULL");
                             }
                             updateStatement.setString(9, userId);
 

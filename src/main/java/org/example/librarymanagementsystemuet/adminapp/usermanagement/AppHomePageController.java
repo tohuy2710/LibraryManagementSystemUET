@@ -62,7 +62,7 @@ public class AppHomePageController {
     private TextField confirmPasswordField;
 
     @FXML
-    private Label adminEmailLabel;
+    private Label adminEmailLabel, adminNameLabel;
     @FXML
 
     private Connection connection;
@@ -113,7 +113,7 @@ public class AppHomePageController {
         displayBookStatistics();
         createPieChart();
         createBarChart();
-        displayAdminEmail();
+        displayAdminInfo();
     }
 
     private void displayTopUsers() {
@@ -158,10 +158,11 @@ public class AppHomePageController {
         }
     }
 
-    private void displayAdminEmail() {
+    private void displayAdminInfo() {
         Admin admin = Admin.getInstance();
         adminEmailLabel.setText(admin.getEmail());
         String avatarPath = Admin.DEFAULT_AVATAR_PATH;
+        adminNameLabel.setText(admin.getName());
         try {
             Image image = new Image(getClass().getResource(avatarPath).toExternalForm());
             adminProfileCircle.setFill(new ImagePattern(image));
@@ -238,6 +239,12 @@ public class AppHomePageController {
     private void showModifyInfo() {
         adminInfoVBox.setVisible(false);
         modifyInfoVBox.setVisible(true);
+    }
+
+    @FXML
+    private void hideModifyInfo() {
+        adminInfoVBox.setVisible(true);
+        modifyInfoVBox.setVisible(false);
     }
 
     @FXML

@@ -24,7 +24,17 @@ public class PaymentAPI {
     public static final String VIP = "VIP";
     public static final String DONATE = "DONATE";
 
+    public static String getLinkQr(String amount, String description) {
+        return LINK_QR_PREFIX +
+                LINK_QR_AMOUNT + amount + LINK_QR_ADD_INFO + description;
+    }
+
     public static String getLinkQr(int amount, String description) {
+        return LINK_QR_PREFIX +
+                LINK_QR_AMOUNT + amount + LINK_QR_ADD_INFO + description;
+    }
+
+    public static String getLinkQr(long amount, String description) {
         return LINK_QR_PREFIX +
                 LINK_QR_AMOUNT + amount + LINK_QR_ADD_INFO + description;
     }
