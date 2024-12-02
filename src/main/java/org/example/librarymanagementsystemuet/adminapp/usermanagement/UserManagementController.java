@@ -25,7 +25,7 @@ import static org.example.librarymanagementsystemuet.obj.Account.*;
 
 public class UserManagementController implements Initializable {
 
-    public Label labelUpdate;
+    public Label labelUpdate, vipPointLabel;
 
     @FXML
     private Button cancelUpdateButton, saveUpdateButton, viewUserDetailButton, backButton;
@@ -38,7 +38,7 @@ public class UserManagementController implements Initializable {
     private TextField usernameUpdate, emailUpdate, passwordUpdate,
             phoneNumberUpdate, emailField, fullNameField,
             passwordField, phoneNumberField, userIdField,
-            usernameField, answerField;
+            usernameField, answerField, vipPointField;
 
     @FXML
     private AnchorPane updateUserPane;
@@ -95,8 +95,7 @@ public class UserManagementController implements Initializable {
                     resultSet.getString("phonenumber"),
                     resultSet.getString("question"),
                     resultSet.getString("answer"),
-                    resultSet.getInt("hmCoin"),
-                    resultSet.getString("expiredVipDate"));
+                    resultSet.getInt("vipPoint"));
             userList.add(user);
         }
     }
@@ -343,6 +342,15 @@ public class UserManagementController implements Initializable {
                                         phoneNumberField.setText(updatedUser.getPhonenumber());
                                         questionField.setValue(updatedUser.getQuestion());
                                         answerField.setText(updatedUser.getAnswer());
+                                        if (updatedUser.getUserType() == "Classic") {
+                                            vipPointLabel.setVisible(false);
+                                            vipPointField.setVisible(false);
+                                        } else {
+                                            vipPointLabel.setVisible(true);
+                                            vipPointField.setVisible(true);
+                                            UserVip userVip = (UserVip) updatedUser;
+                                            vipPointField.setText(String.valueOf(userVip.getVipPoint()));
+                                        }
 
                                         // fill in user request table
                                         try {
