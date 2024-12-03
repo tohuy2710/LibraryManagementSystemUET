@@ -30,18 +30,32 @@ public class UserBrowserBookController extends Controller implements Initializab
     private StackPane mainPane;
 
     private final String queryInit = "(\n" +
-            "    SELECT * \n" +
+            "    SELECT *\n" +
             "    FROM books\n" +
-            "    WHERE category = \"Information Technology\"\n" +
+            "    WHERE category = 'Information Technology'\n" +
             "    LIMIT 5\n" +
             ")\n" +
             "UNION ALL\n" +
             "(\n" +
-            "    SELECT * \n" +
+            "    SELECT *\n" +
             "    FROM books\n" +
-            "    WHERE category = \"Economics\"\n" +
+            "    WHERE category = 'Economics'\n" +
             "    LIMIT 5\n" +
-            ");\n";
+            ")\n" +
+            "UNION ALL\n" +
+            "(\n" +
+            "    SELECT *\n" +
+            "    FROM books\n" +
+            "    WHERE category = 'Literature'\n" +
+            "    LIMIT 5\n" +
+            ")\n" +
+            "UNION ALL\n" +
+            "(\n" +
+            "    SELECT *\n" +
+            "    FROM books\n" +
+            "    WHERE category = 'Mathematics'\n" +
+            "    LIMIT 5\n" +
+            ")";
 
     public StackPane getMainPane() {
         return mainPane;
