@@ -1,21 +1,23 @@
 package org.example.librarymanagementsystemuet;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.example.librarymanagementsystemuet.exception.InvalidDatatype;
+import org.example.librarymanagementsystemuet.exception.LogicException;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.obj.Book;
+import org.example.librarymanagementsystemuet.obj.UserRequest;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
 import javax.swing.*;
@@ -31,7 +33,20 @@ import static org.example.librarymanagementsystemuet.Database.*;
 import static org.example.librarymanagementsystemuet.obj.UserRequest.PENDING;
 
 public class UserHomePageNewController extends Controller implements Initializable {
-
+    @FXML
+    private TableView<UserRequest> userRequestTableView;
+    @FXML
+    private TableColumn<UserRequest, String> requestIdColumn;
+    @FXML
+    private TableColumn<UserRequest, String> bookIdColumn;
+    @FXML
+    private TableColumn<UserRequest, String> noOfBooksColumn;
+    @FXML
+    private TableColumn<UserRequest, String> createdTimeColumn;
+    @FXML
+    private TableColumn<UserRequest, String> lastUpdatedTimeColumn;
+    @FXML
+    private TableColumn<UserRequest, String> statusColumn;
     @FXML
     private Label topBorrowedBook1Author, topBorrowedBook1BrrowedCount, topBorrowedBook1ID,
             topBorrowedBook1ISBN, topBorrowedBook1Name, topBorrowedBook2Author,
@@ -56,6 +71,32 @@ public class UserHomePageNewController extends Controller implements Initializab
 
     @FXML
     private Button borrowBookButton;
+
+    private void loadUserRequests() {
+        ObservableList<UserRequest> userRequests = FXCollections.observableArrayList();
+        try (Connection conn = Database.connectDB();
+             PreparedStatement pstmt = conn.prepareStatement(
+                     "SELECT * FROM usersrequest WHERE userId = ?")) {
+            pstmt.setInt(1, Integer.parseInt(UserSession.getInstance().getId()));
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                UserRequest request = new UserRequest();
+                request.setRequestID(String.valueOf(rs.getInt("id")));
+                request.setBookID(String.valueOf(rs.getInt("bookId")));
+                request.setNoOfBooks(String.valueOf(rs.getInt("noOfBooks")));
+                request.setCreatedTime(rs.getString("createdTime"));
+                request.setLastUpdatedTime(rs.getString("lastUpdatedTime"));
+                request.setStatus(rs.getString("status"));
+                userRequests.add(request);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (LogicException e) {
+            throw new RuntimeException(e);
+        }
+        userRequestTableView.setItems(userRequests);
+    }
 
     public void loadTopBorrowBook(Label topBorrowedBookID, Label topBorrowedBookName,
                                   Label topBorrowedBookAuthor, Label topBorrowedBookISBN,
@@ -169,12 +210,22 @@ public class UserHomePageNewController extends Controller implements Initializab
         }
     }
 
+
+
     public AnchorPane getMainPane() {
         return mainPane;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        requestIdColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+        bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+        noOfBooksColumn.setCellValueFactory(new PropertyValueFactory<>("noOfBooks"));
+        createdTimeColumn.setCellValueFactory(new PropertyValueFactory<>("createdTime"));
+        lastUpdatedTimeColumn.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedTime"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        loadUserRequests();
         getTopRequestedBooks(null);
         getHighestRatingBook(null);
     }
