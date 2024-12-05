@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.librarymanagementsystemuet.userapp.DiscussionPageController">
    <children>
       <BorderPane prefHeight="640.0" prefWidth="1200" stylesheets="@style.css">
@@ -35,7 +34,26 @@
                   <Insets left="10" right="10" />
                </BorderPane.margin>
                <children>
-                  <ListView fx:id="commentListView" prefHeight="550.0" styleClass="hbox-book-recommend-user" stylesheets="@style.css" VBox.vgrow="ALWAYS" />
+                  <VBox prefHeight="53.0" prefWidth="888.0" styleClass="hbox-book-recommend-user">
+                     <children>
+                        <Label fx:id="topicTitleLabel" styleClass="labelHeader" text="Topic Name">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="topicCreatorLabel" styleClass="label2" text="Created By">
+                           <VBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="topicCreationTimeLabel" styleClass="label2" text="Creation Time">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <ListView fx:id="commentListView" prefHeight="550.0" styleClass="hbox-book-recommend-user" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER_LEFT" spacing="10">
                      <children>
                         <TextArea fx:id="commentTextArea" prefHeight="22.0" prefWidth="740.0" promptText="Write your comment here" wrapText="true" HBox.hgrow="ALWAYS" />

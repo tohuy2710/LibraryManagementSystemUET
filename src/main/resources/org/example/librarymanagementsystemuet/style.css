@@ -509,3 +509,51 @@
 .chart .default-color4.chart-pie {
     -fx-pie-color: #82ccdd;
 }
+
+/* style.css */
+
+/* CSS Styles for Comments and Time */
+
+/* Admin comments */
+.admin-comment {
+    -fx-font-weight: bold;
+    -fx-text-fill: #d64545; /* Slightly darker red for better contrast */
+    -fx-background-color: #ffe0e0; /* Soft pinkish red background */
+    -fx-padding: 7px;
+    -fx-border-radius: 5px; /* Rounded corners without border */
+}
+
+.admin-time {
+    -fx-text-fill: #d64545; /* Matching admin comment color */
+}
+
+/* User comments */
+.user-comment {
+    -fx-font-weight: normal;
+    -fx-text-fill: #003366; /* Dark navy blue for text */
+    -fx-background-color: #d9e6f2; /* Light navy blue background */
+    -fx-padding: 7px;
+    -fx-border-radius: 5px; /* Rounded corners without border */
+}
+
+.user-time {
+    -fx-text-fill: #003366; /* Matching user comment color */
+}
+/* style.css */
+
+.topic-list-view .list-cell {
+    -fx-background-color: #f0f8ff; /* Light blue background */
+    -fx-text-fill: #17376e; /* Dark blue text color */
+    -fx-font-weight: bold; /* Bold text */
+    -fx-padding: 10px; /* Padding around the text */
+    -fx-border-color: #17376e; /* Dark blue border */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 5px; /* Rounded corners */
+}
+
+.topic-list-view .list-cell:hover {
+    -fx-background-color: #d3dce6; /* Slightly darker blue on hover */
+    -fx-text-fill: #ffffff; /* White text on hover */
+    -fx-border-color: #1f5db9; /* Darker blue border on hover */
+}
+
