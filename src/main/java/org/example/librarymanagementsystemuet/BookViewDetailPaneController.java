@@ -143,6 +143,8 @@ public class BookViewDetailPaneController extends Controller {
         connect = connectDB();
         try {
             preparedStatement = connect.prepareStatement(query1);
+            preparedStatement.executeUpdate();
+
             preparedStatement = connect.prepareStatement(query2);
             preparedStatement.executeUpdate();
             AlertMessage alertMessage = new AlertMessage();

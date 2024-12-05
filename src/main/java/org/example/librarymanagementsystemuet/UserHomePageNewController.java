@@ -73,6 +73,14 @@ public class UserHomePageNewController extends Controller implements Initializab
     private Button borrowBookButton;
 
     private void loadUserRequests() {
+        userRequestTableView.getItems().clear();
+        requestIdColumn.getColumns().clear();
+        bookIdColumn.getColumns().clear();
+        noOfBooksColumn.getColumns().clear();
+        createdTimeColumn.getColumns().clear();
+        lastUpdatedTimeColumn.getColumns().clear();
+        statusColumn.getColumns().clear();
+
         ObservableList<UserRequest> userRequests = FXCollections.observableArrayList();
         try (Connection conn = Database.connectDB();
              PreparedStatement pstmt = conn.prepareStatement(
