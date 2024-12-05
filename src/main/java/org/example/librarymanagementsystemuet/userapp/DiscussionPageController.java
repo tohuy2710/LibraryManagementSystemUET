@@ -131,9 +131,10 @@ public class DiscussionPageController {
                 ObservableList<HBox> newComments = FXCollections.observableArrayList();
                 try (Connection conn = Database.connectDB();
                      PreparedStatement pstmt = conn.prepareStatement(
-                             "SELECT tc.comment, tc.commentTime, u.username, tc.role " +
+                             "SELECT tc.comment, tc.commentTime, u.username, a.email, tc.role " +
                                      "FROM topiccomment tc " +
-                                     "JOIN users u ON tc.id = u.id " +
+                                     "LEFT JOIN users u ON tc.id = u.id " +
+                                     "LEFT JOIN admins a ON tc.id = a.id " +
                                      "JOIN topicinfo ti ON tc.topicID = ti.topicID " +
                                      "WHERE ti.topicTitle = ?")) {
                     pstmt.setString(1, topic);
@@ -142,7 +143,7 @@ public class DiscussionPageController {
                     while (rs.next()) {
                         String comment = rs.getString("comment");
                         String commentTime = rs.getString("commentTime");
-                        String userName = rs.getString("username");
+                        String userName = rs.getString("role").equals("ADMIN") ? rs.getString("email") : rs.getString("username");
                         String role = rs.getString("role");
                         String displayComment = (role.equals("ADMIN") ? "[Admin] " : "[User] ") + userName + ": " + comment;
 
@@ -204,7 +205,7 @@ public class DiscussionPageController {
             pstmt.setString(4, role);
             pstmt.executeUpdate();
 
-            // load lai 
+            // load lai
             loadCommentsForTopic(selectedTopic);
             commentTextArea.clear();
         } catch (Exception e) {
