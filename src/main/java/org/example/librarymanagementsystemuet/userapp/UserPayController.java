@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import org.example.librarymanagementsystemuet.Database;
 import org.example.librarymanagementsystemuet.PaymentAPI;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.obj.User;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
 import java.net.URL;
@@ -193,12 +194,9 @@ public class UserPayController implements Initializable {
             return;
         }
             for (Transaction transaction : initTrans) {
-            System.out.println(transaction.getInitType() + " "
-                    + transaction.getAmount() + " " + transaction.getDescription());
             if (check(transaction.getDescription(),
                     Integer.parseInt(transaction.getAmount()),
                     transaction.getDate())) {
-                System.out.println(transaction.getInitType() + transaction.getAmount() + " " + transaction.getTime() + " " + transaction.getDescription());
 
                 Platform.runLater(() -> {
                     if (transaction.getInitType().equals("Coin Package")) {

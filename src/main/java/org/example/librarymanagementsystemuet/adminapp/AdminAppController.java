@@ -18,12 +18,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.HumamiLibraryApplication;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookManagementDashboardController;
 import org.example.librarymanagementsystemuet.adminapp.usermanagement.UserManagementController;
 import org.example.librarymanagementsystemuet.adminapp.bookmanagement.BookListController;
 import org.example.librarymanagementsystemuet.obj.Admin;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
+import org.example.librarymanagementsystemuet.userapp.DiscussionPageController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +34,7 @@ import java.util.ResourceBundle;
 
 import static org.example.librarymanagementsystemuet.obj.Admin.DEFAULT_AVATAR_PATH;
 
-public class AdminAppController implements Initializable {
+public class AdminAppController extends Controller implements Initializable {
     @FXML
     private Circle adminAvatar;
 
@@ -219,7 +221,6 @@ public class AdminAppController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/org/example/librarymanagementsystemuet/user-request-management.fxml"));
             HBox userRequestManagementHBox = loader.load();
-            contentPane.getChildren().clear();
             contentPane.getChildren().add(userRequestManagementHBox);
             adjustContentSize();
             enableChangeMenuSizeButton();
@@ -234,7 +235,6 @@ public class AdminAppController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/org/example/librarymanagementsystemuet/penalty-list-view.fxml"));
             HBox userPenaltyHBox = loader.load();
-            contentPane.getChildren().clear();
             contentPane.getChildren().add(userPenaltyHBox);
             adjustContentSize();
             enableChangeMenuSizeButton();
@@ -249,7 +249,9 @@ public class AdminAppController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/org/example/librarymanagementsystemuet/discussion-page.fxml"));
             HBox vipForumBox = loader.load();
-            contentPane.getChildren().clear();
+            DiscussionPageController controller = loader.getController();
+            controller.setRole("ADMIN");
+            System.out.println(controller.getRole());
             contentPane.getChildren().add(vipForumBox);
             adjustContentSize();
             enableChangeMenuSizeButton();

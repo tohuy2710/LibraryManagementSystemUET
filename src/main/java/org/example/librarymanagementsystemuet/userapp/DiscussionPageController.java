@@ -12,7 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.util.Duration;
+import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.Database;
+import org.example.librarymanagementsystemuet.adminapp.AdminAppController;
 import org.example.librarymanagementsystemuet.obj.Admin;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
@@ -46,8 +48,22 @@ public class DiscussionPageController {
     private ObservableList<HBox> comments = FXCollections.observableArrayList();
     private Timeline timeline;
 
+    private String role;
+
+    private Controller parentController;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @FXML
     public void initialize() {
+        this.role = getRole();
+        System.out.println("Role: " + role);
         topicListView.setItems(topics);
         commentListView.setItems(comments);
 
@@ -188,19 +204,11 @@ public class DiscussionPageController {
             return;
         }
 
-        int userId = getCurrentUserID();
-        if (userId == -1) {
-            System.err.println("Failed to retrieve user ID.");
-            return;
-        }
-
-        String role = Admin.getInstance() != null ? "ADMIN" : "USER";
-
         try (Connection conn = Database.connectDB();
              PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO topiccomment (topicID, id, comment, role) VALUES ((SELECT topicID FROM topicinfo WHERE topicTitle = ? LIMIT 1), ?, ?, ?)")) {
             pstmt.setString(1, selectedTopic);
-            pstmt.setInt(2, userId);
+            pstmt.setInt(2, role.equals("ADMIN") ? 1 : Integer.parseInt(UserSession.getInstance().getId()));
             pstmt.setString(3, content);
             pstmt.setString(4, role);
             pstmt.executeUpdate();
@@ -224,8 +232,8 @@ public class DiscussionPageController {
              PreparedStatement pstmt = conn.prepareStatement(
                      "INSERT INTO topicinfo (topicTitle, id, role) VALUES (?, ?, ?)")) {
             pstmt.setString(1, newTopic);
-            pstmt.setInt(2, getCurrentUserID());
-            pstmt.setString(3, Admin.getInstance() != null ? "ADMIN" : "USER");
+            pstmt.setInt(2, role.equals("ADMIN") ? 1 : Integer.parseInt(UserSession.getInstance().getId()));
+            pstmt.setString(3, role);
             pstmt.executeUpdate();
 
             topics.add(newTopic);
@@ -233,32 +241,5 @@ public class DiscussionPageController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private int getCurrentUserID() {
-        if (Admin.getInstance() != null) {
-            try (Connection conn = Database.connectDB();
-                 PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM admins WHERE email = ?")) {
-                pstmt.setString(1, Admin.getInstance().getEmail());
-                ResultSet rs = pstmt.executeQuery();
-                if (rs.next()) {
-                    return rs.getInt("id");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try (Connection conn = Database.connectDB();
-                 PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM users WHERE email = ?")) {
-                pstmt.setString(1, UserSession.getInstance().getEmail());
-                ResultSet rs = pstmt.executeQuery();
-                if (rs.next()) {
-                    return rs.getInt("id");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return -1;
     }
 }

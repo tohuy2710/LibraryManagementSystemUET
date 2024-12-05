@@ -72,8 +72,6 @@ public class PaymentAPI {
                             String amount = String.valueOf(record.optInt("amount", 0));
                             String when = record.optString("when", "");
 
-                            System.out.println("id: " + id + " - tid: " + tid + " - description: " + description + " - amount: " + amount + " - when: " + when);
-
                             if (description.contains(descriptionContent)
                                     && (amount.compareTo(String.valueOf(paymentAmount)) >= 0)) {
                                 return true;

@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.example.librarymanagementsystemuet.Controller;
 import org.example.librarymanagementsystemuet.HumamiLibraryApplication;
 import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.obj.User;
@@ -22,7 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class UserAppController implements Initializable {
+public class UserAppController extends Controller implements Initializable {
 
     @FXML
     AnchorPane paneMenuMini;
@@ -125,6 +126,7 @@ public class UserAppController implements Initializable {
         if (!UserSession.getInstance().getUserType().equals("VIP")) {
             AlertMessage alertMessage = new AlertMessage();
             alertMessage.errorMessage("You must be a VIP to access this feature!");
+            return;
         }
 
         contentPane.getChildren().clear();
@@ -132,6 +134,9 @@ public class UserAppController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/org/example/librarymanagementsystemuet/discussion-page.fxml"));
             HBox discussionPage = loader.load();
+            DiscussionPageController controller = loader.getController();
+            controller.setRole("USER");
+            System.out.println(controller.getRole());
             contentPane.getChildren().add(discussionPage);
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -82,6 +82,10 @@ public class UserBrowserBookController extends Controller implements Initializab
                     VBox labelBox = new VBox();
                     Label categoryLabel = new Label(category);
                     categoryLabel.getStyleClass().add("labelHeader");
+                    categoryLabel.setOnMouseClicked(event -> {
+                        searchBooks(category);
+                    });
+
                     labelBox.getChildren().add(categoryLabel);
                     labelBox.setPadding(new Insets(5, 0, 10, 0));
 

@@ -1,6 +1,5 @@
 package org.example.librarymanagementsystemuet.adminapp.userrequestmanagement;
 
-import com.google.api.client.util.Data;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -99,12 +98,35 @@ public class UserRequestManagementController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateOverdue();
         setupDatabaseAndFetchData("SELECT * FROM usersrequest " +
                 "LEFT JOIN books ON usersrequest.bookId = books.id" +
                 " WHERE status in (" +
                 "'Pending', 'Approved for borrowing', 'Overdue for return book')");
         initializeColumns();
         offlineRecordBox.setVisible(false);
+    }
+
+    public void updateOverdue() {
+        String query = "UPDATE usersrequest SET status = \"Overdue for return book\"," +
+                " lastUpdatedTime = NOW() WHERE id in \n" +
+                "(SELECT request_id FROM borrowbooks " +
+                "WHERE return_date is null AND DATEDIFF(NOW(), due_date) > 0) " +
+                "AND status != \"Overdue for return book\";";
+        Database.connect = Database.connectDB();
+        try {
+            Database.prepare = Database.connect.prepareStatement(query);
+            Database.prepare.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (Database.prepare != null) Database.prepare.close();
+                if (Database.connect != null) Database.connect.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void refreshData(ActionEvent event) {

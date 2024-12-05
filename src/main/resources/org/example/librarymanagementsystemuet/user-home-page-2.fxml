@@ -109,10 +109,12 @@
                   </HBox>
                </AnchorPane>
             </HBox>
-            <TableView prefHeight="250.0" prefWidth="874.0">
+            <TableView fx:id="requestInfoTableView" prefHeight="250.0" prefWidth="874.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="requestIdCol" prefWidth="89.59997129440308" text="Request ID" />
+                <TableColumn fx:id="bookNameCol" prefWidth="319.20003509521484" text="Book Name" />
+                  <TableColumn fx:id="statusCol" prefWidth="259.9999694824219" text="Status" />
+                  <TableColumn fx:id="lastUpdateTimeCol" prefWidth="204.00006103515625" text="Last Update Time" />
               </columns>
             </TableView>
          </VBox>
