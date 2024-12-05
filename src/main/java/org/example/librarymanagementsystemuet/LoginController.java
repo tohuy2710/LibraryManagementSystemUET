@@ -185,9 +185,10 @@ public class LoginController implements Initializable {
     private ResultSet result;
     private Statement statement;
 
-    String[] questions = {"Who is your crush?", "How many of ex do you have?", "What is the name of your first pet?",
+    String[] questions = {"What is the name of your first pet?",
             "What is the name of your first school?", "What is your favorite movie?",
-            "What is your favorite book?", "What is your favorite food?", "What is your favorite color?"};
+            "What is your favorite book?", "What is your favorite food?", "What is your favorite color?",
+            "Who is your crush?", "How many of ex do you have?"};
 
 //    public Connection connectDB() {
 //        try {

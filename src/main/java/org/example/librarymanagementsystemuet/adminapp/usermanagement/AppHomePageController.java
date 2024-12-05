@@ -26,6 +26,7 @@ import java.util.Map;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class AppHomePageController {
 
@@ -151,7 +152,10 @@ public class AppHomePageController {
 
     private void updateUserBox(String userName, int hmCoin, String avatarImg, Label userNameLabel, Label hmPointLabel, Circle userCircle) {
         userNameLabel.setText(userName);
-        hmPointLabel.setText("hmPoint: " + hmCoin);
+        hmPointLabel.setText("HM Coin: " + hmCoin);
+        if (Objects.equals(avatarImg, "null")) {
+            return;
+        }
         if (avatarImg != null && !avatarImg.isEmpty()) {
             Image image = new Image(avatarImg);
             userCircle.setFill(new ImagePattern(image));

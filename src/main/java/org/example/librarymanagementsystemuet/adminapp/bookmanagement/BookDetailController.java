@@ -106,6 +106,9 @@ public class BookDetailController extends Controller {
     }
 
     public void setDetail(Book book) {
+        if (book == null) {
+            return;
+        }
         idLabel.setText("ID: " + book.getId());
         nameLabel.setText(book.getName());
         authorLabel.setText("Author: " + book.getAuthors());

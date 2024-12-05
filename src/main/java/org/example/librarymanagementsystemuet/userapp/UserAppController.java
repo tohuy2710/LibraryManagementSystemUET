@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -15,6 +17,7 @@ import org.example.librarymanagementsystemuet.obj.AlertMessage;
 import org.example.librarymanagementsystemuet.obj.User;
 import org.example.librarymanagementsystemuet.userapp.obj.UserSession;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,6 +38,18 @@ public class UserAppController implements Initializable {
 
     @FXML
     Circle avtShape;
+
+    @FXML
+    ImageView vipBanner;
+
+    private void showVipBanner() {
+        if (UserSession.getInstance().getUserType().equals("VIP")) {
+            vipBanner.setVisible(true);
+        }
+        else {
+            vipBanner.setVisible(false);
+        }
+    }
 
     public void showHomePageBox(ActionEvent event) {
         contentPane.getChildren().clear();
@@ -106,6 +121,23 @@ public class UserAppController implements Initializable {
         }
     }
 
+    public void showVIPForum(ActionEvent event) {
+        if (!UserSession.getInstance().getUserType().equals("VIP")) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("You must be a VIP to access this feature!");
+        }
+
+        contentPane.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/org/example/librarymanagementsystemuet/discussion-page.fxml"));
+            HBox discussionPage = loader.load();
+            contentPane.getChildren().add(discussionPage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void logout(ActionEvent event) throws IOException {
         Stage stage = (Stage) contentPane.getScene().getWindow();
         stage.close();
@@ -122,6 +154,7 @@ public class UserAppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setInfoUser();
+        showVipBanner();
         showHomePageBox(null);
         coinNumLabel.textProperty().bind(UserSession.getInstance().hmCoinProperty().asString());
     }
