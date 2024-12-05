@@ -109,11 +109,15 @@
                   </HBox>
                </AnchorPane>
             </HBox>
-            <TableView prefHeight="250.0" prefWidth="874.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
+            <TableView fx:id="userRequestTableView" prefHeight="250.0" prefWidth="874.0">
+               <columns>
+                  <TableColumn fx:id="requestIdColumn" prefWidth="160.0000033378601" text="Request ID" />
+                  <TableColumn fx:id="bookIdColumn" minWidth="0.0" prefWidth="0.0" text="Book ID" />
+                  <TableColumn fx:id="noOfBooksColumn" prefWidth="160.80003356933594" text="Number of Books" />
+                  <TableColumn fx:id="createdTimeColumn" minWidth="0.0" prefWidth="160.0" text="Created Time" />
+                  <TableColumn fx:id="lastUpdatedTimeColumn" minWidth="0.0" prefWidth="147.19998168945312" text="Last Updated Time" />
+                  <TableColumn fx:id="statusColumn" minWidth="0.0" prefWidth="241.60003662109375" text="Status" />
+               </columns>
             </TableView>
          </VBox>
          <VBox fx:id="highestRatingBook_VB" prefHeight="640.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" styleClass="hbox-book-recommend-user">
