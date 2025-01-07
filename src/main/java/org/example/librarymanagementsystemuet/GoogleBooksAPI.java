@@ -18,7 +18,7 @@ public class GoogleBooksAPI {
     private static final String APPLICATION_NAME = "Google Books API Test";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String CREDENTIALS_FILE_PATH = "/org/example/librarymanagementsystemuet/credentials.json";
-
+    //please get your own credentials file from Google Books API.
     private static Books getBooksService() throws GeneralSecurityException, IOException {
         var httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         InputStream credentialsStream = GoogleBooksAPI.class.getResourceAsStream(CREDENTIALS_FILE_PATH);

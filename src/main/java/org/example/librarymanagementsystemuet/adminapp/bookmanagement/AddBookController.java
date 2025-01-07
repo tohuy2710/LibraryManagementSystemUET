@@ -126,6 +126,23 @@ public class AddBookController implements Initializable {
 
     @FXML
     public void addBookToDatabase(ActionEvent event) {
+        if (bookDetailCoverLink.getText().isEmpty() || bookDetailName.getText().isEmpty() ||
+                bookDetailAuthor.getText().isEmpty() || bookDetailPublisher.getText().isEmpty() ||
+                bookDetailCategory.getText().isEmpty() || bookDetailLocation.getText().isEmpty() ||
+                bookDetailQuantity.getText().isEmpty() || bookDetailDescription.getText().isEmpty() ||
+                bookDetailAvgRate.getText().isEmpty() || bookDetailLanguage.getText().isEmpty() ||
+                bookDetailPageCount.getText().isEmpty() || bookDetailISBN.getText().isEmpty() ||
+        bookDetailCoverLink.getText().isBlank() || bookDetailName.getText().isBlank() ||
+                bookDetailAuthor.getText().isBlank() || bookDetailPublisher.getText().isBlank() ||
+                bookDetailCategory.getText().isBlank() || bookDetailLocation.getText().isBlank() ||
+                bookDetailQuantity.getText().isBlank() || bookDetailDescription.getText().isBlank() ||
+                bookDetailAvgRate.getText().isBlank() || bookDetailLanguage.getText().isBlank() ||
+                bookDetailPageCount.getText().isBlank() || bookDetailISBN.getText().isBlank()) {
+            AlertMessage alertMessage = new AlertMessage();
+            alertMessage.errorMessage("Please fill in all the fields!");
+            return;
+        }
+
         Database.connect = Database.connectDB();
         String query = "INSERT INTO books " +
                 "(isbn, name, author, publisher, category, location, quantity, " +

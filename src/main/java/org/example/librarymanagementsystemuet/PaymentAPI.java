@@ -13,10 +13,9 @@ import java.util.List;
 
 public class PaymentAPI {
 
-    private static final String API_KEY = "AK_CS.687b1090ad9611ef8f20077fb9828c57.roJCbYj97ZZnD" +
-            "FrFBOPoyGWgT0WaEW8fO63lTUGKHSngV6aO30azSex8Z6ICSBNXq4nFkDu7";
+    private static final String API_KEY = "____"; //API KEY HERE
 
-    private static final String LINK_QR_PREFIX = "https://api.vietqr.io/image/970422-0001019624993-JXVtmO3.jpg?accountName=TO%20QUANG%20HUY";
+    private static final String LINK_QR_PREFIX = "____"; //VIETQR PREFIX QR LINK HERE
     private static final String LINK_QR_AMOUNT = "&amount=";
     private static final String LINK_QR_ADD_INFO = "&addInfo=";
 
@@ -203,6 +202,11 @@ public class PaymentAPI {
 
     public static void main(String[] args) {
         boolean t = check("HMVip1732911357883", 20000, Database.getDateNow());
+
+        List<Transaction> ls = getTransactions();
+        for (Transaction transaction : ls) {
+            System.out.println(transaction.getDescription());
+        }
     }
 
     //Coin Package 20000 HMVip1732911357883

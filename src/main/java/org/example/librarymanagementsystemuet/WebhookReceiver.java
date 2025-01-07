@@ -7,7 +7,7 @@ import java.io.IOException;
 public class WebhookReceiver extends NanoHTTPD {
 
     public WebhookReceiver() throws IOException {
-        super(80); // Lắng nghe trên cổng 8080
+        super(80);
         start(SOCKET_READ_TIMEOUT, false); // Bắt đầu server
         System.out.println("Server is running on http://localhost:8080");
     }

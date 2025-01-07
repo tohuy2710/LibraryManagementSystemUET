@@ -140,6 +140,7 @@ public class BookViewDetailPaneController extends Controller {
                 + userId + ", " + bookId + ", " + quantity + ")";
         String query2 = "UPDATE users SET hmCoin = " + UserSession.getInstance().getHmCoin()
                 + " WHERE id = " + userId;
+        String query3 = "UPDATE books SET quantity = quantity - 1 WHERE id = " + bookId;
         connect = connectDB();
         try {
             preparedStatement = connect.prepareStatement(query1);
@@ -147,6 +148,10 @@ public class BookViewDetailPaneController extends Controller {
 
             preparedStatement = connect.prepareStatement(query2);
             preparedStatement.executeUpdate();
+
+            preparedStatement = connect.prepareStatement(query3);
+            preparedStatement.executeUpdate();
+
             AlertMessage alertMessage = new AlertMessage();
             alertMessage.successMessage("Sent request successfully!");
         } catch (Exception e) {

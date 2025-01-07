@@ -74,6 +74,9 @@ public class UserRequestManagementController implements Initializable {
     private CheckBox onLoanCheckBox;
 
     @FXML
+    private CheckBox VIPCheckBox;
+
+    @FXML
     private TextField searchTextField;
 
     private ObservableList<UserRequest> userRequestList = FXCollections.observableArrayList();
@@ -166,6 +169,10 @@ public class UserRequestManagementController implements Initializable {
 
         if (cancelledCheckBox.isSelected()) {
             query += " status = 'Cancelled by admin' OR";
+        }
+
+        if (VIPCheckBox.isSelected()) {
+            query += " userId in (SELECT id FROM users WHERE DATEDIFF(expiredVipDate, NOW()) > 0) OR";
         }
 
         if (query.endsWith("WHERE")) {
@@ -325,9 +332,6 @@ public class UserRequestManagementController implements Initializable {
         String queryReturnCoin = "UPDATE users " +
                 "SET hmCoin = hmCoin + (SELECT noOfBooks FROM usersrequest WHERE id = ?)" +
                 " where id = (SELECT userId FROM usersrequest WHERE id = ?)";
-        String queryMinusBookQuantity = "UPDATE books " +
-                "SET quantity = quantity - (SELECT noOfBooks FROM usersrequest WHERE id = ?) " +
-                "WHERE id = (SELECT bookId FROM usersrequest WHERE id = ?)";
         String queryAddBookQuantity = "UPDATE books " +
                 "SET quantity = quantity + (SELECT noOfBooks FROM usersrequest WHERE id = ?) " +
                 "WHERE id = (SELECT bookId FROM usersrequest WHERE id = ?)";
@@ -354,12 +358,14 @@ public class UserRequestManagementController implements Initializable {
                 Database.prepare.executeUpdate();
             } else if (userRequest.getStatus().equals(CANCELLED_BY_ADMIN)
                     || userRequest.getStatus().equals(DENIED_FOR_BORROWING)) {
+                Database.prepare = Database.connect.prepareStatement(queryAddBookQuantity);
+                Database.prepare.executeUpdate();
+
                 Database.prepare = Database.connect.prepareStatement(queryReturnCoin);
                 Database.prepare.setString(1, userRequest.getRequestID());
                 Database.prepare.setString(2, userRequest.getRequestID());
                 Database.prepare.executeUpdate();
             } else if (userRequest.getStatus().equals(APPROVED_FOR_BORROWING)) {
-                Database.prepare = Database.connect.prepareStatement(queryMinusBookQuantity);
                 Database.prepare.setString(1, userRequest.getRequestID());
                 Database.prepare.setString(2, userRequest.getRequestID());
                 Database.prepare.executeUpdate();

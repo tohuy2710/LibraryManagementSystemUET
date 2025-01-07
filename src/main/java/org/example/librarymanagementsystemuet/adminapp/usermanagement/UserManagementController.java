@@ -276,7 +276,15 @@ public class UserManagementController implements Initializable {
                                 phoneNumberField.setText(resultSet.getString("phoneNumber"));
                                 questionField.setValue(resultSet.getString("question"));
                                 answerField.setText(resultSet.getString("answer"));
-                                expiredVIPDateField.setText(resultSet.getString("expiredVipDate"));
+                                String vip = resultSet.getString("expiredVipDate");
+                                System.out.println(vip);
+                                if (vip == null || vip.equals("null")) {
+                                    vip = "No VIP";
+                                } else {
+                                    vip = vip.substring(0, 10);
+                                }
+                                String coins = resultSet.getString("hmCoin");
+                                expiredVIPDateField.setText(vip + " - " + coins + " coins");
                                 if (resultSet.getString("avatarImg") == null) {
                                     Database.setImageByLink(userAvatar,
                                             getClass().getResource("/asset/img/user-avatar.png").toString());
@@ -352,8 +360,10 @@ public class UserManagementController implements Initializable {
                                                 updateStatement.setString(5, phoneNumberField.getText());
                                                 updateStatement.setString(6, questionField.getValue());
                                                 updateStatement.setString(7, answerField.getText());
-                                                if (updatedUser.getHmCoin() > 0) {
+                                                if (updatedUser.getUserType().equals("VIP")) {
                                                     updateStatement.setString(8, file.get().toURI().toString());
+                                                } else {
+                                                    updateStatement.setString(8, "NULL");
                                                 }
                                                 updateStatement.setString(9, updatedUser.getId());
 

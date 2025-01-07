@@ -35,6 +35,7 @@
                         <CheckBox fx:id="onLoanCheckBox" mnemonicParsing="false" text="On loan" />
                         <CheckBox fx:id="returnedCheckBox" mnemonicParsing="false" text="Returned" />
                         <CheckBox fx:id="cancelledCheckBox" mnemonicParsing="false" text="Cancelled" />
+                        <CheckBox fx:id="VIPCheckBox" mnemonicParsing="false" text="VIP" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets left="10.0" />

@@ -11,7 +11,7 @@ public class ChatGPTAPI {
     public static String chatGPT(String question) {
         String url = "https://api.openai.com/v1/chat/completions";
         String model = "gpt-3.5-turbo";
-        String apiKey = "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";
+        String apiKey = "____"; //GPT API KEY HERE
         // The prompt is the question that the user asks
         String knowledge =
                 "You are a helpful assistant of Humami Library that can answer questions from user." +

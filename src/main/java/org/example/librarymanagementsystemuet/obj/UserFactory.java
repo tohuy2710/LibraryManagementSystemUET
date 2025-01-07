@@ -1,5 +1,4 @@
 package org.example.librarymanagementsystemuet.obj;
-
 import org.example.librarymanagementsystemuet.Database;
 
 public class UserFactory {

@@ -153,7 +153,9 @@ public class AppHomePageController {
     private void updateUserBox(String userName, int hmCoin, String avatarImg, Label userNameLabel, Label hmPointLabel, Circle userCircle) {
         userNameLabel.setText(userName);
         hmPointLabel.setText("HM Coin: " + hmCoin);
-        if (Objects.equals(avatarImg, "null")) {
+        if (Objects.equals(avatarImg, "NULL") || Objects.equals(avatarImg, "null")) {
+            Image image = new Image(avatarImg);
+            userCircle.setFill(new ImagePattern(image));
             return;
         }
         if (avatarImg != null && !avatarImg.isEmpty()) {
