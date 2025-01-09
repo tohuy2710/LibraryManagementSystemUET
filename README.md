@@ -1,5 +1,23 @@
 # Library Management System Desktop Application #
 
+REVIEW: https://youtu.be/9lCxDek1jgs
+
+![img.png](img.png)
+_User Home Page_
+
+![img_1.png](img_1.png)
+_User Payment_
+
+![img_2.png](img_2.png)
+
+![img_3.png](img_3.png)
+
+![img_4.png](img_4.png)
+
+![img_5.png](img_5.png)
+
+![img_6.png](img_6.png)
+
 This project is a Desktop Library Management Application, developed as a part of the Object-Oriented Programming (OOP) course during Year 2, Semester 1 at UET - VNU.
 
 ## 📋 Overview ##
